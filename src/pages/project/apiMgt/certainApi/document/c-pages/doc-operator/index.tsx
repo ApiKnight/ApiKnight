@@ -1,33 +1,28 @@
-import React, { memo, useState, useRef } from "react";
+import React, { memo, useState } from "react";
 import { Button, Input, Select, Space } from "antd";
+
+import type { ReqOptType } from "./type";
 import "./index.less";
 
-type Method = "GET" | "POST" | "PUT" | "DELETE" | "OPTIONS" | "HEAD" | "PATCH";
-type ReqOptType = { label: string; value: Method; color: string };
-
-// const colors: string[] = [
-//   "#49AA19",
-//   "#D87A16",
-//   "#176DDC",
-//   "#D84A1E",
-//   "#176DDC",
-//   "#176DDC",
-//   "#CF2F86",
-// ];
+// 请求类型信息
 const methodOptions: ReqOptType[] = [
-  { label: "GET", value: "GET", color: "#49AA19" },
-  { label: "POST", value: "POST", color: "#D87A16" },
-  { label: "PUT", value: "PUT", color: "#176DDC" },
-  { label: "DELETE", value: "DELETE", color: "#D84A1E" },
-  { label: "OPTIONS", value: "OPTIONS", color: "#176DDC" },
-  { label: "HEAD", value: "HEAD", color: "#176DDC" },
-  { label: "PATCH", value: "PATCH", color: "#CF2F86" },
+  { label: "GET", value: "GET", colorClassName: "color-get" },
+  {
+    label: "POST",
+    value: "POST",
+    colorClassName: "color-post",
+  },
+  { label: "PUT", value: "PUT", colorClassName: "color-put" },
+  { label: "DELETE", value: "DELETE", colorClassName: "color-delete" },
+  { label: "OPTIONS", value: "OPTIONS", colorClassName: "color-options" },
+  { label: "HEAD", value: "HEAD", colorClassName: "color-head" },
+  { label: "PATCH", value: "PATCH", colorClassName: "color-patch" },
 ];
 
 const DocOperator: React.FunctionComponent = memo(() => {
   const [method, setMethod] = useState(methodOptions[0]);
   const [selectVisible, setSelectVisible] = useState(false);
-  const selectRef = useRef(null);
+  const [docUrl, setDocUrl] = useState("");
 
   // 手动渲染请求方式下拉列表
   function getDropDownEle(): React.ReactElement {
@@ -35,8 +30,7 @@ const DocOperator: React.FunctionComponent = memo(() => {
       <ul className="method-select">
         {methodOptions.map((item, index) => (
           <li
-            className="method-item"
-            style={{ color: item.color }}
+            className={["method-item", item.colorClassName].join(" ")}
             onClick={() => methodChooseHandle(item)}
             key={index}
           >
@@ -52,15 +46,19 @@ const DocOperator: React.FunctionComponent = memo(() => {
     console.log(req);
     setSelectVisible(false);
     setMethod(req);
-    console.log(selectRef.current);
+  }
+
+  // 输入框改变事件
+  function urlInputChangeHandle(e: React.ChangeEvent<HTMLInputElement>): void {
+    setDocUrl(e.target.value);
+    // TODO:加上防抖与节流
   }
 
   return (
     <div className="doc-operator">
-      <div className="left-info">
+      <div className={["left-info", method.colorClassName].join(" ")}>
         <Space.Compact block>
           <Select
-            ref={selectRef}
             open={selectVisible}
             onDropdownVisibleChange={(visible) => setSelectVisible(visible)}
             // options={methodOptions}
@@ -72,7 +70,7 @@ const DocOperator: React.FunctionComponent = memo(() => {
             dropdownRender={getDropDownEle}
             onSelect={(e) => console.log(e)}
           />
-          <Input defaultValue="/v2/getGoodsList" />
+          <Input value={docUrl} onChange={(e) => urlInputChangeHandle(e)} />
         </Space.Compact>
       </div>
       <div className="right-warp">

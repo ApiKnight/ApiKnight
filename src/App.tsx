@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 
 //一级路由
-import Home from './pages/home/home.tsx'
+import Home from './pages/home/index.tsx'
 import Project from './pages/project/index.tsx'
 import User from './pages/user/index.tsx'
 //二级路由

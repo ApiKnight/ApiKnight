@@ -5,7 +5,7 @@ import { createResourceErrorMonitor } from './createResourceErrorMonitor';
 import { createXhrMonitor } from './createXhrMonitor';
 import { createPromiseErrorMonitor } from './createPromiseErrorMonitor';
 
-export function createAllMonitor(url:string) {
+export function createAllMonitor(url?:string) {
     const name = "AllMonitor";
     if ( url === "" || url === undefined ) {
         url = `url is ${window.location.pathname}:`;

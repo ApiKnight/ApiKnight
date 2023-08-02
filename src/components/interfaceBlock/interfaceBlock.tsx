@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./index.less";
 import AddBtn from './addBtn';
 import DelBtn from './delBtn';
@@ -15,16 +15,25 @@ interface Props {
 
 const InterfaceBlock: React.FunctionComponent<{data:TitleNode}> = (props:Props) => {
     createJsErrorMonitor('interfaceBlock').start();
+    const [show,setShowState] = useState(false)
+    function changeBtnState():void {
+      setShowState(!show);
+      console.log(show);
+    }
     const {data} = props; 
     return (
-      <div className='InterfaceBlock'>
+      <div className='InterfaceBlock' onMouseEnter={changeBtnState} onMouseLeave={changeBtnState}>
         <div>
           { data.title }
         </div>
-        <div className='btn'>
-          <AddBtn/>
-          <DelBtn/>
-        </div>
+        {
+          show && (
+            <div className='btn'>
+              <AddBtn/>
+              <DelBtn/>
+            </div>
+          )
+        }
       </div>
     )
 }

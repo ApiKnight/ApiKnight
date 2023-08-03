@@ -20,67 +20,73 @@ import AuthRoute from './components/AuthRoute.tsx'
 import Login from './pages/user/login/index.tsx'
 
 const Layout: React.FunctionComponent = () => {
-	return (
-		<div>
-			<Outlet />
-		</div>
-	)
+  return (
+    <div>
+      <Outlet />
+    </div>
+  )
 }
 const App: React.FunctionComponent = () => {
-	return (
-		<div>
-			{/* 1.直接在App中配置二级路由 2.在对应页面中使用Switch包裹后配置二级路由，本项目采用法1 */}
-			<Routes>
-				<Route path='/' element={<Layout />}>
-					{/* Home */}
-					<Route index element={<Home />}></Route>
-					{/* Project */}
+  // React.useEffect(()=>{
+  // 	console.log('APP挂载');
+  // 	return ()=>{
+  // 		console.log('卸载app');
+  // 	}
+  // },[])
+  return (
+    <div>
+      {/* 1.直接在App中配置二级路由 2.在对应页面中使用Switch包裹后配置二级路由，本项目采用法1 */}
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          {/* Home */}
+          <Route index element={<Home />}></Route>
+          {/* Project */}
 
-					<Route
-						path='/project'
-						element={
-							<AuthRoute>
-								<Project />
-							</AuthRoute>
-						}
-					>
-						<Route path='/project/apiMgt' element={<ApiMgt />}>
-							<Route
-								path='/project/apiMgt/overview'
-								element={<Overview />}
-							></Route>
-							<Route path='/project/apiMgt/certainApi' element={<CertainApi />}>
-								<Route
-									path='/project/apiMgt/certainApi/document'
-									element={<Document />}
-								></Route>
-								<Route
-									path='/project/apiMgt/certainApi/test'
-									element={<Test />}
-								></Route>
-								<Route
-									path='/project/apiMgt/certainApi/mock'
-									element={<Mock />}
-								></Route>
-							</Route>
-						</Route>
-						<Route path='/project/memberMgt' element={<MemberMgt />}></Route>
-						<Route path='/project/projectMgt' element={<ProjectMgt />}></Route>
-					</Route>
-					{/* User */}
-					<Route
-						path='/user'
-						element={
-							<AuthRoute>
-								<User />
-							</AuthRoute>
-						}
-					></Route>
-					<Route path='/user/login' element={<Login />} />
-				</Route>
-			</Routes>
-		</div>
-	)
+          <Route
+            path='/project'
+            element={
+              <AuthRoute>
+                <Project />
+              </AuthRoute>
+            }
+          >
+            <Route path='/project/apiMgt' element={<ApiMgt />}>
+              <Route
+                path='/project/apiMgt/overview'
+                element={<Overview />}
+              ></Route>
+              <Route path='/project/apiMgt/certainApi' element={<CertainApi />}>
+                <Route
+                  path='/project/apiMgt/certainApi/document'
+                  element={<Document />}
+                ></Route>
+                <Route
+                  path='/project/apiMgt/certainApi/test'
+                  element={<Test />}
+                ></Route>
+                <Route
+                  path='/project/apiMgt/certainApi/mock'
+                  element={<Mock />}
+                ></Route>
+              </Route>
+            </Route>
+            <Route path='/project/memberMgt' element={<MemberMgt />}></Route>
+            <Route path='/project/projectMgt' element={<ProjectMgt />}></Route>
+          </Route>
+          {/* User */}
+          <Route
+            path='/user'
+            element={
+              <AuthRoute>
+                <User />
+              </AuthRoute>
+            }
+          ></Route>
+          <Route path='/user/login' element={<Login />} />
+        </Route>
+      </Routes>
+    </div>
+  )
 }
 
 export default App

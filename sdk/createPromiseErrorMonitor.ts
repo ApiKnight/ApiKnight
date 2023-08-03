@@ -1,19 +1,19 @@
-import { reportError } from "./reportError";
+import { reportError } from './reportError'
 
-export function createPromiseErrorMonitor(url?:string) {
-  const name = 'promise';
-  
-  function handlePromiseError(event:any) {
-    reportError({ name, data: event.reason },`${url}`);
+export function createPromiseErrorMonitor(url?: string) {
+  const name = 'promise'
+
+  function handlePromiseError(event: any) {
+    reportError({ name, data: event.reason }, `${url}`)
   }
-  
+
   function start() {
-    window.addEventListener('unhandledrejection', handlePromiseError);
+    window.addEventListener('unhandledrejection', handlePromiseError)
   }
-  
+
   function stop() {
-    window.removeEventListener('unhandledrejection', handlePromiseError);
+    window.removeEventListener('unhandledrejection', handlePromiseError)
   }
-  
-  return { start, stop };
+
+  return { start, stop }
 }

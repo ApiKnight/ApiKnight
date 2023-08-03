@@ -1,3 +1,11 @@
+# Ignore artifacts:
+build
+coverage
+
+# Ignore all HTML files:
+*.html
+
+
 /build/*
 .local
 .output.js

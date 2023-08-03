@@ -54,6 +54,7 @@ createXhrMonitor(url).start();//url是可选参数，可以不传递，不传递
 ```
 
 ## createPromiseErrorMonitor
+
 监听promise场景下的错误
 
 ```

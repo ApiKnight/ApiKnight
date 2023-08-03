@@ -1,16 +1,16 @@
-import { Navigate } from "react-router-dom";
-import { useAuth } from "../utils/useAuth";
+import { Navigate } from 'react-router-dom'
+import { useAuth } from '../utils/useAuth'
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
 interface AuthRouteProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const AuthRoute = ({ children }: AuthRouteProps) => {
-  const auth = useAuth();
-  console.log(auth);
-  return auth ? children : <Navigate to="/user/login" />;
-};
+  const auth = useAuth()
+  console.log(auth)
+  return auth ? children : <Navigate to='/user/login' />
+}
 
-export default AuthRoute;
+export default AuthRoute

@@ -1464,11 +1464,7 @@ prelude-ls@^1.2.1:
 
 prettier@^3.0.0:
   version "3.0.0"
-<<<<<<< HEAD
-  resolved "https://registry.npmmirror.com/prettier/-/prettier-3.0.0.tgz#e7b19f691245a21d618c68bc54dc06122f6105ae"
-=======
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.0.tgz#e7b19f691245a21d618c68bc54dc06122f6105ae"
->>>>>>> main
   integrity sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==
 
 proxy-from-env@^1.1.0:

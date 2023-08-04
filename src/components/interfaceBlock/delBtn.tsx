@@ -1,7 +1,13 @@
 import { Modal } from 'antd'
 import React, { useState , createContext } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  remove,
+} from '@/store/modules/dirArraySlice.ts'
 
-const DelBtn: React.FunctionComponent = () => {
+const DelBtn: React.FunctionComponent<{data:number}> = (props) => {
+    const dispatch = useDispatch()
+    const { data } = props;
     const ReachableContext = createContext<string | null>(null);
     // const UnreachableContext = createContext<string | null>(null);
     const [open, setOpen] = useState(false);
@@ -13,16 +19,17 @@ const DelBtn: React.FunctionComponent = () => {
     };
 
     const handleOk = () => {
-        setModalText('The modal will be closed after two seconds');
+        setModalText('节点将在2s后被删除(模拟异步操作)');
         setConfirmLoading(true);
         setTimeout(() => {
-        setOpen(false);
-        setConfirmLoading(false);
+            setOpen(false);
+            setConfirmLoading(false);
+            dispatch(remove(data + 1))
         }, 2000);
     };
 
     const handleCancel = () => {
-        console.log('Clicked cancel button');
+        // console.log('Clicked cancel button');
         setOpen(false);
     };
     function delFunction() {

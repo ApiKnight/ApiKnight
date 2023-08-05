@@ -10,10 +10,16 @@ import { createXhrMonitor } from '../../../sdk/createXhrMonitor';
 interface TitleNode {
     id: number;
     title: string;
+    pid: number
 }
 
 interface Props {
     data:TitleNode;
+}
+
+interface AddData {
+  id: number;
+  pid: number
 }
 
 function startMonitor() {
@@ -30,6 +36,7 @@ const InterfaceBlock: React.FunctionComponent<{data:TitleNode}> = (props:Props) 
       setShowState(!show);
     }
     const {data} = props; 
+    const addData:AddData = {id:data.id,pid:data.pid + 1}
     return (
       <div className='InterfaceBlock' onMouseEnter={changeBtnState} onMouseLeave={changeBtnState}>
         <div>
@@ -37,9 +44,9 @@ const InterfaceBlock: React.FunctionComponent<{data:TitleNode}> = (props:Props) 
         </div>
         {
           show && (
-            <div className='btn'>
-              <AddBtn/>
-              <DelBtn/>
+            <div className='btn' >
+              <AddBtn data={addData}/>
+              <DelBtn data={data.id}/>
             </div>
           )
         }

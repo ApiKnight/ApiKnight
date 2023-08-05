@@ -1,31 +1,35 @@
-import React from 'react'
-import './index.less'
-import { Link } from 'react-router-dom'
-import request from '../../api/request'
-import { Counter } from '../../components/Counter.tsx'
-import { fetchProjectList } from '../../store/modules/projectSlice.ts'
-import { useDispatch } from 'react-redux'
-//axios test
+import React, { useState, useEffect } from 'react';
+import './index.less';
+import { Link } from 'react-router-dom';
+import { Counter } from '../../components/Counter.tsx';
+import { useSelector, useDispatch } from 'react-redux';
+import InterfaceBlock from '@/components/interfaceBlock/interfaceBlock.tsx';
+import RenderTree from '@/components/renderTree/renderTree.tsx';
+import { ArrayItem } from '@/utils/arrayToTree.ts';
+import { assign } from '@/store/modules/dirArraySlice.ts';
+import { RootState } from '@/store/index.ts';
 
-// request
-// 	.get('holiday/single/20181121', {
-// 		params: {
-// 			ignoreHoliday: false,
-// 			app_id: 'bolpgeq7pltiflnj',
-// 			app_secret: 'd0JZQ2N1bUQ2djJBSXFFSm92ZVpWdz09'
-// 		}
-// 	})
-// 	.then((res) => {
-// 		console.log('axios test res', res)
-// 	})
+interface MakeValue {
+  value: ArrayItem[];
+}
+
+const data = [
+  { key: 1, title: <InterfaceBlock data={{ id: 1, title: "接口目录1", pid: 0 }} />, type: "file", pid: 0 },
+  { key: 2, title: <InterfaceBlock data={{ id: 2, title: "接口目录2", pid: 1 }} />, type: "file", pid: 1 },
+];
 
 const Home: React.FunctionComponent = () => {
-  let dispatch = useDispatch()
+  const [makeValue, setMakeValue] = useState<MakeValue>({ value: data });
+  const dispatch = useDispatch();
+  const dirArray = useSelector((state: RootState) => state.dirArray.value);
 
-  //redux test
-  React.useEffect(() => {
-    dispatch(fetchProjectList() as any)
-  }, [])
+  useEffect(() => {
+    dispatch(assign(data));
+  }, []);
+
+  useEffect(() => {
+    setMakeValue({ value: dirArray });
+  }, [dirArray]);
 
   return (
     <div>
@@ -39,8 +43,9 @@ const Home: React.FunctionComponent = () => {
       <div>
         <Counter />
       </div>
+      <RenderTree data={makeValue.value}></RenderTree>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

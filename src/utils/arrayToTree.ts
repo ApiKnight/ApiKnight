@@ -6,10 +6,10 @@ import { ReactNode } from "react";
 
 interface ArrayItem {
     key: number;
-    title: ReactNode;
+    title: any;
     pid: number;
-    type: "file" | "get" | "post";
-    isLeaf?: boolean
+    type: string;
+    isLeaf?: boolean | undefined
 }
 
 interface TreeNode {

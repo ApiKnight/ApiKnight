@@ -1,51 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import './index.less';
-import { Link } from 'react-router-dom';
-import { Counter } from '../../components/Counter.tsx';
-import { useSelector, useDispatch } from 'react-redux';
-import InterfaceBlock from '@/components/InterfaceBlock/index.tsx';
-import RenderTree from '@/components/RenderTree/index.tsx';
-import { ArrayItem } from '@/types/arrayToTree.ts';
-import { assign } from '@/store/modules/dirArraySlice.ts';
-import { RootState } from '@/store/index.ts';
+import React, { useState, useEffect } from 'react'
+import './index.less'
+import ProjectItem from '@/components/ProjectItem'
+import { Layout } from 'antd'
+import HeaderNav from '@/components/HeaderNav'
 
-interface MakeValue {
-  value: ArrayItem[];
-}
-
-const data = [
-  { key: 1, title: <InterfaceBlock data={{ id: 1, title: "接口目录1", pid: 0 }} />, type: "file", pid: 0 },
-  { key: 2, title: <InterfaceBlock data={{ id: 2, title: "接口目录2", pid: 1 }} />, type: "file", pid: 1 },
-];
+const { Header, Content, Footer } = Layout
 
 const Home: React.FunctionComponent = () => {
-  const [makeValue, setMakeValue] = useState<MakeValue>({ value: data });
-  const dispatch = useDispatch();
-  const dirArray = useSelector((state: RootState) => state.dirArray.value);
-
+  let [projectList, setProjectList] = useState<ProjectItemType[]>([])
   useEffect(() => {
-    dispatch(assign(data));
-  }, []);
-
-  useEffect(() => {
-    setMakeValue({ value: dirArray });
-  }, [dirArray]);
-
+    setProjectList([
+      {
+        id: 'p1',
+        name: '项目1',
+        iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
+      },
+      {
+        id: 'p2',
+        name: '项目2',
+        iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
+      },
+      {
+        id: 'p3',
+        name: '项目4',
+        iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
+      },
+      {
+        id: 'p5',
+        name: '项目5',
+        iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
+      },
+      {
+        id: 'p6',
+        name: '项目6',
+        iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
+      },
+      {
+        id: 'p7',
+        name: '项目8',
+        iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
+      },
+      {
+        id: 'p8',
+        name: '项目8',
+        iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
+      }
+    ])
+  }, [])
   return (
-    <div>
-      <div>主页</div>
-      <div>
-        <Link to='/project'>项目1</Link>
-      </div>
-      <div>
-        <Link to='/user'>用户中心</Link>
-      </div>
-      <div>
-        <Counter />
-      </div>
-      <RenderTree data={makeValue.value}></RenderTree>
-    </div>
-  );
-};
+    <>
+      <Layout className="layout">
+        <Header
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            backgroundColor: '#ffffff',
+            height: '80px'
+          }}
+        >
+          <div className="Header-title">
+            <i>ApiKnight</i>
+          </div>
+          <HeaderNav />
+        </Header>
+        <Content style={{ padding: '50px 50px' }}>
+          <ul>
+            {projectList.map((value, index) => {
+              return (
+                <li className="projectListItem" key={value.id}>
+                  <ProjectItem
+                    name={value.name}
+                    id={value.id}
+                    iconPath={value.iconPath}
+                  ></ProjectItem>
+                </li>
+              )
+            })}
+          </ul>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          ApiKnight ©2023 Created by ApiKnight
+        </Footer>
+      </Layout>
+      {/* <Counter /> */}
+    </>
+  )
+}
 
-export default Home;
+export default Home

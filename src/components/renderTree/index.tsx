@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tree } from 'antd';
 import { arrayToTree } from "../../utils/arrayToTree";
-import type { TreeNode, ArrayItem } from "../../utils/arrayToTree";
+import type { TreeNode, ArrayItem } from "../../types/arrayToTree";
 import "./index.less";
 // 导入监控
 import { createJsErrorMonitor } from '../../../sdk/createJsErrorMonitor';
@@ -18,10 +18,6 @@ function startMonitor() {
   createResourceErrorMonitor('renderTree').start();
   createPromiseErrorMonitor('renderTree').start();
   createXhrMonitor('renderTree').start();
-}
-
-interface MakeValue {
-  value: ArrayItem[]
 }
 
 const renderTree: React.FC<Props> = ({data}) => {

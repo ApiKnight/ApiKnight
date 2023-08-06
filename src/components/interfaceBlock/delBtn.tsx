@@ -1,6 +1,6 @@
 import { Modal } from 'antd'
 import React, { useState , createContext } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
   remove,
 } from '@/store/modules/dirArraySlice.ts'

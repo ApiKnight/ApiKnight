@@ -6,21 +6,7 @@ import { createJsErrorMonitor } from '../../../sdk/createJsErrorMonitor';
 import { createResourceErrorMonitor } from '../../../sdk/createResourceErrorMonitor';
 import { createPromiseErrorMonitor } from '../../../sdk/createPromiseErrorMonitor';
 import { createXhrMonitor } from '../../../sdk/createXhrMonitor';
-
-interface TitleNode {
-    id: number;
-    title: string;
-    pid: number
-}
-
-interface Props {
-    data:TitleNode;
-}
-
-interface AddData {
-  id: number;
-  pid: number
-}
+import { TitleNode , Props , AddData } from '@/types/treeComponents';
 
 function startMonitor() {
   createJsErrorMonitor('renderTree').start();

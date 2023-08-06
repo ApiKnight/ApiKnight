@@ -3,9 +3,9 @@ import './index.less';
 import { Link } from 'react-router-dom';
 import { Counter } from '../../components/Counter.tsx';
 import { useSelector, useDispatch } from 'react-redux';
-import InterfaceBlock from '@/components/interfaceBlock/interfaceBlock.tsx';
-import RenderTree from '@/components/renderTree/renderTree.tsx';
-import { ArrayItem } from '@/utils/arrayToTree.ts';
+import InterfaceBlock from '@/components/InterfaceBlock/index.tsx';
+import RenderTree from '@/components/RenderTree/index.tsx';
+import { ArrayItem } from '@/types/arrayToTree.ts';
 import { assign } from '@/store/modules/dirArraySlice.ts';
 import { RootState } from '@/store/index.ts';
 

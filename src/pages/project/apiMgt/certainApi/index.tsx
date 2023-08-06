@@ -3,9 +3,9 @@ import './index.less'
 import { assign } from '@/store/modules/dirArraySlice.ts'
 import { RootState } from '@/store/index.ts'
 import { useSelector, useDispatch } from 'react-redux'
-import InterfaceBlock from '@/components/interfaceBlock/interfaceBlock.tsx'
-import RenderTree from '@/components/renderTree/renderTree.tsx'
-import { ArrayItem } from '@/utils/arrayToTree.ts'
+import InterfaceBlock from '@/components/interfaceBlock'
+import RenderTree from '@/components/renderTree'
+import { ArrayItem } from '@/types/arrayToTree.ts'
 import { Outlet, Link } from 'react-router-dom'
 
 interface MakeValue {

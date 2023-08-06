@@ -9,6 +9,7 @@ const ProjectItem = (params: ProjectItemType) => {
         <Image
           width={200}
           src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          preview={false}
         />
       </Card>
     </Link>

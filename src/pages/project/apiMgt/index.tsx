@@ -7,10 +7,10 @@ const ApiMgt: React.FunctionComponent = () => {
       <div>ApiMgt</div>
       <ul>
         <li>
-          <Link to='/project/apiMgt/overview'>Overview</Link>
+          <Link to="/project/apiMgt/overview">Overview</Link>
         </li>
         <li>
-          <Link to='/project/apiMgt/certainApi'>CertainApi</Link>
+          <Link to="/project/apiMgt/certainApi">CertainApi</Link>
         </li>
       </ul>
       <div>

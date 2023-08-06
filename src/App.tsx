@@ -37,52 +37,61 @@ const App: React.FunctionComponent = () => {
     <div>
       {/* 1.直接在App中配置二级路由 2.在对应页面中使用Switch包裹后配置二级路由，本项目采用法1 */}
       <Routes>
-        <Route path='/' element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           {/* Home */}
           <Route index element={<Home />}></Route>
           {/* Project */}
 
           <Route
-            path='/project'
+            path="/project/:id"
             element={
               <AuthRoute>
                 <Project />
               </AuthRoute>
             }
           >
-            <Route path='/project/apiMgt' element={<ApiMgt />}>
+            <Route path="/project/:id/apiMgt" element={<ApiMgt />}>
               <Route
-                path='/project/apiMgt/overview'
+                path="/project/:id/apiMgt/overview"
                 element={<Overview />}
               ></Route>
-              <Route path='/project/apiMgt/certainApi' element={<CertainApi />}>
+              <Route
+                path="/project/:id/apiMgt/certainApi"
+                element={<CertainApi />}
+              >
                 <Route
-                  path='/project/apiMgt/certainApi/document'
+                  path="/project/:id/apiMgt/certainApi/document"
                   element={<Document />}
                 ></Route>
                 <Route
-                  path='/project/apiMgt/certainApi/test'
+                  path="/project/:id/apiMgt/certainApi/test"
                   element={<Test />}
                 ></Route>
                 <Route
-                  path='/project/apiMgt/certainApi/mock'
+                  path="/project/:id/apiMgt/certainApi/mock"
                   element={<Mock />}
                 ></Route>
               </Route>
             </Route>
-            <Route path='/project/memberMgt' element={<MemberMgt />}></Route>
-            <Route path='/project/projectMgt' element={<ProjectMgt />}></Route>
+            <Route
+              path="/project/:id/memberMgt"
+              element={<MemberMgt />}
+            ></Route>
+            <Route
+              path="/project/:id/projectMgt"
+              element={<ProjectMgt />}
+            ></Route>
           </Route>
           {/* User */}
           <Route
-            path='/user'
+            path="/user"
             element={
               <AuthRoute>
                 <User />
               </AuthRoute>
             }
           ></Route>
-          <Route path='/user/login' element={<Login />} />
+          <Route path="/user/login" element={<Login />} />
         </Route>
       </Routes>
     </div>

@@ -1,24 +1,24 @@
 import React from 'react'
 import './index.less'
 import { Outlet, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+
 const Project: React.FunctionComponent = () => {
+  const { id } = useParams ()
   return (
     <>
-      <div>
-        <div>具体项目</div>
         <ul>
           <li>
-            <Link to='/project/apiMgt'>接口管理</Link>
+            <Link to={`/project/${id}/apiMgt`}>接口管理</Link>
           </li>
           <li>
-            <Link to='/project/memberMgt'>成员/权限管理</Link>
+            <Link to={`/project/${id}/memberMgt`}>成员/权限管理</Link>
           </li>
           <li>
-            <Link to='/project/memberMgt'>项目管理</Link>
+            <Link to={`/project/${id}/projectMgt`}>项目管理</Link>
           </li>
         </ul>
         <Outlet />
-      </div>
     </>
   )
 }

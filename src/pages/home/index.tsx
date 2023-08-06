@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './index.less'
-import { Counter } from '../../components/Counter.tsx'
 import ProjectItem from '@/components/ProjectItem'
-import HearNavc from '@/components/HeaderNav'
-import { Breadcrumb, Layout, Menu, theme } from 'antd'
+import { Layout } from 'antd'
 import HeaderNav from '@/components/HeaderNav'
 
 const { Header, Content, Footer } = Layout

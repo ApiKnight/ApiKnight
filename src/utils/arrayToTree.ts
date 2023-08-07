@@ -1,10 +1,10 @@
-import { ArrayItem } from "@/types/arrayToTree";
+import { ArrayNode } from "@/types/arrayToTree";
 /* 
     包含了数组类型转树形结构的函数方法及数据结构
 */
 
   
-  function arrayToTree(items:ArrayItem[]) {
+  function arrayToTree(items:ArrayNode[]) {
     const res:any = [] // 存放结果集
     const map:any = {}
     // 判断对象是否有某个属性

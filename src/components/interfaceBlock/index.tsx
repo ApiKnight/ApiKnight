@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./index.less";
-import AddBtn from './addBtn';
-import DelBtn from './delBtn';
+import AddBtn from './addBtn.tsx';
+import DelBtn from './delBtn.tsx';
 import { createJsErrorMonitor } from '../../../sdk/createJsErrorMonitor';
 import { createResourceErrorMonitor } from '../../../sdk/createResourceErrorMonitor';
 import { createPromiseErrorMonitor } from '../../../sdk/createPromiseErrorMonitor';

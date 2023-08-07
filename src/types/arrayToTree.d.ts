@@ -2,6 +2,19 @@ import { ReactNode } from "react";
 
 interface ArrayItem {
     key: number;
+    title: {
+        key: number;
+        title: string;
+        pid: number;
+        type: string;
+    };
+    pid: number;
+    type: string;
+    isLeaf?: boolean | undefined
+}
+
+interface ArrayNode {
+    key: number;
     title: ReactNode;
     pid: number;
     type: string;
@@ -17,4 +30,4 @@ interface TreeNode {
     isLeaf?: boolean
 }
 
-export type { TreeNode , ArrayItem };
+export type { TreeNode , ArrayItem , ArrayNode };

@@ -1,4 +1,4 @@
-import { ArrayItem } from '@/utils/arrayToTree'
+import { ArrayItem } from '@/types/arrayToTree'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 

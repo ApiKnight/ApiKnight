@@ -22,7 +22,7 @@ const InterfaceBlock: React.FunctionComponent<{data:TitleNode}> = (props:Props) 
       setShowState(!show);
     }
     const {data} = props; 
-    const addData:AddData = {id:data.id,pid:data.pid + 1}
+    const addData:AddData = {key:data.key,pid:data.pid + 1}
     return (
       <div className='InterfaceBlock' onMouseEnter={changeBtnState} onMouseLeave={changeBtnState}>
         <div>
@@ -32,7 +32,7 @@ const InterfaceBlock: React.FunctionComponent<{data:TitleNode}> = (props:Props) 
           show && (
             <div className='btn' >
               <AddBtn data={addData}/>
-              <DelBtn data={data.id}/>
+              <DelBtn data={data.key}/>
             </div>
           )
         }

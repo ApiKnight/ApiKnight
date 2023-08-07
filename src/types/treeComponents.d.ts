@@ -1,10 +1,10 @@
 interface AddData {
-    id: number;
+    key: number;
     pid: number
 }
 
 interface TitleNode {
-    id: number;
+    key: number;
     title: string;
     pid: number
 }

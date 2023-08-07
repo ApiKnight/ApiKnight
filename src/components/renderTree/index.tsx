@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState , useEffect } from "react"
 import { Tree } from 'antd';
-import { arrayToTree } from "../../utils/arrayToTree";
-import type { TreeNode, ArrayItem , ArrayNode } from "../../types/arrayToTree";
+import { arrayToTree } from "@/utils/arrayToTree";
+import type { TreeNode, ArrayItem , ArrayNode } from "@/types/arrayToTree";
 import "./index.less";
 import { assign } from '@/store/modules/dirArraySlice.ts';
 import { RootState } from '@/store/index.ts';
@@ -32,7 +32,7 @@ function startMonitor() {
 const renderTree: React.FC<Props> = ({data}) => {
   function restoreData(data: ArrayItem[]): ArrayNode[] {
     const restoredData: ArrayNode[] = [];
-  
+
     for (const item of data) {
       const restoredItem: ArrayNode = {
         key: item.key,
@@ -40,14 +40,14 @@ const renderTree: React.FC<Props> = ({data}) => {
         type: item.type,
         pid: item.pid
       };
-  
+
       restoredData.push(restoredItem);
     }
-  
+
     return restoredData;
   }
-  
-  // 
+
+  //
   const [makeValue, setMakeValue] = useState<MakeValue>({ value: data });
   const dispatch = useDispatch();
   const dirArray = useSelector((state: RootState) => state.dirArray.value);
@@ -66,17 +66,16 @@ const renderTree: React.FC<Props> = ({data}) => {
 
   const { DirectoryTree } = Tree;
   startMonitor();
-  return <DirectoryTree
-   multiple 
-   treeData={tree} 
+  return <Tree
+   treeData={tree}
    defaultExpandAll
     // onSelect={onSelect}
     // onRightClick={onRightClick}
    style={{ width: '270px' }}
    className='renderTree'
    >
-    
-  </DirectoryTree>;
+
+  </Tree>;
 };
 
 export default renderTree;

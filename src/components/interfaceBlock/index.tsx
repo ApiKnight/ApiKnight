@@ -7,6 +7,7 @@ import { createResourceErrorMonitor } from '../../../sdk/createResourceErrorMoni
 import { createPromiseErrorMonitor } from '../../../sdk/createPromiseErrorMonitor';
 import { createXhrMonitor } from '../../../sdk/createXhrMonitor';
 import { TitleNode , Props , AddData } from '@/types/treeComponents';
+import MethodList from "@/components/MethodList";
 
 function startMonitor() {
   createJsErrorMonitor('renderTree').start();
@@ -21,11 +22,14 @@ const InterfaceBlock: React.FunctionComponent<{data:TitleNode}> = (props:Props) 
     function changeBtnState():void {
       setShowState(!show);
     }
-    const {data} = props; 
+    const {data} = props;
     const addData:AddData = {key:data.key,pid:data.pid + 1}
     return (
       <div className='InterfaceBlock' onMouseEnter={changeBtnState} onMouseLeave={changeBtnState}>
-        <div>
+          <div>
+              <MethodList value={data.type} />
+          </div>
+        <div className='InterfaceBlock-title'>
           { data.title }
         </div>
         {

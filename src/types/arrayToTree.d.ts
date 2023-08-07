@@ -6,11 +6,11 @@ interface ArrayItem {
         key: number;
         title: string;
         pid: number;
-        type: string;
+        type: "GET" | "POST" | "PUT" | "DELETE" | "OPTIONS" | "HEAD" | "PATCH" | "FILE";
     };
     pid: number;
-    type: string;
-    isLeaf?: boolean | undefined
+    type: "GET" | "POST" | "PUT" | "DELETE" | "OPTIONS" | "HEAD" | "PATCH" | "FILE";
+    isLeaf?: boolean | undefined;
 }
 
 interface ArrayNode {
@@ -18,7 +18,7 @@ interface ArrayNode {
     title: ReactNode;
     pid: number;
     type: string;
-    isLeaf?: boolean | undefined
+    isLeaf?: boolean | undefined;
 }
 
 interface TreeNode {

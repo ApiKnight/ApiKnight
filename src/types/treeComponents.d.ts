@@ -1,12 +1,15 @@
+import {ArrayItem} from "@/types/arrayToTree";
+
 interface AddData {
     key: number;
-    pid: number
+    pid: number;
 }
 
 interface TitleNode {
     key: number;
     title: string;
-    pid: number
+    pid: number;
+    type: "GET" | "POST" | "PUT" | "DELETE" | "OPTIONS" | "HEAD" | "PATCH" ;
 }
 
 interface Props {

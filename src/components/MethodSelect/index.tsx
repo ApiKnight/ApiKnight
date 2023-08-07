@@ -1,10 +1,28 @@
 import React, { memo, useState } from 'react'
 import { Select } from 'antd'
-import { MethodSelectProps } from './type'
 import classNames from 'classnames'
-import './index.less'
 
-import { ApiOptReqOptType } from './type'
+import './index.less'
+import { MethodSelectProps, ApiOptReqOptType } from './type'
+
+function getColorClassName(methodInfo: ApiOptReqOptType | undefined): string {
+  if (!methodInfo) return 'color-others'
+  // 用户定义新类则使用用户定义的类
+  if (methodInfo?.colorClassName) return methodInfo.colorClassName
+  // 用户未定义则使用默认类
+  const isNormalMethod = [
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+    'OPTIONS',
+    'HEAD',
+    'PATCH',
+    'TRACE',
+  ].includes(methodInfo.value.toUpperCase())
+  if (isNormalMethod) return `color-${methodInfo.value.toLowerCase()}`
+  return 'color-others'
+}
 
 const MethodSelect: React.FunctionComponent<MethodSelectProps> = memo(
   (props) => {
@@ -13,10 +31,10 @@ const MethodSelect: React.FunctionComponent<MethodSelectProps> = memo(
     // 手动渲染请求方式下拉列表
     function getDropDownEle(): React.ReactElement {
       return (
-        <ul className="method-select">
+        <ul className='method-select'>
           {methodOptions.map((item, index) => (
             <li
-              className={['method-item', item.colorClassName].join(' ')}
+              className={classNames('method-item', getColorClassName(item))}
               onClick={() => onReqMethodChange(item)}
               key={index}
             >
@@ -34,8 +52,8 @@ const MethodSelect: React.FunctionComponent<MethodSelectProps> = memo(
     }
 
     return (
-      <div className="select-wrap">
-        <div className={props.methodValue?.colorClassName}>
+      <div className='select-wrap'>
+        <div className={getColorClassName(props.methodValue)}>
           <Select
             open={selectVisible}
             onDropdownVisibleChange={(visible) => setSelectVisible(visible)}
@@ -49,29 +67,25 @@ const MethodSelect: React.FunctionComponent<MethodSelectProps> = memo(
         </div>
       </div>
     )
-  }
+  },
 )
 
 // 默认请求类型信息
 const methodOptions: ApiOptReqOptType[] = [
-  { label: 'GET', value: 'GET', colorClassName: 'color-get' },
-  {
-    label: 'POST',
-    value: 'POST',
-    colorClassName: 'color-post'
-  },
-  { label: 'PUT', value: 'PUT', colorClassName: 'color-put' },
-  { label: 'DELETE', value: 'DELETE', colorClassName: 'color-delete' },
-  { label: 'OPTIONS', value: 'OPTIONS', colorClassName: 'color-options' },
-  { label: 'HEAD', value: 'HEAD', colorClassName: 'color-head' },
-  { label: 'PATCH', value: 'PATCH', colorClassName: 'color-patch' }
+  { label: 'GET', value: 'GET' },
+  { label: 'POST', value: 'POST' },
+  { label: 'PUT', value: 'PUT' },
+  { label: 'DELETE', value: 'DELETE' },
+  { label: 'OPTIONS', value: 'OPTIONS' },
+  { label: 'HEAD', value: 'HEAD' },
+  { label: 'PATCH', value: 'PATCH' },
 ]
 
 MethodSelect.defaultProps = {
   methodOptions: methodOptions,
   defaultMethod: methodOptions[0],
   methodValue: methodOptions[0],
-  popupMatchSelectWidth: 100
+  popupMatchSelectWidth: 100,
 }
 
 export default MethodSelect

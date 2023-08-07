@@ -6,6 +6,16 @@ export type Method =
   | 'OPTIONS'
   | 'HEAD'
   | 'PATCH'
+  | 'TRACE'
+  | 'CONNECT'
+  | 'COPY'
+  | 'LINK'
+  | 'UNLINK'
+  | 'MKCOL'
+  | 'MOVE'
+  | 'PROPFIND'
+  | 'REPORT'
+  | 'VIEW'
 
 export interface ApiOptReqOptType {
   label: string

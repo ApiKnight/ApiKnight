@@ -73,6 +73,7 @@ const renderTree: React.FC<Props> = ({data}) => {
     // onSelect={onSelect}
     // onRightClick={onRightClick}
    style={{ width: '270px' }}
+   className='renderTree'
    >
     
   </DirectoryTree>;

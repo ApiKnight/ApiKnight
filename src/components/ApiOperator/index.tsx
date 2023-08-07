@@ -12,7 +12,7 @@ const ApiOperator: React.FunctionComponent<ApiOptProps> = memo((props) => {
   }
 
   return (
-    <div className="api-operator">
+    <div className='api-operator'>
       <div
         className={['left-info', props.methodValue?.colorClassName].join(' ')}
       >
@@ -31,7 +31,7 @@ const ApiOperator: React.FunctionComponent<ApiOptProps> = memo((props) => {
           />
         </Space.Compact>
       </div>
-      <div className="right-warp" style={{ width: props.rightWidth }}>
+      <div className='right-warp' style={{ width: props.rightWidth }}>
         {props.children}
       </div>
     </div>
@@ -41,7 +41,7 @@ const ApiOperator: React.FunctionComponent<ApiOptProps> = memo((props) => {
 ApiOperator.defaultProps = {
   rightWidth: '225px',
   placeholder: '接口地址',
-  inputValue: ''
+  inputValue: '',
 }
 
 export default ApiOperator

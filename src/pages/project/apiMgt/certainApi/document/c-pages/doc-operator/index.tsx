@@ -16,18 +16,18 @@ const DocOperator: React.FunctionComponent = memo(() => {
   }
 
   return (
-    <div className="doc-operator">
+    <div className='doc-operator'>
       <ApiOperator
         methodValue={method}
         onOptionChange={(m) => setMethod(m)}
         onInputChange={(e) => urlInputChangeHandle(e)}
         inputValue={docUrl}
       >
-        <Button className="btn" type="primary">
+        <Button className='btn' type='primary'>
           保存
         </Button>
-        <Button className="btn">运行</Button>
-        <Button className="btn">删除</Button>
+        <Button className='btn'>运行</Button>
+        <Button className='btn'>删除</Button>
       </ApiOperator>
     </div>
   )

@@ -18,7 +18,7 @@ function getColorClassName(methodInfo: ApiOptReqOptType | undefined): string {
     'OPTIONS',
     'HEAD',
     'PATCH',
-    'TRACE'
+    'TRACE',
   ].includes(methodInfo.value.toUpperCase())
   if (isNormalMethod) return `color-${methodInfo.value.toLowerCase()}`
   return 'color-others'
@@ -31,7 +31,7 @@ const MethodSelect: React.FunctionComponent<MethodSelectProps> = memo(
     // 手动渲染请求方式下拉列表
     function getDropDownEle(): React.ReactElement {
       return (
-        <ul className="method-select">
+        <ul className='method-select'>
           {methodOptions.map((item, index) => (
             <li
               className={classNames('method-item', getColorClassName(item))}
@@ -52,7 +52,7 @@ const MethodSelect: React.FunctionComponent<MethodSelectProps> = memo(
     }
 
     return (
-      <div className="select-wrap">
+      <div className='select-wrap'>
         <div className={getColorClassName(props.methodValue)}>
           <Select
             open={selectVisible}
@@ -67,7 +67,7 @@ const MethodSelect: React.FunctionComponent<MethodSelectProps> = memo(
         </div>
       </div>
     )
-  }
+  },
 )
 
 // 默认请求类型信息
@@ -78,14 +78,14 @@ const methodOptions: ApiOptReqOptType[] = [
   { label: 'DELETE', value: 'DELETE' },
   { label: 'OPTIONS', value: 'OPTIONS' },
   { label: 'HEAD', value: 'HEAD' },
-  { label: 'PATCH', value: 'PATCH' }
+  { label: 'PATCH', value: 'PATCH' },
 ]
 
 MethodSelect.defaultProps = {
   methodOptions: methodOptions,
   defaultMethod: methodOptions[0],
   methodValue: methodOptions[0],
-  popupMatchSelectWidth: 100
+  popupMatchSelectWidth: 100,
 }
 
 export default MethodSelect

@@ -1,7 +1,7 @@
-import React, { memo } from "react";
+import React, { memo } from 'react'
 
 const DocRequest: React.FunctionComponent = memo(() => {
-  return <div>DocRequest</div>;
-});
+  return <div>DocRequest</div>
+})
 
-export default DocRequest;
+export default DocRequest

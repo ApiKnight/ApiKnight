@@ -1,20 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './index.less';
 import { Link } from 'react-router-dom';
 import { Counter } from '../../components/Counter.tsx';
-import InterfaceBlock from '@/components/InterfaceBlock/index.tsx';
-import RenderTree from '@/components/RenderTree/index.tsx';
-import { ArrayItem } from '@/types/arrayToTree.ts';
-
-// eval()
-const data = [
-  { key: 1, title: { key: 1, title: "接口目录1", pid: 0 , type: "file" } , type: "file", pid: 0 },
-  { key: 2, title: { key: 2, title: "接口目录2", pid: 1 , type: "file" }, type: "file", pid: 1 },
-];
 
 const Home: React.FunctionComponent = () => {
-  
-
   return (
     <div>
       <div>主页</div>
@@ -27,7 +16,6 @@ const Home: React.FunctionComponent = () => {
       <div>
         <Counter />
       </div>
-      <RenderTree data={data}></RenderTree>
     </div>
   );
 };

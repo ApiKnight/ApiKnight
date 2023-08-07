@@ -1,9 +1,11 @@
 import React from 'react'
 import './index.less'
+import HeaderNav from '@/components/HeaderNav'
 
-const User: React.FunctionComponent = () => {
-  const username = localStorage.getItem('login_token')
-  return <div>{username}的用户中心</div>
+const User = () => {
+  return (
+    <HeaderNav />
+  )
 }
 
 export default User

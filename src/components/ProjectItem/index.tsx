@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const ProjectItem = (params: ProjectItemType) => {
   return (
     <Link to={`/project/${params.id}`}>
-      <Card title={params.name} style={{ width: 300 }}>
+      <Card title={params.name} style={{ width: 300}}>
         <Image
           width={200}
           src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"

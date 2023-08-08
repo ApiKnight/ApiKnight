@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import { Button, Checkbox, Form, Input,Modal  } from 'antd';
 import './index.less'
+import request from '@/api/request';
 
 type FieldType = {
   username?: string;
@@ -11,12 +12,16 @@ type FieldType = {
 interface childProps{
   isModalOpen: boolean
   closeModal: Function
+  updateProjectList: Function
 }
 
 const UpdateProject: React.FC<childProps> = (props) => {
-  const {isModalOpen,closeModal} =props
+  const {isModalOpen,closeModal,updateProjectList} =props
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    request.post('v1/project/create',{},values).then(()=>{
+      updateProjectList()
+      closeModal()
+    })
   };
   
   const onFinishFailed = (errorInfo: any) => {
@@ -49,7 +54,7 @@ const UpdateProject: React.FC<childProps> = (props) => {
   >
     <Form.Item<FieldType>
       label="项目名称"
-      name="projectName"
+      name="projectname"
       rules={[{ required: true, message: '请输入项目名称!' }]}
     >
       <Input />
@@ -57,18 +62,10 @@ const UpdateProject: React.FC<childProps> = (props) => {
 
     <Form.Item<FieldType>
       label="项目描述"
-      name="projectDsc"
+      name="description"
       rules={[{ required: true, message: '请输入项目描述!' }]}
     >
       <Input />
-    </Form.Item>
-
-    <Form.Item<FieldType>
-      name="remember"
-      valuePropName="checked"
-      wrapperCol={{ offset: 8, span: 16 }}
-    >
-      <Checkbox>Remember me</Checkbox>
     </Form.Item>
 
     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

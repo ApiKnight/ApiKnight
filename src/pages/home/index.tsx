@@ -4,7 +4,7 @@ import ProjectItem from '@/components/ProjectItem'
 import { Layout,Button } from 'antd'
 import HeaderNav from '@/components/HeaderNav'
 import { PlusOutlined } from '@ant-design/icons';
-import UpdateProject from '@/components/UpdateProject'
+import CreateProject from '@/components/CreateProject'
 import request from '@/api/request'
 
 const { Header, Content, Footer } = Layout
@@ -17,6 +17,21 @@ const Home: React.FunctionComponent = () => {
   }
   const closeModal=()=>{
     setIsModalOpen(false)
+  }
+  const updateProjectList=()=>{
+    request.get('v1/project/list').then((res)=>{
+      let {data}=res.data
+      let list=[]
+      data.forEach(value=>{
+        list.push({
+          name:value.projectname,
+          dec:value.description,
+          projectId:value.id,
+          iconPath:'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
+        })
+      })
+      setProjectList(list)
+    })
   }
   useEffect(() => {
     // setProjectList([
@@ -56,9 +71,7 @@ const Home: React.FunctionComponent = () => {
     //     iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
     //   }
     // ])
-    request.get('v1/invite/sending').then((res)=>{
-      console.log('res',res);
-    })
+    updateProjectList()
   }, [])
   return (
     <>
@@ -79,10 +92,11 @@ const Home: React.FunctionComponent = () => {
           <ul>
             {projectList.map((value, index) => {
               return (
-                <li className="projectListItem" key={value.id}>
+                <li className="projectListItem" key={value.projectId}>
                   <ProjectItem
                     name={value.name}
-                    id={value.id}
+                    dec={value.dec}
+                    projectId={value.projectId}
                     iconPath={value.iconPath}
                   ></ProjectItem>
                 </li>
@@ -96,7 +110,7 @@ const Home: React.FunctionComponent = () => {
       </Layout>
       {/* <Counter /> */}
       
-      <UpdateProject isModalOpen={isModalOpen} closeModal={closeModal}/>
+      <CreateProject isModalOpen={isModalOpen} closeModal={closeModal} updateProjectList={updateProjectList}/>
     </>
   )
 }

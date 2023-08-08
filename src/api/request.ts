@@ -28,10 +28,11 @@ export class Request {
       (config: any) => {
         // CORS
         config.headers['Access-Control-Allow-Origin'] = '*'
+        // config.headers['Content-Type'] = 'application/json'
         // 判断token
         const token = localStorage.getItem('token') as string
         if (token) {
-          config.headers!.Authorization = token
+          config.headers!.Authorization = 'Bearer '+token
         }
         console.log('请求拦截成功', config)
         return config

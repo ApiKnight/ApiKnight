@@ -1,7 +1,8 @@
 declare interface ProjectItemType {
-  id: string
+  projectId: string
   name: string
   iconPath: string
+  dec: string
 }
 // interface ProjectItemType {
 //     id: string,

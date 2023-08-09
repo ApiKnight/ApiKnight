@@ -14,9 +14,9 @@ export class Request {
   // 测试接口，id:bolpgeq7pltiflnj,  secret:d0JZQ2N1bUQ2djJBSXFFSm92ZVpWdz09
   // https://www.mxnzp.com/api/holiday/single/20181121?ignoreHoliday=false&app_id=bolpgeq7pltiflnj&app_secret=d0JZQ2N1bUQ2djJBSXFFSm92ZVpWdz09
   baseConfig: AxiosRequestConfig = {
-    baseURL: 'https://www.mxnzp.com/api/',
+    baseURL: 'http://47.112.108.202:7002/api/',
     timeout: 60000,
-    withCredentials: true,
+    // withCredentials: true,
   }
 
   constructor(config: AxiosRequestConfig) {
@@ -28,10 +28,11 @@ export class Request {
       (config: any) => {
         // CORS
         config.headers['Access-Control-Allow-Origin'] = '*'
+        config.headers['Content-Type'] = 'application/json'
         // 判断token
         const token = localStorage.getItem('token') as string
         if (token) {
-          config.headers!.Authorization = token
+          config.headers!.Authorization = 'Bearer '+token
         }
         console.log('请求拦截成功', config)
         return config
@@ -112,8 +113,8 @@ export class Request {
 
   post<T = any>(
     url: string,
-    config?: AxiosRequestConfig,
     data?: any,
+    config?: AxiosRequestConfig
   ): Promise<AxiosResponse<Result<T>>> {
     return this.instance.post(url, data, config)
   }

@@ -1,14 +1,14 @@
 import { ArrayItem } from '@/types/arrayToTree'
 
 interface AddData {
-  key: number
-  pid: number
+  key: string
+  pid: string | null
 }
 
 interface TitleNode {
-  key: number
+  key: string
   title: string
-  pid: number
+  pid: string | null
   type: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
 }
 

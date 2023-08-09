@@ -6,18 +6,18 @@ import './index.less'
 
 const HeaderNav: React.FC = () => {
   return (
-    <div className="headerNav">
-      <a href="https://github.com/ApiKnight" target="_blank">
+    <div className='headerNav'>
+      <a href='https://github.com/ApiKnight' target='_blank'>
         <Avatar
           size={54}
           style={{ backgroundColor: 'black' }}
           icon={<GithubOutlined />}
         />
       </a>
-      <Link to="/user">
+      <Link to='/user'>
         <Avatar
           size={54}
-          style={{ backgroundColor: 'black',marginLeft:'10px'}}
+          style={{ backgroundColor: 'black', marginLeft: '10px' }}
           icon={<UserOutlined />}
         />
       </Link>

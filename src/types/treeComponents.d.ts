@@ -1,20 +1,23 @@
+import { ArrayItem } from '@/types/arrayToTree'
+
 interface AddData {
-    id: number;
-    pid: number
+  key: string
+  pid: string | null
 }
 
 interface TitleNode {
-    id: number;
-    title: string;
-    pid: number
+  key: string
+  title: string
+  pid: string | null
+  type: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
 }
 
 interface Props {
-    data:TitleNode;
+  data: TitleNode
 }
 
 interface MakeValue {
-    value: ArrayItem[]
+  value: ArrayItem[]
 }
 
-export { AddData , Props , TitleNode , MakeValue }
+export { AddData, Props, TitleNode, MakeValue }

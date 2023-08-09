@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './index.less'
 import ProjectItem from '@/components/ProjectItem'
 import { Layout,Button } from 'antd'

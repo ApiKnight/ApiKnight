@@ -31,7 +31,7 @@ const App: React.FunctionComponent = () => {
     <div>
       {/* 1.直接在App中配置二级路由 2.在对应页面中使用Switch包裹后配置二级路由，本项目采用法1 */}
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path='/' element={<Layout />}>
           {/* Home */}
           <Route index element={<Home />}></Route>
 
@@ -79,14 +79,14 @@ const App: React.FunctionComponent = () => {
 
           {/* User */}
           <Route
-            path="/user"
+            path='/user'
             element={
               <AuthRoute>
                 <User />
               </AuthRoute>
             }
           ></Route>
-          <Route path="/user/login" element={<Login />} />
+          <Route path='/user/login' element={<Login />} />
         </Route>
       </Routes>
     </div>

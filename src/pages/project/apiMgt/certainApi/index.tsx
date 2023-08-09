@@ -16,14 +16,14 @@ const data = [
     key: 1,
     title: <InterfaceBlock data={{ id: 1, title: '接口目录1', pid: 0 }} />,
     type: 'file',
-    pid: 0
+    pid: 0,
   },
   {
     key: 2,
     title: <InterfaceBlock data={{ id: 2, title: '接口目录2', pid: 1 }} />,
     type: 'file',
-    pid: 1
-  }
+    pid: 1,
+  },
 ]
 
 const CertainApi: React.FunctionComponent = () => {
@@ -44,13 +44,13 @@ const CertainApi: React.FunctionComponent = () => {
       <RenderTree data={makeValue.value}></RenderTree>
       <ul>
         <li>
-          <Link to="/project/apiMgt/certainApi/document">document</Link>
+          <Link to='/project/apiMgt/certainApi/document'>document</Link>
         </li>
         <li>
-          <Link to="/project/apiMgt/certainApi/test">test</Link>
+          <Link to='/project/apiMgt/certainApi/test'>test</Link>
         </li>
         <li>
-          <Link to="/project/apiMgt/certainApi/mock">mock</Link>
+          <Link to='/project/apiMgt/certainApi/mock'>mock</Link>
         </li>
       </ul>
       <Outlet />

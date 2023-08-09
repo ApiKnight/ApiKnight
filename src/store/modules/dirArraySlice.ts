@@ -1,4 +1,4 @@
-import { ArrayItem } from '@/utils/arrayToTree'
+import { ArrayItem } from '@/types/arrayToTree'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
@@ -7,7 +7,7 @@ export interface DirArray {
 }
 
 const initialState: DirArray = {
-  value: []
+  value: [],
 }
 
 export const dirArraySlice = createSlice({
@@ -15,23 +15,27 @@ export const dirArraySlice = createSlice({
   initialState,
   reducers: {
     increment: (state, action: PayloadAction<ArrayItem>) => {
-        state.value.push(action.payload)
+      state.value.push(action.payload)
     },
     assign: (state, action: PayloadAction<Array<ArrayItem>>) => {
       console.log('assign')
-        state.value = action.payload;
+      state.value = action.payload
     },
-    remove: (state, action: PayloadAction<number>) => {
+    remove: (state, action: PayloadAction<string>) => {
       console.log(action.payload)
-      console.log(state.value.filter((item)=>{
-        return item.key != 2
-     }))
-     state.value = state.value.filter((item) => item.key !== action.payload);
-    }
+      console.log(
+        state.value.filter((item) => {
+          return item.key !== action.payload && item.pid !== action.payload
+        }),
+      )
+      state.value = state.value.filter(
+        (item) => item.key !== action.payload && item.pid !== action.payload,
+      )
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment , assign , remove } = dirArraySlice.actions
+export const { increment, assign, remove } = dirArraySlice.actions
 
 export default dirArraySlice.reducer

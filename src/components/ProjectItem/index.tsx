@@ -20,7 +20,7 @@ const ProjectItem = (params: ProjectItemType) => {
       <Card title={params.name} style={{ width: 300}}>
         <Image
           width={200}
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          src='https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
           preview={false}
         />
         <div>{params.dec}</div>

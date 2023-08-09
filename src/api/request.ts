@@ -28,7 +28,7 @@ export class Request {
       (config: any) => {
         // CORS
         config.headers['Access-Control-Allow-Origin'] = '*'
-        // config.headers['Content-Type'] = 'application/json'
+        config.headers['Content-Type'] = 'application/json'
         // 判断token
         const token = localStorage.getItem('token') as string
         if (token) {
@@ -113,8 +113,8 @@ export class Request {
 
   post<T = any>(
     url: string,
-    config?: AxiosRequestConfig,
     data?: any,
+    config?: AxiosRequestConfig
   ): Promise<AxiosResponse<Result<T>>> {
     return this.instance.post(url, data, config)
   }

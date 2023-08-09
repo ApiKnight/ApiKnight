@@ -31,6 +31,7 @@ import type { MenuProps } from 'antd'
 import request from '@/api/request'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import login from '@/api/login'
 
 const { Header, Content } = Layout
 
@@ -71,27 +72,33 @@ const Login: React.FC = () => {
     let loginData: LoginType
     let registerData: RegisterType
     current === 'login'
-      ? ((loginData = {
-          usernameOrEmail: values.log_username,
-          password: values.log_password,
-          remember: values.remember
-        }),
-        request.post('v1/user/login', {}, loginData).then(
+      ? 
+      (
+        loginData={
+          usernameOrEmail:values.log_username,
+          password:values.log_password,
+          remember:values.remember
+        },
+        login(loginData).then(
           (res) => {
             res.data.code === 200
-              ? (messageApi.info('登录成功!'),
-                res.data.code === 200
-                  ? localStorage.setItem('token', res.data.data.token)
-                  : '',
+              ?
+               (
+                messageApi.info('登录成功!'),
+                localStorage.setItem('token', res.data.data.token),
+                localStorage.setItem('userId', res.data.data.user.id),
                 setTimeout(() => {
-                  navigate('/user')
-                }, 1200))
-              : messageApi.info('登录失败')
+                  navigate('/')
+                }, 1200)
+               )
+              :
+               messageApi.info('登录失败')
           },
           (err) => {
             messageApi.info('请求失败', err)
           }
-        ))
+        )
+      )
       : ((registerData = {
           username: values.reg_username,
           password: values.reg_password,
@@ -99,19 +106,17 @@ const Login: React.FC = () => {
           email: values.email,
           phone: values.phone
         }),
-        (console.log(registerData)
-        ),
         request
-          .post('v1/user/checkExist', {}, registerData)
+          .post('v1/user/checkExist', registerData,{})
           .then((res) => {
-            res.data.code === 200
-            ? request.post('v1/user/login', {}, registerData)
-            : messageApi.info('用户名或邮箱已被注册')
-            
+            if(res.data.code===200){
+             request.post('v1/user/register', registerData,{}).then(res1=>{
+              res1.data.code===200?messageApi.info('注册成功'):''
+             })
+            }else{
+             messageApi.info('用户名或邮箱已被注册')
+            }
           })
-          // .then(() => {
-           
-          // })
           )
   }
 

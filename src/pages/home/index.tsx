@@ -6,12 +6,14 @@ import HeaderNav from '@/components/HeaderNav'
 import { PlusOutlined } from '@ant-design/icons';
 import CreateProject from '@/components/CreateProject'
 import request from '@/api/request'
-
+import getUserInfo from '@/api/getUserInfo'
 const { Header, Content, Footer } = Layout
 
 const Home: React.FunctionComponent = () => {
   const [projectList, setProjectList] = useState<ProjectItemType[]>([])
   const [isModalOpen,setIsModalOpen] = useState(false)
+  const [userInfo,setUserInfo] = useState({})
+
   const openModal=()=>{
     setIsModalOpen(true)
   }
@@ -19,7 +21,7 @@ const Home: React.FunctionComponent = () => {
     setIsModalOpen(false)
   }
   const updateProjectList=()=>{
-    request.get('v1/project/list').then((res)=>{
+      request.get('v1/project/list').then((res)=>{
       let {data}=res.data
       let list=[]
       data.forEach(value=>{
@@ -33,45 +35,16 @@ const Home: React.FunctionComponent = () => {
       setProjectList(list)
     })
   }
+  
   useEffect(() => {
-    // setProjectList([
-    //   {
-    //     id: 'p1',
-    //     name: '项目1',
-    //     iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
-    //   },
-    //   {
-    //     id: 'p2',
-    //     name: '项目2',
-    //     iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
-    //   },
-    //   {
-    //     id: 'p3',
-    //     name: '项目4',
-    //     iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
-    //   },
-    //   {
-    //     id: 'p5',
-    //     name: '项目5',
-    //     iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
-    //   },
-    //   {
-    //     id: 'p6',
-    //     name: '项目6',
-    //     iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
-    //   },
-    //   {
-    //     id: 'p7',
-    //     name: '项目8',
-    //     iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
-    //   },
-    //   {
-    //     id: 'p8',
-    //     name: '项目8',
-    //     iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg'
-    //   }
-    // ])
-    updateProjectList()
+    //有token，先登录再拉取项目列表
+    if(localStorage.getItem('token') && localStorage.getItem('userId')){
+      updateProjectList()
+      getUserInfo(localStorage.getItem('userId')).then(res=>{
+        let data=res.data.data
+        setUserInfo(data)
+      })
+    }
   }, [])
   return (
     <>
@@ -82,7 +55,7 @@ const Home: React.FunctionComponent = () => {
             height: '80px'
           }}
         >
-          <HeaderNav />
+          <HeaderNav userInfo={userInfo}/>
         </Header>
         <Content style={{ padding: '50px 50px',justifyContent:'center'}}>
         <div className="Content-title">

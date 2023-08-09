@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './modules/counterSlice.ts'
-import projectIdReducer from './modules/projectIdSlice.ts'
+import projectReducer from './modules/projectSlice.ts'
 import dirArrayReducer from './modules/dirArraySlice.ts';
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    project: projectIdReducer,
+    project: projectReducer,
     dirArray:dirArrayReducer,
   },
   middleware: (getDefaultMiddleware) =>

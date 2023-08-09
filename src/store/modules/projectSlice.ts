@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import request from '../../api/request'
+import {message} from 'antd'
 export interface ProjectIdType {
   projectId: string
 }
@@ -9,6 +10,7 @@ const initialState: ProjectIdType = {
 }
 
 // export const fetchProjectList = createAsyncThunk(
+  // createAsyncThunk的第一个参数是动作的名称，Redux动作名称的标准惯例是'[slice name]/[action name]' ，例如('auth/login')
 //   'fetchProjectList',
 //   async () => {
 //     const response = await request.get('holiday/single/20181121', {
@@ -22,13 +24,11 @@ const initialState: ProjectIdType = {
 //   },
 // )
 
-export const projectIdSlice = createSlice({
+export const projectSlice = createSlice({
   name: 'project',
   initialState,
   reducers: {
     updateProjectId:(state,action)=>{
-      console.log('state',state);
-      
       state.projectId=action.payload.projectId
     }
   },
@@ -47,5 +47,5 @@ export const projectIdSlice = createSlice({
   },
 })
 
-export const {updateProjectId} = projectIdSlice.actions
-export default projectIdSlice.reducer
+export const {updateProjectId} = projectSlice.actions
+export default projectSlice.reducer

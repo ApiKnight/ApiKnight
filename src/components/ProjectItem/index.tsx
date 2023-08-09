@@ -2,7 +2,7 @@ import React,{useEffect} from 'react'
 import { Card, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import {updateProjectId} from '@/store/modules/projectIdSlice'
+import {updateProjectId} from '@/store/modules/projectSlice'
 
 const ProjectItem = (params: ProjectItemType) => {
   const dispatch=useDispatch()
@@ -10,7 +10,8 @@ const ProjectItem = (params: ProjectItemType) => {
   },[])
   const navigate=useNavigate()
   const toProject=()=>{
-    dispatch(updateProjectId(params.projectId))
+    console.log(params.projectId);
+    dispatch(updateProjectId({projectId:params.projectId}))
     navigate('/project',{state:{projectId:params.projectId}})
   }
   

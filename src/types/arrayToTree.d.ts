@@ -54,11 +54,20 @@ interface ArrayNode {
 
 interface TreeNode {
   key: string
-  title: ReactNode
-  type: string
+  title: {
+    key: string;
+    pid: string | null
+  }
+  type:
+      | 'GET'
+      | 'POST'
+      | 'PUT'
+      | 'DELETE'
+      | 'OPTIONS'
+      | 'HEAD'
+      | 'PATCH'
+      | 'FILE'
   pid: string | null
-  children?: TreeNode[]
-  isLeaf?: boolean
 }
 
 export type { TreeNode, ArrayItem, ArrayNode, FlatArrayItem }

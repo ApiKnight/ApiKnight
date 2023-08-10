@@ -44,20 +44,20 @@ interface RegisterType {
   username: string
   password: string
   email: string
-  phone: string,
+  phone: string
   avatar_url: string
 }
 const items: MenuProps['items'] = [
   {
     label: '注册',
-    key: 'register'
+    key: 'register',
     // icon: <MailOutlined />,
   },
   {
     label: '登录',
-    key: 'login'
+    key: 'login',
     // icon: <AppstoreOutlined />,
-  }
+  },
 ]
 
 const Login: React.FC = () => {
@@ -72,52 +72,42 @@ const Login: React.FC = () => {
     let loginData: LoginType
     let registerData: RegisterType
     current === 'login'
-      ? 
-      (
-        loginData={
-          usernameOrEmail:values.log_username,
-          password:values.log_password,
-          remember:values.remember
-        },
+      ? ((loginData = {
+          usernameOrEmail: values.log_username,
+          password: values.log_password,
+          remember: values.remember,
+        }),
         login(loginData).then(
           (res) => {
             res.data.code === 200
-              ?
-               (
-                messageApi.info('登录成功!'),
+              ? (messageApi.info('登录成功!'),
                 localStorage.setItem('token', res.data.data.token),
                 localStorage.setItem('userId', res.data.data.user.id),
                 setTimeout(() => {
                   navigate('/')
-                }, 1200)
-               )
-              :
-               messageApi.info('登录失败')
+                }, 1200))
+              : messageApi.info('登录失败')
           },
           (err) => {
             messageApi.info('请求失败', err)
-          }
-        )
-      )
+          },
+        ))
       : ((registerData = {
           username: values.reg_username,
           password: values.reg_password,
           avatar_url: 'https://avatars.githubusercontent.com/u/19998011?v=4',
           email: values.email,
-          phone: values.phone
+          phone: values.phone,
         }),
-        request
-          .post('v1/user/checkExist', registerData,{})
-          .then((res) => {
-            if(res.data.code===200){
-             request.post('v1/user/register', registerData,{}).then(res1=>{
-              res1.data.code===200?messageApi.info('注册成功'):''
-             })
-            }else{
-             messageApi.info('用户名或邮箱已被注册')
-            }
-          })
-          )
+        request.post('v1/user/checkExist', registerData, {}).then((res) => {
+          if (res.data.code === 200) {
+            request.post('v1/user/register', registerData, {}).then((res1) => {
+              res1.data.code === 200 ? messageApi.info('注册成功') : ''
+            })
+          } else {
+            messageApi.info('用户名或邮箱已被注册')
+          }
+        }))
   }
 
   const onFinishFailed = (errorInfo: any) => {
@@ -129,7 +119,7 @@ const Login: React.FC = () => {
     <>
       {contextHolder}
       <Header style={{ backgroundColor: '#ffffff' }}>
-        <HeaderNav ifHideUser={false} />
+        <HeaderNav ifHideUser={false} userInfo={} />
       </Header>
       <Content style={{ backgroundColor: '#fbf7ff' }}>
         <Menu
@@ -138,22 +128,21 @@ const Login: React.FC = () => {
             width: '100%',
             backgroundColor: '#fbf7ff',
             justifyContent: 'center',
-            marginBottom: '20px'
+            marginBottom: '20px',
           }}
           selectedKeys={[current]}
-          mode="horizontal"
+          mode='horizontal'
           items={items}
         />
         <Form
-          name="basic"
+          name='basic'
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           style={{ maxWidth: 600 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
+          autoComplete='off'>
           <Form.Item<LoginType>
             label={current === 'login' ? '用户名或邮箱' : '用户名'}
             name={current === 'login' ? 'log_username' : 'reg_username'}
@@ -161,50 +150,45 @@ const Login: React.FC = () => {
               {
                 required: true,
                 message:
-                  current === 'login' ? '输入用户名或邮箱!' : '输入用户名!'
-              }
-            ]}
-          >
+                  current === 'login' ? '输入用户名或邮箱!' : '输入用户名!',
+              },
+            ]}>
             <Input />
           </Form.Item>
 
           <Form.Item<LoginType>
-            label="密码"
+            label='密码'
             name={current === 'login' ? 'log_password' : 'reg_password'}
-            rules={[{ required: true, message: '输入密码!' }]}
-          >
+            rules={[{ required: true, message: '输入密码!' }]}>
             <Input.Password />
           </Form.Item>
 
           {current === 'login' ? (
             <Form.Item<LoginType>
-              name="remember"
-              valuePropName="checked"
-              wrapperCol={{ offset: 8, span: 16 }}
-            >
+              name='remember'
+              valuePropName='checked'
+              wrapperCol={{ offset: 8, span: 16 }}>
               <Checkbox>下次自动登录</Checkbox>
             </Form.Item>
           ) : (
             <>
               <Form.Item<LoginType>
-                label="邮箱"
-                name="email"
-                rules={[{ required: true, message: '输入邮箱!' }]}
-              >
+                label='邮箱'
+                name='email'
+                rules={[{ required: true, message: '输入邮箱!' }]}>
                 <Input />
               </Form.Item>
               <Form.Item<LoginType>
-                label="手机号"
-                name="phone"
-                rules={[{ required: true, message: '输入手机号码!' }]}
-              >
+                label='手机号'
+                name='phone'
+                rules={[{ required: true, message: '输入手机号码!' }]}>
                 <Input />
               </Form.Item>
             </>
           )}
 
           <Form.Item wrapperCol={{ offset: 14, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type='primary' htmlType='submit'>
               {/* {current==='login'?'登录':'注册'} */}
               提交
             </Button>

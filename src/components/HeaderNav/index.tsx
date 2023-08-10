@@ -6,11 +6,16 @@ import './index.less'
 
 interface Props{
   ifHideUser?:boolean,
-  userInfo:Object
+  userInfo?:Object
 }
 const HeaderNav: React.FC<Props> = (props) => {
+  // localStorage.setItem('token','')
+  // localStorage.setItem('user_id','')
+  let {ifHideUser,userInfo}=props
+
   // 默认值
-  const {ifHideUser,userInfo}=props
+  ifHideUser?'':ifHideUser=false
+  userInfo?'':userInfo={}
   return (
     // left
     <div className="header-nav">
@@ -33,7 +38,6 @@ const HeaderNav: React.FC<Props> = (props) => {
           />
         </a>
         </div>
-        <div className='username'>{userInfo.username}</div>
         </div>
         {
           ifHideUser
@@ -46,9 +50,10 @@ const HeaderNav: React.FC<Props> = (props) => {
             <Avatar
               size={54}
               style={{ backgroundColor: 'black', marginLeft: '10px' }}
-              // icon={<UserOutlined />}
-              src={userInfo.avatar_url}
+              icon={userInfo.avatar_url?'':<UserOutlined />}
+              src={userInfo.avatar_url?userInfo.avatar_url:null}
             />
+        <div className='username'>{userInfo.username?userInfo.username:null}</div>
           </Link>
           </div>
             )

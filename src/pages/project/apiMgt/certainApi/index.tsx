@@ -5,43 +5,77 @@ import { RootState } from '@/store/index.ts'
 import { useSelector, useDispatch } from 'react-redux'
 import InterfaceBlock from '@/components/interfaceBlock'
 import RenderTree from '@/components/renderTree'
-import { ArrayItem } from '@/types/arrayToTree.ts'
+import { ArrayItem } from '@/types/arrayToTree.d.ts'
 import { Outlet, Link } from 'react-router-dom'
-
-interface MakeValue {
-  value: ArrayItem[]
-}
-const data = [
-  {
-    key: 1,
-    title: <InterfaceBlock data={{ id: 1, title: '接口目录1', pid: 0 }} />,
-    type: 'file',
-    pid: 0,
-  },
-  {
-    key: 2,
-    title: <InterfaceBlock data={{ id: 2, title: '接口目录2', pid: 1 }} />,
-    type: 'file',
-    pid: 1,
-  },
-]
+import { FlatItem, FlatItemValue } from '@/types/mergeFlatArrays'
+import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
 
 const CertainApi: React.FunctionComponent = () => {
-  const [makeValue, setMakeValue] = useState<MakeValue>({ value: data })
-  const dispatch = useDispatch()
-  const dirArray = useSelector((state: RootState) => state.dirArray.value)
-
-  useEffect(() => {
-    dispatch(assign(data))
-  }, [])
-
-  useEffect(() => {
-    setMakeValue({ value: dirArray })
-  }, [dirArray])
+  const a1: FlatItem[] = [
+    {
+      id: '1',
+      name: '根目录',
+      project_id: 100,
+      parent_id: null,
+    },
+    {
+      id: '2',
+      name: '接口目录1',
+      project_id: 100,
+      parent_id: '1',
+    },
+    {
+      id: '3',
+      name: '接口目录1',
+      project_id: 100,
+      parent_id: '1',
+    },
+  ]
+  const a2: FlatItem[] = [
+    {
+      id: '4',
+      name: 'getList',
+      project_id: 100,
+      parent_id: '3',
+    },
+  ]
+  const dd: ArrayItem[] = mergeFlatArrays(a1, a2, 100)
+  const cs: FlatItemValue = {
+    value_1: a1,
+    value_2: a2,
+    target: 100,
+  }
+  const d: ArrayItem[] = [
+    {
+      key: '1',
+      title: { key: '1', title: '根目录', pid: null, type: 'FILE' },
+      type: 'FILE',
+      pid: null,
+    },
+    {
+      key: '2',
+      title: { key: '2', title: '接口目录1', pid: '1', type: 'FILE' },
+      type: 'FILE',
+      pid: '1',
+    },
+    {
+      key: '3',
+      title: { key: '3', title: '接口目录2', pid: '1', type: 'FILE' },
+      type: 'FILE',
+      pid: '1',
+    },
+    {
+      key: '4',
+      title: { key: '4', title: 'getList', pid: '3', type: 'GET' },
+      type: 'GET',
+      pid: '3',
+    },
+  ]
+  console.log(dd)
+  console.log(d)
   return (
     <>
       <div>CertainApi</div>
-      <RenderTree data={makeValue.value}></RenderTree>
       <ul>
         <li>
           <Link to='/project/apiMgt/certainApi/document'>document</Link>
@@ -54,6 +88,7 @@ const CertainApi: React.FunctionComponent = () => {
         </li>
       </ul>
       <Outlet />
+      <RenderTree data={dd} />
     </>
   )
 }

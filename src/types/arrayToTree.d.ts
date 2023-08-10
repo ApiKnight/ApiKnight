@@ -1,5 +1,20 @@
 import { ReactNode } from 'react'
 
+interface FlatArrayItem {
+  key: string;
+  title: string;
+  type:
+      | 'GET'
+      | 'POST'
+      | 'PUT'
+      | 'DELETE'
+      | 'OPTIONS'
+      | 'HEAD'
+      | 'PATCH'
+      | 'FILE'
+  pid: null | string
+}
+
 interface ArrayItem {
   key: string
   title: {
@@ -46,4 +61,4 @@ interface TreeNode {
   isLeaf?: boolean
 }
 
-export type { TreeNode, ArrayItem, ArrayNode }
+export type { TreeNode, ArrayItem, ArrayNode, FlatArrayItem }

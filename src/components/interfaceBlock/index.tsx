@@ -38,7 +38,9 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
       <div className='InterfaceBlock-title'>{data.title}</div>
       {show && (
         <div className='btn'>
-          <AddBtn data={addData} />
+          {
+            data.type === 'FILE' && <AddBtn data={addData} />
+          }
           <DelBtn data={data.key} />
         </div>
       )}

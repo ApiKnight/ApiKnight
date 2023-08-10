@@ -37,44 +37,35 @@ const App: React.FunctionComponent = () => {
 
           {/* Project */}
           <Route
-            path="/project"
+            path='/project'
             element={
               <AuthRoute>
                 <Project />
               </AuthRoute>
             }
           >
-            <Route path="/project/apiMgt" element={<ApiMgt />}>
+            <Route path='/project/apiMgt' element={<ApiMgt />}>
               <Route
-                path="/project/apiMgt/overview"
+                path='/project/apiMgt/overview'
                 element={<Overview />}
               ></Route>
-              <Route
-                path="/project/apiMgt/certainApi"
-                element={<CertainApi />}
-              >
+              <Route path='/project/apiMgt/certainApi' element={<CertainApi />}>
                 <Route
-                  path="/project/apiMgt/certainApi/document"
+                  path='/project/apiMgt/certainApi/document'
                   element={<Document />}
                 ></Route>
                 <Route
-                  path="/project/apiMgt/certainApi/test"
+                  path='/project/apiMgt/certainApi/test'
                   element={<Test />}
                 ></Route>
                 <Route
-                  path="/project/apiMgt/certainApi/mock"
+                  path='/project/apiMgt/certainApi/mock'
                   element={<Mock />}
                 ></Route>
               </Route>
             </Route>
-            <Route
-              path="/project/memberMgt"
-              element={<MemberMgt />}
-            ></Route>
-            <Route
-              path="/project/projectMgt"
-              element={<ProjectMgt />}
-            ></Route>
+            <Route path='/project/memberMgt' element={<MemberMgt />}></Route>
+            <Route path='/project/projectMgt' element={<ProjectMgt />}></Route>
           </Route>
 
           {/* User */}

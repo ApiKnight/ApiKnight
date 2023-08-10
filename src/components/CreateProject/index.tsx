@@ -47,7 +47,8 @@ const UpdateProject: React.FC<childProps> = (props) => {
       onCancel={() => {
         props.closeModal()
       }}
-      footer={null}>
+      footer={null}
+    >
       <Form
         name='basic'
         labelCol={{ span: 8 }}
@@ -56,18 +57,21 @@ const UpdateProject: React.FC<childProps> = (props) => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        autoComplete='off'>
+        autoComplete='off'
+      >
         <Form.Item<FieldType>
           label='项目名称'
           name='projectname'
-          rules={[{ required: true, message: '请输入项目名称!' }]}>
+          rules={[{ required: true, message: '请输入项目名称!' }]}
+        >
           <Input />
         </Form.Item>
 
         <Form.Item<FieldType>
           label='项目描述'
           name='description'
-          rules={[{ required: true, message: '请输入项目描述!' }]}>
+          rules={[{ required: true, message: '请输入项目描述!' }]}
+        >
           <Input />
         </Form.Item>
 
@@ -75,7 +79,8 @@ const UpdateProject: React.FC<childProps> = (props) => {
           <Button
             type='primary'
             htmlType='submit'
-            style={{ marginRight: '10px' }}>
+            style={{ marginRight: '10px' }}
+          >
             确定
           </Button>
         </Form.Item>

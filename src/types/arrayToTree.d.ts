@@ -1,17 +1,17 @@
 import { ReactNode } from 'react'
 
 interface FlatArrayItem {
-  key: string;
-  title: string;
+  key: string
+  title: string
   type:
-      | 'GET'
-      | 'POST'
-      | 'PUT'
-      | 'DELETE'
-      | 'OPTIONS'
-      | 'HEAD'
-      | 'PATCH'
-      | 'FILE'
+    | 'GET'
+    | 'POST'
+    | 'PUT'
+    | 'DELETE'
+    | 'OPTIONS'
+    | 'HEAD'
+    | 'PATCH'
+    | 'FILE'
   pid: null | string
 }
 

@@ -18,6 +18,7 @@ import Test from './pages/project/apiMgt/certainApi/test/index.tsx'
 import Mock from './pages/project/apiMgt/certainApi/mock/index.tsx'
 import AuthRoute from './components/AuthRoute.tsx'
 import Login from './pages/user/login/index.tsx'
+import Index from '@/pages/index'
 
 const Layout: React.FunctionComponent = () => {
   return (
@@ -33,48 +34,39 @@ const App: React.FunctionComponent = () => {
       <Routes>
         <Route path='/' element={<Layout />}>
           {/* Home */}
-          <Route index element={<Home />}></Route>
-
+          <Route index element={<Index />}></Route>
+          <Route path='/main' element={<Home />}></Route>
           {/* Project */}
           <Route
-            path="/project"
+            path='/project'
             element={
               <AuthRoute>
                 <Project />
               </AuthRoute>
             }
           >
-            <Route path="/project/apiMgt" element={<ApiMgt />}>
+            <Route path='/project/apiMgt' element={<ApiMgt />}>
               <Route
-                path="/project/apiMgt/overview"
+                path='/project/apiMgt/overview'
                 element={<Overview />}
               ></Route>
-              <Route
-                path="/project/apiMgt/certainApi"
-                element={<CertainApi />}
-              >
+              <Route path='/project/apiMgt/certainApi' element={<CertainApi />}>
                 <Route
-                  path="/project/apiMgt/certainApi/document"
+                  path='/project/apiMgt/certainApi/document'
                   element={<Document />}
                 ></Route>
                 <Route
-                  path="/project/apiMgt/certainApi/test"
+                  path='/project/apiMgt/certainApi/test'
                   element={<Test />}
                 ></Route>
                 <Route
-                  path="/project/apiMgt/certainApi/mock"
+                  path='/project/apiMgt/certainApi/mock'
                   element={<Mock />}
                 ></Route>
               </Route>
             </Route>
-            <Route
-              path="/project/memberMgt"
-              element={<MemberMgt />}
-            ></Route>
-            <Route
-              path="/project/projectMgt"
-              element={<ProjectMgt />}
-            ></Route>
+            <Route path='/project/memberMgt' element={<MemberMgt />}></Route>
+            <Route path='/project/projectMgt' element={<ProjectMgt />}></Route>
           </Route>
 
           {/* User */}

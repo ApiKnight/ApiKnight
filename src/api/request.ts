@@ -32,7 +32,7 @@ export class Request {
         // 判断token
         const token = localStorage.getItem('token') as string
         if (token) {
-          config.headers!.Authorization = 'Bearer '+token
+          config.headers!.Authorization = 'Bearer ' + token
         }
         console.log('请求拦截成功', config)
         return config
@@ -114,7 +114,7 @@ export class Request {
   post<T = any>(
     url: string,
     data?: any,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<Result<T>>> {
     return this.instance.post(url, data, config)
   }

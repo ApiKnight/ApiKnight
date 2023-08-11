@@ -18,6 +18,7 @@ import Test from './pages/project/apiMgt/certainApi/test/index.tsx'
 import Mock from './pages/project/apiMgt/certainApi/mock/index.tsx'
 import AuthRoute from './components/AuthRoute.tsx'
 import Login from './pages/user/login/index.tsx'
+import Index from '@/pages/index'
 
 const Layout: React.FunctionComponent = () => {
   return (
@@ -33,8 +34,8 @@ const App: React.FunctionComponent = () => {
       <Routes>
         <Route path='/' element={<Layout />}>
           {/* Home */}
-          <Route index element={<Home />}></Route>
-
+          <Route index element={<Index />}></Route>
+          <Route path='/main' element={<Home />}></Route>
           {/* Project */}
           <Route
             path='/project'

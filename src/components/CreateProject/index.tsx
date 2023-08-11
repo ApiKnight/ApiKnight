@@ -12,14 +12,14 @@ type FieldType = {
 interface childProps {
   isModalOpen: boolean
   closeModal: Function
-  updateProjectList: Function
+  getUserInfo: Function
 }
 
 const UpdateProject: React.FC<childProps> = (props) => {
-  const { isModalOpen, closeModal, updateProjectList } = props
+  const { isModalOpen, closeModal, getUserInfo } = props
   const onFinish = (values: any) => {
     request.post('v1/project/create', values, {}).then(() => {
-      updateProjectList()
+      getUserInfo()
       closeModal()
     })
   }

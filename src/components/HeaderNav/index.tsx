@@ -6,16 +6,16 @@ import './index.less'
 
 interface Props {
   ifHideUser?: boolean
-  userInfo?: Object
+  user_info?: Object
 }
 const HeaderNav: React.FC<Props> = (props) => {
   // localStorage.setItem('token','')
   // localStorage.setItem('user_id','')
-  let { ifHideUser, userInfo } = props
+  let { ifHideUser, user_info } = props
 
   // 默认值
   ifHideUser ? '' : (ifHideUser = false)
-  userInfo ? '' : (userInfo = {})
+  user_info ? '' : (user_info = {})
   return (
     // left
     <div className='header-nav'>
@@ -34,7 +34,7 @@ const HeaderNav: React.FC<Props> = (props) => {
                 size={54}
                 style={{ backgroundColor: 'black' }}
                 icon={<GithubOutlined />}
-                // src={userInfo.avatar_url}
+                // src={user_info.avatar_url}
               />
             </a>
           </div>
@@ -43,15 +43,15 @@ const HeaderNav: React.FC<Props> = (props) => {
           ''
         ) : (
           <div className='user'>
-            <Link to='/user'>
+            <Link to='/user' state={{user_id:localStorage.getItem('user_id')}}>
               <Avatar
                 size={54}
                 style={{ backgroundColor: 'black', marginLeft: '10px' }}
-                icon={userInfo.avatar_url ? '' : <UserOutlined />}
-                src={userInfo.avatar_url ? userInfo.avatar_url : null}
+                icon={user_info.avatar_url ? '' : <UserOutlined />}
+                src={user_info.avatar_url ? user_info.avatar_url : null}
               />
               <div className='username'>
-                {userInfo.username ? userInfo.username : null}
+                {user_info.username ? user_info.username : null}
               </div>
             </Link>
           </div>

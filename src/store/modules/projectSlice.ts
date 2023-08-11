@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import request from '../../api/request'
 import { message } from 'antd'
 export interface ProjectIdType {
-  projectId: string
+  project_id: string
 }
 
 const initialState: ProjectIdType = {
-  projectId: '',
+  project_id: '',
 }
 
 // export const fetchProjectList = createAsyncThunk(
@@ -29,7 +29,7 @@ export const projectSlice = createSlice({
   initialState,
   reducers: {
     updateProjectId: (state, action) => {
-      state.projectId = action.payload.projectId
+      state.project_id = action.payload.project_id
     },
   },
   extraReducers: (builder) => {

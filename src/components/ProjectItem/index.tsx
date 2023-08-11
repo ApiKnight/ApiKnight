@@ -9,9 +9,10 @@ const ProjectItem = (params: ProjectItemType) => {
   useEffect(() => {}, [])
   const navigate = useNavigate()
   const toProject = () => {
-    console.log(params.projectId)
-    dispatch(updateProjectId({ projectId: params.projectId }))
-    navigate('/project', { state: { projectId: params.projectId } })
+    console.log(params.project_id)
+    dispatch(updateProjectId({ project_id: params.project_id }))
+    // navigate('/project', { state: { project_id: params.project_id } })
+    navigate('/project')
   }
 
   return (

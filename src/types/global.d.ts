@@ -1,5 +1,5 @@
 declare interface ProjectItemType {
-  projectId: string
+  project_id: string
   name: string
   iconPath: string
   dec: string

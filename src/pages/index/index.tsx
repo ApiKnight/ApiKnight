@@ -10,8 +10,25 @@ import {
   PhoneOutlined,
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
+import getSelfInfo from '@/api/getSelfInfo'
+
 const Index: React.FunctionComponent = () => {
   const navigate = useNavigate()
+
+  const user_id=localStorage.getItem('user_id')
+  
+  const [user_info,setUserInfo] = useState({})
+
+  user_id
+  ?
+  useEffect(()=>{
+    getSelfInfo(user_id).then(res=>{
+      res.data.code===200 ? setUserInfo(res.data.data) : ''
+    })
+  },[])
+  :
+  ''
+
   const text1 = (
       <div>
         <h3>
@@ -282,7 +299,7 @@ const Index: React.FunctionComponent = () => {
   }
   return (
       <div className='index'>
-        <HeaderNav></HeaderNav>
+        <HeaderNav user_info={user_info}></HeaderNav>
         <div className='index-main'>
           <div className='block_1'>
             <h1 style={{ marginTop: '5%' }}>

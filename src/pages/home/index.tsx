@@ -28,7 +28,7 @@ const Home: React.FunctionComponent = () => {
         list.push({
           name: value.projectname,
           dec: value.description,
-          projectId: value.id,
+          project_id: value.id,
           iconPath: 'https://cdn.apifox.cn/app/project-icon/builtin/14.jpg',
         })
       })
@@ -40,7 +40,7 @@ const Home: React.FunctionComponent = () => {
     //有token，先登录再拉取项目列表
     if (localStorage.getItem('token') && localStorage.getItem('user_id')) {
       updateProjectList()
-      getUserInfo(localStorage.getItem('userId')).then((res) => {
+      getUserInfo(localStorage.getItem('user_id')).then((res) => {
         let data = res.data.data
         setUserInfo(data)
       })
@@ -71,11 +71,11 @@ const Home: React.FunctionComponent = () => {
           <ul>
             {projectList.map((value, index) => {
               return (
-                <li className='projectListItem' key={value.projectId}>
+                <li className='projectListItem' key={value.project_id}>
                   <ProjectItem
                     name={value.name}
                     dec={value.dec}
-                    projectId={value.projectId}
+                    project_id={value.project_id}
                     iconPath={value.iconPath}
                   ></ProjectItem>
                 </li>

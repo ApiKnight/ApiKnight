@@ -6,7 +6,7 @@ import getUserInfo from '@/api/getUserInfo'
 const User = () => {
   const [userInfo, setUserInfo] = useState({})
   useEffect(() => {
-    getUserInfo(localStorage.getItem('userId')).then((res) => {
+    getUserInfo(localStorage.getItem('user_id')).then((res) => {
       let data = res.data.data
       setUserInfo(data)
     })

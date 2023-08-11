@@ -11,13 +11,13 @@ import { message } from 'antd'
 const [messageApi] = message.useMessage()
 
 export interface ProjectIdType {
-  userId: string
-  userName: string
+  user_id: string
+  user_name: string
 }
 
 const initialState: ProjectIdType = {
-  userId: '',
-  userName: '',
+  user_id: '',
+  user_name: '',
 }
 
 export const login = createAsyncThunk(

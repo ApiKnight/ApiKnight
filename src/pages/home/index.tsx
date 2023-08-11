@@ -38,7 +38,7 @@ const Home: React.FunctionComponent = () => {
 
   useEffect(() => {
     //有token，先登录再拉取项目列表
-    if (localStorage.getItem('token') && localStorage.getItem('userId')) {
+    if (localStorage.getItem('token') && localStorage.getItem('user_id')) {
       updateProjectList()
       getUserInfo(localStorage.getItem('userId')).then((res) => {
         let data = res.data.data
@@ -53,7 +53,8 @@ const Home: React.FunctionComponent = () => {
           style={{
             backgroundColor: '#ffffff',
             height: '80px',
-          }}>
+          }}
+        >
           <HeaderNav userInfo={userInfo} />
         </Header>
         <Content style={{ padding: '50px 50px', justifyContent: 'center' }}>
@@ -62,7 +63,8 @@ const Home: React.FunctionComponent = () => {
             <Button
               icon={<PlusOutlined />}
               style={{ backgroundColor: '#9373ee', color: '#ffffff' }}
-              onClick={() => openModal()}>
+              onClick={() => openModal()}
+            >
               新建项目
             </Button>
           </div>
@@ -74,7 +76,8 @@ const Home: React.FunctionComponent = () => {
                     name={value.name}
                     dec={value.dec}
                     projectId={value.projectId}
-                    iconPath={value.iconPath}></ProjectItem>
+                    iconPath={value.iconPath}
+                  ></ProjectItem>
                 </li>
               )
             })}

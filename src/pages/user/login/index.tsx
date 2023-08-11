@@ -86,7 +86,7 @@ const Login: React.FC = () => {
                (
                 messageApi.info('登录成功!'),
                 localStorage.setItem('token', res.data.data.token),
-                localStorage.setItem('userId', res.data.data.user.id),
+                localStorage.setItem('user_id', res.data.data.user.id),
                 setTimeout(() => {
                   navigate('/')
                 }, 1200)

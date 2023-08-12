@@ -37,7 +37,10 @@ const Email: React.FunctionComponent = () => {
       .post('/v1/user/searchUsersByEmail', { email: userEmail }, {})
       .then((res) => {
         ;(res as any).data.data.map((item) => {
-          newArray.push(item.email)
+          newArray.push({
+            key: item.id,
+            email: item.email
+          })
           setListData(newArray)
         })
       })
@@ -67,7 +70,7 @@ const Email: React.FunctionComponent = () => {
         />
         <datalist id='opts'>
           {listData.map((item) => {
-            return <option>{item}</option>
+            return <option key={item.key}>{item.email}</option>
           })}
         </datalist>
         <p style={{ marginTop: '2%' }}>链接将在七天后过期</p>

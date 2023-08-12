@@ -2,7 +2,6 @@ import React from 'react'
 import { Routes, Route, Outlet } from 'react-router-dom'
 
 //一级路由
-import Home from './pages/home/index.tsx'
 import Project from './pages/project/index.tsx'
 import User from './pages/user/index.tsx'
 //二级路由
@@ -35,7 +34,6 @@ const App: React.FunctionComponent = () => {
         <Route path='/' element={<Layout />}>
           {/* Home */}
           <Route index element={<Index />}></Route>
-          <Route path='/main' element={<Home />}></Route>
           {/* Project */}
           <Route
             path='/project'

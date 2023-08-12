@@ -3,6 +3,7 @@ import counterReducer from './modules/counterSlice.ts'
 import projectReducer from './modules/projectSlice.ts'
 import dirArrayReducer from './modules/dirArraySlice.ts'
 import watchDirReducer from './modules/watchDir.ts'
+import watchStateFlagReducer from './modules/stateFlag.ts'
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     project: projectReducer,
     dirArray: dirArrayReducer,
     watchDir: watchDirReducer,
+    stateFlag: watchStateFlagReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

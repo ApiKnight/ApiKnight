@@ -39,7 +39,7 @@ const Email: React.FunctionComponent = () => {
         ;(res as any).data.data.map((item) => {
           newArray.push({
             key: item.id,
-            email: item.email
+            email: item.email,
           })
           setListData(newArray)
         })
@@ -66,6 +66,7 @@ const Email: React.FunctionComponent = () => {
           value={userEmail}
           onChange={handleChange}
           list='opts'
+          allowClear
           style={{ marginTop: '2%' }}
         />
         <datalist id='opts'>

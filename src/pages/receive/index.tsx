@@ -11,7 +11,6 @@ const Receive:React.FunctionComponent = () => {
     const [api, contextHolder] = notification.useNotification()
     function sendJoin() {
         request.post("/v1/invite/receive",{projectid:Number(searchParams.get('projectid'))},{}).then((resp)=>{
-            console.log(resp.data.message)
             const openNotification = (placement: NotificationPlacement) => {
                 api.info({
                     message: <p>{resp.data.message}</p>,

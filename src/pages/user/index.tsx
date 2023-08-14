@@ -24,7 +24,7 @@
 //   )
 // }
 
-// export default User 
+// export default User
 
 import React, { useState, useEffect } from 'react'
 import './index.less'
@@ -120,7 +120,7 @@ const User: React.FunctionComponent = () => {
                   <ProjectItem
                     name={value.name}
                     dec={value.dec}
-                    project_id={value.project_id}
+                    project_id={value.id}
                     iconPath={value.iconPath}
                   ></ProjectItem>
                 </li>

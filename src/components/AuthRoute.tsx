@@ -7,23 +7,12 @@ interface AuthRouteProps {
   children: ReactNode
 }
 const AuthRoute = ({ children }: AuthRouteProps) => {
-  async function run() {
-    const auth = await useAuth().then((result)=>{
-      return result;
-    })
-    if(auth === false){
-      return false;
-    }else{
-      return true;
-    }
-  }
-  console.log(run().then((result)=>{
-    console.log(result)
-  }))
-  const [isLogin,setIsLogin] = useState(<div>Loading</div>);
-  run().then((res)=>{
-    return setIsLogin(res ? children : <Navigate to="/user/login" state={{user_id:localStorage.getItem('user_id')}}/>)
-  })
+   const [isLogin,setIsLogin] = useState(<div>Loading</div>);
+     useEffect(()=>{
+      useAuth().then((result)=>{
+        return setIsLogin(result ? children : <Navigate to="/user/login"/>)
+      })
+     },[])
   return <div>
     { isLogin }
   </div>

@@ -28,7 +28,7 @@ const Link: React.FunctionComponent = () => {
   return (
     <div className='link'>
       {contextHolder}
-      <Input value={link} rereadOnly={true} className='link-Input' />
+      <Input value={link} readOnly={true} className='link-Input' />
       <div className='link-btn'>
         <Button type='primary' block style={{ marginTop: '5%' }} onClick={copy}>
           复制链接

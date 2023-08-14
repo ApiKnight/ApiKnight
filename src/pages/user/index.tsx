@@ -34,7 +34,7 @@ import HeaderNav from '@/components/HeaderNav'
 import { PlusOutlined } from '@ant-design/icons'
 import CreateProject from '@/components/CreateProject'
 import getUserInfo from '@/api/getUserInfo'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'  
 import AuthRoute from '@/components/AuthRoute'
 const { Header, Content, Footer } = Layout
 
@@ -43,22 +43,8 @@ const User: React.FunctionComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [user_info, setUserInfo] = useState({})
   const {state} = useLocation()
-  if(!state){
-    return (
-      <div>
-        请传入id
-      </div>
-    )
-  }
-
-  const {user_id} = state
-  if(!user_id){
-    return (
-      <div>
-        请传入id
-      </div>
-    )
-  }
+  const {user_id}=state
+console.log('userid',user_id);
 
   const openModal = () => {
     setIsModalOpen(true)
@@ -92,8 +78,16 @@ const User: React.FunctionComponent = () => {
         setProjectList(data.project_list)
       })
   }, [])
+
   return (
     <>
+    <CreateProject
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        getUserInfo={getUserInfo}
+        user_id={user_id}
+      />
+
       <Layout className='layout'>
         <Header
           style={{
@@ -114,32 +108,25 @@ const User: React.FunctionComponent = () => {
               新建项目
             </Button>
           </div>
-          <ul>
+          <div className='project-list'>
             {projectList.map((value, index) => {
               return (
-                <li className='projectListItem' key={value.id}>
+                <div className='project-list-item' key={value.id}>
                   <ProjectItem
-                    name={value.name}
-                    dec={value.dec}
+                    name={value.projectname}
+                    dec={value.description}
                     project_id={value.id}
                     iconPath={value.iconPath}
                   ></ProjectItem>
-                </li>
+                </div>
               )
             })}
-          </ul>
+          </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
           ApiKnight ©2023 Created by ApiKnight
         </Footer>
       </Layout>
-      {/* <Counter /> */}
-
-      <CreateProject
-        isModalOpen={isModalOpen}
-        closeModal={closeModal}
-        getUserInfo={getUserInfo}
-      />
     </>
   )
 }

@@ -24,7 +24,7 @@
 //   )
 // }
 
-// export default User 
+// export default User
 
 import React, { useState, useEffect } from 'react'
 import './index.less'

@@ -4,6 +4,8 @@ import request from '@/api/request'
 import './email.less'
 const { TextArea } = Input
 import type { NotificationPlacement } from 'antd/es/notification/interface'
+import {useSelector} from "react-redux";
+import {RootState} from "@/store";
 
 const Context = React.createContext({ name: 'Default' })
 const Email: React.FunctionComponent = () => {
@@ -13,9 +15,10 @@ const Email: React.FunctionComponent = () => {
     await setUserEmail(e.target.value)
   }
   const [info, setInfo] = useState('')
+  const projectId = useSelector((state: RootState) => state.project.project_id)
   function sendInfo(): void {
     request
-      .post('/v1/invite/sending', { email: userEmail, projectid: 1063 }, {})
+      .post('/v1/invite/sending', { email: userEmail, projectid: Number(projectId) }, {})
       .then((resp) => {
         if (
           (resp as any).data.code !== 403 ||

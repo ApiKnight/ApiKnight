@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './title.less'
 import { PoweroffOutlined } from '@ant-design/icons'
-import { useDispatch } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { setFalse } from '@/store/modules/stateFlag'
+import Overlay from "@/components/overlay";
+import {RootState} from "../../store";
 
 const Title: React.FunctionComponent = () => {
   const dispatch = useDispatch()
-  function closeInvite(): void {
+    const flag = useSelector((state: RootState) => state.stateFlag.value)
+    function closeInvite(): void {
     dispatch(setFalse())
   }
   return (
@@ -15,6 +18,9 @@ const Title: React.FunctionComponent = () => {
       <div className='invite-title__close' onClick={closeInvite}>
         <PoweroffOutlined />
       </div>
+        {
+            flag && <Overlay/>
+        }
     </div>
   )
 }

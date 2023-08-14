@@ -1,34 +1,32 @@
 import { Navigate } from 'react-router-dom'
-import { useAuth } from '../utils/useAuth'
+import { useAuth } from '@/utils/useAuth'
 
-import { ReactNode,useState,useEffect } from 'react'
+import {ReactNode, useState, useEffect, useLayoutEffect} from 'react'
 
 interface AuthRouteProps {
   children: ReactNode
 }
 const AuthRoute = ({ children }: AuthRouteProps) => {
-  const auth = useAuth()
-  const [isLogin,setIsLogin] = useState(false)
-  useEffect(()=>{
-    console.log(auth);
+  async function run() {
+    const auth = await useAuth().then((result)=>{
+      return result;
+    })
     if(auth === false){
-      setIsLogin(false)
+      return false;
     }else{
-      auth.then(res=>{
-        console.log('auth',res);
-        setIsLogin(true)
-        // res ? setIsLogin(true) : setIsLogin(false)
-        res ? console.log('成功') : console.log('失败');
-        
-        
-      })
+      return true;
     }
-  },[])
-  useEffect(()=>{
-    console.log('state')
+  }
+  console.log(run().then((result)=>{
+    console.log(result)
+  }))
+  const [isLogin,setIsLogin] = useState(<div>Loading</div>);
+  run().then((res)=>{
+    return setIsLogin(res ? children : <Navigate to="/user/login" state={{user_id:localStorage.getItem('user_id')}}/>)
   })
-  console.log('isLogin',isLogin);
-  return isLogin ? children : <Navigate to="/user/login" state={{user_id:localStorage.getItem('user_id')}}/>
+  return <div>
+    { isLogin }
+  </div>
 }
 
 export default AuthRoute

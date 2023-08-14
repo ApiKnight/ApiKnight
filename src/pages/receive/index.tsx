@@ -40,7 +40,13 @@ const Receive:React.FunctionComponent = () => {
             <div className="receive-btn">
                 <Button type="primary" size="large" onClick={sendJoin}>立即加入</Button>
             </div>
-            <p>
+            <p style={{fontSize:"16px"}}>
+                Apifox = Postman + Swagger + Mock + Jmeter
+            </p>
+            <p style={{fontSize:"16px"}}>
+                API 文档、API 调试、API Mock、API 自动导入
+            </p>
+            <p style={{marginTop:"9.6%"}}>
                 ApiKnight - 节约团队每一分钟
             </p>
             <p>

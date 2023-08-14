@@ -7,7 +7,7 @@ import User from './pages/user/index.tsx'
 //二级路由
 import ApiMgt from './pages/project/apiMgt/index.tsx'
 import MemberMgt from './pages/project/memberMgt/index.tsx'
-import ProjectMgt from './pages/project/projectMgt/index.tsx'
+import ProjectSet from './pages/project/projectSet/index.tsx'
 //三级路由
 import CertainApi from './pages/project/apiMgt/certainApi/index.tsx'
 import Overview from './pages/project/apiMgt/overview/index.tsx'
@@ -40,9 +40,9 @@ const App: React.FunctionComponent = () => {
           <Route
             path='/project'
             element={
-              <AuthRoute>
+              // <AuthRoute>
                 <Project />
-              </AuthRoute>
+                // </AuthRoute>
             }
           >
             <Route path='/project/apiMgt' element={<ApiMgt />}>
@@ -66,7 +66,7 @@ const App: React.FunctionComponent = () => {
               </Route>
             </Route>
             <Route path='/project/memberMgt' element={<MemberMgt />}></Route>
-            <Route path='/project/projectMgt' element={<ProjectMgt />}></Route>
+            <Route path='/project/projectSet' element={<ProjectSet />}></Route>
           </Route>
 
           {/* User */}

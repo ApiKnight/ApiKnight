@@ -13,6 +13,9 @@ import { useNavigate } from 'react-router-dom'
 import getSelfInfo from '@/api/getSelfInfo'
 
 const Index: React.FunctionComponent = () => {
+    //清空缓存
+    // localStorage.setItem('token','')
+    // localStorage.setItem('user_id','')
     const navigate = useNavigate()
 
     const user_id=localStorage.getItem('user_id')
@@ -22,7 +25,7 @@ const Index: React.FunctionComponent = () => {
     user_id
         ?
         useEffect(()=>{
-            getSelfInfo(user_id).then(res=>{
+            getSelfInfo().then(res=>{
                 res.data.code===200 ? setUserInfo(res.data.data) : ''
             })
         },[])

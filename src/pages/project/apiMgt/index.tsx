@@ -6,10 +6,6 @@ import { ArrayItem } from '@/types/arrayToTree'
 import { FlatItem, FlatItemValue } from '@/types/mergeFlatArrays'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
 import Email from '@/components/Invite/email'
-import Invite from '@/components/Invite'
-import { Button } from 'antd'
-import { useDispatch } from 'react-redux'
-import { reversal } from '@/store/modules/stateFlag'
 const ApiMgt: React.FunctionComponent = () => {
   const a1: FlatItem[] = [
     {
@@ -71,18 +67,10 @@ const ApiMgt: React.FunctionComponent = () => {
       pid: '3',
     },
   ]
-  console.log(dd)
-  console.log(d)
-  const dispatch = useDispatch()
-  function show(): void {
-    dispatch(reversal())
-  }
+  console.log('dd',dd)
+  console.log('d',d)
   return (
     <>
-      <div>
-        <Invite></Invite>
-      </div>
-      <Button onClick={show}>显示邀请组件</Button>
       <div>ApiMgt</div>
       <ul>
         <li>

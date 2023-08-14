@@ -35,6 +35,7 @@ import { PlusOutlined } from '@ant-design/icons'
 import CreateProject from '@/components/CreateProject'
 import getUserInfo from '@/api/getUserInfo'
 import { useLocation } from 'react-router-dom'
+import AuthRoute from '@/components/AuthRoute'
 const { Header, Content, Footer } = Layout
 
 const User: React.FunctionComponent = () => {
@@ -120,7 +121,7 @@ const User: React.FunctionComponent = () => {
                   <ProjectItem
                     name={value.name}
                     dec={value.dec}
-                    project_id={value.project_id}
+                    project_id={value.id}
                     iconPath={value.iconPath}
                   ></ProjectItem>
                 </li>

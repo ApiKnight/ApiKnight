@@ -35,7 +35,7 @@ export function createXhrMonitor(url?: string) {
               reportError({ name, data: this.payload }, `Xhr error(${url}):`)
             }
           })
-          origin.apply(this, ...params)
+          // origin.apply(this, ...params)
         },
     )()
   }

@@ -43,7 +43,10 @@ const HeaderNav: React.FC<Props> = (props) => {
           ''
         ) : (
           <div className='user'>
-            <Link to='/user' state={{user_id:localStorage.getItem('user_id')}}>
+            <Link
+              to='/user'
+              state={{ user_id: localStorage.getItem('user_id') }}
+            >
               <Avatar
                 size={54}
                 style={{ backgroundColor: 'black', marginLeft: '10px' }}

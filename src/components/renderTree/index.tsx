@@ -13,10 +13,10 @@ import { createResourceErrorMonitor } from '../../../sdk/createResourceErrorMoni
 import { createPromiseErrorMonitor } from '../../../sdk/createPromiseErrorMonitor'
 import { createXhrMonitor } from '../../../sdk/createXhrMonitor'
 import InterfaceBlock from '../InterfaceBlock'
-import {FlatItem} from "@/types/mergeFlatArrays";
-import {mergeFlatArrays} from "@/utils/mergeFlatArrays";
-import request from "@/api/request";
-import {increment} from "@/store/modules/watchDir";
+import { FlatItem } from '@/types/mergeFlatArrays'
+import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
+import request from '@/api/request'
+import { increment } from '@/store/modules/watchDir'
 
 interface Props {
   data: ArrayItem[]
@@ -35,61 +35,55 @@ const renderTree: React.FC = () => {
   }
   const a1: FlatItem[] = [
     {
-      id: "694948f6-7908-4388-8da7-c744b13f76b6",
+      id: '694948f6-7908-4388-8da7-c744b13f76b6',
       project_id: 1063,
-      name: "根目录",
-      parent_id: null
-    }
+      name: '根目录',
+      parent_id: null,
+    },
   ]
   const a2: FlatItem[] = [
     {
-      id: "3b658414-ff28-4b2a-b7ff-627656205961",
-      folder_id: "694948f6-7908-4388-8da7-c744b13f76b6",
-      create_user: "5a0ce9c2-01a6-4b4f-9d79-adfc4b1a4213",
-      create_time: "2023-08-14 17:25:40",
-      operate_time: "2023-08-14 17:25:40",
-      operate_user: "5a0ce9c2-01a6-4b4f-9d79-adfc4b1a4213",
-      request_data: "cs",
-      response_data: "cccc",
+      id: '3b658414-ff28-4b2a-b7ff-627656205961',
+      folder_id: '694948f6-7908-4388-8da7-c744b13f76b6',
+      create_user: '5a0ce9c2-01a6-4b4f-9d79-adfc4b1a4213',
+      create_time: '2023-08-14 17:25:40',
+      operate_time: '2023-08-14 17:25:40',
+      operate_user: '5a0ce9c2-01a6-4b4f-9d79-adfc4b1a4213',
+      request_data: 'cs',
+      response_data: 'cccc',
       project_id: 1063,
-      description: "cxxxx",
-      name: "getList"
-    }
+      description: 'cxxxx',
+      name: 'getList',
+    },
   ]
-  const [data,setData] = useState(mergeFlatArrays(a1,[],1063))
+  const [data, setData] = useState(mergeFlatArrays(a1, [], 1063))
   const [makeValue, setMakeValue] = useState<MakeValue>({ value: data })
-  function reqFun () {
-    // request.post("v1/project/query",{ projectid: 1063 },{}).then((resp)=>{
-    //   // const temp = mergeFlatArrays(resp.data.data.folder_list,resp.data.data.api_list,1063)
-    //   // console.log(temp)
-    //   // setData(temp)
-    //   console.log(resp)
-    // })
-    fetch("http://47.112.108.202:7002/api/v1/project/query", {
+  function reqFun() {
+    fetch('http://47.112.108.202:7002/api/v1/project/query', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token') as string
+        Authorization: ('Bearer ' + localStorage.getItem('token')) as string,
       },
-      body: JSON.stringify({ projectid: 1063 })
+      body: JSON.stringify({ projectid: 1063 }),
     })
-        .then(response => response.json())
-        .then(res => {
-          // 在这里处理返回的数据
-          console.log(res);
-          setData(mergeFlatArrays(res.data.folder_list,res.data.api_list,1063))
-          setMakeValue({value:mergeFlatArrays(res.data.folder_list,res.data.api_list,1063)})
+      .then((response) => response.json())
+      .then((res) => {
+        // 在这里处理返回的数据
+        setData(mergeFlatArrays(res.data.folder_list, res.data.api_list, 1063))
+        setMakeValue({
+          value: mergeFlatArrays(res.data.folder_list, res.data.api_list, 1063),
         })
-        .catch(error => {
-          // 在这里处理错误
-          console.error(error);
-        });
+      })
+      .catch((error) => {
+        // 在这里处理错误
+        console.error(error)
+      })
   }
   const watchDir = useSelector((state: RootState) => state.watchDir.value)
-  useEffect(()=>{
-    console.log(1)
-    reqFun();
-  },[watchDir])
+  useEffect(() => {
+    reqFun()
+  }, [watchDir])
   function restoreData(d: ArrayItem[]): ArrayNode[] {
     const restoredData: ArrayNode[] = []
 
@@ -106,31 +100,31 @@ const renderTree: React.FC = () => {
 
     return restoredData
   }
-
-  console.log(makeValue.value)
   const dispatch = useDispatch()
   const onDrop = (info) => {
-    console.log(info)
-    console.log(info.dragNodesKeys[0])
-    const url = info.dragNode.type === "FILE" ? "/v1/folder/update" : "/v1/apis/update"
-    const urlData = info.dragNode.type === "FILE" ? { folder_id: info.dragNodesKeys[0],parent_id: info.node.key} : { apis_id: info.dragNodesKeys[0],folder_id: info.node.key}
+    const url =
+      info.dragNode.type === 'FILE' ? '/v1/folder/update' : '/v1/apis/update'
+    const urlData =
+      info.dragNode.type === 'FILE'
+        ? { folder_id: info.dragNodesKeys[0], parent_id: info.node.key }
+        : { apis_id: info.dragNodesKeys[0], folder_id: info.node.key }
     fetch(`http://47.112.108.202:7002/api${url}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token') as string
+        Authorization: ('Bearer ' + localStorage.getItem('token')) as string,
       },
-      body: JSON.stringify(urlData)
+      body: JSON.stringify(urlData),
     })
-        .then(response => response.json())
-        .then(res => {
-          // 在这里处理返回的数据
-          dispatch(increment())
-        })
-        .catch(error => {
-          // 在这里处理错误
-          console.error(error);
-        });
+      .then((response) => response.json())
+      .then((res) => {
+        // 在这里处理返回的数据
+        dispatch(increment())
+      })
+      .catch((error) => {
+        // 在这里处理错误
+        console.error(error)
+      })
   }
   const renderData = restoreData(makeValue.value)
   // 数组转树形结构

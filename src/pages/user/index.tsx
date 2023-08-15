@@ -34,7 +34,7 @@ import HeaderNav from '@/components/HeaderNav'
 import { PlusOutlined } from '@ant-design/icons'
 import CreateProject from '@/components/CreateProject'
 import getUserInfo from '@/api/getUserInfo'
-import { useLocation } from 'react-router-dom'  
+import { useLocation } from 'react-router-dom'
 import AuthRoute from '@/components/AuthRoute'
 const { Header, Content, Footer } = Layout
 
@@ -42,9 +42,9 @@ const User: React.FunctionComponent = () => {
   const [projectList, setProjectList] = useState<ProjectItemType[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [user_info, setUserInfo] = useState({})
-  const {state} = useLocation()
-  const {user_id}=state
-console.log('userid',user_id);
+  const { state } = useLocation()
+  const { user_id } = state
+  console.log('userid', user_id)
 
   const openModal = () => {
     setIsModalOpen(true)
@@ -71,17 +71,17 @@ console.log('userid',user_id);
 
   useEffect(() => {
     //有token，先登录再拉取项目列表
-      // updateProjectList()
-      getUserInfo(user_id).then((res) => {
-        let data = res.data.data
-        setUserInfo(data)
-        setProjectList(data.project_list)
-      })
+    // updateProjectList()
+    getUserInfo(user_id).then((res) => {
+      let data = res.data.data
+      setUserInfo(data)
+      setProjectList(data.project_list)
+    })
   }, [])
 
   return (
     <>
-    <CreateProject
+      <CreateProject
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         getUserInfo={getUserInfo}

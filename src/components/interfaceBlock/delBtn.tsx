@@ -3,10 +3,10 @@ import React, { useState, createContext } from 'react'
 import { useDispatch } from 'react-redux'
 import { remove } from '@/store/modules/dirArraySlice.ts'
 import { MinusOutlined } from '@ant-design/icons'
-import {increment} from "@/store/modules/watchDir";
+import { increment } from '@/store/modules/watchDir'
 
 interface Props {
-  key: string;
+  key: string
   type: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
 }
 
@@ -23,12 +23,15 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
   const showModal = () => {
     setOpen(true)
   }
-  const delDataJson = data.type == 'FILE' ? {
-    project_id: 1063,
-    folder_id: data.key
-  } : {
-    apis_id: data.key
-  }
+  const delDataJson =
+    data.type == 'FILE'
+      ? {
+          project_id: 1063,
+          folder_id: data.key,
+        }
+      : {
+          apis_id: data.key,
+        }
   console.log(delDataJson)
   const handleOk = () => {
     setModalText('节点正在删除中')
@@ -36,26 +39,26 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
     setOpen(false)
     setConfirmLoading(false)
     // dispatch(remove(data))
-    const url = data.type === "FILE" ? '/v1/folder/delete' : "/v1/apis/delete"
+    const url = data.type === 'FILE' ? '/v1/folder/delete' : '/v1/apis/delete'
     fetch(`http://47.112.108.202:7002/api${url}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token') as string
+        Authorization: ('Bearer ' + localStorage.getItem('token')) as string,
       },
-      body: JSON.stringify(delDataJson)
+      body: JSON.stringify(delDataJson),
     })
-        .then(response => response.json())
-        .then(res => {
-          // 在这里处理返回的数据
-          if (res.code == 200) {
-            dispatch(increment())
-          }
-        })
-        .catch(error => {
-          // 在这里处理错误
-          console.error(error);
-        });
+      .then((response) => response.json())
+      .then((res) => {
+        // 在这里处理返回的数据
+        if (res.code == 200) {
+          dispatch(increment())
+        }
+      })
+      .catch((error) => {
+        // 在这里处理错误
+        console.error(error)
+      })
   }
 
   const handleCancel = () => {

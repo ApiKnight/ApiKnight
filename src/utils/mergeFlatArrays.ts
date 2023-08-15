@@ -16,7 +16,12 @@ export function mergeFlatArrays(
   realArray_1.map((item) => {
     item.type = 'FILE'
   })
-  realArray_2.map((item) => (item.type = 'GET'))
+  realArray_2.map((item) => (
+      item.type = 'GET'
+  ))
+  realArray_2.map((item)=>{
+    item.parent_id = item.folder_id
+  })
   const newArray = [...realArray_2, ...realArray_1]
   let mergeArray: any = []
   newArray.map((item: FlatItem) => {

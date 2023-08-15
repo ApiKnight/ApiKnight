@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react'
 import { Button } from 'antd'
-import type { ApiOptReqOptType } from '@/components/types/type'
+import type { ApiOptReqOptType } from '@/types/components'
 import './index.less'
 import ApiOperator from '@/components/ApiOperator'
 

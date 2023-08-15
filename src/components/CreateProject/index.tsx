@@ -22,8 +22,8 @@ const UpdateProject: React.FC<childProps> = (props) => {
   console.log(props);
   
   const onFinish = (values: any) => {
-    console.log(values);
-    
+    console.log(values)
+
     request.post('v1/project/create', values, {}).then(() => {
       updateUserInfo(user_id)
       closeModal()

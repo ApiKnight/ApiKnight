@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Card, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-
 const ProjectItem = (params: ProjectItemType) => {
   useEffect(() => {}, [])
   const navigate = useNavigate()

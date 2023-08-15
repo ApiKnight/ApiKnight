@@ -299,7 +299,7 @@ const Index: React.FunctionComponent = () => {
         },
     ]
     function JumpTo(): void {
-        navigate('/main')
+        navigate('/user',{state:{user_id:localStorage.getItem('user_id')}})
     }
     return (
         <div className='index'>

@@ -28,6 +28,10 @@ const CertainApi: React.FunctionComponent = () => {
         </li>
       </ul>
       <Outlet />
+<<<<<<< HEAD
+=======
+      <RenderTree />
+>>>>>>> main
     </>
   )
 }

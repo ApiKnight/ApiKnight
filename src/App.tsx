@@ -18,7 +18,7 @@ import Mock from './pages/project/apiMgt/certainApi/mock/index.tsx'
 import AuthRoute from './components/AuthRoute.tsx'
 import Login from './pages/user/login/index.tsx'
 import Index from '@/pages/index'
-import Receive from "@/pages/receive";
+import Receive from '@/pages/receive'
 
 const Layout: React.FunctionComponent = () => {
   return (
@@ -33,7 +33,7 @@ const App: React.FunctionComponent = () => {
       {/* 1.直接在App中配置二级路由 2.在对应页面中使用Switch包裹后配置二级路由，本项目采用法1 */}
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route path='/receive' element={<Receive/>}></Route>
+          <Route path='/receive' element={<Receive />}></Route>
           {/* Home */}
           <Route index element={<Index />}></Route>
           {/* Project */}
@@ -41,8 +41,8 @@ const App: React.FunctionComponent = () => {
             path='/project'
             element={
               // <AuthRoute>
-                <Project />
-                // </AuthRoute>
+              <Project />
+              // </AuthRoute>
             }
           >
             <Route path='/project/apiMgt' element={<ApiMgt />}>

@@ -70,8 +70,8 @@ const ApiMgt: React.FunctionComponent = () => {
       pid: '3',
     },
   ]
-  console.log('dd',dd)
-  console.log('d',d)
+  console.log('dd', dd)
+  console.log('d', d)
   return (
       <div className='project-api'>
         <div className="header">

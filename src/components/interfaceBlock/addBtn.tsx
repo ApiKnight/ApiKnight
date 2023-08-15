@@ -15,7 +15,7 @@ const AddBtn: React.FunctionComponent<{ data: AddData }> = (props) => {
       style={{ display: 'inline' }}
       onClick={() => {
         // 这里是插入示例
-          fetch("http://47.112.108.202:7002/api/v1/folder/create", {
+          fetch("http://47.112.108.202:7002/api/v1/apis/create", {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -23,8 +23,11 @@ const AddBtn: React.FunctionComponent<{ data: AddData }> = (props) => {
               },
               body: JSON.stringify({
                   project_id: 1063,
-                  parent_id: data.key,
-                  name: "测试文件夹"
+                  folder_id: data.key,
+                  request_data: "{type:'GET'}",
+                  response_data: "xxxx",
+                  description: "xxxx",
+                  name: "getList2"
               })
           })
               .then(response => response.json())

@@ -8,6 +8,7 @@ import { createPromiseErrorMonitor } from '../../../sdk/createPromiseErrorMonito
 import { createXhrMonitor } from '../../../sdk/createXhrMonitor'
 import { TitleNode, Props, AddData } from '@/types/treeComponents'
 import MethodList from '@/components/MethodList'
+import Menu from "@/components/InterfaceBlock/menu";
 
 function startMonitor() {
   createJsErrorMonitor('renderTree').start()
@@ -39,7 +40,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
       <div className='InterfaceBlock-title'>{data.title}</div>
       {show && (
         <div className='btn'>
-          {data.type === 'FILE' && <AddBtn data={addData} />}
+          {data.type === 'FILE' && <div><Menu data={addData}/><AddBtn data={addData} /></div>}
           <DelBtn data={delData} />
         </div>
       )}

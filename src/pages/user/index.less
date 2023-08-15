@@ -1,4 +1,35 @@
-.project-list{
-    display: flex;
-    flex-wrap: wrap;
+.user{
+    .content{
+        .title{
+            .my-project{
+            text-align: center;
+                font-weight: 800;
+                font-size: 30px;
+                color: rgb(80, 38, 220);
+                opacity: 50%;
+            }
+            .create-project{
+                position: relative;
+                .button{
+                    position: absolute;
+                    left: 5%;
+                    // left: 50%;
+                    // transform: translateX(-50%);
+                }
+            }
+        }
+        .list{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+            .item{
+                position: relative;
+                top: 40px;
+            }
+            .item-empty{
+                position: relative;
+                top: 40px;
+            }
+        }
+    }
 }

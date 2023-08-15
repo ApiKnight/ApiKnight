@@ -80,16 +80,16 @@ const Login: React.FC = () => {
         login(loginData).then(
           (res) => {
             res.data.code === 200
-              ? (messageApi.info('登录成功!'),
+              ? (message.success('登录成功'),
                 localStorage.setItem('token', res.data.data.token),
                 localStorage.setItem('user_id', res.data.data.user.id),
                 setTimeout(() => {
                   navigate('/')
                 }, 1200))
-              : messageApi.info('登录失败')
+              : message.error('登录失败')
           },
           (err) => {
-            messageApi.info('请求失败', err)
+            message.error('请求失败', err)
           },
         ))
       : ((registerData = {
@@ -102,10 +102,10 @@ const Login: React.FC = () => {
         request.post('v1/user/checkExist', registerData, {}).then((res) => {
           if (res.data.code === 200) {
             request.post('v1/user/register', registerData, {}).then((res1) => {
-              res1.data.code === 200 ? messageApi.info('注册成功') : ''
+              res1.data.code === 200 ? message.success('注册成功') : ''
             })
           } else {
-            messageApi.info('用户名或邮箱已被注册')
+            message.error('用户名或邮箱已被注册')
           }
         }))
   }
@@ -114,10 +114,8 @@ const Login: React.FC = () => {
     console.log('Failed:', errorInfo)
   }
 
-  const [messageApi, contextHolder] = message.useMessage()
   return (
     <>
-      {contextHolder}
       <Header style={{ backgroundColor: '#ffffff' }}>
         <HeaderNav ifHideUser={false} />
       </Header>

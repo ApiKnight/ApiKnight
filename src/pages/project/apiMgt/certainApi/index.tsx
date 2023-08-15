@@ -9,26 +9,25 @@ import { ArrayItem } from '@/types/arrayToTree.d.ts'
 import { Outlet, Link } from 'react-router-dom'
 import { FlatItem, FlatItemValue } from '@/types/mergeFlatArrays'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
-import request from '@/api/request'
-import CreateFile from '@/components/createFile'
+import { useLocation } from 'react-router-dom'
 
 const CertainApi: React.FunctionComponent = () => {
+  const state= useLocation().state
   return (
     <>
-      <div>CertainApi</div>
+      <div>具体某个Api</div>
       <ul>
         <li>
-          <Link to='/project/apiMgt/certainApi/document'>document</Link>
+          <Link to='/project/apiMgt/certainApi/document' state={state}>document</Link>
         </li>
         <li>
-          <Link to='/project/apiMgt/certainApi/test'>test</Link>
+          <Link to='/project/apiMgt/certainApi/test' state={state}>test</Link>
         </li>
         <li>
-          <Link to='/project/apiMgt/certainApi/mock'>mock</Link>
+          <Link to='/project/apiMgt/certainApi/mock' state={state}>mock</Link>
         </li>
       </ul>
       <Outlet />
-      <RenderTree />
     </>
   )
 }

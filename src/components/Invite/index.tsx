@@ -29,7 +29,7 @@ const Invite: React.FunctionComponent = (props) => {
               return {
                 label: `邮箱邀请`,
                 key: id,
-                children: <Email />,
+                children: <Email project_id={props.project_id}/>,
               }
             }
           })}

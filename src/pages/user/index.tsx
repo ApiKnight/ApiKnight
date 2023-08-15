@@ -7,23 +7,15 @@ import { PlusOutlined } from '@ant-design/icons'
 import CreateProject from '@/components/CreateProject'
 import getUserInfo from '@/api/getUserInfo'
 import { useLocation } from 'react-router-dom'
-<<<<<<< HEAD
 import EmptyShow from '@/components/EmptyShow'
 
-=======
-import AuthRoute from '@/components/AuthRoute'
->>>>>>> main
 const { Header, Content, Footer } = Layout
 
 const User: React.FunctionComponent = () => {
   const [projectList, setProjectList] = useState<ProjectItemType[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [user_info, setUserInfo] = useState({})
-<<<<<<< HEAD
   const state = useLocation().state
-=======
-  const { state } = useLocation()
->>>>>>> main
   const { user_id } = state
   console.log('userid', user_id)
 

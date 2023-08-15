@@ -37,9 +37,8 @@ const Invite: React.FunctionComponent = () => {
       </div>,
       document.body,
     )
-  }
-  else {
-      return <div style={{display: 'none'}}></div>
+  } else {
+    return <div style={{ display: 'none' }}></div>
   }
 }
 

@@ -13,7 +13,7 @@ export const store = configureStore({
     dirArray: dirArrayReducer,
     watchDir: watchDirReducer,
     stateFlag: watchStateFlagReducer,
-    createFileState:createFileStateReducer
+    createFileState: createFileStateReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

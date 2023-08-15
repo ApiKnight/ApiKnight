@@ -16,7 +16,7 @@ interface FlatArrayItem {
 }
 
 interface AddDir {
-  project_id: number;
+  project_id: number
   parent_id: string
 }
 
@@ -66,4 +66,4 @@ interface TreeNode {
   isLeaf?: boolean
 }
 
-export type { TreeNode, ArrayItem, ArrayNode, FlatArrayItem , AddDir }
+export type { TreeNode, ArrayItem, ArrayNode, FlatArrayItem, AddDir }

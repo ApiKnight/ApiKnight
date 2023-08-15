@@ -2,8 +2,8 @@ import React from 'react'
 import { Button, Input, notification } from 'antd'
 import './link.less'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
-import {useSelector} from "react-redux";
-import {RootState} from "../../store";
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
 
 const Link: React.FunctionComponent = () => {
   const [api, contextHolder] = notification.useNotification()

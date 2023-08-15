@@ -1,13 +1,13 @@
-import React,{useState} from 'react';
-import { MailOutlined, SettingOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Menu,Button} from 'antd';
-import {useNavigate} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
-import { reversal,setFalse } from '@/store/modules/stateFlag'
+import React, { useState } from 'react'
+import { MailOutlined, SettingOutlined } from '@ant-design/icons'
+import type { MenuProps } from 'antd'
+import { Menu, Button } from 'antd'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { reversal, setFalse } from '@/store/modules/stateFlag'
 import Invite from '@/components/Invite'
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>['items'][number]
 
 function getItem(
   label: React.ReactNode,
@@ -22,7 +22,7 @@ function getItem(
     children,
     label,
     type,
-  } as MenuItem;
+  } as MenuItem
 }
 
 const items: MenuProps['items'] = [
@@ -30,7 +30,6 @@ const items: MenuProps['items'] = [
   getItem('成员/权限管理', '2', <MailOutlined />),
   getItem('项目管理', '3', <MailOutlined />),
   getItem('邀请成员', '4', <MailOutlined />),
-
 
   // { type: 'divider' },
 
@@ -42,7 +41,7 @@ const items: MenuProps['items'] = [
   // ]),
 
   // getItem('Group', 'grp', null, [getItem('Option 13', '13'), getItem('Option 14', '14')], 'group'),
-];
+]
 
 const ProjectNav: React.FC = () => {
   const dispatch = useDispatch()
@@ -51,37 +50,38 @@ const ProjectNav: React.FC = () => {
   }
   const navigate = useNavigate()
   const onClick: MenuProps['onClick'] = (e) => {
-    switch(e.key){
+    switch (e.key) {
       case '1':
         navigate('/project/apiMgt')
         dispatch(setFalse())
-        break;
+        break
       case '2':
         navigate('/project/memberMgt')
         dispatch(setFalse())
-        break;
+        break
       case '3':
         navigate('/project/projectSet')
         dispatch(setFalse())
-        break;
+        break
       case '4':
         show()
-        break;
-        default:''
+        break
+      default:
+        ''
     }
   }
   return (
     <>
-    <div>
+      <div>
         <Invite></Invite>
       </div>
-    <Menu
-      onClick={onClick}
-      style={{ width: 256}}
-      // defaultSelectedKeys={['1']}
-      mode="inline"
-      items={items}
-    />  
+      <Menu
+        onClick={onClick}
+        style={{ width: 256 }}
+        // defaultSelectedKeys={['1']}
+        mode='inline'
+        items={items}
+      />
     </>
     // <ul>
     //       <li>
@@ -94,7 +94,7 @@ const ProjectNav: React.FC = () => {
     //         <Link to={`/project/projectSet`}>项目管理</Link>
     //       </li>
     //     </ul>
-  );
-};
+  )
+}
 
-export default ProjectNav;
+export default ProjectNav

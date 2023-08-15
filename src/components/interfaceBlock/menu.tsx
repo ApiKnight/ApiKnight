@@ -6,6 +6,7 @@ import { AddData } from '@/types/treeComponents'
 import { useDispatch } from 'react-redux'
 import { setTrue } from '@/store/modules/createFileState'
 import CreateFile from '@/components/createFile'
+import Overlay from "@/components/overlay";
 
 const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
   const { data } = props

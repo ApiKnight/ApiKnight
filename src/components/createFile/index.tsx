@@ -18,6 +18,9 @@ const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
   function change(e: any): void {
     setDirName(e.target.value)
   }
+  function closeThis():void {
+    dispatch(setFalse())
+  }
   function addChildDir() {
     fetch('http://47.112.108.202:7002/api/v1/folder/create', {
       method: 'POST',
@@ -51,7 +54,7 @@ const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
           <span>
             <h3>新建子目录</h3>
           </span>
-          <span className='createFile-title__icon'>
+          <span className='createFile-title__icon' onClick={closeThis}>
             <CloseOutlined />
           </span>
         </div>

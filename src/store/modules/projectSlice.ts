@@ -12,7 +12,7 @@ const initialState: ProjectIdType = {
 // export const fetchProjectList = createAsyncThunk(
 // createAsyncThunk的第一个参数是动作的名称，Redux动作名称的标准惯例是'[slice name]/[action name]' ，例如('auth/login')
 //   'fetchProjectList',
-//   async () => {
+//   async () => {  
 //     const response = await request.get('holiday/single/20181121', {
 //       params: {
 //         ignoreHoliday: false,

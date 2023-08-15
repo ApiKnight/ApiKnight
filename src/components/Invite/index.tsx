@@ -38,6 +38,9 @@ const Invite: React.FunctionComponent = () => {
       document.body,
     )
   }
+  else {
+      return <div style={{display: 'none'}}></div>
+  }
 }
 
 export default Invite

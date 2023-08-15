@@ -10,6 +10,7 @@ import { Outlet, Link } from 'react-router-dom'
 import { FlatItem, FlatItemValue } from '@/types/mergeFlatArrays'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
 import request from "@/api/request";
+import CreateFile from "@/components/createFile";
 
 const CertainApi: React.FunctionComponent = () => {
   return (

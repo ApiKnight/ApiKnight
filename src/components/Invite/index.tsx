@@ -8,7 +8,7 @@ import Link from '@/components/Invite/link'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 
-const Invite: React.FunctionComponent = () => {
+const Invite: React.FunctionComponent = (props) => {
   const flag = useSelector((state: RootState) => state.stateFlag.value)
   if (flag == true) {
     return ReactDOM.createPortal(
@@ -23,7 +23,7 @@ const Invite: React.FunctionComponent = () => {
               return {
                 label: `链接邀请`,
                 key: id,
-                children: <Link />,
+                children: <Link project_id={props.project_id}/>,
               }
             } else {
               return {

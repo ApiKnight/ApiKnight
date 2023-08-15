@@ -75,7 +75,7 @@ const ProjectNav: React.FC = (props) => {
   return (
     <>
       <div>
-        <Invite></Invite>
+        <Invite project_id={props.project_id}></Invite>
       </div>
       <Menu
         onClick={onClick}

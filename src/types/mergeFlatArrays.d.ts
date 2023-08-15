@@ -1,8 +1,16 @@
 interface FlatItem {
   id: string
-  parent_id: string | null
+  parent_id?: string | null
   project_id: number
   name: string
+  folder_id?: string
+  create_user?: any
+  create_time?: any
+  operate_time?: any
+  operate_user?: any
+  request_data?: any
+  response_data?: any
+  description?: any
   type?:
     | null
     | 'GET'

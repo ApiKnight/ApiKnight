@@ -26,6 +26,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
   }
   const { data } = props
   const addData: AddData = { key: data.key, pid: data.pid + 1 }
+  const delData = {key: data.key,type: data.type}
   return (
     <div
       className='InterfaceBlock'
@@ -39,7 +40,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
       {show && (
         <div className='btn'>
           {data.type === 'FILE' && <AddBtn data={addData} />}
-          <DelBtn data={data.key} />
+          <DelBtn data={delData} />
         </div>
       )}
     </div>

@@ -5,6 +5,6 @@ import request from './request'
  * @returns 
  */
 const getApplyList = (projectid) => {
-  return request.post('v1/invite/alist', { projectid: projectid })
+  return request.post('v1/invite/wlist', { projectid: projectid })
 }
 export default getApplyList

@@ -16,6 +16,7 @@ import InterfaceBlock from '../InterfaceBlock'
 import {FlatItem} from "@/types/mergeFlatArrays";
 import {mergeFlatArrays} from "@/utils/mergeFlatArrays";
 import request from "@/api/request";
+import {increment} from "@/store/modules/watchDir";
 
 interface Props {
   data: ArrayItem[]
@@ -107,7 +108,30 @@ const renderTree: React.FC = () => {
   }
 
   console.log(makeValue.value)
-
+  const dispatch = useDispatch()
+  const onDrop = (info) => {
+    console.log(info)
+    console.log(info.dragNodesKeys[0])
+    const url = info.dragNode.type === "FILE" ? "/v1/folder/update" : "/v1/apis/update"
+    const urlData = info.dragNode.type === "FILE" ? { folder_id: info.dragNodesKeys[0],parent_id: info.node.key} : { apis_id: info.dragNodesKeys[0],folder_id: info.node.key}
+    fetch(`http://47.112.108.202:7002/api${url}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token') as string
+      },
+      body: JSON.stringify(urlData)
+    })
+        .then(response => response.json())
+        .then(res => {
+          // 在这里处理返回的数据
+          dispatch(increment())
+        })
+        .catch(error => {
+          // 在这里处理错误
+          console.error(error);
+        });
+  }
   const renderData = restoreData(makeValue.value)
   // 数组转树形结构
   const tree: TreeNode[] = arrayToTree(renderData)
@@ -118,8 +142,9 @@ const renderTree: React.FC = () => {
     <Tree
       treeData={tree}
       defaultExpandAll
-      // onSelect={onSelect}
-      // onRightClick={onRightClick}
+      draggable
+      blockNode
+      onDrop={onDrop}
       style={{ width: '270px' }}
       className='renderTree'
     ></Tree>

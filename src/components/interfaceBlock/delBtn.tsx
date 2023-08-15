@@ -36,7 +36,8 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
     setOpen(false)
     setConfirmLoading(false)
     // dispatch(remove(data))
-    fetch("http://47.112.108.202:7002/api/v1/folder/delete", {
+    const url = data.type === "FILE" ? '/v1/folder/delete' : "/v1/apis/delete"
+    fetch(`http://47.112.108.202:7002/api${url}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

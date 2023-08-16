@@ -44,8 +44,8 @@ const items: MenuProps['items'] = [
 ]
 
 const ProjectNav: React.FC = (props) => {
-  console.log('props',props);
-  
+  console.log('props', props)
+
   const dispatch = useDispatch()
   function show(): void {
     dispatch(reversal())
@@ -54,15 +54,15 @@ const ProjectNav: React.FC = (props) => {
   const onClick: MenuProps['onClick'] = (e) => {
     switch (e.key) {
       case '1':
-        navigate('/project/apiMgt',{state:props})
+        navigate('/project/apiMgt', { state: props })
         dispatch(setFalse())
         break
       case '2':
-        navigate('/project/memberMgt',{state:props})
+        navigate('/project/memberMgt', { state: props })
         dispatch(setFalse())
         break
       case '3':
-        navigate('/project/projectSet',{state:props})
+        navigate('/project/projectSet', { state: props })
         dispatch(setFalse())
         break
       case '4':

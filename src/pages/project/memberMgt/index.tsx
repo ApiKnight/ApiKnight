@@ -91,7 +91,8 @@ const MemberMgt: React.FC = () => {
           marginTop: 12,
           height: 32,
           lineHeight: '32px',
-        }}>
+        }}
+      >
         <Button onClick={onLoadMore}>loading more</Button>
       </div>
     ) : null
@@ -143,7 +144,11 @@ const MemberMgt: React.FC = () => {
             renderItem={(item) => (
               <List.Item
                 actions={[
-                  <Button type='primary' style={{ backgroundColor: 'purple' }} onClick={refuse}>
+                  <Button
+                    type='primary'
+                    style={{ backgroundColor: 'purple' }}
+                    onClick={refuse}
+                  >
                     拒绝
                   </Button>,
                   <Button
@@ -177,7 +182,8 @@ const MemberMgt: React.FC = () => {
         renderItem={(item) => (
           <List.Item
             actions={[<Button>权限</Button>, <Button danger>移除</Button>]}
-            key={item.user_id}>
+            key={item.user_id}
+          >
             <Skeleton avatar title={false} loading={initLoading} active>
               <List.Item.Meta
                 avatar={<Avatar src={item.avatar_url} />}

@@ -3,7 +3,7 @@ import './index.less'
 import { useLocation } from 'react-router-dom'
 
 const Mock: React.FunctionComponent = () => {
-  const state= useLocation().state
+  const state = useLocation().state
 
   return (
     <>

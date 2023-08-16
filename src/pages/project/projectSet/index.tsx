@@ -55,8 +55,7 @@ const ProjectSet: React.FC<childProps> = () => {
     deleteProject()
   }
 
-  const cancel = (e: React.MouseEvent<HTMLElement>) => {
-  }
+  const cancel = (e: React.MouseEvent<HTMLElement>) => {}
 
   useEffect(() => {
     getProjectBase(project_id).then((res) => {
@@ -68,64 +67,66 @@ const ProjectSet: React.FC<childProps> = () => {
 
   return (
     <div className='project-set'>
-      <div className="form">
-      <Form
-        name='basic'
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete='off'>
-        {projectInfo.description ? (
-          <Form.Item<FieldType>
-            label='项目名称'
-            name='projectname'
-            rules={[{ required: true, message: '请输入项目名称!' }]}
-            initialValue={projectInfo.projectname}>
-            <Input />
-          </Form.Item>
-        ) : (
-          ''
-        )}
+      <div className='form'>
+        <Form
+          name='basic'
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          style={{ maxWidth: 600 }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete='off'
+        >
+          {projectInfo.description ? (
+            <Form.Item<FieldType>
+              label='项目名称'
+              name='projectname'
+              rules={[{ required: true, message: '请输入项目名称!' }]}
+              initialValue={projectInfo.projectname}
+            >
+              <Input />
+            </Form.Item>
+          ) : (
+            ''
+          )}
 
-        {projectInfo.description ? (
-          <Form.Item<FieldType>
-            label='项目描述'
-            name='description'
-            rules={[{ required: true, message: '请输入项目描述!' }]}
-            initialValue={projectInfo.description}>
-            <Input />
-          </Form.Item>
-        ) : (
-          ''
-        )}
+          {projectInfo.description ? (
+            <Form.Item<FieldType>
+              label='项目描述'
+              name='description'
+              rules={[{ required: true, message: '请输入项目描述!' }]}
+              initialValue={projectInfo.description}
+            >
+              <Input />
+            </Form.Item>
+          ) : (
+            ''
+          )}
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button
-            type='primary'
-            htmlType='submit'
-            style={{ marginRight: '10px' }}>
-            确定
-          </Button>
-        </Form.Item>
-      </Form>
-      <div className='delete'>
-        <Popconfirm
-          title='谨慎操作！'
-          description='确定删除本项目吗?'
-          onConfirm={confirm}
-          onCancel={cancel}
-          okText='确定'
-          cancelText='取消'>
-          <Button danger>
-            删除项目
-          </Button>
-        </Popconfirm>
+          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Button
+              type='primary'
+              htmlType='submit'
+              style={{ marginRight: '10px' }}
+            >
+              确定
+            </Button>
+          </Form.Item>
+        </Form>
+        <div className='delete'>
+          <Popconfirm
+            title='谨慎操作！'
+            description='确定删除本项目吗?'
+            onConfirm={confirm}
+            onCancel={cancel}
+            okText='确定'
+            cancelText='取消'
+          >
+            <Button danger>删除项目</Button>
+          </Popconfirm>
+        </div>
       </div>
-      </div>
-      
     </div>
   )
 }

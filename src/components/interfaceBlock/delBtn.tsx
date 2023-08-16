@@ -1,7 +1,7 @@
 import { Modal } from 'antd'
 import React, { useState, createContext } from 'react'
 import { useDispatch } from 'react-redux'
-import { remove } from '@/store/modules/dirArraySlice.ts'
+import { useLocation } from 'react-router-dom'
 import { MinusOutlined } from '@ant-design/icons'
 import { increment } from '@/store/modules/watchDir'
 
@@ -11,6 +11,8 @@ interface Props {
 }
 
 const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
+  const state = useLocation().state
+  const projectId = state.project_id
   const dispatch = useDispatch()
   const { data } = props
   const ReachableContext = createContext<string | null>(null)
@@ -26,13 +28,12 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
   const delDataJson =
     data.type == 'FILE'
       ? {
-          project_id: 1063,
+          project_id: projectId,
           folder_id: data.key,
         }
       : {
           apis_id: data.key,
         }
-  console.log(delDataJson)
   const handleOk = () => {
     setModalText('节点正在删除中')
     setConfirmLoading(true)
@@ -62,11 +63,9 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
   }
 
   const handleCancel = () => {
-    // console.log('Clicked cancel button');
     setOpen(false)
   }
   function delFunction() {
-    console.log('删除按钮')
     showModal()
   }
   return (

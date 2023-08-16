@@ -8,18 +8,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AddDir } from '@/types/arrayToTree'
 import { setFalse, setTrue } from '@/store/modules/createFileState'
 import { increment } from '@/store/modules/watchDir'
-import Overlay from "@/components/overlay";
+import Overlay from '@/components/overlay'
 
 const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
   const flag = useSelector((state: RootState) => state.createFileState.value)
   const dispatch = useDispatch()
   const [dirName, setDirName] = useState('')
-  console.log(props)
-  console.log(props.data)
   function change(e: any): void {
     setDirName(e.target.value)
   }
-  function closeThis():void {
+  function closeThis(): void {
     dispatch(setFalse())
   }
   function addChildDir() {
@@ -71,9 +69,7 @@ const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
             创建
           </Button>
         </div>
-        {
-            flag && <Overlay/>
-        }
+        {flag && <Overlay />}
       </div>,
       document.body,
     )

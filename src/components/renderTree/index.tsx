@@ -57,9 +57,9 @@ const renderTree: React.FC = () => {
       .then((response) => response.json())
       .then((res) => {
         // 在这里处理返回的数据
-        setData(mergeFlatArrays(res.data.folder_list, res.data.api_list, 1063))
+        setData(mergeFlatArrays(res.data.folder_list, res.data.api_list, projectId))
         setMakeValue({
-          value: mergeFlatArrays(res.data.folder_list, res.data.api_list, 1063),
+          value: mergeFlatArrays(res.data.folder_list, res.data.api_list, projectId),
         })
       })
       .catch((error) => {

@@ -116,10 +116,8 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <Header style={{ backgroundColor: '#ffffff' }}>
         <HeaderNav ifHideUser={false} />
-      </Header>
-      <Content style={{ backgroundColor: '#fbf7ff' }}>
+      <Content style={{ backgroundColor: '#fbf7ff', height: '89vh', width: '100vw'}}>
         <Menu
           onClick={onClick}
           style={{

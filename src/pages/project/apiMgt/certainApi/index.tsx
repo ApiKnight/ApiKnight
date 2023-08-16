@@ -11,6 +11,7 @@ import { FlatItem, FlatItemValue } from '@/types/mergeFlatArrays'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
 import request from '@/api/request'
 import CreateFile from '@/components/createFile'
+import Tab from "@/components/Tab";
 
 const CertainApi: React.FunctionComponent = () => {
   return (
@@ -29,6 +30,7 @@ const CertainApi: React.FunctionComponent = () => {
       </ul>
       <Outlet />
       <RenderTree />
+        <Tab/>
     </>
   )
 }

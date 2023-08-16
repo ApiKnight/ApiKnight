@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import './index.less'
 import AddBtn from './addBtn.tsx'
 import DelBtn from './delBtn.tsx'
@@ -26,9 +26,13 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
     setShowState(!show)
   }
   const { data } = props
-  const addData: AddData = { key: data.key, pid: data.pid, type: data.type }
-  const menuData: AddData = { key: data.key, pid: data.pid, type: data.type }
+  const [addData,setAddData] = useState<AddData>({ key: data.key, pid: data.pid, type: data.type });
+  const [menuData,setMenuData] = useState<AddData>({ key: data.key, pid: data.pid, type: data.type })
   const delData = { key: data.key, type: data.type }
+  // useEffect(()=>{
+  //   setAddData({ key: data.key, pid: data.pid, type: data.type })
+  //   setMenuData({ key: data.key, pid: data.pid, type: data.type })
+  // },[data])
   return (
     <div
       className='InterfaceBlock'

@@ -122,7 +122,6 @@ const renderTree: React.FC = () => {
   return (
     <Tree
       treeData={tree}
-      defaultExpandAll
       draggable
       blockNode
       onDrop={onDrop}

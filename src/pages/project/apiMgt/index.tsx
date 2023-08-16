@@ -75,6 +75,7 @@ const ApiMgt: React.FunctionComponent = () => {
   return (
     <div className='project-api'>
       <div className='header'>Api管理</div>
+      <RenderTree data={dd} />
       <div className='content'>
         <ul>
           <li>
@@ -92,7 +93,6 @@ const ApiMgt: React.FunctionComponent = () => {
       <div className='child'>
         <Outlet />
       </div>
-      <RenderTree data={dd} />
     </div>
   )
 }

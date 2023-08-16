@@ -30,6 +30,7 @@ const ApiMgt: React.FunctionComponent = () => {
       <div className='child'>
         <Outlet />
       </div>
+      {/* 不需要传data，内部都做好了 */}
       <RenderTree />
     </div>
   )

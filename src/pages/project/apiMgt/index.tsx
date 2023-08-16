@@ -7,6 +7,8 @@ import { FlatItem, FlatItemValue } from '@/types/mergeFlatArrays'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
 import Email from '@/components/Invite/email'
 import { useLocation } from 'react-router-dom'
+import Tabs from "@/components/Tabs";
+import Tab from "@/components/Tab";
 
 const ApiMgt: React.FunctionComponent = () => {
   const state = useLocation().state
@@ -31,7 +33,8 @@ const ApiMgt: React.FunctionComponent = () => {
         <Outlet />
       </div>
       {/* 不需要传data，内部都做好了 */}
-      <RenderTree />
+      {/*<RenderTree />*/}
+        <Tabs/>
     </div>
   )
 }

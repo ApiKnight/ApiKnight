@@ -1,14 +1,26 @@
 .tab {
+  border: #9373ee solid 0.2px;
   background-color: aliceblue;
-  max-width: 4.5%;
-  padding: 0.5% 1.5% 0.5% 1.5%;
+  width: auto;
+  height: 20px;
+  padding: 5px;
   text-overflow: ellipsis;
   display: flex;
-  .tab-content {
+  font-size: 14px;
+  .tab-title {
     display: flex;
+    align-items: center;
+  }
+  .tab-content {
+    width: auto;
+    display: flex;
+    align-items: center;
   }
   .tab-closed {
-    margin-left: 8.5%;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .tab-closed:hover {
     cursor: pointer;

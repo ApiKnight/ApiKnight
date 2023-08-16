@@ -6,7 +6,10 @@ import { ArrayItem } from '@/types/arrayToTree'
 import { FlatItem, FlatItemValue } from '@/types/mergeFlatArrays'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
 import Email from '@/components/Invite/email'
+import { useLocation } from 'react-router-dom'
+
 const ApiMgt: React.FunctionComponent = () => {
+  const state = useLocation().state
   const a1: FlatItem[] = [
     {
       id: '1',
@@ -67,24 +70,30 @@ const ApiMgt: React.FunctionComponent = () => {
       pid: '3',
     },
   ]
-  console.log('dd',dd)
-  console.log('d',d)
+  console.log('dd', dd)
+  console.log('d', d)
   return (
-    <>
-      <div>ApiMgt</div>
-      <ul>
-        <li>
-          <Link to='/project/apiMgt/overview'>Overview</Link>
-        </li>
-        <li>
-          <Link to='/project/apiMgt/certainApi'>CertainApi</Link>
-        </li>
-      </ul>
-      <div>
+    <div className='project-api'>
+      <div className='header'>Api管理</div>
+      <RenderTree data={dd} />
+      <div className='content'>
+        <ul>
+          <li>
+            <Link to='/project/apiMgt/overview' state={state}>
+              Overview
+            </Link>
+          </li>
+          <li>
+            <Link to='/project/apiMgt/certainApi' state={state}>
+              CertainApi
+            </Link>
+          </li>
+        </ul>
+      </div>
+      <div className='child'>
         <Outlet />
       </div>
-      {/* <RenderTree data={dd} /> */}
-    </>
+    </div>
   )
 }
 

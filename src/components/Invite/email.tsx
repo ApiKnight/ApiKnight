@@ -4,21 +4,25 @@ import request from '@/api/request'
 import './email.less'
 const { TextArea } = Input
 import type { NotificationPlacement } from 'antd/es/notification/interface'
-import {useSelector} from "react-redux";
-import {RootState} from "@/store";
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 
 const Context = React.createContext({ name: 'Default' })
-const Email: React.FunctionComponent = () => {
+const Email: React.FunctionComponent<any> = (props) => {
   const [userEmail, setUserEmail] = useState('')
   const [listData, setListData] = useState([])
   async function handleChange(e: any) {
     await setUserEmail(e.target.value)
   }
   const [info, setInfo] = useState('')
-  const projectId = useSelector((state: RootState) => state.project.project_id)
+  // const projectId = useSelector((state: RootState) => state.project.project_id)
   function sendInfo(): void {
     request
-      .post('/v1/invite/sending', { email: userEmail, projectid: Number(projectId) }, {})
+      .post(
+        '/v1/invite/sending',
+        { email: userEmail, projectid: Number(props.project_id) },
+        {},
+      )
       .then((resp) => {
         if (
           (resp as any).data.code !== 403 ||
@@ -32,10 +36,6 @@ const Email: React.FunctionComponent = () => {
   }
   const newArray = []
   useEffect(() => {
-    const data = {
-      projectid: 1063,
-      email: userEmail,
-    }
     request
       .post('/v1/user/searchUsersByEmail', { email: userEmail }, {})
       .then((res) => {

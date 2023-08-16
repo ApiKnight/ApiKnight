@@ -8,8 +8,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import request from '../../api/request'
 import { message } from 'antd'
 
-const [messageApi] = message.useMessage()
-
 export interface ProjectIdType {
   user_id: string
   user_name: string

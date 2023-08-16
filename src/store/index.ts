@@ -4,6 +4,7 @@ import projectReducer from './modules/projectSlice.ts'
 import dirArrayReducer from './modules/dirArraySlice.ts'
 import watchDirReducer from './modules/watchDir.ts'
 import watchStateFlagReducer from './modules/stateFlag.ts'
+import createFileStateReducer from './modules/createFileState.ts'
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     dirArray: dirArrayReducer,
     watchDir: watchDirReducer,
     stateFlag: watchStateFlagReducer,
+    createFileState: createFileStateReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

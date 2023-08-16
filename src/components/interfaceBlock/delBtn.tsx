@@ -1,10 +1,18 @@
 import { Modal } from 'antd'
 import React, { useState, createContext } from 'react'
 import { useDispatch } from 'react-redux'
-import { remove } from '@/store/modules/dirArraySlice.ts'
+import { useLocation } from 'react-router-dom'
 import { MinusOutlined } from '@ant-design/icons'
+import { increment } from '@/store/modules/watchDir'
 
-const DelBtn: React.FunctionComponent<{ data: string }> = (props) => {
+interface Props {
+  key: string
+  type: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
+}
+
+const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
+  const state = useLocation().state
+  const projectId = state.project_id
   const dispatch = useDispatch()
   const { data } = props
   const ReachableContext = createContext<string | null>(null)
@@ -17,23 +25,47 @@ const DelBtn: React.FunctionComponent<{ data: string }> = (props) => {
   const showModal = () => {
     setOpen(true)
   }
-
+  const delDataJson =
+    data.type == 'FILE'
+      ? {
+          project_id: projectId,
+          folder_id: data.key,
+        }
+      : {
+          apis_id: data.key,
+        }
   const handleOk = () => {
-    setModalText('节点将在2s后被删除(模拟异步操作)')
+    setModalText('节点正在删除中')
     setConfirmLoading(true)
-    setTimeout(() => {
-      setOpen(false)
-      setConfirmLoading(false)
-      dispatch(remove(data))
-    }, 2000)
+    setOpen(false)
+    setConfirmLoading(false)
+    // dispatch(remove(data))
+    const url = data.type === 'FILE' ? '/v1/folder/delete' : '/v1/apis/delete'
+    fetch(`http://47.112.108.202:7002/api${url}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: ('Bearer ' + localStorage.getItem('token')) as string,
+      },
+      body: JSON.stringify(delDataJson),
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        // 在这里处理返回的数据
+        if (res.code == 200) {
+          dispatch(increment())
+        }
+      })
+      .catch((error) => {
+        // 在这里处理错误
+        console.error(error)
+      })
   }
 
   const handleCancel = () => {
-    // console.log('Clicked cancel button');
     setOpen(false)
   }
   function delFunction() {
-    console.log('删除按钮')
     showModal()
   }
   return (

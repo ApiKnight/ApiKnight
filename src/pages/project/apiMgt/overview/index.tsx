@@ -1,11 +1,11 @@
 import React from 'react'
 import './index.less'
 import { useLocation } from 'react-router-dom'
-import { Badge, Descriptions } from 'antd';
-import type { DescriptionsProps } from 'antd';
+import { Badge, Descriptions } from 'antd'
+import type { DescriptionsProps } from 'antd'
 
 const Overview: React.FunctionComponent = () => {
-  const state= useLocation().state
+  const state = useLocation().state
   const items: DescriptionsProps['items'] = [
     {
       key: '1',
@@ -16,7 +16,7 @@ const Overview: React.FunctionComponent = () => {
       key: '2',
       label: '项目描述',
       children: '这是一个好项目',
-      span: '2'
+      span: '2',
     },
     {
       key: '3',
@@ -34,7 +34,7 @@ const Overview: React.FunctionComponent = () => {
       label: '用例数量',
       children: '6',
     },
-    
+
     {
       key: '6',
       label: '成员数量',
@@ -43,19 +43,17 @@ const Overview: React.FunctionComponent = () => {
     {
       key: '7',
       lebel: '添加接口/文档',
-      children: <Badge status="processing" text="Running" />,
-      span: '3'
-    }
-  ];
+      children: <Badge status='processing' text='Running' />,
+      span: '3',
+    },
+  ]
   return (
-      <div className='project-overview'>
-        <div className="header">
-          项目概览
-        </div>
-        <div className="content">
-        <Descriptions title="User Info" bordered items={items} />;
-        </div>
-        </div>
+    <div className='project-overview'>
+      <div className='header'>项目概览</div>
+      <div className='content'>
+        <Descriptions title='User Info' bordered items={items} />;
+      </div>
+    </div>
   )
 }
 

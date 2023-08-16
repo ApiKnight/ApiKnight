@@ -18,9 +18,9 @@ interface childProps {
 }
 
 const UpdateProject: React.FC<childProps> = (props) => {
-  const { isModalOpen, closeModal, updateUserInfo,user_id } = props
-  console.log(props);
-  
+  const { isModalOpen, closeModal, updateUserInfo, user_id } = props
+  console.log(props)
+
   const onFinish = (values: any) => {
     console.log(values)
 

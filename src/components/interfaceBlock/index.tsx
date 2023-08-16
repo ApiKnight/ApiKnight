@@ -26,7 +26,8 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
     setShowState(!show)
   }
   const { data } = props
-  const addData: AddData = { key: data.key, pid: data.pid + 1 }
+  const addData: AddData = { key: data.key, pid: data.pid, type: data.type }
+  const menuData: AddData = { key: data.key, pid: data.pid, type: data.type }
   const delData = { key: data.key, type: data.type }
   return (
     <div
@@ -49,7 +50,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
             )}
           </div>
         )}
-        <Menu data={addData} />
+        <Menu data={menuData} />
       </div>
     </div>
   )

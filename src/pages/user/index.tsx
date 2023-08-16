@@ -25,7 +25,7 @@ const User: React.FunctionComponent = () => {
   const closeModal = () => {
     setIsModalOpen(false)
   }
-  const updateUserInfo=()=>{
+  const updateUserInfo = () => {
     getUserInfo(user_id).then((res) => {
       let data = res.data.data
       setUserInfo(data)
@@ -53,19 +53,28 @@ const User: React.FunctionComponent = () => {
             // backgroundColor: '#ffffff',
             padding: 0
           }}> */}
-          <HeaderNav user_info={user_info} />
+        <HeaderNav user_info={user_info} />
         {/* </Header> */}
-        <Content className='content' style={{ padding: '50px 50px', justifyContent: 'center',alignItems:'center',position:'relative' }}>
+        <Content
+          className='content'
+          style={{
+            padding: '50px 50px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
+          }}
+        >
           <div className='title'>
             <div className='my-project'>我的项目</div>
-            <div className="create-project">
-            <Button
-              icon={<PlusOutlined />}
-              style={{ backgroundColor: '#9373ee', color: '#ffffff' }}
-              className='button'
-              onClick={() => openModal()}>
-              新建项目
-            </Button>
+            <div className='create-project'>
+              <Button
+                icon={<PlusOutlined />}
+                style={{ backgroundColor: '#9373ee', color: '#ffffff' }}
+                className='button'
+                onClick={() => openModal()}
+              >
+                新建项目
+              </Button>
             </div>
           </div>
           <div className='list'>
@@ -77,14 +86,15 @@ const User: React.FunctionComponent = () => {
                       name={value.projectname}
                       dec={value.description}
                       project_id={value.id}
-                      iconPath={value.iconPath}></ProjectItem>
+                      iconPath={value.iconPath}
+                    ></ProjectItem>
                   </div>
                 )
               })
             ) : (
-                <div  className='item-empty'>
-              <EmptyShow />
-                </div>
+              <div className='item-empty'>
+                <EmptyShow />
+              </div>
             )}
           </div>
         </Content>

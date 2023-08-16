@@ -9,7 +9,7 @@ import Email from '@/components/Invite/email'
 import { useLocation } from 'react-router-dom'
 
 const ApiMgt: React.FunctionComponent = () => {
-  const state= useLocation().state
+  const state = useLocation().state
   const a1: FlatItem[] = [
     {
       id: '1',
@@ -73,25 +73,27 @@ const ApiMgt: React.FunctionComponent = () => {
   console.log('dd', dd)
   console.log('d', d)
   return (
-      <div className='project-api'>
-        <div className="header">
-        Api管理
-        </div>
-      <div className="content">
-      <ul>
-        <li>
-          <Link to='/project/apiMgt/overview' state={state}>Overview</Link>
-        </li>
-        <li>
-          <Link to='/project/apiMgt/certainApi' state={state}>CertainApi</Link>
-        </li>
-      </ul>
+    <div className='project-api'>
+      <div className='header'>Api管理</div>
+      <div className='content'>
+        <ul>
+          <li>
+            <Link to='/project/apiMgt/overview' state={state}>
+              Overview
+            </Link>
+          </li>
+          <li>
+            <Link to='/project/apiMgt/certainApi' state={state}>
+              CertainApi
+            </Link>
+          </li>
+        </ul>
       </div>
       <div className='child'>
         <Outlet />
       </div>
       <RenderTree data={dd} />
-      </div>
+    </div>
   )
 }
 

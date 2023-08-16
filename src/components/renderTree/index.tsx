@@ -4,7 +4,7 @@ import { Tree } from 'antd'
 import { arrayToTree } from '@/utils/arrayToTree'
 import type { TreeNode, ArrayItem, ArrayNode } from '@/types/arrayToTree'
 import './index.less'
-import { assign } from '@/store/modules/dirArraySlice.ts'
+import { useLocation } from 'react-router-dom'
 import { RootState } from '@/store/index.ts'
 import { useSelector, useDispatch } from 'react-redux'
 // 导入监控
@@ -41,23 +41,10 @@ const renderTree: React.FC = () => {
       parent_id: null,
     },
   ]
-  const a2: FlatItem[] = [
-    {
-      id: '3b658414-ff28-4b2a-b7ff-627656205961',
-      folder_id: '694948f6-7908-4388-8da7-c744b13f76b6',
-      create_user: '5a0ce9c2-01a6-4b4f-9d79-adfc4b1a4213',
-      create_time: '2023-08-14 17:25:40',
-      operate_time: '2023-08-14 17:25:40',
-      operate_user: '5a0ce9c2-01a6-4b4f-9d79-adfc4b1a4213',
-      request_data: 'cs',
-      response_data: 'cccc',
-      project_id: 1063,
-      description: 'cxxxx',
-      name: 'getList',
-    },
-  ]
   const [data, setData] = useState(mergeFlatArrays(a1, [], 1063))
   const [makeValue, setMakeValue] = useState<MakeValue>({ value: data })
+  const state = useLocation().state
+  const projectId = state.project_id
   function reqFun() {
     fetch('http://47.112.108.202:7002/api/v1/project/query', {
       method: 'POST',
@@ -65,7 +52,7 @@ const renderTree: React.FC = () => {
         'Content-Type': 'application/json',
         Authorization: ('Bearer ' + localStorage.getItem('token')) as string,
       },
-      body: JSON.stringify({ projectid: 1063 }),
+      body: JSON.stringify({ projectid: projectId }),
     })
       .then((response) => response.json())
       .then((res) => {

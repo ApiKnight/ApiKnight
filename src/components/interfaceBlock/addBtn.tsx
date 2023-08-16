@@ -6,10 +6,13 @@ import type { AddData } from '@/types/treeComponents.js'
 import { PlusOutlined } from '@ant-design/icons'
 import request from '@/api/request'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
+import { useLocation } from 'react-router-dom'
 
 const AddBtn: React.FunctionComponent<{ data: AddData }> = (props) => {
   const dispatch = useDispatch()
   const { data } = props
+  const state = useLocation().state
+  const projectId = state.project_id
   return (
     <span
       style={{ display: 'inline' }}
@@ -23,7 +26,7 @@ const AddBtn: React.FunctionComponent<{ data: AddData }> = (props) => {
               localStorage.getItem('token')) as string,
           },
           body: JSON.stringify({
-            project_id: 1063,
+            project_id: projectId,
             folder_id: data.key,
             request_data: "{type:'GET'}",
             response_data: 'xxxx',

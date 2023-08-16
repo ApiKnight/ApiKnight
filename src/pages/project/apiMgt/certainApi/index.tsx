@@ -9,30 +9,34 @@ import { ArrayItem } from '@/types/arrayToTree.d.ts'
 import { Outlet, Link } from 'react-router-dom'
 import { FlatItem, FlatItemValue } from '@/types/mergeFlatArrays'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
-import request from '@/api/request'
-import CreateFile from '@/components/createFile'
-import Tab from "@/components/Tab";
+import { useLocation } from 'react-router-dom'
 
 const CertainApi: React.FunctionComponent = () => {
-  return (
-    <>
-      <div>CertainApi</div>
-      <ul>
-        <li>
-          <Link to='/project/apiMgt/certainApi/document'>document</Link>
-        </li>
-        <li>
-          <Link to='/project/apiMgt/certainApi/test'>test</Link>
-        </li>
-        <li>
-          <Link to='/project/apiMgt/certainApi/mock'>mock</Link>
-        </li>
-      </ul>
-      <Outlet />
-      <RenderTree />
-        <Tab/>
-    </>
-  )
+    const state = useLocation().state
+    return (
+        <>
+            <div>具体某个Api</div>
+            <ul>
+                <li>
+                    <Link to='/project/apiMgt/certainApi/document' state={state}>
+                        document
+                    </Link>
+                </li>
+                <li>
+                    <Link to='/project/apiMgt/certainApi/test' state={state}>
+                        test
+                    </Link>
+                </li>
+                <li>
+                    <Link to='/project/apiMgt/certainApi/mock' state={state}>
+                        mock
+                    </Link>
+                </li>
+            </ul>
+            <Outlet />
+
+        </>
+    )
 }
 
 export default CertainApi

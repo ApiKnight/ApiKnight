@@ -1,11 +1,16 @@
 .header-nav {
+  width: 100vw;
+  height: 10vh;
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  background-color: #ffffff;
+  padding-top: 1vh;
   .left {
     padding-left: 30px;
     .title {
+      position: relative;
+      top: 1vh;
       font-weight: 800;
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
       font-size: 30px;
@@ -16,17 +21,19 @@
     justify-content: center;
     padding-right: 30px;
     .github{
-      display: flex;
-      flex-direction: column;
+      margin-right: 16px;
+    }
+    .user{
+      height: 10vh;
+      position: relative;
       // align-items: center;
       // justify-content: center;
-      width: 80px;
-      height: 80px;
-      .url{
-        flex: 3;
+      .avatar{
       }
-      .username{
-        flex: 1;
+      .name{
+        color:rgb(75, 75, 163);
+        // position: absolute;
+        // bottom: 2vh;
       }
     }
   }

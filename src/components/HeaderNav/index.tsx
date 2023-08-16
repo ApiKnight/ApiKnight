@@ -43,20 +43,23 @@ const HeaderNav: React.FC<Props> = (props) => {
           ''
         ) : (
           <div className='user'>
-            <Link
-              to='/user'
-              state={{ user_id: localStorage.getItem('user_id') }}
-            >
-              <Avatar
-                size={54}
-                style={{ backgroundColor: 'black', marginLeft: '10px' }}
-                icon={user_info.avatar_url ? '' : <UserOutlined />}
-                src={user_info.avatar_url ? user_info.avatar_url : null}
-              />
-              <div className='username'>
-                {user_info.username ? user_info.username : null}
-              </div>
-            </Link>
+            <div className='avatar'>
+              <Link
+                to='/user'
+                state={{ user_id: localStorage.getItem('user_id') }}
+              >
+                <Avatar
+                  size={54}
+                  style={{ backgroundColor: 'black', marginLeft: '10px' }}
+                  icon={user_info.avatar_url ? '' : <UserOutlined />}
+                  src={user_info.avatar_url ? user_info.avatar_url : null}
+                />
+              </Link>
+            </div>
+
+            <div className='name'>
+              {user_info.username ? user_info.username : null}
+            </div>
           </div>
         )}
       </div>

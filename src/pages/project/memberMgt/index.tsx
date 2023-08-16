@@ -79,7 +79,10 @@ const MemberMgt: React.FC = () => {
     // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
     // window.dispatchEvent(new Event('resize'));
   }
-
+  
+  const closeModal=()=>{
+    setIsModalOpen(false)
+  }
   const loadMore =
     !initLoading && !moreLoading ? (
       <div
@@ -93,26 +96,32 @@ const MemberMgt: React.FC = () => {
       </div>
     ) : null
 
-  const approval = () => {
-    let apply_obj = {
-      projectid: project_id,
-      status: '1',
-      id: '',
+  const approval = (id) => {
+    return ()=>{
+      let apply_obj = {
+        projectid: project_id,
+        status: '1',
+        id: id,
+      }
+      updateApply(apply_obj).then((res) => {
+        res.code === 200 ? message.success('已同意') : message.error('操作失败')
+      })
     }
-    updateApply(apply_obj).then((res) => {
-      res.code === 200 ? message.success('已同意') : message.error('操作失败')
-    })
+    
   }
 
-  const refuse = () => {
-    let apply_obj={
-      projectid:project_id,
-      status:'-1',
-      id:''
+  const refuse = (id) => {
+    return ()=>{
+      let apply_obj = {
+        projectid: project_id,
+        status: '-1',
+        id: id,
+      }
+      updateApply(apply_obj).then((res) => {
+        res.code === 200 ? message.success('已拒绝') : message.error('操作失败')
+      })
     }
-    updateApply(apply_obj).then(res=>{
-      res.code === 200 ?  message.success('已拒绝')  :  message.error('操作失败')
-    })
+    
   }
 
   return (
@@ -124,7 +133,7 @@ const MemberMgt: React.FC = () => {
           审批列表
         </Button>
 
-        <Modal title='申请人' open={isModalOpen} footer={null}>
+        <Modal title='申请人' open={isModalOpen} onCancel={closeModal} footer={null}>
           <List
             className='list'
             loading={initLoading}
@@ -140,11 +149,12 @@ const MemberMgt: React.FC = () => {
                   <Button
                     type='primary'
                     style={{ backgroundColor: 'green' }}
-                    onClick={approval}>
+                    onClick={approval(item.id)}
+                    >
                     同意
                   </Button>,
                 ]}
-                key={item.user_id}>
+                key={item.id}>
                 <Skeleton avatar title={false} loading={initLoading} active>
                   <List.Item.Meta
                     // avatar={<Avatar src={item.avatar_url} />}

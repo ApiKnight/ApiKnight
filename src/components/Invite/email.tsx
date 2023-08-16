@@ -10,7 +10,7 @@ import { RootState } from '@/store'
 const Context = React.createContext({ name: 'Default' })
 const Email: React.FunctionComponent = (props) => {
   const [userEmail, setUserEmail] = useState('')
-  const [ , setListData] = useState([])
+  const [ listData , setListData] = useState([])
   async function handleChange(e: any) {
     await setUserEmail(e.target.value)
   }

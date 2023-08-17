@@ -50,7 +50,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
       className='InterfaceBlock'
       onMouseEnter={changeBtnState}
       onMouseLeave={changeBtnState}
-      onClick={openTab}
+      onDoubleClick={openTab}
     >
       <div>
         <MethodList value={data.type} />

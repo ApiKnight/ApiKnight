@@ -29,7 +29,6 @@ const Tabs: React.FunctionComponent = () => {
     )
   }, [])
   useEffect(() => {
-    console.log(Tabs)
     setTabList(Tabs)
   }, [Tabs])
   function openTab(): void {

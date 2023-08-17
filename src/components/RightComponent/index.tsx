@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import RightMenu from "@/components/RightMenu";
@@ -6,7 +6,6 @@ import RightMenu from "@/components/RightMenu";
 const RightComponent: React.FunctionComponent = () => {
   const dispatch = useDispatch()
   const rightSlice = useSelector((state: RootState) => state.rightSlice.value)
-    console.log("rgt is "+ rightSlice)
   return (
     <div>
       <div>{rightSlice === '0' && <div>新建xx(默认页面)</div>}</div>

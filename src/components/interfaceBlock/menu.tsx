@@ -43,7 +43,6 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
     project_id: proId,
     parent_id: data.key,
   })
-  console.log(data.key)
   return (
     <span>
       <Popover content={content} title='' trigger='click'>

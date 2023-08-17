@@ -46,13 +46,25 @@ const renderTree: React.FC = () => {
   const state = useLocation().state
   const projectId = state.project_id
   function reqFun() {
-    request.post("/v1/project/query",{ projectid: projectId },{}).then((resp)=>{
-          // 在这里处理返回的数据
-          setData(mergeFlatArrays(resp.data.data.folder_list, resp.data.data.api_list, projectId))
-          setMakeValue({
-            value: mergeFlatArrays(resp.data.data.folder_list, resp.data.data.api_list, projectId),
-          })
-    })
+    request
+      .post('/v1/project/query', { projectid: projectId }, {})
+      .then((resp) => {
+        // 在这里处理返回的数据
+        setData(
+          mergeFlatArrays(
+            resp.data.data.folder_list,
+            resp.data.data.api_list,
+            projectId,
+          ),
+        )
+        setMakeValue({
+          value: mergeFlatArrays(
+            resp.data.data.folder_list,
+            resp.data.data.api_list,
+            projectId,
+          ),
+        })
+      })
   }
   const watchDir = useSelector((state: RootState) => state.watchDir.value)
   useEffect(() => {
@@ -82,9 +94,9 @@ const renderTree: React.FC = () => {
       info.dragNode.type === 'FILE'
         ? { folder_id: info.dragNodesKeys[0], parent_id: info.node.key }
         : { apis_id: info.dragNodesKeys[0], folder_id: info.node.key }
-    request.post(url,urlData,{}).then((res)=>{
-          // 在这里处理返回的数据
-          dispatch(increment())
+    request.post(url, urlData, {}).then((res) => {
+      // 在这里处理返回的数据
+      dispatch(increment())
     })
   }
   const renderData = restoreData(makeValue.value)

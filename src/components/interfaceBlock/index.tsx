@@ -9,9 +9,9 @@ import { createXhrMonitor } from '../../../sdk/createXhrMonitor'
 import { TitleNode, Props, AddData } from '@/types/treeComponents'
 import MethodList from '@/components/MethodList'
 import Menu from '@/components/InterfaceBlock/menu'
-import {addData, assign} from "@/store/modules/tabSlice.ts";
-import {useDispatch} from "react-redux";
-import {setValue} from "@/store/modules/rightSlice";
+import { addData, assign } from '@/store/modules/tabSlice.ts'
+import { useDispatch } from 'react-redux'
+import { setValue } from '@/store/modules/rightSlice'
 
 function startMonitor() {
   createJsErrorMonitor('renderTree').start()
@@ -33,13 +33,15 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
   const menuData: AddData = { key: data.key, pid: data.pid, type: data.type }
   const delData = { key: data.key, type: data.type }
   const dispatch = useDispatch()
-  function openTab():void {
-    if (data.type !== "FILE") {
-      dispatch(addData({
-        key: data.key,
-        title: data.title,
-        type: data.type
-      }))
+  function openTab(): void {
+    if (data.type !== 'FILE') {
+      dispatch(
+        addData({
+          key: data.key,
+          title: data.title,
+          type: data.type,
+        }),
+      )
       dispatch(setValue(data.key))
     }
   }

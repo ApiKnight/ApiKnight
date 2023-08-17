@@ -9,7 +9,7 @@ import { AddDir } from '@/types/arrayToTree'
 import { setFalse, setTrue } from '@/store/modules/createFileState'
 import { increment } from '@/store/modules/watchDir'
 import Overlay from '@/components/overlay'
-import request from "../../api/request";
+import request from '../../api/request'
 
 const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
   const flag = useSelector((state: RootState) => state.createFileState.value)
@@ -22,16 +22,22 @@ const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
     dispatch(setFalse())
   }
   function addChildDir() {
-    request.post("/v1/folder/create",{
+    request
+      .post(
+        '/v1/folder/create',
+        {
           project_id: props.data.project_id,
           parent_id: props.data.parent_id,
           name: dirName,
-        },{}).then((res)=>{
-          // 在这里处理返回的数据
-          if (res.data.code == 200) {
-            dispatch(increment())
-          }
-    })
+        },
+        {},
+      )
+      .then((res) => {
+        // 在这里处理返回的数据
+        if (res.data.code == 200) {
+          dispatch(increment())
+        }
+      })
     dispatch(setFalse())
   }
   if (flag) {

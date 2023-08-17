@@ -33,11 +33,13 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
   const delData = { key: data.key, type: data.type }
   const dispatch = useDispatch()
   function openTab():void {
-    dispatch(addData({
-      key: data.key,
-      title: data.title,
-      type: data.type
-    }))
+    if (data.type !== "FILE") {
+      dispatch(addData({
+        key: data.key,
+        title: data.title,
+        type: data.type
+      }))
+    }
   }
   return (
     <div

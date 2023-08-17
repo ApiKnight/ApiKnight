@@ -6,12 +6,15 @@ import RightMenu from "@/components/RightMenu";
 const RightComponent: React.FunctionComponent = () => {
   const dispatch = useDispatch()
   const rightSlice = useSelector((state: RootState) => state.rightSlice.value)
+    console.log("rgt is "+ rightSlice)
   return (
     <div>
-      <div>{rightSlice === '' && <div>新建xx(默认页面)</div>}</div>
+      <div>{rightSlice === '0' && <div>新建xx(默认页面)</div>}</div>
       {/* 下面的div里加入右边组件。 rightSlice就是我要传的  id */}
       <div>
-          <RightMenu data={rightSlice}/>
+          {
+              ( rightSlice !== '0' && rightSlice !== "" ) && <RightMenu data={rightSlice}/>
+          }
       </div>
     </div>
   )

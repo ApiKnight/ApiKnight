@@ -26,7 +26,7 @@ const AddBtn: React.FunctionComponent<{ data: AddData }> = (props) => {
               request_data: "{type:'GET'}",
               response_data: 'xxxx',
               description: 'xxxx',
-              name: 'getList2',
+              name: 'getList1',
             },
             {},
           )

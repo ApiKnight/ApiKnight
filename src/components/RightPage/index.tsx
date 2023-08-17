@@ -3,12 +3,9 @@ import Tabs from '@/components/Tabs'
 import RightComponent from '@/components/RightComponent'
 import {RootState} from "../../store";
 import {useSelector} from "react-redux";
+import {Button} from "antd";
 
 const RightPage: React.FunctionComponent = () => {
-    const rightSlice = useSelector((state: RootState) => state.rightSlice.value)
-    useEffect(()=>{
-        console.log(rightSlice)
-    },[rightSlice])
     return (
         <div>
           <Tabs />

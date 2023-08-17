@@ -8,6 +8,7 @@ import createFileStateReducer from './modules/createFileState.ts'
 import tabSliceReducer from '@/store/modules/tabSlice'
 import tabsSliceReducer from '@/store/modules/tabsSlice'
 import rightSliceReducer from '@/store/modules/rightSlice'
+import showRightMenuReducer from '@/store/modules/showRightMenu'
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     tabSlice: tabSliceReducer,
     tabsSlice: tabsSliceReducer,
     rightSlice: rightSliceReducer,
+    showRightMenu: showRightMenuReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

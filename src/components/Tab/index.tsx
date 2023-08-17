@@ -8,20 +8,19 @@ import { removeData } from '@/store/modules/tabSlice'
 import RightPage from '../RightPage'
 import { setValue } from '@/store/modules/rightSlice'
 import {RootState} from "@/store";
+import {reversal} from "@/store/modules/showRightMenu";
 
 const Tab: React.FunctionComponent<Props> = (props) => {
   const [show, setShow] = useState(false)
   const dispatch = useDispatch()
-  const rightSlice = useSelector((state: RootState) => state.rightSlice.value)
-  useEffect(()=>{
-    console.log(rightSlice)
-  },[rightSlice])
   function changeShowState(): void {
     setShow(!show)
   }
-  function closeThisPage(): void {
+  function closeThisPage(e:any): void {
+    dispatch(setValue('0'))
     dispatch(removeData(props.data.key))
-    dispatch(setValue(''))
+    dispatch(reversal())
+    e.stopPropagation();
   }
   function openTab(): void {
     dispatch(setValue(props.data.key))

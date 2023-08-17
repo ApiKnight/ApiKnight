@@ -11,6 +11,7 @@ import MethodList from '@/components/MethodList'
 import Menu from '@/components/InterfaceBlock/menu'
 import {addData, assign} from "@/store/modules/tabSlice.ts";
 import {useDispatch} from "react-redux";
+import {setValue} from "@/store/modules/rightSlice";
 
 function startMonitor() {
   createJsErrorMonitor('renderTree').start()
@@ -39,6 +40,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
         title: data.title,
         type: data.type
       }))
+      dispatch(setValue(data.key))
     }
   }
   return (

@@ -33,7 +33,7 @@ const ApiMgt: React.FunctionComponent = () => {
         <Outlet />
       </div>
       {/* 不需要传data，内部都做好了 */}
-      {/*<RenderTree />*/}
+      <RenderTree />
         <Tabs/>
     </div>
   )

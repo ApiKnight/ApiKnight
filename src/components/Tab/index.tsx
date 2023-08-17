@@ -5,19 +5,24 @@ import { CloseOutlined } from '@ant-design/icons';
 import {Props} from "@/types/tabs";
 import {useDispatch} from "react-redux";
 import {removeData} from "@/store/modules/tabSlice";
+import RightPage from "../RightPage";
+import {setValue} from "@/store/modules/rightSlice";
 
 const Tab: React.FunctionComponent<Props> = (props) => {
     const [show,setShow] = useState(false);
     const dispatch = useDispatch()
-    function changeShowState() {
+    function changeShowState():void {
         setShow(!show)
     }
-    function closeThisPage() {
+    function closeThisPage():void {
         console.log("关闭当前标签页");
         dispatch(removeData(props.data.key))
     }
+    function openTab():void {
+        dispatch(setValue(props.data.key))
+    }
     return (
-        <div className="tab" onMouseEnter={changeShowState} onMouseLeave={changeShowState}>
+        <div className="tab" onMouseEnter={changeShowState} onMouseLeave={changeShowState} onClick={openTab}>
             <div className="tab-title">
                 <span style={{marginRight: "7px"}}>
                     <MethodList value={props.data.type} />

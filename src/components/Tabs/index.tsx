@@ -18,14 +18,9 @@ const Tabs: React.FunctionComponent = () => {
     useEffect(()=>{
         dispatch(assign([
             {
-                key: "1111111",
-                title: 'getList',
-                type: "GET"
-            },
-            {
-                key: "222222",
-                title: 'postList',
-                type: "POST"
+                key: "0",
+                title: '新建页面',
+                type: ""
             }
         ]))
     },[])
@@ -35,8 +30,8 @@ const Tabs: React.FunctionComponent = () => {
     },[Tabs])
     function openTab():void {
         dispatch(addData({
-            key: "333333",
-            title: '测试接口',
+            key: "0",
+            title: '新建页面',
             type: "GET"
         }))
     }

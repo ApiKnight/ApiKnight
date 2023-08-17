@@ -9,6 +9,8 @@ import { createXhrMonitor } from '../../../sdk/createXhrMonitor'
 import { TitleNode, Props, AddData } from '@/types/treeComponents'
 import MethodList from '@/components/MethodList'
 import Menu from '@/components/InterfaceBlock/menu'
+import {addData, assign} from "@/store/modules/tabSlice.ts";
+import {useDispatch} from "react-redux";
 
 function startMonitor() {
   createJsErrorMonitor('renderTree').start()
@@ -26,14 +28,23 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
     setShowState(!show)
   }
   const { data } = props
-  const addData: AddData = { key: data.key, pid: data.pid, type: data.type }
+  const addDatas: AddData = { key: data.key, pid: data.pid, type: data.type }
   const menuData: AddData = { key: data.key, pid: data.pid, type: data.type }
   const delData = { key: data.key, type: data.type }
+  const dispatch = useDispatch()
+  function openTab():void {
+    dispatch(addData({
+      key: data.key,
+      title: data.title,
+      type: data.type
+    }))
+  }
   return (
     <div
       className='InterfaceBlock'
       onMouseEnter={changeBtnState}
       onMouseLeave={changeBtnState}
+      onClick={openTab}
     >
       <div>
         <MethodList value={data.type} />
@@ -45,7 +56,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
             <DelBtn data={delData} />
             {data.type === 'FILE' && (
               <div>
-                <AddBtn data={addData} />
+                <AddBtn data={addDatas} />
               </div>
             )}
           </div>

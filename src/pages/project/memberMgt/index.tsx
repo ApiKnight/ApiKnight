@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import getProjectMember from '@/api/getProjectMember'
 import { useLocation } from 'react-router-dom'
-import { Avatar, Button, List, Skeleton, Modal, message } from 'antd'
+import { Avatar, Button, List, Skeleton, Modal, message, Dropdown } from 'antd'
 import './index.less'
 import getApplyList from '@/api/getApplyList'
 import updateApply from '@/api/updateApply'
-
+import type { MenuProps } from 'antd';
+import updateAuthority from '@/api/updateAuthority'
 // interface DataType {
 //   gender?: string;
 //   name: {
@@ -37,35 +38,43 @@ const MemberMgt: React.FC = () => {
 
   const [member_list, setMemberList] = useState()
 
-  const [apply_list, setApplyList] = useState()
+  const [apply_list, setApplyList] = useState([])
+  
+  const [currentUid,setCurrentUid] = useState<string>('')
 
   const showModal = () => {
+    updateApplyList()
+    setIsModalOpen(true)
+  }
+
+  const updateApplyList = ()=>{
     getApplyList(project_id).then((res) => {
       if (res.data.code === 200) {
-        setApplyList(res.data.data)
-        console.log(res.data.data)
+        setApplyList(res.data.data.reverse())
       } else {
         console.log('审批列表拉取失败')
       }
     })
-    setIsModalOpen(true)
   }
 
+  const updateMemberList= ()=>
+  getProjectMember(project_id).then((res) => {
+    if (res.data.code === 200) {
+      let data = res.data.data
+      setMemberList(
+        data.map((value) => {
+          setInitLoading(false)
+          value.key = value.user_id
+          return value
+        })
+      )
+    } else {
+      console.log('拉取成员列表失败')
+    }
+  })
+
   useEffect(() => {
-    getProjectMember(project_id).then((res) => {
-      if (res.data.code === 200) {
-        let data = res.data.data
-        setMemberList(
-          data.map((value) => {
-            setInitLoading(false)
-            value.key = value.user_id
-            return value
-          }),
-        )
-      } else {
-        console.log('拉取成员列表失败')
-      }
-    })
+    updateMemberList()
   }, [])
 
   const onLoadMore = () => {
@@ -83,6 +92,7 @@ const MemberMgt: React.FC = () => {
   const closeModal=()=>{
     setIsModalOpen(false)
   }
+
   const loadMore =
     !initLoading && !moreLoading ? (
       <div
@@ -105,7 +115,11 @@ const MemberMgt: React.FC = () => {
         id: id,
       }
       updateApply(apply_obj).then((res) => {
-        res.code === 200 ? message.success('已同意') : message.error('操作失败')
+        res.data.code === 200 
+        ?
+        (message.success('已同意'),updateApplyList()) 
+        :
+        message.error('操作失败')
       })
     }
     
@@ -118,12 +132,49 @@ const MemberMgt: React.FC = () => {
         status: '-1',
         id: id,
       }
-      updateApply(apply_obj).then((res) => {
-        res.code === 200 ? message.success('已拒绝') : message.error('操作失败')
+        updateApply(apply_obj).then((res) => {
+          res.data.code === 200 
+          ?
+          (message.success('已拒绝'),updateApplyList()) 
+          :
+          message.error('操作失败')
+        })
+    }
+  }
+
+  const setAuthority = (authority)=>{
+    return ()=>{
+      console.log(authority);
+      updateAuthority({
+        id:currentUid,
+        role:authority === 'member' ? '0011' : authority === 'operator' ? '0111' : authority === 'admin' ? '1111' : ''
+      }).then(res=>{
+        res.data.code === 200
+        ?
+        message.success('修改成功')
+        :
+        message.error('修改失败')
       })
     }
-    
   }
+
+  const items: MenuProps['items'] = [
+    {
+      label: <div onClick={setAuthority('member')}>设为成员</div>,
+      key: '0',
+    },
+    {
+      label: <div onClick={setAuthority('operator')}>设为管理者</div>,
+      key: '1',
+    },
+    // {
+    //   type: 'divider',
+    // },
+    {
+      label: <div onClick={setAuthority('admin')}>设为所有者</div>,
+      key: '3',
+    },
+  ];
 
   return (
     <div className='membermgt'>
@@ -144,20 +195,50 @@ const MemberMgt: React.FC = () => {
             renderItem={(item) => (
               <List.Item
                 actions={[
-                  <Button
-                    type='primary'
-                    style={{ backgroundColor: 'purple' }}
-                    onClick={refuse}
-                  >
-                    拒绝
-                  </Button>,
-                  <Button
-                    type='primary'
-                    style={{ backgroundColor: 'green' }}
-                    onClick={approval(item.id)}
+                  <>
+                  {
+                  item.status === 0
+                  ?
+                    <>
+                    <Button
+                      type='primary'
+                      style={{ backgroundColor: 'purple' }}
+                      onClick={refuse(item.id)}
                     >
-                    同意
-                  </Button>,
+                      拒绝
+                    </Button>,
+                    <Button
+                      type='primary'
+                      style={{ backgroundColor: 'green' }}
+                      onClick={approval(item.id)}
+                      >
+                      同意
+                    </Button>
+                    </>
+                    :
+                  item.status === 1
+                  ?
+                    <Button
+                      disabled
+                      type='primary'
+                      style={{ backgroundColor: 'green', opacity:'50%', color:'black'}}
+                      >
+                      已同意
+                    </Button>
+                  :
+                  item.status === -1
+                  ?
+                  <Button
+                      disabled
+                      type='primary'
+                      style={{ backgroundColor: 'red', opacity:'50%', color:'black'}}
+                      >
+                      已拒绝
+                    </Button>
+                  :
+                  ''
+                }
+                  </>
                 ]}
                 key={item.id}>
                 <Skeleton avatar title={false} loading={initLoading} active>
@@ -181,7 +262,14 @@ const MemberMgt: React.FC = () => {
         dataSource={member_list}
         renderItem={(item) => (
           <List.Item
-            actions={[<Button>权限</Button>, <Button danger>移除</Button>]}
+            actions={[
+              <Dropdown menu={{ items }} trigger={['click']}>
+              <a onClick={() => setCurrentUid(item.user_id)}>
+                  权限设置
+              </a>
+            </Dropdown>, 
+            <Button danger>移除</Button>
+          ]}
             key={item.user_id}
           >
             <Skeleton avatar title={false} loading={initLoading} active>

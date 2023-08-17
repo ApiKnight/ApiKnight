@@ -33,7 +33,14 @@ const tabSlice = createSlice({
             })
         },
         addData(state,action: PayloadAction<TabSlice>) {
-            state.data.push(action.payload)
+            const temp = state.data
+            temp.push(action.payload)
+            state.data =  temp.filter((value, index, self) => {
+                const jsonValue = JSON.stringify(value);
+                return index === self.findIndex(obj => {
+                    return JSON.stringify(obj) === jsonValue;
+                });
+            });
         }
     }
 })

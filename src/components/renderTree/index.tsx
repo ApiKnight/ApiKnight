@@ -46,26 +46,13 @@ const renderTree: React.FC = () => {
   const state = useLocation().state
   const projectId = state.project_id
   function reqFun() {
-    fetch('http://47.112.108.202:7002/api/v1/project/query', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: ('Bearer ' + localStorage.getItem('token')) as string,
-      },
-      body: JSON.stringify({ projectid: projectId }),
+    request.post("/v1/project/query",{ projectid: projectId },{}).then((resp)=>{
+          // 在这里处理返回的数据
+          setData(mergeFlatArrays(resp.data.data.folder_list, resp.data.data.api_list, projectId))
+          setMakeValue({
+            value: mergeFlatArrays(resp.data.data.folder_list, resp.data.data.api_list, projectId),
+          })
     })
-      .then((response) => response.json())
-      .then((res) => {
-        // 在这里处理返回的数据
-        setData(mergeFlatArrays(res.data.folder_list, res.data.api_list, projectId))
-        setMakeValue({
-          value: mergeFlatArrays(res.data.folder_list, res.data.api_list, projectId),
-        })
-      })
-      .catch((error) => {
-        // 在这里处理错误
-        console.error(error)
-      })
   }
   const watchDir = useSelector((state: RootState) => state.watchDir.value)
   useEffect(() => {
@@ -95,30 +82,17 @@ const renderTree: React.FC = () => {
       info.dragNode.type === 'FILE'
         ? { folder_id: info.dragNodesKeys[0], parent_id: info.node.key }
         : { apis_id: info.dragNodesKeys[0], folder_id: info.node.key }
-    fetch(`http://47.112.108.202:7002/api${url}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: ('Bearer ' + localStorage.getItem('token')) as string,
-      },
-      body: JSON.stringify(urlData),
+    request.post(url,urlData,{}).then((res)=>{
+          // 在这里处理返回的数据
+          dispatch(increment())
     })
-      .then((response) => response.json())
-      .then((res) => {
-        // 在这里处理返回的数据
-        dispatch(increment())
-      })
-      .catch((error) => {
-        // 在这里处理错误
-        console.error(error)
-      })
   }
   const renderData = restoreData(makeValue.value)
   // 数组转树形结构
   const tree: TreeNode[] = arrayToTree(renderData)
 
   const { DirectoryTree } = Tree
-  startMonitor()
+  //startMonitor()
   return (
     <Tree
       treeData={tree}

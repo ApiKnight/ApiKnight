@@ -9,6 +9,7 @@ import { AddDir } from '@/types/arrayToTree'
 import { setFalse, setTrue } from '@/store/modules/createFileState'
 import { increment } from '@/store/modules/watchDir'
 import Overlay from '@/components/overlay'
+import request from "../../api/request";
 
 const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
   const flag = useSelector((state: RootState) => state.createFileState.value)
@@ -21,29 +22,16 @@ const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
     dispatch(setFalse())
   }
   function addChildDir() {
-    fetch('http://47.112.108.202:7002/api/v1/folder/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: ('Bearer ' + localStorage.getItem('token')) as string,
-      },
-      body: JSON.stringify({
-        project_id: props.data.project_id,
-        parent_id: props.data.parent_id,
-        name: dirName,
-      }),
+    request.post("/v1/folder/create",{
+          project_id: props.data.project_id,
+          parent_id: props.data.parent_id,
+          name: dirName,
+        },{}).then((res)=>{
+          // 在这里处理返回的数据
+          if (res.data.code == 200) {
+            dispatch(increment())
+          }
     })
-      .then((response) => response.json())
-      .then((res) => {
-        // 在这里处理返回的数据
-        if (res.code == 200) {
-          dispatch(increment())
-        }
-      })
-      .catch((error) => {
-        // 在这里处理错误
-        console.error(error)
-      })
     dispatch(setFalse())
   }
   if (flag) {

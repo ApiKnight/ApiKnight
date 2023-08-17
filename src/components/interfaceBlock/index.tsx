@@ -22,7 +22,7 @@ function startMonitor() {
 const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
   props: Props,
 ) => {
-  startMonitor()
+  //startMonitor()
   const [show, setShowState] = useState(false)
   function changeBtnState(): void {
     setShowState(!show)

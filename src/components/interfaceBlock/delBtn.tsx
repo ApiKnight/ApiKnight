@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { MinusOutlined } from '@ant-design/icons'
 import { increment } from '@/store/modules/watchDir'
+import request from "@/api/request";
 
 interface Props {
   key: string
@@ -41,25 +42,12 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
     setConfirmLoading(false)
     // dispatch(remove(data))
     const url = data.type === 'FILE' ? '/v1/folder/delete' : '/v1/apis/delete'
-    fetch(`http://47.112.108.202:7002/api${url}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: ('Bearer ' + localStorage.getItem('token')) as string,
-      },
-      body: JSON.stringify(delDataJson),
+    request.post(url,delDataJson,{}).then((res)=>{
+          // 在这里处理返回的数据
+          if (res.data.code == 200) {
+            dispatch(increment())
+          }
     })
-      .then((response) => response.json())
-      .then((res) => {
-        // 在这里处理返回的数据
-        if (res.code == 200) {
-          dispatch(increment())
-        }
-      })
-      .catch((error) => {
-        // 在这里处理错误
-        console.error(error)
-      })
   }
 
   const handleCancel = () => {

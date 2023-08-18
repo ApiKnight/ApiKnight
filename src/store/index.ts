@@ -21,7 +21,7 @@ export const store = configureStore({
     tabSlice: tabSliceReducer,
     tabsSlice: tabsSliceReducer,
     rightSlice: rightSliceReducer,
-    showRightMenu: showRightMenuReducer
+    showRightMenu: showRightMenuReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

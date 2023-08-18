@@ -11,17 +11,19 @@ import { increment } from '@/store/modules/watchDir'
 import Overlay from '@/components/overlay'
 import request from '../../api/request'
 
-const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
-  const flag = useSelector((state: RootState) => state.createFileState.value)
+const CreateFile: React.FunctionComponent<{ handleClick: any , data: AddDir }> = (props) => {
   const dispatch = useDispatch()
   const [dirName, setDirName] = useState('')
   function change(e: any): void {
+    e.stopPropagation()
     setDirName(e.target.value)
   }
   function closeThis(): void {
+    props.handleClick(false)
     dispatch(setFalse())
   }
-  function addChildDir() {
+  function addChildDir(e: any): void {
+    e.stopPropagation()
     request
       .post(
         '/v1/folder/create',
@@ -39,10 +41,12 @@ const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
         }
       })
     dispatch(setFalse())
+    props.handleClick(false)
   }
-  if (flag) {
-    return ReactDOM.createPortal(
-      <div className='createFile'>
+  return ReactDOM.createPortal(
+      <div className='createFile' onClick={(e:any):void=>{
+        e.stopPropagation()
+      }}>
         <div className='createFile-title'>
           <span>
             <h3>新建子目录</h3>
@@ -53,9 +57,9 @@ const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
         </div>
         <div className='createFile-content'>
           <Input
-            placeholder='请输入要创建的文件夹名字'
-            value={dirName}
-            onChange={change}
+              placeholder='请输入要创建的文件夹名字'
+              value={dirName}
+              onChange={change}
           />
         </div>
         <div className='createFile-btn'>
@@ -63,13 +67,10 @@ const CreateFile: React.FunctionComponent<{ data: AddDir }> = (props) => {
             创建
           </Button>
         </div>
-        {flag && <Overlay />}
+
       </div>,
       document.body,
-    )
-  } else {
-    return <div style={{ display: 'none' }}></div>
-  }
+  )
 }
 
 export default CreateFile

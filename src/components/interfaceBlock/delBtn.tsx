@@ -56,7 +56,7 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
     dispatch(setValue('gl'))
   }
 
-  const handleCancel = (e:any):void => {
+  const handleCancel = (e: any): void => {
     setOpen(false)
     e.stopPropagation()
   }

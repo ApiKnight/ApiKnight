@@ -12,6 +12,10 @@ import watchDirReducer from './modules/watchDir.ts'
 import watchStateFlagReducer from './modules/stateFlag.ts'
 import createFileStateReducer from './modules/createFileState.ts'
 import documentReducer from './modules/document.ts'
+import tabSliceReducer from '@/store/modules/tabSlice'
+import tabsSliceReducer from '@/store/modules/tabsSlice'
+import rightSliceReducer from '@/store/modules/rightSlice'
+import showRightMenuReducer from '@/store/modules/showRightMenu'
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +26,10 @@ export const store = configureStore({
     stateFlag: watchStateFlagReducer,
     createFileState: createFileStateReducer,
     document: documentReducer,
+    tabSlice: tabSliceReducer,
+    tabsSlice: tabsSliceReducer,
+    rightSlice: rightSliceReducer,
+    showRightMenu: showRightMenuReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

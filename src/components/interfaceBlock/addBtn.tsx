@@ -6,41 +6,34 @@ import type { AddData } from '@/types/treeComponents.js'
 import { PlusOutlined } from '@ant-design/icons'
 import request from '@/api/request'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
+import { useLocation } from 'react-router-dom'
 
 const AddBtn: React.FunctionComponent<{ data: AddData }> = (props) => {
   const dispatch = useDispatch()
   const { data } = props
+  const state = useLocation().state
+  const projectId = state.project_id
   return (
     <span
       style={{ display: 'inline' }}
       onClick={() => {
-        // 这里是插入示例
-        fetch('http://47.112.108.202:7002/api/v1/apis/create', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: ('Bearer ' +
-              localStorage.getItem('token')) as string,
-          },
-          body: JSON.stringify({
-            project_id: 1063,
-            folder_id: data.key,
-            request_data: "{type:'GET'}",
-            response_data: 'xxxx',
-            description: 'xxxx',
-            name: 'getList2',
-          }),
-        })
-          .then((response) => response.json())
+        request
+          .post(
+            '/v1/apis/create',
+            {
+              project_id: projectId,
+              folder_id: data.key,
+              request_data: "{type:'GET'}",
+              response_data: 'xxxx',
+              description: 'xxxx',
+              name: 'getList1',
+            },
+            {},
+          )
           .then((res) => {
-            // 在这里处理返回的数据
-            if (res.code == 200) {
+            if (res.data.code == 200) {
               dispatch(increment())
             }
-          })
-          .catch((error) => {
-            // 在这里处理错误
-            console.error(error)
           })
       }}
     >

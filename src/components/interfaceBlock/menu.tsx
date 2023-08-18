@@ -3,69 +3,82 @@ import { UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Popover, Space } from 'antd'
 import { increment } from '@/store/modules/watchDir'
 import { AddData } from '@/types/treeComponents'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setTrue } from '@/store/modules/createFileState'
 import CreateFile from '@/components/createFile'
-import Overlay from "@/components/overlay";
+import Overlay from '@/components/overlay'
+import { useLocation } from 'react-router-dom'
+import './menu.less'
+import { RootState } from '@/store'
 
 const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
   const { data } = props
   const dispatch = useDispatch()
-  function addChildDir() {
-    // fetch("http://47.112.108.202:7002/api/v1/folder/create", {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + localStorage.getItem('token') as string
-    //     },
-    //     body: JSON.stringify({
-    //         project_id: 1063,
-    //         parent_id: data.key,
-    //         name: "测试文件夹"
-    //     })
-    // })
-    //     .then(response => response.json())
-    //     .then(res => {
-    //         // 在这里处理返回的数据
-    //         if (res.code == 200) {
-    //             dispatch(increment())
-    //         }
-    //     })
-    //     .catch(error => {
-    //         // 在这里处理错误
-    //         console.error(error);
-    //     });
+  function addChildDir(e: any): void {
     dispatch(setTrue())
+    setShow(true)
+    e.stopPropagation()
+    setTitleInfo('添加子目录')
+  }
+  function updateChildDir(e: any): void {
+    dispatch(setTrue())
+    setShow(true)
+    e.stopPropagation()
+    setTitleInfo('修改文件夹名称')
   }
   useEffect(() => {
     setPData({
       project_id: proId,
       parent_id: data.key,
+      pid: data.pid,
     })
-  }, [data])
+  }, [])
   const content = (
     <div>
-      <p>
-        <Button block onClick={addChildDir}>
-          添加子目录
-        </Button>
-      </p>
-      <p>
+      <div>
+        {data.type === 'FILE' ? (
+          <div>
+            <Button block onClick={addChildDir}>
+              添加子目录
+            </Button>
+            <Button block onClick={updateChildDir}>
+              更改文件夹名
+            </Button>
+          </div>
+        ) : (
+          <div style={{ display: 'none' }}></div>
+        )}
+      </div>
+      <div>
         <Button block>导出</Button>
-      </p>
+      </div>
     </div>
   )
-  const proId = 1063
+  const state = useLocation().state
+  const proId = state.project_id
+  const [show, setShow] = useState(false)
   const [pData, setPData] = useState({
-    project_id: 0,
-    parent_id: '',
+    project_id: proId,
+    parent_id: data.key,
+    pid: data.pid,
   })
+  const handleDataFromChild = (data: boolean): void => {
+    setShow(data)
+  }
+  const [titleInfo, setTitleInfo] = useState('添加子目录')
   return (
     <span>
       <Popover content={content} title='' trigger='click'>
         <UnorderedListOutlined />
       </Popover>
-      <CreateFile data={pData} />
+      {show && (
+        <CreateFile
+          handleClick={handleDataFromChild}
+          data={pData}
+          title={titleInfo}
+        />
+      )}
+      {show && <Overlay />}
     </span>
   )
 }

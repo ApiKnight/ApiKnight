@@ -3,6 +3,7 @@ import { ArrayItem } from '@/types/arrayToTree'
 interface AddData {
   key: string
   pid: string | null
+  type?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
 }
 
 interface TitleNode {

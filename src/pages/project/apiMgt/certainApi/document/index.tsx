@@ -8,7 +8,7 @@ import DocResponse from './c-pages/doc-response'
 import { useLocation } from 'react-router-dom'
 
 const Document: React.FunctionComponent = memo(() => {
-  const state= useLocation().state
+  const state = useLocation().state
 
   return (
     <div className='document-page'>

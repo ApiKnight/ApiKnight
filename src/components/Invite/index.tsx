@@ -8,12 +8,12 @@ import Link from '@/components/Invite/link'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 
-const Invite: React.FunctionComponent = (props) => {
+const Invite: React.FunctionComponent<any> = (props) => {
   const flag = useSelector((state: RootState) => state.stateFlag.value)
   if (flag == true) {
     return ReactDOM.createPortal(
       <div className='invite-modal'>
-        <Title />
+        <Title projectid={props.project_id} />
         <Tabs
           defaultActiveKey='1'
           centered
@@ -23,13 +23,13 @@ const Invite: React.FunctionComponent = (props) => {
               return {
                 label: `链接邀请`,
                 key: id,
-                children: <Link project_id={props.project_id}/>,
+                children: <Link project_id={props.project_id} />,
               }
             } else {
               return {
                 label: `邮箱邀请`,
                 key: id,
-                children: <Email project_id={props.project_id}/>,
+                children: <Email project_id={props.project_id} />,
               }
             }
           })}

@@ -88,7 +88,8 @@ const MemberMgt: React.FC = () => {
           marginTop: 12,
           height: 32,
           lineHeight: '32px',
-        }}>
+        }}
+      >
         <Button onClick={onLoadMore}>loading more</Button>
       </div>
     ) : null
@@ -105,13 +106,13 @@ const MemberMgt: React.FC = () => {
   }
 
   const refuse = () => {
-    let apply_obj={
-      projectid:project_id,
-      status:'-1',
-      id:''
+    let apply_obj = {
+      projectid: project_id,
+      status: '-1',
+      id: '',
     }
-    updateApply(apply_obj).then(res=>{
-      res.code === 200 ?  message.success('已拒绝')  :  message.error('操作失败')
+    updateApply(apply_obj).then((res) => {
+      res.code === 200 ? message.success('已拒绝') : message.error('操作失败')
     })
   }
 
@@ -134,17 +135,23 @@ const MemberMgt: React.FC = () => {
             renderItem={(item) => (
               <List.Item
                 actions={[
-                  <Button type='primary' style={{ backgroundColor: 'purple' }} onClick={refuse}>
+                  <Button
+                    type='primary'
+                    style={{ backgroundColor: 'purple' }}
+                    onClick={refuse}
+                  >
                     拒绝
                   </Button>,
                   <Button
                     type='primary'
                     style={{ backgroundColor: 'green' }}
-                    onClick={approval}>
+                    onClick={approval}
+                  >
                     同意
                   </Button>,
                 ]}
-                key={item.user_id}>
+                key={item.user_id}
+              >
                 <Skeleton avatar title={false} loading={initLoading} active>
                   <List.Item.Meta
                     // avatar={<Avatar src={item.avatar_url} />}
@@ -167,7 +174,8 @@ const MemberMgt: React.FC = () => {
         renderItem={(item) => (
           <List.Item
             actions={[<Button>权限</Button>, <Button danger>移除</Button>]}
-            key={item.user_id}>
+            key={item.user_id}
+          >
             <Skeleton avatar title={false} loading={initLoading} active>
               <List.Item.Meta
                 avatar={<Avatar src={item.avatar_url} />}

@@ -16,7 +16,6 @@ const ApiMgt: React.FunctionComponent = () => {
   return (
     <div className='project-api'>
       <div className='header'>Api管理</div>
-      <RenderTree data={dd} />
       <div className='content'>
         <ul>
           <li>

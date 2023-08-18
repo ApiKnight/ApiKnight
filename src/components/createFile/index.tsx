@@ -11,7 +11,10 @@ import { increment } from '@/store/modules/watchDir'
 import Overlay from '@/components/overlay'
 import request from '../../api/request'
 
-const CreateFile: React.FunctionComponent<{ handleClick: any , data: AddDir }> = (props) => {
+const CreateFile: React.FunctionComponent<{
+  handleClick: any
+  data: AddDir
+}> = (props) => {
   const dispatch = useDispatch()
   const [dirName, setDirName] = useState('')
   function change(e: any): void {
@@ -44,32 +47,34 @@ const CreateFile: React.FunctionComponent<{ handleClick: any , data: AddDir }> =
     props.handleClick(false)
   }
   return ReactDOM.createPortal(
-      <div className='createFile' onClick={(e:any):void=>{
+    <div
+      className='createFile'
+      onClick={(e: any): void => {
         e.stopPropagation()
-      }}>
-        <div className='createFile-title'>
-          <span>
-            <h3>新建子目录</h3>
-          </span>
-          <span className='createFile-title__icon' onClick={closeThis}>
-            <CloseOutlined />
-          </span>
-        </div>
-        <div className='createFile-content'>
-          <Input
-              placeholder='请输入要创建的文件夹名字'
-              value={dirName}
-              onChange={change}
-          />
-        </div>
-        <div className='createFile-btn'>
-          <Button size='large' onClick={addChildDir}>
-            创建
-          </Button>
-        </div>
-
-      </div>,
-      document.body,
+      }}
+    >
+      <div className='createFile-title'>
+        <span>
+          <h3>新建子目录</h3>
+        </span>
+        <span className='createFile-title__icon' onClick={closeThis}>
+          <CloseOutlined />
+        </span>
+      </div>
+      <div className='createFile-content'>
+        <Input
+          placeholder='请输入要创建的文件夹名字'
+          value={dirName}
+          onChange={change}
+        />
+      </div>
+      <div className='createFile-btn'>
+        <Button size='large' onClick={addChildDir}>
+          创建
+        </Button>
+      </div>
+    </div>,
+    document.body,
   )
 }
 

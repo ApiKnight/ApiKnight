@@ -25,7 +25,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
 ) => {
   //startMonitor()
   const [show, setShowState] = useState(false)
-  function changeBtnState(e:any): void {
+  function changeBtnState(e: any): void {
     setShowState(!show)
     e.stopPropagation()
   }

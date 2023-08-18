@@ -3,20 +3,20 @@ import { UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Popover, Space } from 'antd'
 import { increment } from '@/store/modules/watchDir'
 import { AddData } from '@/types/treeComponents'
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setTrue } from '@/store/modules/createFileState'
 import CreateFile from '@/components/createFile'
 import Overlay from '@/components/overlay'
 import { useLocation } from 'react-router-dom'
-import "./menu.less"
-import {RootState} from "@/store";
+import './menu.less'
+import { RootState } from '@/store'
 
 const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
   const { data } = props
   const dispatch = useDispatch()
   function addChildDir(e: any): void {
     dispatch(setTrue())
-      setShow(true)
+    setShow(true)
     e.stopPropagation()
   }
   useEffect(() => {
@@ -44,25 +44,21 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
   )
   const state = useLocation().state
   const proId = state.project_id
-    const [show,setShow] = useState(false)
+  const [show, setShow] = useState(false)
   const [pData, setPData] = useState({
     project_id: proId,
     parent_id: data.key,
   })
-  const handleDataFromChild = (data:boolean):void => {
+  const handleDataFromChild = (data: boolean): void => {
     setShow(data)
-  };
+  }
   return (
     <span>
       <Popover content={content} title='' trigger='click'>
         <UnorderedListOutlined />
       </Popover>
-        {
-            show && <CreateFile handleClick={handleDataFromChild} data={pData} />
-        }
-      {
-          show && <Overlay />
-      }
+      {show && <CreateFile handleClick={handleDataFromChild} data={pData} />}
+      {show && <Overlay />}
     </span>
   )
 }

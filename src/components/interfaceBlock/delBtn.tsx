@@ -6,7 +6,7 @@ import { MinusOutlined } from '@ant-design/icons'
 import { increment } from '@/store/modules/watchDir'
 import request from '@/api/request'
 import { removeData } from '@/store/modules/tabSlice'
-import {setValue} from "@/store/modules/rightSlice";
+import { setValue } from '@/store/modules/rightSlice'
 
 interface Props {
   key: string

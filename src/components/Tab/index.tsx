@@ -29,11 +29,11 @@ const Tab: React.FunctionComponent<Props> = (props) => {
       dispatch(setValue('gl'))
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     if (props.data.type === 'gl') {
       dispatch(setValue('gl'))
     }
-  },[])
+  }, [])
   return (
     <div
       className='tab'

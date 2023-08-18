@@ -25,8 +25,7 @@ const Tab: React.FunctionComponent<Props> = (props) => {
   function openTab(): void {
     if (props.data.type !== 'gl') {
       dispatch(setValue(props.data.key))
-    }
-    else {
+    } else {
       dispatch(setValue('gl'))
     }
   }

@@ -22,7 +22,7 @@ const ApiMgt: React.FunctionComponent = () => {
             addData({
                 key: projectId,
                 title: "项目概览",
-                type: '',
+                type: 'gl',
             })
         )
         dispatch(setValue('gl'))

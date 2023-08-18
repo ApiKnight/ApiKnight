@@ -23,7 +23,12 @@ const Tab: React.FunctionComponent<Props> = (props) => {
     e.stopPropagation()
   }
   function openTab(): void {
-    dispatch(setValue(props.data.key))
+    if (props.data.type !== 'gl') {
+      dispatch(setValue(props.data.key))
+    }
+    else {
+      dispatch(setValue('gl'))
+    }
   }
   return (
     <div

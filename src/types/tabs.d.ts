@@ -1,11 +1,11 @@
 interface TabsSetItem {
-    key: string
-    title: string
-    type: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
+  key: string
+  title: string
+  type: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
 }
 
 interface Props {
-    data: TabsSetItem
+  data: TabsSetItem
 }
 
-export type { TabsSetItem , Props }
+export type { TabsSetItem, Props }

@@ -5,7 +5,6 @@ import type { NotificationPlacement } from 'antd/es/notification/interface'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { RootState } from '../../store'
-import { log } from 'console'
 
 const Link: React.FunctionComponent<any> = (props) => {
   console.log(props)

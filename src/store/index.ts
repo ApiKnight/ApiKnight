@@ -5,9 +5,10 @@ import dirArrayReducer from './modules/dirArraySlice.ts'
 import watchDirReducer from './modules/watchDir.ts'
 import watchStateFlagReducer from './modules/stateFlag.ts'
 import createFileStateReducer from './modules/createFileState.ts'
-import tabSliceReducer from "@/store/modules/tabSlice";
-import tabsSliceReducer from "@/store/modules/tabsSlice";
-import rightSliceReducer from "@/store/modules/rightSlice";
+import tabSliceReducer from '@/store/modules/tabSlice'
+import tabsSliceReducer from '@/store/modules/tabsSlice'
+import rightSliceReducer from '@/store/modules/rightSlice'
+import showRightMenuReducer from '@/store/modules/showRightMenu'
 
 export const store = configureStore({
   reducer: {
@@ -19,7 +20,8 @@ export const store = configureStore({
     createFileState: createFileStateReducer,
     tabSlice: tabSliceReducer,
     tabsSlice: tabsSliceReducer,
-    rightSlice: rightSliceReducer
+    rightSlice: rightSliceReducer,
+    showRightMenu: showRightMenuReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

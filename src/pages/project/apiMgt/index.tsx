@@ -15,27 +15,35 @@ const ApiMgt: React.FunctionComponent = () => {
   const state = useLocation().state
   return (
     <div className='project-api'>
-      <div className='header'>Api管理</div>
-      <div className='content'>
+      
+      <div className="top">
+        <div className='top-tile'>
+          Api管理
+      </div>
+      </div>
+
+      <div className="bottom">
+      <div className='left-nav'>
         <ul>
-          <li>
+          <li className='title'>
             <Link to='/project/apiMgt/overview' state={state}>
-              Overview
+              项目概览
             </Link>
           </li>
           <li>
-            <Link to='/project/apiMgt/certainApi' state={state}>
-              CertainApi
-            </Link>
+            {/* <Link to='/project/apiMgt/certainApi' state={state}> */}
+            <RenderTree project_id={state.project_id}/>
+            {/* </Link> */}
           </li>
         </ul>
       </div>
-      <div className='child'>
+      <div className='right-content'>
         <Outlet />
       </div>
+      </div>
       {/* 不需要传data，内部都做好了 */}
-      <RenderTree />
-      <RightPage />
+      
+      {/* <RightPage /> */}
     </div>
   )
 }

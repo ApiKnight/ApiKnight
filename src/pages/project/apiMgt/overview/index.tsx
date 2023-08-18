@@ -62,9 +62,8 @@ const Overview: React.FunctionComponent = () => {
   },[])
   return (
     <div className='project-overview'>
-      <div className='header'>项目概览</div>
       <div className='content'>
-        <Descriptions title='User Info' bordered items={items} />
+        <Descriptions title='项目概览' bordered items={items} />
       </div>
     </div>
   )

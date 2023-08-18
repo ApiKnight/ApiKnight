@@ -11,7 +11,13 @@ type requestType={
     data:Object,
     header:Object
 }
-const testApi = (requestObj:requestType) => {
-  return request.post('v1/api/testApi', requestObj, {})
+// const testApi = (requestObj:requestType) => {
+const testApi = () => {
+
+  return request.post('v1/mock/real', {url: "http://v.juhe.cn/calendar/day",method: "POST",data:{key:'5b0588d13fa598a5423a41d0346a2cae',date:'2016-2-3'}}, {})
+  // return request.post('v1/mock/real', {
+  //   "url": "https://jsonplaceholder.typicode.com/todos/1",
+  //   "method": "GET"
+  // }, {})
 }
 export default testApi

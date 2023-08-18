@@ -53,13 +53,30 @@ const Document: React.FunctionComponent<{ data: string }> = (props) => {
         getCreateUser((resp.data as any).data.create_user)
         getChangeUser((resp.data as any).data.operate_user)
         setApiName((resp.data as any).data.name)
+        getFolderName((resp.data as any).data.folder_id)
       })
   }, [props])
   const [createUser, SetCreateUser] = useState('')
   const [changeUser, SetChangeUser] = useState('')
   const [apiName, setApiName] = useState('ApiName')
+  const [floderName, setFolderName] = useState('根目录')
   // url这里正常应该包含在rquest_data中，这里未定结构，暂时写死
   const [url, setUrl] = useState('/example')
+  function getFolderName(folderId: string): void {
+    request
+      .post(
+        '/v1/folder/queryname',
+        {
+          folder_id: folderId,
+        },
+        {},
+      )
+      .then((resp: any) => {
+        if (resp.data.code == 200) {
+          setFolderName(resp.data.data)
+        }
+      })
+  }
   function getCreateUser(userId: string): void {
     request
       .post(
@@ -110,7 +127,7 @@ const Document: React.FunctionComponent<{ data: string }> = (props) => {
           <li>修改时间 {allValue.operate_time}</li>
           <li>修改者 {changeUser}</li>
           <li>创建者 {createUser}</li>
-          <li>目录 {allValue.folder_id}</li>
+          <li>目录 {floderName}</li>
         </ul>
       </div>
       <div className='document-mock'>

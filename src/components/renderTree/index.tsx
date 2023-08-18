@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Tree } from 'antd'
+import { Spin, Tree } from 'antd'
 import { arrayToTree } from '@/utils/arrayToTree'
 import type { TreeNode, ArrayItem, ArrayNode } from '@/types/arrayToTree'
 import './index.less'
@@ -33,6 +33,7 @@ const renderTree: React.FC = () => {
     createPromiseErrorMonitor('renderTree').start()
     createXhrMonitor('renderTree').start()
   }
+  const [showLoading, setShowLoading] = useState(false)
   const a1: FlatItem[] = [
     {
       id: '694948f6-7908-4388-8da7-c744b13f76b6',
@@ -46,24 +47,28 @@ const renderTree: React.FC = () => {
   const state = useLocation().state
   const projectId = state.project_id
   function reqFun() {
+    setShowLoading(true)
     request
       .post('/v1/project/query', { projectid: projectId }, {})
       .then((resp) => {
         // 在这里处理返回的数据
-        setData(
-          mergeFlatArrays(
-            resp.data.data.folder_list,
-            resp.data.data.api_list,
-            projectId,
-          ),
-        )
-        setMakeValue({
-          value: mergeFlatArrays(
-            resp.data.data.folder_list,
-            resp.data.data.api_list,
-            projectId,
-          ),
-        })
+        if (resp.data.code == 200) {
+          setData(
+            mergeFlatArrays(
+              resp.data.data.folder_list,
+              resp.data.data.api_list,
+              projectId,
+            ),
+          )
+          setMakeValue({
+            value: mergeFlatArrays(
+              resp.data.data.folder_list,
+              resp.data.data.api_list,
+              projectId,
+            ),
+          })
+          setShowLoading(false)
+        }
       })
   }
   const watchDir = useSelector((state: RootState) => state.watchDir.value)
@@ -94,9 +99,11 @@ const renderTree: React.FC = () => {
       info.dragNode.type === 'FILE'
         ? { folder_id: info.dragNodesKeys[0], parent_id: info.node.key }
         : { apis_id: info.dragNodesKeys[0], folder_id: info.node.key }
+    setShowLoading(true)
     request.post(url, urlData, {}).then((res) => {
       // 在这里处理返回的数据
       dispatch(increment())
+      setShowLoading(true)
     })
   }
   const renderData = restoreData(makeValue.value)
@@ -106,15 +113,22 @@ const renderTree: React.FC = () => {
   const { DirectoryTree } = Tree
   //startMonitor()
   return (
-    <Tree
-      treeData={tree}
-      defaultExpandAll
-      draggable
-      blockNode
-      onDrop={onDrop}
-      style={{ width: '270px' }}
-      className='renderTree'
-    ></Tree>
+    <div>
+      <Tree
+        treeData={tree}
+        defaultExpandAll
+        draggable
+        blockNode
+        onDrop={onDrop}
+        style={{ width: '270px' }}
+        className='renderTree'
+      ></Tree>
+      {showLoading && (
+        <Spin tip='Loading' size='large'>
+          <div className='content' />
+        </Spin>
+      )}
+    </div>
   )
 }
 

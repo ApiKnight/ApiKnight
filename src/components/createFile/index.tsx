@@ -13,7 +13,7 @@ import request from '../../api/request'
 
 const CreateFile: React.FunctionComponent<{
   handleClick: any
-  data: AddDir,
+  data: AddDir
   title: string
 }> = (props) => {
   const dispatch = useDispatch()
@@ -28,41 +28,40 @@ const CreateFile: React.FunctionComponent<{
   }
   function addChildDir(e: any): void {
     e.stopPropagation()
-    if (props.title === "添加子目录") {
+    if (props.title === '添加子目录') {
       request
-          .post(
-              '/v1/folder/create',
-              {
-                project_id: props.data.project_id,
-                parent_id: props.data.parent_id,
-                name: dirName,
-              },
-              {},
-          )
-          .then((res) => {
-            // 在这里处理返回的数据
-            if (res.data.code == 200) {
-              dispatch(increment())
-            }
-          })
-    }
-    else {
+        .post(
+          '/v1/folder/create',
+          {
+            project_id: props.data.project_id,
+            parent_id: props.data.parent_id,
+            name: dirName,
+          },
+          {},
+        )
+        .then((res) => {
+          // 在这里处理返回的数据
+          if (res.data.code == 200) {
+            dispatch(increment())
+          }
+        })
+    } else {
       request
-          .post(
-              '/v1/folder/update',
-              {
-                  folder_id: props.data.parent_id,
-                parent_id: props.data.pid,
-                name: dirName,
-              },
-              {},
-          )
-          .then((res) => {
-            // 在这里处理返回的数据
-            if (res.data.code == 200) {
-              dispatch(increment())
-            }
-          })
+        .post(
+          '/v1/folder/update',
+          {
+            folder_id: props.data.parent_id,
+            parent_id: props.data.pid,
+            name: dirName,
+          },
+          {},
+        )
+        .then((res) => {
+          // 在这里处理返回的数据
+          if (res.data.code == 200) {
+            dispatch(increment())
+          }
+        })
     }
     dispatch(setFalse())
     props.handleClick(false)

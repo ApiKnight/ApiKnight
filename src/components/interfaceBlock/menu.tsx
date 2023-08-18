@@ -18,19 +18,19 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
     dispatch(setTrue())
     setShow(true)
     e.stopPropagation()
-    setTitleInfo("添加子目录")
+    setTitleInfo('添加子目录')
   }
   function updateChildDir(e: any): void {
     dispatch(setTrue())
     setShow(true)
     e.stopPropagation()
-    setTitleInfo("修改文件夹名称")
+    setTitleInfo('修改文件夹名称')
   }
   useEffect(() => {
     setPData({
       project_id: proId,
       parent_id: data.key,
-      pid: data.pid
+      pid: data.pid,
     })
   }, [])
   const content = (
@@ -60,18 +60,24 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
   const [pData, setPData] = useState({
     project_id: proId,
     parent_id: data.key,
-    pid: data.pid
+    pid: data.pid,
   })
   const handleDataFromChild = (data: boolean): void => {
     setShow(data)
   }
-  const [titleInfo,setTitleInfo] = useState('添加子目录')
+  const [titleInfo, setTitleInfo] = useState('添加子目录')
   return (
     <span>
       <Popover content={content} title='' trigger='click'>
         <UnorderedListOutlined />
       </Popover>
-      {show && <CreateFile handleClick={handleDataFromChild} data={pData} title={titleInfo} />}
+      {show && (
+        <CreateFile
+          handleClick={handleDataFromChild}
+          data={pData}
+          title={titleInfo}
+        />
+      )}
       {show && <Overlay />}
     </span>
   )

@@ -25,7 +25,6 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
       parent_id: data.key,
     })
   }, [])
-  console.log(data.key)
   const content = (
     <div>
       <p>

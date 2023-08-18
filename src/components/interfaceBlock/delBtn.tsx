@@ -56,8 +56,9 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
     dispatch(setValue('gl'))
   }
 
-  const handleCancel = () => {
+  const handleCancel = (e:any):void => {
     setOpen(false)
+    e.stopPropagation()
   }
   function delFunction() {
     showModal()

@@ -7,35 +7,34 @@ import { FlatItem, FlatItemValue } from '@/types/mergeFlatArrays'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
 import Email from '@/components/Invite/email'
 import { useLocation } from 'react-router-dom'
-import Tabs from '@/components/Tabs'
-import Tab from '@/components/Tab'
+import './index.less'
 import RightPage from '@/components/RightPage'
+import {addData} from "@/store/modules/tabSlice";
+import {useDispatch} from "react-redux";
+import {setValue} from "@/store/modules/rightSlice";
 
 const ApiMgt: React.FunctionComponent = () => {
-  const state = useLocation().state
+    const dispatch = useDispatch()
+    const state = useLocation().state
+    const projectId = state.project_id
+    function openTab() {
+        dispatch(
+            addData({
+                key: projectId,
+                title: "项目概览",
+                type: '',
+            })
+        )
+        dispatch(setValue('gl'))
+    }
   return (
     <div className='project-api'>
-      <div className='header'>Api管理</div>
-      <div className='content'>
-        <ul>
-          <li>
-            <Link to='/project/apiMgt/overview' state={state}>
-              Overview
-            </Link>
-          </li>
-          <li>
-            <Link to='/project/apiMgt/certainApi' state={state}>
-              CertainApi
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <div className='child'>
-        <Outlet />
-      </div>
-      {/* 不需要传data，内部都做好了 */}
-      <RenderTree />
-      <RightPage />
+        <div className='project-api__left'>
+            <div onClick={openTab}>overview</div>
+            {/* 不需要传data，内部都做好了 */}
+            <RenderTree />
+        </div>
+        <RightPage />
     </div>
   )
 }

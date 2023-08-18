@@ -12,6 +12,7 @@ import RightPage from '@/components/RightPage'
 import { addData } from '@/store/modules/tabSlice'
 import { useDispatch } from 'react-redux'
 import { setValue } from '@/store/modules/rightSlice'
+import Swagger from "@/components/Swagger";
 
 const ApiMgt: React.FunctionComponent = () => {
   const dispatch = useDispatch()
@@ -35,6 +36,7 @@ const ApiMgt: React.FunctionComponent = () => {
         <RenderTree />
       </div>
       <RightPage />
+        <Swagger />
     </div>
   )
 }

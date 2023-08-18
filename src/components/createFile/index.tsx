@@ -13,7 +13,8 @@ import request from '../../api/request'
 
 const CreateFile: React.FunctionComponent<{
   handleClick: any
-  data: AddDir
+  data: AddDir,
+  title: string
 }> = (props) => {
   const dispatch = useDispatch()
   const [dirName, setDirName] = useState('')
@@ -27,22 +28,42 @@ const CreateFile: React.FunctionComponent<{
   }
   function addChildDir(e: any): void {
     e.stopPropagation()
-    request
-      .post(
-        '/v1/folder/create',
-        {
-          project_id: props.data.project_id,
-          parent_id: props.data.parent_id,
-          name: dirName,
-        },
-        {},
-      )
-      .then((res) => {
-        // 在这里处理返回的数据
-        if (res.data.code == 200) {
-          dispatch(increment())
-        }
-      })
+    if (props.title === "添加子目录") {
+      request
+          .post(
+              '/v1/folder/create',
+              {
+                project_id: props.data.project_id,
+                parent_id: props.data.parent_id,
+                name: dirName,
+              },
+              {},
+          )
+          .then((res) => {
+            // 在这里处理返回的数据
+            if (res.data.code == 200) {
+              dispatch(increment())
+            }
+          })
+    }
+    else {
+      request
+          .post(
+              '/v1/folder/update',
+              {
+                  folder_id: props.data.parent_id,
+                parent_id: props.data.pid,
+                name: dirName,
+              },
+              {},
+          )
+          .then((res) => {
+            // 在这里处理返回的数据
+            if (res.data.code == 200) {
+              dispatch(increment())
+            }
+          })
+    }
     dispatch(setFalse())
     props.handleClick(false)
   }
@@ -55,7 +76,7 @@ const CreateFile: React.FunctionComponent<{
     >
       <div className='createFile-title'>
         <span>
-          <h3>新建子目录</h3>
+          <h3>{props.title}</h3>
         </span>
         <span className='createFile-title__icon' onClick={closeThis}>
           <CloseOutlined />

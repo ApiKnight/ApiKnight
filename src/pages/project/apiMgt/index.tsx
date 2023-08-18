@@ -36,7 +36,6 @@ const ApiMgt: React.FunctionComponent = () => {
         <RenderTree />
       </div>
       <RightPage />
-        <Swagger />
     </div>
   )
 }

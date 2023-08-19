@@ -22,14 +22,14 @@ import Receive from '@/pages/receive'
 
 const Layout: React.FunctionComponent = () => {
   return (
-    <div>
+    <>
       <Outlet />
-    </div>
+    </>
   )
 }
 const App: React.FunctionComponent = () => {
   return (
-    <div>
+    <>
       {/* 1.直接在App中配置二级路由 2.在对应页面中使用Switch包裹后配置二级路由，本项目采用法1 */}
       <Routes>
         <Route path='/' element={<Layout />}>
@@ -43,26 +43,21 @@ const App: React.FunctionComponent = () => {
               // <AuthRoute>
               <Project />
               // </AuthRoute>
-            }
-          >
+            }>
             <Route path='/project/apiMgt' element={<ApiMgt />}>
               <Route
                 path='/project/apiMgt/overview'
-                element={<Overview />}
-              ></Route>
+                element={<Overview />}></Route>
               <Route path='/project/apiMgt/certainApi' element={<CertainApi />}>
                 <Route
                   path='/project/apiMgt/certainApi/document'
-                  element={<Document />}
-                ></Route>
+                  element={<Document />}></Route>
                 <Route
                   path='/project/apiMgt/certainApi/test'
-                  element={<Test />}
-                ></Route>
+                  element={<Test />}></Route>
                 <Route
                   path='/project/apiMgt/certainApi/mock'
-                  element={<Mock />}
-                ></Route>
+                  element={<Mock />}></Route>
               </Route>
             </Route>
             <Route path='/project/memberMgt' element={<MemberMgt />}></Route>
@@ -76,12 +71,11 @@ const App: React.FunctionComponent = () => {
               <AuthRoute>
                 <User />
               </AuthRoute>
-            }
-          ></Route>
+            }></Route>
           <Route path='/user/login' element={<Login />} />
         </Route>
       </Routes>
-    </div>
+    </>
   )
 }
 

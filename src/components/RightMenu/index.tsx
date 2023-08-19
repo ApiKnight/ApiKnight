@@ -31,7 +31,7 @@ const RightMenu: React.FunctionComponent<{ data: string }> = (props) => {
     setCurrent(e.key)
   }
   return (
-    <div>
+    <>
       <Menu
         onClick={onClick}
         selectedKeys={[current]}
@@ -41,20 +41,18 @@ const RightMenu: React.FunctionComponent<{ data: string }> = (props) => {
       {
         //  这里做条件渲染，文档，运行，mock等做成条件渲染，比如if e等于多少的时候渲染文档，等于多少的时候渲染运行
         current == 1 ? (
-          <div>
-            <Document data={data} />
-          </div>
+          <Document data={data} />
         ) : current == 2 ? (
           // <div>修改文档组件,同时父组件传入的id为{data}</div>
           <Document data={data} />
         ) : current == 3 ? (
-          <Mock data={data} mode='run'/>
+          <Mock data={data} mode='run' />
         ) : (
           // <div>Mock组件,同时父组件传入的id为{data}</div>
-          <Mock data={data} mode='mock'/>
+          <Mock data={data} mode='mock' />
         )
       }
-    </div>
+    </>
   )
 }
 

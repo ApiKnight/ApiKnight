@@ -14,10 +14,12 @@ import getSelfInfo from '@/api/getSelfInfo'
 import EmptyShow from '@/components/EmptyShow'
 
 const Index: React.FunctionComponent = () => {
-  //清空缓存
-  // localStorage.setItem('token','')
-  // localStorage.setItem('user_id','')
-  const navigate = useNavigate()
+    //清空缓存
+    // 过期token
+    // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhMGNlOWMyLTAxYTYtNGI0Zi05ZDc5LWFkZmM0YjFhNDIxMyIsImlhdCI6MTY5MTc0NTg1MCwiZXhwIjoxNjkxODMyMjUwfQ.2bavSv2t4BVmx_LpyT77P_8c3rFI5Qr0EuA4VLjohRA
+    // localStorage.setItem('token','')
+    // localStorage.setItem('user_id','')
+    const navigate = useNavigate()
 
   const user_id = localStorage.getItem('user_id')
 

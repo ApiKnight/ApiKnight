@@ -59,9 +59,7 @@ const ProjectSet: React.FC<childProps> = () => {
 
   useEffect(() => {
     getProjectBase(project_id).then((res) => {
-      console.log(res.data.data)
-      setProjectInfo(res.data.data)
-      // res.data.code === 200 ? setProjectInfo(res.data.data) : ''
+      res.data.code === 200 ? setProjectInfo(res.data.data) : ''
     })
   }, [])
 

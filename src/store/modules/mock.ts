@@ -114,16 +114,19 @@ const mockSlice = createSlice({
       state.mockData = payload
     },
     changeNormalParamsAction(state, { payload }: NormalParamsActionType) {
+      const dataSource =
+        state.mockMode === 'run' ? state.runData : state.mockData
+
       const { key, value, index, paramType } = payload
       switch (paramType) {
         case NavType.Params:
-          state.apiData.apiInfo.request.params[index][key] = value
+          dataSource.apiInfo.request.params[index][key] = value
           break
         case NavType.Header:
-          state.apiData.apiInfo.request.headers[index][key] = value
+          dataSource.apiInfo.request.headers[index][key] = value
           break
         case NavType.Cookie:
-          state.apiData.apiInfo.request.cookie[index][key] = value
+          dataSource.apiInfo.request.cookie[index][key] = value
           break
       }
     },

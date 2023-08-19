@@ -148,7 +148,7 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
         <Table
           dataSource={getTableData()}
           columns={columns}
-          rowKey='paramName'
+          rowKey='id'
           pagination={false}
           footer={() => getTableFooter()}
           bordered

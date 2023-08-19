@@ -5,6 +5,7 @@ type DataType = 'string' | 'number' | 'boolean' | 'object' | 'array' | 'null'
 
 // 键值对类型参数
 export interface NormalParamsType {
+  id: number
   paramName: string
   type: DataType
   desc?: string

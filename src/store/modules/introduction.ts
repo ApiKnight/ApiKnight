@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { IAPIInfo } from '@/types/api'
+import { getRangeRandom } from '@/utils/math'
 
 const initialData: IAPIInfo = {
   meta_info: {
@@ -12,59 +13,41 @@ const initialData: IAPIInfo = {
   apiInfo: {
     base: {
       method: 'GET',
-      path: '/exapmle/api',
-      prefix: 'http://localhost:3000',
+      path: '',
+      prefix: '',
     },
     request: {
       params: [
         {
-          paramName: 'paramstestkey1',
+          paramName: '参数名',
           type: 'string',
           desc: '',
           required: false,
           value: '',
-        },
-        {
-          paramName: 'paramstestkey2',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
+          id: getRangeRandom(1000, 9999),
         },
       ],
       headers: [
         {
-          paramName: 'headerstestkey1',
+          paramName: '参数名',
           type: 'string',
           desc: '',
           required: false,
           value: '',
-        },
-        {
-          paramName: 'headerstestkey2',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
+          id: getRangeRandom(1000, 9999),
         },
       ],
       cookie: [
         {
-          paramName: 'cookietestkey1',
+          paramName: '参数名',
           type: 'string',
           desc: '',
           required: false,
           value: '',
-        },
-        {
-          paramName: 'cookietestkey2',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
+          id: getRangeRandom(1000, 9999),
         },
       ],
-      body: 'HelloWorld',
+      body: '{}',
     },
     response: {
       status: 0,

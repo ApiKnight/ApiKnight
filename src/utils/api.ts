@@ -34,6 +34,6 @@ export function parseAPIInfo(dataJsonStr: string): IAPIInfoPlus {
   res.value = apiData
   res.getMethod = () => apiData.apiInfo.base.method
   res.getPath = () => apiData.apiInfo.base.path
-  res.getFullUrl = () => res.getPath() + apiData.apiInfo.base.prefix
+  res.getFullUrl = () => res.getPath() + '/' + apiData.apiInfo.base.prefix
   return res
 }

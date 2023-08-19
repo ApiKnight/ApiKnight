@@ -35,7 +35,9 @@ const ApiMgt: React.FunctionComponent = () => {
         {/* 不需要传data，内部都做好了 */}
         <RenderTree />
       </div>
-      <RightPage />
+      <div className='project-api__right'>
+        <RightPage />
+      </div>
     </div>
   )
 }

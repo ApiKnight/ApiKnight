@@ -17,11 +17,25 @@
       }
     }
     .active {
-      border-bottom: 3px solid #9373ee;
+      border-bottom: 3px solid @theme-color-primary;
     }
   }
 
   .content {
     padding: 10px 0;
+
+    .action {
+      cursor: pointer;
+      font-size: 15px;
+      .anticon:hover {
+        color: @theme-color-danger;
+      }
+    }
+
+    .param-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }

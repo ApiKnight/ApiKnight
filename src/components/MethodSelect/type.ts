@@ -32,6 +32,7 @@ export interface MethodSelectProps {
   methodValue?: ApiOptReqOptType
   // 下拉菜单和选择器同宽。默认将设置 min-width，当值小于选择框宽度时会被忽略。
   popupMatchSelectWidth?: number
+  disabled?: boolean
   // 左侧选项改变事件
   onOptionChange?: (value: ApiOptReqOptType) => void
 }

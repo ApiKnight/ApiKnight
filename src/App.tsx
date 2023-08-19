@@ -13,7 +13,6 @@ import CertainApi from './pages/project/apiMgt/certainApi/index.tsx'
 import Overview from './pages/project/apiMgt/overview/index.tsx'
 //四级路由
 import Document from './pages/project/apiMgt/certainApi/document/index.tsx'
-import Test from './pages/project/apiMgt/certainApi/test/index.tsx'
 import Mock from './pages/project/apiMgt/certainApi/mock/index.tsx'
 import AuthRoute from './components/AuthRoute.tsx'
 import Login from './pages/user/login/index.tsx'
@@ -52,9 +51,6 @@ const App: React.FunctionComponent = () => {
                 <Route
                   path='/project/apiMgt/certainApi/document'
                   element={<Document />}></Route>
-                <Route
-                  path='/project/apiMgt/certainApi/test'
-                  element={<Test />}></Route>
                 <Route
                   path='/project/apiMgt/certainApi/mock'
                   element={<Mock />}></Route>

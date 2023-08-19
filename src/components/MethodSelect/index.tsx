@@ -36,8 +36,7 @@ const MethodSelect: React.FunctionComponent<MethodSelectProps> = memo(
             <li
               className={classNames('method-item', getColorClassName(item))}
               onClick={() => onReqMethodChange(item)}
-              key={index}
-            >
+              key={index}>
               {item.label}
             </li>
           ))}
@@ -63,6 +62,7 @@ const MethodSelect: React.FunctionComponent<MethodSelectProps> = memo(
             popupMatchSelectWidth={props.popupMatchSelectWidth}
             dropdownRender={getDropDownEle}
             onSelect={(e) => props?.onOptionChange?.(e)}
+            disabled={props.disabled}
           />
         </div>
       </div>
@@ -86,6 +86,7 @@ MethodSelect.defaultProps = {
   defaultMethod: methodOptions[0],
   methodValue: methodOptions[0],
   popupMatchSelectWidth: 100,
+  disabled: false,
 }
 
 export default MethodSelect

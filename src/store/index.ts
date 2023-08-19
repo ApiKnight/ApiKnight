@@ -11,7 +11,13 @@ import dirArrayReducer from './modules/dirArraySlice.ts'
 import watchDirReducer from './modules/watchDir.ts'
 import watchStateFlagReducer from './modules/stateFlag.ts'
 import createFileStateReducer from './modules/createFileState.ts'
+// 文档编辑
 import documentReducer from './modules/document.ts'
+// 运行/mock
+import mockReducer from './modules/mock.ts'
+// 文档
+import introductionReducer from './modules/introduction.ts'
+
 import tabSliceReducer from '@/store/modules/tabSlice'
 import tabsSliceReducer from '@/store/modules/tabsSlice'
 import rightSliceReducer from '@/store/modules/rightSlice'
@@ -26,6 +32,8 @@ export const store = configureStore({
     stateFlag: watchStateFlagReducer,
     createFileState: createFileStateReducer,
     document: documentReducer,
+    mock: mockReducer,
+    introduction: introductionReducer,
     tabSlice: tabSliceReducer,
     tabsSlice: tabsSliceReducer,
     rightSlice: rightSliceReducer,

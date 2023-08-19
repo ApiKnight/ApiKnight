@@ -11,6 +11,7 @@
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.5",
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "5.8.3",
     "axios": "^1.4.0",

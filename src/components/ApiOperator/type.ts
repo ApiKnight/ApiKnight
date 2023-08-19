@@ -7,6 +7,15 @@ export type ApiOptProps = {
   rightWidth?: string
   // 输入框placeholder
   placeholder?: string
+  // url前缀输入框placeholder
+  urlPrefixPlaceholder?: string
+  // url前缀内容
+  urlPrefixValue?: string
+  // 是否禁用url前缀输入框
+  disablePrefix?: boolean
+  // 是否显示前缀输入框
+  showPrefix?: boolean
+
   // 接口选项信息
   methodOptions?: ApiOptReqOptType[]
   // 默认展示的接口信息
@@ -21,4 +30,6 @@ export type ApiOptProps = {
   onOptionChange?: (value: ApiOptReqOptType) => void
   // 输入框内容改变事件
   onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  // url前缀输入框内容改变事件
+  onPrefixInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }

@@ -83,7 +83,7 @@ export const fetchApiDataAction = createAsyncThunk(
   },
 )
 
-const documentSlice = createSlice({
+const introductionSlice = createSlice({
   name: 'document',
   initialState: {
     apiData: initialData,
@@ -95,5 +95,5 @@ const documentSlice = createSlice({
   },
 })
 
-export const { changeApiDataAction } = documentSlice.actions
-export default documentSlice.reducer
+export const { changeApiDataAction } = introductionSlice.actions
+export default introductionSlice.reducer

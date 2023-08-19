@@ -80,7 +80,7 @@ const ProjectNav: React.FC = (props) => {
       <Menu
         onClick={onClick}
         style={{ width: 256 }}
-        // defaultSelectedKeys={['1']}
+        defaultSelectedKeys={['1']}
         mode='inline'
         items={items}
       />

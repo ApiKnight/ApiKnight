@@ -40,15 +40,15 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
   const dispatch = useDispatch()
   function openTab(): void {
     if (data.type !== 'FILE') {
-      // dispatch(
-      //   addData({
-      //     key: data.key,
-      //     title: data.title,
-      //     type: data.type,
-      //   }),
-      // )
-      // dispatch(setValue(data.key))
-      navigate('/project/apiMgt/certainApi', { state: {api_id:api_id, project_id:project_id} })
+      dispatch(
+        addData({
+          key: data.key,
+          title: data.title,
+          type: data.type,
+        }),
+      )
+      dispatch(setValue(data.key))
+      // navigate('/project/apiMgt/certainApi', { state: {api_id:api_id, project_id:project_id} })
     }
   }
   return (

@@ -68,9 +68,6 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = memo((props) => {
           onClick={(e) => props.onSend(false)}>
           发送
         </Button>
-        <Button className='btn' onClick={(e) => props.onSend(true)}>
-          发送并下载
-        </Button>
       </ApiOperator>
     </div>
   )

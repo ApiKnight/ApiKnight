@@ -1,54 +1,7 @@
-import { Method } from '@/types/components'
 import { createSlice } from '@reduxjs/toolkit'
+import type { IAPIInfo } from '@/types/api'
 
-type DataType = 'string' | 'number' | 'boolean' | 'object' | 'array' | 'null'
-
-// 键值对类型参数
-export interface NormalParamsType {
-  paramName: string
-  type: DataType
-  desc?: string
-  required?: boolean
-  value?: string
-}
-
-// 请求基本信息
-export interface BaseInfoType {
-  method: Method
-  path: string
-}
-// 请求信息类型
-export interface RequestParamsType {
-  params: NormalParamsType[]
-  headers: NormalParamsType[]
-  cookie: NormalParamsType[]
-  body: any
-}
-
-// 响应信息类型
-export interface ResponseType {
-  status: number
-  body: string
-}
-
-// 文档数据结构
-export interface DocumentState {
-  meta_info: {
-    created: string
-    status: string
-    owner_id: string
-    tags: string[]
-    desc: string
-  }
-
-  apiInfo: {
-    base: BaseInfoType
-    request: RequestParamsType
-    response: ResponseType
-  }
-}
-
-const initialState: DocumentState = {
+const initialState: IAPIInfo = {
   meta_info: {
     created: '',
     status: '',

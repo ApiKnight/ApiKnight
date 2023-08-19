@@ -1,14 +1,23 @@
 import React, { memo, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { cloneDeep, isEqual, clone } from 'lodash'
-import { Input, Table } from 'antd'
+import { Input, Table, Button } from 'antd'
+import type { ColumnsType } from 'antd/es/table'
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
+
 const { TextArea } = Input
 
-import { type ReqParamsPropsType, NavType, type NavItem } from './type'
-import type { NormalParamsType } from '@/store/modules/document'
+import { NavType } from '@/types/enum'
+import type { NormalParamsType } from '@/types/api'
 
 import './index.less'
-import { useAppSelector, shallowEqualApp } from '@/store'
+import { useAppSelector, shallowEqualApp, useAppDispatch } from '@/store'
+import {
+  changeBodyAction,
+  changeNormalParamsAction,
+  changeParamsItemOptAction,
+} from '@/store/modules/mock'
+import { NavItem } from './type'
 
 const NavItems: NavItem[] = [
   { label: 'Params', value: NavType.Params },
@@ -17,29 +26,20 @@ const NavItems: NavItem[] = [
   { label: 'Header', value: NavType.Header },
 ]
 
-const MockReqParams: React.FunctionComponent<ReqParamsPropsType> = (props) => {
-  let { reqData } = useAppSelector(
+const MockReqParams: React.FunctionComponent = () => {
+  const dispatch = useAppDispatch()
+
+  let { requestInfo } = useAppSelector(
     (state) => ({
-      reqData: state.document.apiInfo.request,
+      requestInfo: state.mock.apiData.apiInfo.request,
     }),
     shallowEqualApp,
   )
-  // 深拷贝一份，避免修改原数据
-  const [requestInfo, setRequestInfo] = useState(cloneDeep(reqData))
   // 当前选择的项
   const [currentNav, setCurrentNav] = useState(NavType.Params)
 
-  useEffect(() => {
-    // 内容修改了通知父组件
-    if (!isEqual(reqData, requestInfo)) {
-      if (props.onInfoChange) {
-        props.onInfoChange(requestInfo, 'request')
-      }
-    }
-  }, [requestInfo])
-
   // 表格列信息
-  const columns = [
+  const columns: ColumnsType<NormalParamsType> = [
     {
       title: '参数名',
       dataIndex: 'paramName',
@@ -67,6 +67,22 @@ const MockReqParams: React.FunctionComponent<ReqParamsPropsType> = (props) => {
         />
       ),
     },
+    {
+      title: '操作',
+      key: 'action',
+      width: 50,
+      align: 'center',
+      className: 'action',
+      render: (_, record, index) => (
+        <Button
+          type='text'
+          size='small'
+          onClick={() => handleNormalParamsAction(false, index)}
+          block>
+          <MinusCircleOutlined />
+        </Button>
+      ),
+    },
   ]
 
   // 键值对参数内容编辑事件
@@ -74,22 +90,23 @@ const MockReqParams: React.FunctionComponent<ReqParamsPropsType> = (props) => {
     value: string,
     type: 'paramName' | 'value',
     index: number,
-  ): void => {
-    let newInfo = clone(requestInfo)
-    switch (currentNav) {
-      case NavType.Params:
-        newInfo.params[index][type] = value
-        break
-      case NavType.Header:
-        newInfo.headers[index][type] = value
-        break
-      case NavType.Cookie:
-        newInfo.cookie[index][type] = value
-        break
-    }
-    setRequestInfo(newInfo)
+  ) => {
+    const payload = { key: type, value, index, paramType: currentNav }
+    dispatch(changeNormalParamsAction(payload))
   }
 
+  // 键值对参数项增减事件
+  const handleNormalParamsAction = (isInsert: boolean, removeIndex: number) => {
+    dispatch(
+      changeParamsItemOptAction({
+        isInsert,
+        removeIndex,
+        paramType: currentNav,
+      }),
+    )
+  }
+
+  // 从源数据中提取出表格的展示数据
   const getTableData = (): NormalParamsType[] => {
     switch (currentNav) {
       case NavType.Params:
@@ -105,9 +122,7 @@ const MockReqParams: React.FunctionComponent<ReqParamsPropsType> = (props) => {
 
   // 获取表格数据
   const handleBodyChange = (value: string): void => {
-    const newInfo = clone(requestInfo)
-    newInfo.body = value
-    setRequestInfo(newInfo)
+    dispatch(changeBodyAction(value))
   }
 
   // 请求参数内容渲染
@@ -128,11 +143,26 @@ const MockReqParams: React.FunctionComponent<ReqParamsPropsType> = (props) => {
           columns={columns}
           rowKey='paramName'
           pagination={false}
+          footer={() => getTableFooter()}
           bordered
           size='small'
         />
       )
     }
+  }
+  // 表格footer渲染
+  const getTableFooter = (): JSX.Element => {
+    return (
+      <div className='param-footer'>
+        <Button
+          type='link'
+          size='small'
+          onClick={() => handleNormalParamsAction(true, -1)}
+          block>
+          <PlusOutlined />
+        </Button>
+      </div>
+    )
   }
   return (
     <div className='mock-request'>

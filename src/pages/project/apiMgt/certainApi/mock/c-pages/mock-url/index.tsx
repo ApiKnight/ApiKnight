@@ -1,58 +1,56 @@
-import React, { memo, useEffect, useMemo, useState } from 'react'
+import React, { memo, useState } from 'react'
 import { Button } from 'antd'
-import { isEqual, clone, cloneDeep } from 'lodash'
 
-import type { MockUrlProps } from './type'
 import type { ApiOptReqOptType } from '@/types/components'
 import ApiOperator from '@/components/ApiOperator'
 import './index.less'
-import { useAppSelector, shallowEqualApp } from '@/store'
+import { useAppSelector, shallowEqualApp, useAppDispatch } from '@/store'
+import {
+  changeMethodAction,
+  changePathAction,
+  changePrefixAction,
+} from '@/store/modules/mock'
 
-const MockUrl: React.FunctionComponent<MockUrlProps> = memo((props) => {
+const MockUrl: React.FunctionComponent = () => {
+  const dispatch = useAppDispatch()
   // 从redux中获取基本信息
-  const { baseInfo } = useAppSelector(
+  const { userReqInfo, mockMode } = useAppSelector(
     (state) => ({
-      baseInfo: state.document.apiInfo.base,
+      userReqInfo: state.mock.apiData.apiInfo.base,
+      mockMode: state.mock.mockMode,
     }),
     shallowEqualApp,
   )
-  // 深拷贝一份，避免修改原数据
-  const [userReqInfo, setUserReqInfo] = useState(cloneDeep(baseInfo))
+  console.log('userReqInfo', userReqInfo)
+
   // 由于组件需要额外冗余增加一个属性，需要保持与userReqInfo中的method一致
   const [userMethod, setUserMethod] = useState<ApiOptReqOptType>({
     label: 'GET',
     value: 'GET',
   })
 
-  useEffect(() => {
-    // 内容修改了通知父组件
-    if (!isEqual(baseInfo, userReqInfo)) {
-      props.onInfoChange &&
-        props.onInfoChange(
-          {
-            method: userReqInfo.method,
-            path: userReqInfo.path,
-          },
-          'base',
-        )
-    }
-  }, [userReqInfo])
-
-  // url输入框改变事件
-  const handleUrlInputChange = (
+  // 输入框改变事件
+  const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
+    type: 'prefix' | 'path',
   ): void => {
-    const newInfo = clone(userReqInfo)
     // 拿到最新的值
-    newInfo.path = e.target.value
-    setUserReqInfo(newInfo)
+    const newVal = e.target.value
+    if (type === 'prefix') {
+      dispatch(changePrefixAction(newVal))
+    } else {
+      dispatch(changePathAction(newVal))
+    }
   }
   // 请求方式改变事件
   const handleMethodChange = (methodOpt: ApiOptReqOptType): void => {
     setUserMethod(methodOpt)
-    const newInfo = clone(userReqInfo)
-    newInfo.method = methodOpt.value
-    setUserReqInfo(newInfo)
+    dispatch(changeMethodAction(methodOpt.value))
+  }
+
+  // 发送按钮点击事件
+  const handleSendBtnClick = (): void => {
+    console.log('发送请求')
   }
 
   return (
@@ -60,17 +58,17 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = memo((props) => {
       <ApiOperator
         methodValue={userMethod}
         onOptionChange={(m) => handleMethodChange(m)}
-        onInputChange={(e) => handleUrlInputChange(e)}
-        inputValue={userReqInfo.path}>
-        <Button
-          className='btn'
-          type='primary'
-          onClick={(e) => props.onSend(false)}>
+        onPrefixInputChange={(e) => handleInputChange(e, 'prefix')}
+        onInputChange={(e) => handleInputChange(e, 'path')}
+        inputValue={userReqInfo.path}
+        urlPrefixValue={userReqInfo.prefix}
+        disablePrefix={mockMode === 'mock'}>
+        <Button className='btn' type='primary' onClick={handleSendBtnClick}>
           发送
         </Button>
       </ApiOperator>
     </div>
   )
-})
+}
 
-export default MockUrl
+export default memo(MockUrl)

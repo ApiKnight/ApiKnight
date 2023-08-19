@@ -12,7 +12,7 @@ import Menu from '@/components/InterfaceBlock/menu'
 import { addData, assign } from '@/store/modules/tabSlice.ts'
 import { useDispatch } from 'react-redux'
 import { setValue } from '@/store/modules/rightSlice'
-
+import { useNavigate } from 'react-router-dom'
 function startMonitor() {
   createJsErrorMonitor('renderTree').start()
   createResourceErrorMonitor('renderTree').start()
@@ -20,16 +20,20 @@ function startMonitor() {
   createXhrMonitor('renderTree').start()
 }
 
+// const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
 const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
   props: Props,
 ) => {
+  const navigate = useNavigate()
   //startMonitor()
   const [show, setShowState] = useState(false)
   function changeBtnState(e: any): void {
     setShowState(!show)
     e.stopPropagation()
   }
-  const { data } = props
+  const { title:data } = props.data
+  const { api_id } = props.data
+  const { project_id } = props.data
   const addDatas: AddData = { key: data.key, pid: data.pid, type: data.type }
   const menuData: AddData = { key: data.key, pid: data.pid, type: data.type }
   const delData = { key: data.key, type: data.type }
@@ -44,6 +48,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
         }),
       )
       dispatch(setValue(data.key))
+      // navigate('/project/apiMgt/certainApi', { state: {api_id:api_id, project_id:project_id} })
     }
   }
   return (

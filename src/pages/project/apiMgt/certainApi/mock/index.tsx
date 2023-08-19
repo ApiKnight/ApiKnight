@@ -5,7 +5,11 @@ import MockResponse from './c-pages/mock-response'
 import MockUrl from './c-pages/mock-url'
 import { InfoType, MockInfo } from './c-pages/types'
 
-const Mock: React.FunctionComponent = () => {
+const Mock: React.FunctionComponent = (props) => {
+  const {mode} = props  //run为运行,mock为mock
+  
+  const {data} = props
+  
   const [mockInfo, setMockInfo] = useState({} as MockInfo)
 
   // 发送请求

@@ -26,7 +26,7 @@ interface MakeValue {
   value: ArrayItem[]
 }
 
-const renderTree: React.FC = () => {
+const renderTree: React.FC = (props) => {
   function startMonitor() {
     createJsErrorMonitor('renderTree').start()
     createResourceErrorMonitor('renderTree').start()
@@ -81,7 +81,7 @@ const renderTree: React.FC = () => {
     for (const item of d) {
       const restoredItem: ArrayNode = {
         key: item.key,
-        title: <InterfaceBlock data={item.title as any} />, // 将之前提取出的数据重新放入组件中
+        title: <InterfaceBlock data={{title:item.title, api_id:item.id, project_id:props.project_id}} />, // 将之前提取出的数据重新放入组件中
         type: item.type,
         pid: item.pid,
       }
@@ -109,7 +109,7 @@ const renderTree: React.FC = () => {
   const renderData = restoreData(makeValue.value)
   // 数组转树形结构
   const tree: TreeNode[] = arrayToTree(renderData)
-
+  console.log('tree',tree);
   const { DirectoryTree } = Tree
   //startMonitor()
   return (

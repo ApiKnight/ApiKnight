@@ -18,6 +18,7 @@ interface FlatArrayItem {
 interface AddDir {
   project_id: number
   parent_id: string
+  pid?: string
 }
 
 interface ArrayItem {

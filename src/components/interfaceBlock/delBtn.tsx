@@ -1,4 +1,4 @@
-import { Modal } from 'antd'
+import { Modal, Spin } from 'antd'
 import React, { useState, createContext } from 'react'
 import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
@@ -6,6 +6,8 @@ import { MinusOutlined } from '@ant-design/icons'
 import { increment } from '@/store/modules/watchDir'
 import request from '@/api/request'
 import { removeData } from '@/store/modules/tabSlice'
+import { setValue } from '@/store/modules/rightSlice'
+import ReactDOM from 'react-dom'
 
 interface Props {
   key: string
@@ -18,6 +20,7 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
   const dispatch = useDispatch()
   const { data } = props
   const ReachableContext = createContext<string | null>(null)
+  const [showLoading,setShowLoading] = useState(false)
   // const UnreachableContext = createContext<string | null>(null);
   const [open, setOpen] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
@@ -43,19 +46,23 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
     setConfirmLoading(false)
     // dispatch(remove(data))
     const url = data.type === 'FILE' ? '/v1/folder/delete' : '/v1/apis/delete'
+    setShowLoading(true)
     request.post(url, delDataJson, {}).then((res) => {
       // 在这里处理返回的数据
       if (res.data.code == 200) {
+        setShowLoading(true)
         dispatch(increment())
         if (data.type !== 'FILE') {
           dispatch(removeData(data.key))
         }
       }
     })
+    dispatch(setValue('gl'))
   }
 
-  const handleCancel = () => {
+  const handleCancel = (e: any): void => {
     setOpen(false)
+    e.stopPropagation()
   }
   function delFunction() {
     showModal()
@@ -79,6 +86,15 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
           </div>
         }
       </Modal>
+      {ReactDOM.createPortal(
+        <div>
+          {showLoading &&
+              <Spin tip='Loading' size='large'>
+                <div className='content'/>
+              </Spin>}
+        </div>,
+        document.body,
+      )}
     </span>
   )
 }

@@ -4,6 +4,7 @@ import Tab from '@/components/Tab'
 import './index.less'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
+import { useLocation } from 'react-router-dom'
 import { addData, assign } from '@/store/modules/tabSlice'
 import { Button } from 'antd'
 
@@ -17,13 +18,15 @@ const Tabs: React.FunctionComponent = () => {
   ])
   const dispatch = useDispatch()
   const Tabs = useSelector((state: RootState) => state.tabSlice.data)
+  const state = useLocation().state
+  const projectId = state.project_id
   useEffect(() => {
     dispatch(
       assign([
         {
-          key: '0',
-          title: '新建页面',
-          type: '',
+          key: projectId,
+          title: '项目概览',
+          type: 'gl',
         },
       ]),
     )

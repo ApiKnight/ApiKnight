@@ -27,8 +27,9 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
   const navigate = useNavigate()
   //startMonitor()
   const [show, setShowState] = useState(false)
-  function changeBtnState(): void {
+  function changeBtnState(e: any): void {
     setShowState(!show)
+    e.stopPropagation()
   }
   const { title:data } = props.data
   const { api_id } = props.data

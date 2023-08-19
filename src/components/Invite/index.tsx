@@ -13,7 +13,7 @@ const Invite: React.FunctionComponent<any> = (props) => {
   if (flag == true) {
     return ReactDOM.createPortal(
       <div className='invite-modal'>
-        <Title />
+        <Title projectid={props.project_id} />
         <Tabs
           defaultActiveKey='1'
           centered

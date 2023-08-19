@@ -1,3 +1,9 @@
+import {
+  useSelector,
+  useDispatch,
+  shallowEqual,
+  TypedUseSelectorHook,
+} from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './modules/counterSlice.ts'
 import projectReducer from './modules/projectSlice.ts'
@@ -5,6 +11,7 @@ import dirArrayReducer from './modules/dirArraySlice.ts'
 import watchDirReducer from './modules/watchDir.ts'
 import watchStateFlagReducer from './modules/stateFlag.ts'
 import createFileStateReducer from './modules/createFileState.ts'
+import documentReducer from './modules/document.ts'
 import tabSliceReducer from '@/store/modules/tabSlice'
 import tabsSliceReducer from '@/store/modules/tabsSlice'
 import rightSliceReducer from '@/store/modules/rightSlice'
@@ -18,10 +25,11 @@ export const store = configureStore({
     watchDir: watchDirReducer,
     stateFlag: watchStateFlagReducer,
     createFileState: createFileStateReducer,
+    document: documentReducer,
     tabSlice: tabSliceReducer,
     tabsSlice: tabsSliceReducer,
     rightSlice: rightSliceReducer,
-    showRightMenu: showRightMenuReducer
+    showRightMenu: showRightMenuReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -35,3 +43,7 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export const useAppDispatch: () => AppDispatch = useDispatch
+export const shallowEqualApp = shallowEqual

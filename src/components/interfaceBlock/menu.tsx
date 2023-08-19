@@ -3,52 +3,82 @@ import { UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Popover, Space } from 'antd'
 import { increment } from '@/store/modules/watchDir'
 import { AddData } from '@/types/treeComponents'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setTrue } from '@/store/modules/createFileState'
 import CreateFile from '@/components/createFile'
 import Overlay from '@/components/overlay'
 import { useLocation } from 'react-router-dom'
+import './menu.less'
+import { RootState } from '@/store'
 
 const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
   const { data } = props
   const dispatch = useDispatch()
-  function addChildDir() {
+  function addChildDir(e: any): void {
     dispatch(setTrue())
+    setShow(true)
+    e.stopPropagation()
+    setTitleInfo('添加子目录')
+  }
+  function updateChildDir(e: any): void {
+    dispatch(setTrue())
+    setShow(true)
+    e.stopPropagation()
+    setTitleInfo('修改文件夹名称')
   }
   useEffect(() => {
     setPData({
       project_id: proId,
       parent_id: data.key,
+      pid: data.pid,
     })
   }, [])
   const content = (
     <div>
-      <p>
+      <div>
         {data.type === 'FILE' ? (
-          <Button block onClick={addChildDir}>
-            添加子目录
-          </Button>
+          <div>
+            <Button block onClick={addChildDir}>
+              添加子目录
+            </Button>
+            <Button block onClick={updateChildDir}>
+              更改文件夹名
+            </Button>
+          </div>
         ) : (
           <div style={{ display: 'none' }}></div>
         )}
-      </p>
-      <p>
+      </div>
+      <div>
         <Button block>导出</Button>
-      </p>
+      </div>
     </div>
   )
   const state = useLocation().state
   const proId = state.project_id
+  const [show, setShow] = useState(false)
   const [pData, setPData] = useState({
     project_id: proId,
     parent_id: data.key,
+    pid: data.pid,
   })
+  const handleDataFromChild = (data: boolean): void => {
+    setShow(data)
+  }
+  const [titleInfo, setTitleInfo] = useState('添加子目录')
   return (
     <span>
       <Popover content={content} title='' trigger='click'>
         <UnorderedListOutlined />
       </Popover>
-      <CreateFile data={pData} />
+      {show && (
+        <CreateFile
+          handleClick={handleDataFromChild}
+          data={pData}
+          title={titleInfo}
+        />
+      )}
+      {show && <Overlay />}
     </span>
   )
 }

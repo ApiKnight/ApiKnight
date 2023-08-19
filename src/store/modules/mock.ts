@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { cloneDeep } from 'lodash'
+
 import type { IAPIInfo } from '@/types/api'
 import { NavType } from '@/types/enum'
 
@@ -91,19 +93,25 @@ const initialData: IAPIInfo = {
 export const fetchApiDataAction = createAsyncThunk(
   'mock/fetchApiData',
   async (_, { dispatch }) => {
-    dispatch(changeApiDataAction(initialData))
+    dispatch(changeRunData(initialData))
+    dispatch(changeMethodAction(cloneDeep(initialData)))
   },
 )
 
 const mockSlice = createSlice({
   name: 'mock',
   initialState: {
-    apiData: initialData,
+    runData: initialData,
     mockMode: 'mock',
+    // 始终符合document定义的api信息（用于Mock模式）
+    mockData: cloneDeep(initialData),
   },
   reducers: {
-    changeApiDataAction(state, { payload }) {
-      state.apiData = payload
+    changeRunData(state, { payload }) {
+      state.runData = payload
+    },
+    changeMockData(state, { payload }) {
+      state.mockData = payload
     },
     changeNormalParamsAction(state, { payload }: NormalParamsActionType) {
       const { key, value, index, paramType } = payload
@@ -120,18 +128,37 @@ const mockSlice = createSlice({
       }
     },
     changeBodyAction(state, { payload }) {
-      state.apiData.apiInfo.request.body = payload
+      if (state.mockMode === 'run') {
+        state.runData.apiInfo.request.body = payload
+      } else {
+        state.mockData.apiInfo.request.body = payload
+      }
     },
     changeMethodAction(state, { payload }) {
-      state.apiData.apiInfo.base.method = payload
+      if (state.mockMode === 'run') {
+        state.runData.apiInfo.base.method = payload
+      } else {
+        state.mockData.apiInfo.base.method = payload
+      }
     },
     changePathAction(state, { payload }) {
-      state.apiData.apiInfo.base.path = payload
+      if (state.mockMode === 'run') {
+        state.runData.apiInfo.base.path = payload
+      } else {
+        state.mockData.apiInfo.base.path = payload
+      }
     },
     changePrefixAction(state, { payload }) {
-      state.apiData.apiInfo.base.prefix = payload
+      if (state.mockMode === 'run') {
+        state.runData.apiInfo.base.prefix = payload
+      } else {
+        state.mockData.apiInfo.base.prefix = payload
+      }
     },
     changeParamsItemOptAction(state, { payload }: ParamsOptActionType) {
+      const dataSource =
+        state.mockMode === 'run' ? state.runData : state.mockData
+
       const { isInsert, removeIndex, paramType } = payload
       let key: 'params' | 'headers' | 'cookie' = 'params'
       switch (paramType) {
@@ -146,15 +173,15 @@ const mockSlice = createSlice({
           break
       }
       if (isInsert) {
-        state.apiData.apiInfo.request[key].push({
-          paramName: `参数${state.apiData.apiInfo.request[key].length + 1}`,
+        dataSource.apiInfo.request[key].push({
+          paramName: `参数${dataSource.apiInfo.request[key].length + 1}`,
           type: 'string',
           desc: '',
           required: false,
           value: '',
         })
       } else {
-        state.apiData.apiInfo.request[key].splice(removeIndex, 1)
+        dataSource.apiInfo.request[key].splice(removeIndex, 1)
       }
     },
     changeMockModeAction(state, { payload }) {
@@ -164,7 +191,8 @@ const mockSlice = createSlice({
 })
 
 export const {
-  changeApiDataAction,
+  changeRunData,
+  changeMockData,
   changeMethodAction,
   changePathAction,
   changePrefixAction,

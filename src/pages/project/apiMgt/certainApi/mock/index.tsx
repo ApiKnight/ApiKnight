@@ -6,6 +6,7 @@ import MockUrl from './c-pages/mock-url'
 import { useAppDispatch } from '@/store'
 import { changeMockModeAction, fetchApiDataAction } from '@/store/modules/mock'
 import { IMockProps } from './type'
+import ModeContext from './context'
 
 const Mock: React.FunctionComponent<IMockProps> = (props) => {
   const { mode } = props //run为运行,mock为mock
@@ -20,9 +21,11 @@ const Mock: React.FunctionComponent<IMockProps> = (props) => {
 
   return (
     <div className='mock-page'>
-      <MockUrl />
-      <MockReqParams />
-      <MockResponse />
+      <ModeContext.Provider value={{ mode }}>
+        <MockUrl />
+        <MockReqParams />
+        <MockResponse />
+      </ModeContext.Provider>
     </div>
   )
 }

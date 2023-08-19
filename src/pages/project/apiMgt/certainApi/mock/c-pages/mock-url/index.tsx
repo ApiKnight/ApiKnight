@@ -10,18 +10,21 @@ import {
   changePathAction,
   changePrefixAction,
 } from '@/store/modules/mock'
+import { BaseInfoType } from '@/types/api'
+import withMode from '../with-mode'
 
-const MockUrl: React.FunctionComponent = () => {
+const MockUrl: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (props) => {
   const dispatch = useAppDispatch()
-  // 从redux中获取基本信息
-  const { userReqInfo, mockMode } = useAppSelector(
-    (state) => ({
-      userReqInfo: state.mock.apiData.apiInfo.base,
-      mockMode: state.mock.mockMode,
-    }),
-    shallowEqualApp,
-  )
-  console.log('userReqInfo', userReqInfo)
+  // 根据模式，获取对应的数据
+  const { userReqInfo } = useAppSelector((state) => {
+    let res = {} as BaseInfoType
+    if (props.mode === 'mock') {
+      res = state.mock.mockData.apiInfo.base
+    } else {
+      res = state.mock.runData.apiInfo.base
+    }
+    return { userReqInfo: res }
+  }, shallowEqualApp)
 
   // 由于组件需要额外冗余增加一个属性，需要保持与userReqInfo中的method一致
   const [userMethod, setUserMethod] = useState<ApiOptReqOptType>({
@@ -62,7 +65,7 @@ const MockUrl: React.FunctionComponent = () => {
         onInputChange={(e) => handleInputChange(e, 'path')}
         inputValue={userReqInfo.path}
         urlPrefixValue={userReqInfo.prefix}
-        disablePrefix={mockMode === 'mock'}>
+        disablePrefix={props.mode === 'mock'}>
         <Button className='btn' type='primary' onClick={handleSendBtnClick}>
           发送
         </Button>
@@ -71,4 +74,4 @@ const MockUrl: React.FunctionComponent = () => {
   )
 }
 
-export default memo(MockUrl)
+export default memo(withMode(MockUrl))

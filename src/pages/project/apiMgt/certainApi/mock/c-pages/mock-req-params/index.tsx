@@ -1,6 +1,5 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useState } from 'react'
 import classNames from 'classnames'
-import { cloneDeep, isEqual, clone } from 'lodash'
 import { Input, Table, Button } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
@@ -8,7 +7,7 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 const { TextArea } = Input
 
 import { NavType } from '@/types/enum'
-import type { NormalParamsType } from '@/types/api'
+import type { NormalParamsType, RequestParamsType } from '@/types/api'
 
 import './index.less'
 import { useAppSelector, shallowEqualApp, useAppDispatch } from '@/store'
@@ -18,6 +17,7 @@ import {
   changeParamsItemOptAction,
 } from '@/store/modules/mock'
 import { NavItem } from './type'
+import withMode from '../with-mode'
 
 const NavItems: NavItem[] = [
   { label: 'Params', value: NavType.Params },
@@ -26,15 +26,22 @@ const NavItems: NavItem[] = [
   { label: 'Header', value: NavType.Header },
 ]
 
-const MockReqParams: React.FunctionComponent = () => {
+const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
+  props,
+) => {
   const dispatch = useAppDispatch()
 
-  let { requestInfo } = useAppSelector(
-    (state) => ({
-      requestInfo: state.mock.apiData.apiInfo.request,
-    }),
-    shallowEqualApp,
-  )
+  // 根据模式，获取对应的数据
+  const { requestInfo } = useAppSelector((state) => {
+    let res = {} as RequestParamsType
+    if (props.mode === 'mock') {
+      res = state.mock.mockData.apiInfo.request
+    } else {
+      res = state.mock.runData.apiInfo.request
+    }
+    return { requestInfo: res }
+  }, shallowEqualApp)
+
   // 当前选择的项
   const [currentNav, setCurrentNav] = useState(NavType.Params)
 
@@ -186,4 +193,4 @@ const MockReqParams: React.FunctionComponent = () => {
   )
 }
 
-export default memo(MockReqParams)
+export default memo(withMode(MockReqParams))

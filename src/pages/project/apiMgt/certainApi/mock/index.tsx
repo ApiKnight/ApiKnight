@@ -21,7 +21,7 @@ const Mock: React.FunctionComponent<IMockProps> = (props) => {
 
   return (
     <div className='mock-page'>
-      <ModeContext.Provider value={{ mode }}>
+      <ModeContext.Provider value={{ ...props }}>
         <MockUrl />
         <MockReqParams />
         <MockResponse />

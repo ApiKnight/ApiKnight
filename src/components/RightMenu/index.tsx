@@ -49,7 +49,7 @@ const RightMenu: React.FunctionComponent<{ data: string }> = (props) => {
           <Mock data={data} mode='run' />
         ) : (
           // <div>Mock组件,同时父组件传入的id为{data}</div>
-          <Mock data={data} mode='mock' />
+          <Mock data={data} mode='mock' mockPrefix='http://www.apiknight.com' />
         )
       }
     </>

@@ -16,12 +16,21 @@
     }
   }
 
+  &:hover {
+    .split,
+    .input {
+      border-color: #4096ff;
+      border-inline-end-width: 1px;
+    }
+  }
+
   .split {
     font-size: 18px;
     color: #ccc;
     border-top: 1px solid #d9d9d9;
     border-bottom: 1px solid #d9d9d9;
     text-align: center;
+    transition: all 0.2s;
     span {
       display: inline-block;
       padding: 0 5px;

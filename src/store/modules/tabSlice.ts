@@ -15,8 +15,8 @@ const initialState: TabSlice = {
   data: [
     {
       key: '0',
-      title: '',
-      type: 'GET',
+      title: '新建页面',
+      type: '',
     },
   ],
 }

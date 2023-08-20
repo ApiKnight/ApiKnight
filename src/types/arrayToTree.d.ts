@@ -30,6 +30,7 @@ type ArrayItemType =
   | 'PATCH'
   | 'FILE'
   | 'gl'
+  | ''
 
 interface ArrayItem {
   key: string

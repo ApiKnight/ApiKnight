@@ -7,6 +7,18 @@ import { RootState } from '@/store'
 import { useLocation } from 'react-router-dom'
 import { addData, assign } from '@/store/modules/tabSlice'
 import { Button } from 'antd'
+import { ArrayItemType } from '@/types/arrayToTree'
+import {setValue} from "@/store/modules/rightSlice";
+
+interface TabSlice {
+  data: [
+    {
+      key: string
+      title: string
+      type: ArrayItemType
+    },
+  ]
+}
 
 const Tabs: React.FunctionComponent = () => {
   const [tabList, setTabList] = useState<Array<TabsSetItem>>([
@@ -21,39 +33,42 @@ const Tabs: React.FunctionComponent = () => {
   const state = useLocation().state
   const projectId = state.project_id
   useEffect(() => {
+    const d: any = [{
+      key: projectId,
+      title: '项目概览',
+      type: 'gl',
+    }]
     dispatch(
-      assign([
-        {
-          key: projectId,
-          title: '项目概览',
-          type: 'gl',
-        },
-      ]),
+      assign(d),
     )
+    dispatch(setValue('gl'))
   }, [])
   useEffect(() => {
     setTabList(Tabs)
   }, [Tabs])
   function openTab(): void {
+    const d: any = {
+      key: '0',
+      title: '新建页面',
+      type: '',
+    }
     dispatch(
-      addData({
-        key: '0',
-        title: '新建页面',
-        type: '',
-      }),
+      addData(d),
     )
   }
   return (
-    <div className='tabs'>
-      {tabList.map((item) => {
-        return <Tab data={item} key={item.key} />
-      })}
-      <div className='tabs-btn'>
-        <Button onClick={openTab} size='small'>
-          +
-        </Button>
+    <>
+      <div className='tabs'>
+        {tabList.map((item) => {
+          return <Tab data={item} key={item.key} />
+        })}
+        <div className='tabs-btn'>
+          <Button onClick={openTab} size='small'>
+            +
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

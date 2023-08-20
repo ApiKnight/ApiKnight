@@ -9,6 +9,7 @@ interface MethodTypes {
     | 'PATCH'
     | 'FILE'
     | 'gl'
+    | ''
 }
 
 export type { MethodTypes }

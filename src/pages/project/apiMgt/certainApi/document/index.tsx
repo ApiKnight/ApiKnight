@@ -6,7 +6,11 @@ import DocInfo from './c-pages/doc-info'
 import DocRequest from './c-pages/doc-request'
 import DocResponse from './c-pages/doc-response'
 
-const Document: React.FunctionComponent = memo(() => {
+type DocumentPropsType = {
+  data?: string
+}
+
+const Document: React.FunctionComponent<DocumentPropsType> = memo(() => {
   return (
     <div className='document-page'>
       <DocOperator />

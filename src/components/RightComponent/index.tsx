@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import RightMenu from '@/components/RightMenu'
 import Overview from '@/pages/project/apiMgt/overview'
@@ -9,9 +9,10 @@ const RightComponent: React.FunctionComponent = () => {
   return (
     <>
       <>
-        {rightSlice === '0' && rightSlice === '' && rightSlice !== 'gl' && (
-          <div>新建xx(默认页面)</div>
-        )}
+        {/* {rightSlice === '0' && rightSlice === '' && rightSlice !== 'gl' && ( */}
+        {rightSlice === '0' ||
+          rightSlice === '' ||
+          (rightSlice !== 'gl' && <div>新建xx(默认页面)</div>)}
       </>
       {rightSlice == 'gl' && <Overview />}
 

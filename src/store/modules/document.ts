@@ -1,68 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { IAPIInfo } from '@/types/api'
 import { getRangeRandom } from '@/utils/math'
+import { getInitialApiInfoObj } from '@/utils/documents'
+import { getApiData } from '@/api/document'
 
-const initialData: IAPIInfo = {
-  meta_info: {
-    created: '',
-    status: '',
-    owner_id: '',
-    tags: [],
-    desc: '',
-  },
-  apiInfo: {
-    base: {
-      method: 'GET',
-      path: '',
-      prefix: '',
-    },
-    request: {
-      params: [
-        {
-          paramName: '参数名',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
-          id: getRangeRandom(1000, 9999),
-        },
-      ],
-      headers: [
-        {
-          paramName: '参数名',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
-          id: getRangeRandom(1000, 9999),
-        },
-      ],
-      cookie: [
-        {
-          paramName: '参数名',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
-          id: getRangeRandom(1000, 9999),
-        },
-      ],
-      body: '{}',
-    },
-    response: {
-      status: 0,
-      body: '',
-    },
-  },
-}
+const initialData: IAPIInfo = getInitialApiInfoObj('unknown')
 
 // 获取接口数据
 export const fetchApiDataAction = createAsyncThunk(
   'document/fetchApiData',
-  async (payload: any, { dispatch }) => {
-    console.log('fetchApiDataAction', payload)
-
-    dispatch(changeApiDataAction(initialData))
+  async (apiId: string, { dispatch }) => {
+    const apiData = await getApiData(apiId)
+    dispatch(changeApiDataAction(apiData))
   },
 )
 

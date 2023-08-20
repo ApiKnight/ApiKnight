@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import './index.less'
 import AddBtn from './addBtn.tsx'
 import DelBtn from './delBtn.tsx'
-import { createJsErrorMonitor } from '../../../sdk/createJsErrorMonitor'
-import { createResourceErrorMonitor } from '../../../sdk/createResourceErrorMonitor'
-import { createPromiseErrorMonitor } from '../../../sdk/createPromiseErrorMonitor'
-import { createXhrMonitor } from '../../../sdk/createXhrMonitor'
-import { TitleNode, Props, AddData } from '@/types/treeComponents'
+import { createJsErrorMonitor } from '../../../sdk/createJsErrorMonitor.ts'
+import { createResourceErrorMonitor } from '../../../sdk/createResourceErrorMonitor.ts'
+import { createPromiseErrorMonitor } from '../../../sdk/createPromiseErrorMonitor.ts'
+import { createXhrMonitor } from '../../../sdk/createXhrMonitor.ts'
+import type { TitleNode, Props, AddData } from '@/types/treeComponents'
 import MethodList from '@/components/MethodList'
-import Menu from '@/components/InterfaceBlock/menu'
+import Menu from '@/components/InterfaceBlock/menu.tsx'
 import { addData, assign } from '@/store/modules/tabSlice.ts'
 import { useDispatch } from 'react-redux'
 import { setValue } from '@/store/modules/rightSlice'
@@ -31,7 +31,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
     setShowState(!show)
     e.stopPropagation()
   }
-  const { title:data } = props.data
+  const { title: data } = props.data
   const { api_id } = props.data
   const { project_id } = props.data
   const addDatas: AddData = { key: data.key, pid: data.pid, type: data.type }
@@ -56,8 +56,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
       className='InterfaceBlock'
       onMouseEnter={changeBtnState}
       onMouseLeave={changeBtnState}
-      onDoubleClick={openTab}
-    >
+      onDoubleClick={openTab}>
       <div>
         <MethodList value={data.type} />
       </div>

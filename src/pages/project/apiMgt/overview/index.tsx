@@ -56,10 +56,14 @@ const Overview: React.FunctionComponent = () => {
       span: '1',
     },
   ]
-  useEffect(() => {
-    testApi()
-    getProjectBase(state.project_id).then((res) => {
-      res.data.code === 200 ? setProjectBase(res.data.data) : ''
+  useEffect(()=>{
+    // testApi()
+    getProjectBase(state.project_id).then(res=>{
+      res.data.code === 200
+      ?
+      setProjectBase(res.data.data)
+      :
+      ''
     })
   }, [])
   return (

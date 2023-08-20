@@ -3,6 +3,7 @@ import { cloneDeep } from 'lodash'
 
 import type { IAPIInfo } from '@/types/api'
 import { NavType } from '@/types/enum'
+import { getRangeRandom } from '@/utils/math'
 
 type NormalParamsActionType = {
   payload: {
@@ -28,56 +29,38 @@ const initialData: IAPIInfo = {
   apiInfo: {
     base: {
       method: 'GET',
-      path: '/exapmle/api',
-      prefix: 'http://localhost:3000',
+      path: '',
+      prefix: '',
     },
     request: {
       params: [
         {
-          paramName: 'paramstestkey1',
+          paramName: '参数名',
           type: 'string',
           desc: '',
           required: false,
           value: '',
-        },
-        {
-          paramName: 'paramstestkey2',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
+          id: getRangeRandom(1000, 9999),
         },
       ],
       headers: [
         {
-          paramName: 'headerstestkey1',
+          paramName: '参数名',
           type: 'string',
           desc: '',
           required: false,
           value: '',
-        },
-        {
-          paramName: 'headerstestkey2',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
+          id: getRangeRandom(1000, 9999),
         },
       ],
       cookie: [
         {
-          paramName: 'cookietestkey1',
+          paramName: '参数名',
           type: 'string',
           desc: '',
           required: false,
           value: '',
-        },
-        {
-          paramName: 'cookietestkey2',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
+          id: getRangeRandom(1000, 9999),
         },
       ],
       body: '{}',
@@ -177,11 +160,12 @@ const mockSlice = createSlice({
       }
       if (isInsert) {
         dataSource.apiInfo.request[key].push({
-          paramName: `参数${dataSource.apiInfo.request[key].length + 1}`,
+          paramName: '',
           type: 'string',
           desc: '',
           required: false,
           value: '',
+          id: Date.now(),
         })
       } else {
         dataSource.apiInfo.request[key].splice(removeIndex, 1)

@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { Input, Space } from 'antd'
 
 import type { ApiOptProps } from '@/types/components'
@@ -7,27 +7,35 @@ import MethodSelect from '../MethodSelect'
 
 const ApiOperator: React.FunctionComponent<ApiOptProps> = memo((props) => {
   const { urlPrefixValue, inputValue } = props
-  const [prefix, setPrefix] = React.useState(urlPrefixValue)
-  const [path, setPath] = React.useState(inputValue)
+
+  // const [prefix, setPrefix] = React.useState(urlPrefixValue)
+  // const [path, setPath] = React.useState(inputValue)
 
   // 前缀输入框长度
   const [prefixInputWidth, setPrefixInputWidth] = React.useState(0)
 
+  // url前缀输入框长度
+  useEffect(() => {
+    urlPrefixValue && setPrefixInputWidth(urlPrefixValue.length * 12)
+  }, [urlPrefixValue])
+
   // path输入框改变事件
   function onPathInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    const value = e.target.value
-    setPath(value)
+    // const value = e.target.value
+    // setPath(value)
     if (props.onInputChange) props.onInputChange(e)
   }
 
   // url前缀输入框改变事件
   function onPrefixInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    const value = e.target.value
-    // 获取元素的字体大小
-    const fontSize = window.getComputedStyle(e.target).fontSize
-    setPrefixInputWidth(value.length * Number(fontSize.slice(0, -2)) + 10)
+    // const value = e.target.value
+    // // 获取元素的字体大小
+    // const fontSize = window.getComputedStyle(e.target).fontSize
+    // setPrefixInputWidth(
+    //   value.length * Number(fontSize.slice(0, -2)) + 10,
+    // )
 
-    setPrefix(value)
+    // setPrefix(value)
     if (props.onPrefixInputChange) props.onPrefixInputChange(e)
   }
 
@@ -44,17 +52,20 @@ const ApiOperator: React.FunctionComponent<ApiOptProps> = memo((props) => {
             onOptionChange={props.onOptionChange}
             disabled={props.disablePrefix}
           />
+
           {props.showPrefix && (
             <>
               <Input
+                classNames={{ input: 'input' }}
                 style={{
                   width: prefixInputWidth + 'px',
-                  minWidth: '160px',
-                  maxWidth: '220px',
+                  minWidth: '150px',
+                  maxWidth: '250px',
                   borderRight: 'none',
+                  paddingRight: '0',
                 }}
                 disabled={props.disablePrefix}
-                value={prefix}
+                value={urlPrefixValue}
                 onChange={(e) => onPrefixInputChange(e)}
                 placeholder={props.urlPrefixPlaceholder}
               />
@@ -64,8 +75,9 @@ const ApiOperator: React.FunctionComponent<ApiOptProps> = memo((props) => {
             </>
           )}
           <Input
-            style={{ borderLeft: 'none' }}
-            value={path}
+            classNames={{ input: 'input' }}
+            style={{ borderLeft: 'none', paddingLeft: '0' }}
+            value={inputValue}
             onChange={(e) => onPathInputChange(e)}
             placeholder={props.placeholder}
           />

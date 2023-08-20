@@ -13,7 +13,14 @@ import {
 import { BaseInfoType } from '@/types/api'
 import withMode from '../with-mode'
 
-const MockUrl: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (props) => {
+type MockUrlProps = {
+  mode: 'run' | 'mock'
+  mockPrefix?: string
+}
+
+const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
+  console.log(props)
+
   const dispatch = useAppDispatch()
   // 根据模式，获取对应的数据
   const { userReqInfo } = useAppSelector((state) => {
@@ -64,7 +71,9 @@ const MockUrl: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (props) => {
         onPrefixInputChange={(e) => handleInputChange(e, 'prefix')}
         onInputChange={(e) => handleInputChange(e, 'path')}
         inputValue={userReqInfo.path}
-        urlPrefixValue={userReqInfo.prefix}
+        urlPrefixValue={
+          props.mode === 'run' ? userReqInfo.prefix : props.mockPrefix
+        }
         disablePrefix={props.mode === 'mock'}>
         <Button className='btn' type='primary' onClick={handleSendBtnClick}>
           发送

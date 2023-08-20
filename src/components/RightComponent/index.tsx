@@ -18,9 +18,9 @@ const RightComponent: React.FunctionComponent = () => {
       {/* 下面的div里加入右边组件。 rightSlice就是我要传的  id */}
       <>
         {rightSlice !== '0' && rightSlice !== '' && rightSlice !== 'gl' && (
-          <div>
-            <RightMenu data={rightSlice} />
-          </div>
+          // <div>
+          <RightMenu data={rightSlice} />
+          // </div>
         )}
       </>
     </>

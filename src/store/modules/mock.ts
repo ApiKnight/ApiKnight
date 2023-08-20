@@ -4,6 +4,7 @@ import { cloneDeep } from 'lodash'
 import type { IAPIInfo } from '@/types/api'
 import { NavType } from '@/types/enum'
 import { getRangeRandom } from '@/utils/math'
+import { getAPIData } from '@/api/document'
 
 type NormalParamsActionType = {
   payload: {
@@ -20,10 +21,10 @@ type ParamsOptActionType = {
 
 const initialData: IAPIInfo = {
   meta_info: {
-    created: '',
-    status: '',
+    created: new Date().getTime(),
+    status: 0,
     owner_id: '',
-    tags: [],
+    tags: ['默认标签'],
     desc: '',
   },
   apiInfo: {
@@ -75,9 +76,10 @@ const initialData: IAPIInfo = {
 // 获取接口数据
 export const fetchApiDataAction = createAsyncThunk(
   'mock/fetchApiData',
-  async (_, { dispatch }) => {
-    dispatch(changeRunData(initialData))
-    dispatch(changeMockData(cloneDeep(initialData)))
+  async (apiId: string, { dispatch }) => {
+    const apiData = await getAPIData(apiId)
+    dispatch(changeRunData(apiData))
+    dispatch(changeMockData(cloneDeep(apiData)))
   },
 )
 
@@ -162,7 +164,7 @@ const mockSlice = createSlice({
       }
       if (isInsert) {
         dataSource.apiInfo.request[key].push({
-          paramName: '',
+          paramName: '参数名',
           type: 'string',
           desc: '',
           required: false,

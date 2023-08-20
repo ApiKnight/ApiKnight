@@ -81,7 +81,15 @@ const renderTree: React.FC = (props) => {
     for (const item of d) {
       const restoredItem: ArrayNode = {
         key: item.key,
-        title: <InterfaceBlock data={{title:item.title, api_id:item.id, project_id:props.project_id}} />, // 将之前提取出的数据重新放入组件中
+        title: (
+          <InterfaceBlock
+            data={{
+              title: item.title,
+              api_id: item.id,
+              project_id: props.project_id,
+            }}
+          />
+        ), // 将之前提取出的数据重新放入组件中
         type: item.type,
         pid: item.pid,
       }
@@ -101,6 +109,8 @@ const renderTree: React.FC = (props) => {
         : { apis_id: info.dragNodesKeys[0], folder_id: info.node.key }
     setShowLoading(true)
     request.post(url, urlData, {}).then((res) => {
+      console.log(res)
+
       // 在这里处理返回的数据
       dispatch(increment())
       setShowLoading(true)
@@ -109,7 +119,7 @@ const renderTree: React.FC = (props) => {
   const renderData = restoreData(makeValue.value)
   // 数组转树形结构
   const tree: TreeNode[] = arrayToTree(renderData)
-  console.log('tree',tree);
+  console.log('tree', tree)
   const { DirectoryTree } = Tree
   //startMonitor()
   return (
@@ -121,8 +131,7 @@ const renderTree: React.FC = (props) => {
         blockNode
         onDrop={onDrop}
         style={{ width: '270px' }}
-        className='renderTree'
-      ></Tree>
+        className='renderTree'></Tree>
       {showLoading && (
         <Spin tip='Loading' size='large'>
           <div className='content' />

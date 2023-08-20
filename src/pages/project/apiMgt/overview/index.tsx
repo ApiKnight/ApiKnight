@@ -53,7 +53,7 @@ const Overview: React.FunctionComponent = () => {
     },
   ]
   useEffect(()=>{
-    testApi()
+    // testApi()
     getProjectBase(state.project_id).then(res=>{
       res.data.code === 200
       ?

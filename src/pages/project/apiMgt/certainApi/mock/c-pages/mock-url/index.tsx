@@ -12,7 +12,7 @@ import {
 } from '@/store/modules/mock'
 import { BaseInfoType } from '@/types/api'
 import withMode from '../with-mode'
-
+import testApi from '@/api/testApi'
 type MockUrlProps = {
   mode: 'run' | 'mock'
   mockPrefix?: string
@@ -60,7 +60,26 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
 
   // 发送按钮点击事件
   const handleSendBtnClick = (): void => {
-    console.log('发送请求')
+    console.log(userReqInfo);
+    
+    const requestObj={}
+    const {params} = userReqInfo.method.apiInfo.request
+    const url = userReqInfo.prefix + (userReqInfo.path ? ('/' + userReqInfo.path) : '')
+    const {method} = userReqInfo.method.apiInfo.base
+    const paramsObj = {}
+    if(params.length){
+      params.forEach(v=>{
+        console.log(v);
+        paramsObj[v.paramName]=v.value
+      })
+    }
+    console.log(paramsObj);
+    requestObj.params=paramsObj
+    requestObj.url=url
+    requestObj.method=method
+    console.log(requestObj);
+    
+    testApi(requestObj)
   }
 
   return (

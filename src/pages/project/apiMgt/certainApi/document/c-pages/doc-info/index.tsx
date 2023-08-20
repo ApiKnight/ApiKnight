@@ -36,6 +36,7 @@ const DocInfo: React.FunctionComponent = memo(() => {
   const [apiName, setApiName] = useState('')
   // 接口描述
   const [apiDesc, setApiDesc] = useState('')
+  // console.log(apiDesc)
 
   // 下拉框选择事件
   const handleSelectChange = (value: any, type: SelectType) => {

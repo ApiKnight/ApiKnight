@@ -1,4 +1,4 @@
-import { NavType } from '@/types/global'
+import { NavType } from '@/types/enum'
 
 export type NavItem = {
   label: string

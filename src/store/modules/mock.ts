@@ -4,7 +4,8 @@ import { cloneDeep } from 'lodash'
 import type { IAPIInfo } from '@/types/api'
 import { NavType } from '@/types/enum'
 import { getRangeRandom } from '@/utils/math'
-import { getAPIData } from '@/api/document'
+import { getApiData } from '@/api/document'
+import { getInitialApiInfoObj } from '@/utils/documents'
 
 type NormalParamsActionType = {
   payload: {
@@ -19,65 +20,13 @@ type ParamsOptActionType = {
   payload: { isInsert: boolean; removeIndex: number; paramType: NavType }
 }
 
-const initialData: IAPIInfo = {
-  meta_info: {
-    created: new Date().getTime(),
-    status: 0,
-    owner_id: '',
-    tags: ['默认标签'],
-    desc: '',
-  },
-  apiInfo: {
-    base: {
-      method: 'GET',
-      path: '',
-      prefix: '',
-    },
-    request: {
-      params: [
-        {
-          paramName: '参数名',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
-          id: getRangeRandom(1000, 9999),
-        },
-      ],
-      headers: [
-        {
-          paramName: '参数名',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
-          id: getRangeRandom(1000, 9999),
-        },
-      ],
-      cookie: [
-        {
-          paramName: '参数名',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
-          id: getRangeRandom(1000, 9999),
-        },
-      ],
-      body: '{}',
-    },
-    response: {
-      status: 0,
-      body: '',
-    },
-  },
-}
+const initialData: IAPIInfo = getInitialApiInfoObj('unknown')
 
 // 获取接口数据
 export const fetchApiDataAction = createAsyncThunk(
   'mock/fetchApiData',
   async (apiId: string, { dispatch }) => {
-    const apiData = await getAPIData(apiId)
+    const apiData = await getApiData(apiId)
     dispatch(changeRunData(apiData))
     dispatch(changeMockData(cloneDeep(apiData)))
   },
@@ -164,12 +113,12 @@ const mockSlice = createSlice({
       }
       if (isInsert) {
         dataSource.apiInfo.request[key].push({
-          paramName: '参数名',
+          paramName: 'ParamName',
           type: 'string',
           desc: '',
           required: false,
           value: '',
-          id: Date.now(),
+          id: new Date().getTime() + getRangeRandom(1, 1000),
         })
       } else {
         dataSource.apiInfo.request[key].splice(removeIndex, 1)

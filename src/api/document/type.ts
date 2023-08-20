@@ -13,9 +13,19 @@ export interface IFetchApiTransfer {
   name: string
 }
 
+// 传输类型：新建接口信息
+export interface ICreateApiTransfer {
+  project_id: number
+  folder_id: string
+  request_data: string
+  response_data: string
+  description: string
+  name: string
+}
+
 export interface IApiResult<T> {
   code: number
   message: string
   result?: T
-  data: T
+  data?: T
 }

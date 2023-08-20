@@ -42,26 +42,23 @@ const App: React.FunctionComponent = () => {
               // <AuthRoute>
               <Project />
               // </AuthRoute>
-            }
-          >
+            }>
             <Route path='/project/apiMgt' element={<ApiMgt />}>
               <Route
                 path='/project/apiMgt/overview'
-                element={<Overview />}
-              ></Route>
+                element={<Overview />}></Route>
               <Route path='/project/apiMgt/certainApi' element={<CertainApi />}>
                 <Route
                   path='/project/apiMgt/certainApi/document'
-                  element={<Document />}
-                ></Route>
-                <Route
+                  element={<Document />}></Route>
+                {/* <Route
                   path='/project/apiMgt/certainApi/mock'
                   element={<Mock />}
-                ></Route>
+                ></Route> */}
               </Route>
             </Route>
             <Route path='/project/memberMgt' element={<MemberMgt />}></Route>
-            <Route path='/project/projectSet' element={<ProjectSet />}></Route>
+            {/* <Route path='/project/projectSet' element={<ProjectSet />}></Route> */}
           </Route>
 
           {/* User */}
@@ -71,8 +68,7 @@ const App: React.FunctionComponent = () => {
               <AuthRoute>
                 <User />
               </AuthRoute>
-            }
-          ></Route>
+            }></Route>
           <Route path='/user/login' element={<Login />} />
         </Route>
       </Routes>

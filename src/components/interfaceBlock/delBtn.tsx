@@ -8,19 +8,15 @@ import request from '@/api/request'
 import { removeData } from '@/store/modules/tabSlice'
 import { setValue } from '@/store/modules/rightSlice'
 import ReactDOM from 'react-dom'
+import type { delProps } from '@/types/arrayToTree'
 
-interface Props {
-  key: string
-  type: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
-}
-
-const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
+const DelBtn: React.FunctionComponent<{ data: delProps }> = (props) => {
   const state = useLocation().state
   const projectId = state.project_id
   const dispatch = useDispatch()
   const { data } = props
   const ReachableContext = createContext<string | null>(null)
-  const [showLoading,setShowLoading] = useState(false)
+  const [showLoading, setShowLoading] = useState(false)
   // const UnreachableContext = createContext<string | null>(null);
   const [open, setOpen] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
@@ -88,10 +84,11 @@ const DelBtn: React.FunctionComponent<{ data: Props }> = (props) => {
       </Modal>
       {ReactDOM.createPortal(
         <div>
-          {showLoading &&
-              <Spin tip='Loading' size='large'>
-                <div className='content'/>
-              </Spin>}
+          {showLoading && (
+            <Spin tip='Loading' size='large'>
+              <div className='content' />
+            </Spin>
+          )}
         </div>,
         document.body,
       )}

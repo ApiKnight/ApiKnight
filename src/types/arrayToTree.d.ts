@@ -10,7 +10,7 @@ interface FlatArrayItem {
 interface AddDir {
   project_id: number
   parent_id: string
-  pid?: string
+  pid?: string | null
 }
 
 interface ArrayItemTitle {
@@ -29,19 +29,18 @@ type ArrayItemType =
   | 'HEAD'
   | 'PATCH'
   | 'FILE'
+  | 'gl'
 
 interface ArrayItem {
   key: string
   title: ArrayItemTitle
   pid: string | null
-  type: ArrayItemType
-
-  isLeaf?: boolean | undefined
+  type: ArrayItemTitle
 }
 
 interface ArrayNode {
   key: string
-  title: ReactNode
+  title: ReactNode | Element
   pid: string | null
   type: ArrayItemTitle
   isLeaf?: boolean | undefined
@@ -56,6 +55,11 @@ interface TreeNode {
   isLeaf?: boolean
 }
 
+interface delProps {
+  type: ArrayItemType
+  key: string
+}
+
 export type {
   TreeNode,
   ArrayItem,
@@ -64,4 +68,5 @@ export type {
   AddDir,
   ArrayItemTitle,
   ArrayItemType,
+  delProps,
 }

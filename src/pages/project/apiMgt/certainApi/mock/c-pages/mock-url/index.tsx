@@ -92,7 +92,8 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
         urlPrefixValue={
           props.mode === 'run' ? userReqInfo.prefix : props.mockPrefix
         }
-        disablePrefix={props.mode === 'mock'}>
+        disablePrefix={props.mode === 'mock'}
+      >
         <Button className='btn' type='primary' onClick={handleSendBtnClick}>
           发送
         </Button>

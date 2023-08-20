@@ -19,7 +19,7 @@ const Invite: React.FunctionComponent<any> = (props) => {
           centered
           items={new Array(2).fill(null).map((_, i) => {
             const id = String(i + 1)
-            if (id == 1) {
+            if (id == '1') {
               return {
                 label: `链接邀请`,
                 key: id,

@@ -1,7 +1,9 @@
+import { ArrayItemType } from "./arrayToTree"
+
 interface TabsSetItem {
   key: string
   title: string
-  type: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
+  type: ArrayItemType
 }
 
 interface Props {

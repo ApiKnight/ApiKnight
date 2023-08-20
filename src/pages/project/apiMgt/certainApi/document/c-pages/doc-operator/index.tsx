@@ -21,7 +21,8 @@ const DocOperator: React.FunctionComponent = memo(() => {
         methodValue={method}
         onOptionChange={(m) => setMethod(m)}
         onInputChange={(e) => urlInputChangeHandle(e)}
-        inputValue={docUrl}>
+        inputValue={docUrl}
+      >
         <Button className='btn' type='primary'>
           保存
         </Button>

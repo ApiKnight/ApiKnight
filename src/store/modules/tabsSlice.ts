@@ -41,7 +41,7 @@ const tabsSlice = createSlice({
   initialState,
   reducers: {
     assign(state, action: PayloadAction<Array<TabSlice>>) {
-      state.data = action.payload
+      (state.data as any) = action.payload
     },
   },
 })

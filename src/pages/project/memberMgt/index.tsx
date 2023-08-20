@@ -5,7 +5,7 @@ import { Avatar, Button, List, Skeleton, Modal, message, Dropdown } from 'antd'
 import './index.less'
 import getApplyList from '@/api/getApplyList'
 import updateApply from '@/api/updateApply'
-import type { MenuProps } from 'antd';
+import type { MenuProps } from 'antd'
 import updateAuthority from '@/api/updateAuthority'
 // interface DataType {
 //   gender?: string;
@@ -39,15 +39,15 @@ const MemberMgt: React.FC = () => {
   const [member_list, setMemberList] = useState()
 
   const [apply_list, setApplyList] = useState([])
-  
-  const [currentUid,setCurrentUid] = useState<string>('')
+
+  const [currentUid, setCurrentUid] = useState<string>('')
 
   const showModal = () => {
     updateApplyList()
     setIsModalOpen(true)
   }
 
-  const updateApplyList = ()=>{
+  const updateApplyList = () => {
     getApplyList(project_id).then((res) => {
       if (res.data.code === 200) {
         setApplyList(res.data.data.reverse())
@@ -57,21 +57,21 @@ const MemberMgt: React.FC = () => {
     })
   }
 
-  const updateMemberList= ()=>
-  getProjectMember(project_id).then((res) => {
-    if (res.data.code === 200) {
-      let data = res.data.data
-      setMemberList(
-        data.map((value) => {
-          setInitLoading(false)
-          value.key = value.user_id
-          return value
-        })
-      )
-    } else {
-      console.log('拉取成员列表失败')
-    }
-  })
+  const updateMemberList = () =>
+    getProjectMember(project_id).then((res) => {
+      if (res.data.code === 200) {
+        let data = res.data.data
+        setMemberList(
+          data.map((value) => {
+            setInitLoading(false)
+            value.key = value.user_id
+            return value
+          }),
+        )
+      } else {
+        console.log('拉取成员列表失败')
+      }
+    })
 
   useEffect(() => {
     updateMemberList()
@@ -88,8 +88,8 @@ const MemberMgt: React.FC = () => {
     // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
     // window.dispatchEvent(new Event('resize'));
   }
-  
-  const closeModal=()=>{
+
+  const closeModal = () => {
     setIsModalOpen(false)
   }
 
@@ -108,52 +108,52 @@ const MemberMgt: React.FC = () => {
     ) : null
 
   const approval = (id) => {
-    return ()=>{
+    return () => {
       let apply_obj = {
         projectid: project_id,
         status: '1',
         id: id,
       }
       updateApply(apply_obj).then((res) => {
-        res.data.code === 200 
-        ?
-        (message.success('已同意'),updateApplyList()) 
-        :
-        message.error('操作失败')
+        res.data.code === 200
+          ? (message.success('已同意'), updateApplyList())
+          : message.error('操作失败')
       })
     }
-    
   }
 
   const refuse = (id) => {
-    return ()=>{
+    return () => {
       let apply_obj = {
         projectid: project_id,
         status: '-1',
         id: id,
       }
-        updateApply(apply_obj).then((res) => {
-          res.data.code === 200 
-          ?
-          (message.success('已拒绝'),updateApplyList()) 
-          :
-          message.error('操作失败')
-        })
+      updateApply(apply_obj).then((res) => {
+        res.data.code === 200
+          ? (message.success('已拒绝'), updateApplyList())
+          : message.error('操作失败')
+      })
     }
   }
 
-  const setAuthority = (authority)=>{
-    return ()=>{
-      console.log(authority);
+  const setAuthority = (authority) => {
+    return () => {
+      console.log(authority)
       updateAuthority({
-        id:currentUid,
-        role:authority === 'member' ? '0011' : authority === 'operator' ? '0111' : authority === 'admin' ? '1111' : ''
-      }).then(res=>{
+        id: currentUid,
+        role:
+          authority === 'member'
+            ? '0011'
+            : authority === 'operator'
+            ? '0111'
+            : authority === 'admin'
+            ? '1111'
+            : '',
+      }).then((res) => {
         res.data.code === 200
-        ?
-        message.success('修改成功')
-        :
-        message.error('修改失败')
+          ? message.success('修改成功')
+          : message.error('修改失败')
       })
     }
   }
@@ -174,7 +174,7 @@ const MemberMgt: React.FC = () => {
       label: <div onClick={setAuthority('admin')}>设为所有者</div>,
       key: '3',
     },
-  ];
+  ]
 
   return (
     <div className='membermgt'>
@@ -185,7 +185,12 @@ const MemberMgt: React.FC = () => {
           审批列表
         </Button>
 
-        <Modal title='申请人' open={isModalOpen} onCancel={closeModal} footer={null}>
+        <Modal
+          title='申请人'
+          open={isModalOpen}
+          onCancel={closeModal}
+          footer={null}
+        >
           <List
             className='list'
             loading={initLoading}
@@ -196,51 +201,55 @@ const MemberMgt: React.FC = () => {
               <List.Item
                 actions={[
                   <>
-                  {
-                  item.status === 0
-                  ?
-                    <>
-                    <Button
-                      type='primary'
-                      style={{ backgroundColor: 'purple' }}
-                      onClick={refuse(item.id)}
-                    >
-                      拒绝
-                    </Button>,
-                    <Button
-                      type='primary'
-                      style={{ backgroundColor: 'green' }}
-                      onClick={approval(item.id)}
+                    {item.status === 0 ? (
+                      <>
+                        <Button
+                          type='primary'
+                          style={{ backgroundColor: 'purple' }}
+                          onClick={refuse(item.id)}
+                        >
+                          拒绝
+                        </Button>
+                        ,
+                        <Button
+                          type='primary'
+                          style={{ backgroundColor: 'green' }}
+                          onClick={approval(item.id)}
+                        >
+                          同意
+                        </Button>
+                      </>
+                    ) : item.status === 1 ? (
+                      <Button
+                        disabled
+                        type='primary'
+                        style={{
+                          backgroundColor: 'green',
+                          opacity: '50%',
+                          color: 'black',
+                        }}
                       >
-                      同意
-                    </Button>
-                    </>
-                    :
-                  item.status === 1
-                  ?
-                    <Button
-                      disabled
-                      type='primary'
-                      style={{ backgroundColor: 'green', opacity:'50%', color:'black'}}
+                        已同意
+                      </Button>
+                    ) : item.status === -1 ? (
+                      <Button
+                        disabled
+                        type='primary'
+                        style={{
+                          backgroundColor: 'red',
+                          opacity: '50%',
+                          color: 'black',
+                        }}
                       >
-                      已同意
-                    </Button>
-                  :
-                  item.status === -1
-                  ?
-                  <Button
-                      disabled
-                      type='primary'
-                      style={{ backgroundColor: 'red', opacity:'50%', color:'black'}}
-                      >
-                      已拒绝
-                    </Button>
-                  :
-                  ''
-                }
-                  </>
+                        已拒绝
+                      </Button>
+                    ) : (
+                      ''
+                    )}
+                  </>,
                 ]}
-                key={item.id}>
+                key={item.id}
+              >
                 <Skeleton avatar title={false} loading={initLoading} active>
                   <List.Item.Meta
                     // avatar={<Avatar src={item.avatar_url} />}
@@ -264,12 +273,10 @@ const MemberMgt: React.FC = () => {
           <List.Item
             actions={[
               <Dropdown menu={{ items }} trigger={['click']}>
-              <a onClick={() => setCurrentUid(item.user_id)}>
-                  权限设置
-              </a>
-            </Dropdown>, 
-            <Button danger>移除</Button>
-          ]}
+                <a onClick={() => setCurrentUid(item.user_id)}>权限设置</a>
+              </Dropdown>,
+              <Button danger>移除</Button>,
+            ]}
             key={item.user_id}
           >
             <Skeleton avatar title={false} loading={initLoading} active>

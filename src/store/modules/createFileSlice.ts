@@ -19,11 +19,11 @@ export const createFileSlice = createSlice({
   initialState,
   reducers: {
     setValue(state, action: PayloadAction<CreateFileValue>) {
-      state.value = action.payload
+      (state.value as any) = action.payload
     },
   },
 })
 
-export const { setTrue, setFalse, reversal } = createFileSlice.actions
+export const { setValue } = createFileSlice.actions
 
 export default createFileSlice.reducer

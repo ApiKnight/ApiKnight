@@ -114,10 +114,12 @@ const mockSlice = createSlice({
       }
     },
     changeBodyAction(state, { payload }) {
+      console.log(payload)
+
       if (state.mockMode === 'run') {
-        state.runData.apiInfo.request.body = payload
+        state.runData.apiInfo.response.body = payload
       } else {
-        state.mockData.apiInfo.request.body = payload
+        state.mockData.apiInfo.response.body = payload
       }
     },
     changeMethodAction(state, { payload }) {

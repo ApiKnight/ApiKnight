@@ -5,6 +5,7 @@ const { TextArea } = Input
 import './index.less'
 import { shallowEqualApp, useAppSelector } from '@/store'
 import { ResponseType } from '@/types/api'
+import withMode from '../with-mode'
 
 const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
   props,
@@ -29,4 +30,4 @@ const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
   )
 }
 
-export default memo(MockResponse)
+export default memo(withMode(MockResponse))

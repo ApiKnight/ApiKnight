@@ -10,7 +10,7 @@ import {
   changePathAction,
   changePrefixAction,
 } from '@/store/modules/mock'
-import { BaseInfoType } from '@/types/api'
+import { BaseInfoType, IAPIInfo, RequestParamsType } from '@/types/api'
 import withMode from '../with-mode'
 
 type MockUrlProps = {
@@ -19,18 +19,18 @@ type MockUrlProps = {
 }
 
 const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
-  console.log(props)
-
   const dispatch = useAppDispatch()
   // 根据模式，获取对应的数据
-  const { userReqInfo } = useAppSelector((state) => {
-    let res = {} as BaseInfoType
+  const { userReqInfo, reqParams } = useAppSelector((state) => {
+    let res = {} as { userReqInfo: BaseInfoType; reqParams: RequestParamsType }
     if (props.mode === 'mock') {
-      res = state.mock.mockData.apiInfo.base
+      res.userReqInfo = state.mock.mockData.apiInfo.base
+      res.reqParams = state.mock.mockData.apiInfo.request
     } else {
-      res = state.mock.runData.apiInfo.base
+      res.userReqInfo = state.mock.runData.apiInfo.base
+      res.reqParams = state.mock.runData.apiInfo.request
     }
-    return { userReqInfo: res }
+    return res
   }, shallowEqualApp)
 
   // 由于组件需要额外冗余增加一个属性，需要保持与userReqInfo中的method一致
@@ -60,7 +60,19 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
 
   // 发送按钮点击事件
   const handleSendBtnClick = (): void => {
-    console.log('发送请求')
+    const { prefix, path, method } = userReqInfo
+    const { params, headers, cookie, body } = reqParams
+    console.log(userReqInfo)
+
+    console.log({
+      prefix,
+      path,
+      method: userReqInfo.method,
+      params,
+      headers,
+      cookie,
+      body,
+    })
   }
 
   return (

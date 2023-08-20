@@ -77,7 +77,7 @@ export const fetchApiDataAction = createAsyncThunk(
   'mock/fetchApiData',
   async (_, { dispatch }) => {
     dispatch(changeRunData(initialData))
-    dispatch(changeMethodAction(cloneDeep(initialData)))
+    dispatch(changeMockData(cloneDeep(initialData)))
   },
 )
 

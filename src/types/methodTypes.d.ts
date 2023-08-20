@@ -8,6 +8,8 @@ interface MethodTypes {
     | 'HEAD'
     | 'PATCH'
     | 'FILE'
+    | 'gl'
+    | ''
 }
 
 export type { MethodTypes }

@@ -1,11 +1,12 @@
+import { ArrayItemType } from '@/types/arrayToTree'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 interface TabSlice {
   data: [
     {
       key: string
-      name: string
-      type: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
+      title: string
+      type: ArrayItemType
     },
   ]
 }
@@ -14,8 +15,8 @@ const initialState: TabSlice = {
   data: [
     {
       key: '0',
-      name: '',
-      type: 'GET',
+      title: '新建页面',
+      type: '',
     },
   ],
 }
@@ -24,15 +25,15 @@ const tabSlice = createSlice({
   name: 'tabSlice',
   initialState,
   reducers: {
-    assign(state, action: PayloadAction<Array<TabSlice>>) {
+    assign(state: any, action: PayloadAction<Array<TabSlice>>) {
       state.data = action.payload
     },
-    removeData(state, action: PayloadAction<string>) {
+    removeData(state: any, action: PayloadAction<string>) {
       state.data = state.data.filter((item) => {
         return item.key !== action.payload
       })
     },
-    addData(state, action: PayloadAction<TabSlice>) {
+    addData(state: any, action: PayloadAction<TabSlice>) {
       const temp = state.data
       temp.push(action.payload)
       state.data = temp.filter((value, index, self) => {

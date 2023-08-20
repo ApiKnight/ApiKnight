@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Button, notification, Spin, Tag} from 'antd'
+import { Button, notification, Spin, Tag } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
 import './index.less'
 import MethodList from '@/components/MethodList'
@@ -9,7 +9,7 @@ import type { DocumentTypes } from '@/types/document'
 const Document: React.FunctionComponent<{ data: string }> = (props) => {
   const { data } = props
   const [api, contextHolder] = notification.useNotification()
-  const [showLoading,setShowLoading] = useState(false)
+  const [showLoading, setShowLoading] = useState(false)
   const openNotification = (placement: NotificationPlacement) => {
     api.info({
       message: <p>复制成功</p>,
@@ -110,11 +110,11 @@ const Document: React.FunctionComponent<{ data: string }> = (props) => {
   }
   return (
     <div className='document'>
-      {
-          showLoading && <Spin tip="Loading" size="large">
-            <div className="content" />
-          </Spin>
-      }
+      {showLoading && (
+        <Spin tip='Loading' size='large'>
+          <div className='content' />
+        </Spin>
+      )}
       {contextHolder}
       <div className='document--title'>
         <div className='document--title__left'>

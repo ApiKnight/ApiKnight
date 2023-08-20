@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { IAPIInfo } from '@/types/api'
-import { getRangeRandom } from '@/utils/math'
 import { getInitialApiInfoObj } from '@/utils/documents'
 import { getApiData } from '@/api/document'
 

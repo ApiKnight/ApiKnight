@@ -51,13 +51,14 @@ const App: React.FunctionComponent = () => {
                 <Route
                   path='/project/apiMgt/certainApi/document'
                   element={<Document />}></Route>
-                <Route
+                {/* <Route
                   path='/project/apiMgt/certainApi/mock'
-                  element={<Mock />}></Route>
+                  element={<Mock />}
+                ></Route> */}
               </Route>
             </Route>
             <Route path='/project/memberMgt' element={<MemberMgt />}></Route>
-            <Route path='/project/projectSet' element={<ProjectSet />}></Route>
+            {/* <Route path='/project/projectSet' element={<ProjectSet />}></Route> */}
           </Route>
 
           {/* User */}

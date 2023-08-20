@@ -4,23 +4,25 @@ import request from './request'
  * @param {Object} requestObj 请求所需参数
  * @returns
  */
-type requestType={
-    url:string,
-    method:string,
-    params:Object,
-    data:Object,
-    header:Object
+type requestType = {
+  url: string
+  method: string
+  params: Object
+  data: Object
+  header: Object
 }
-// const testApi = (requestObj:requestType) => {
-const testApi = () => {
 
-  return request.post('v1/mock/real', {url: "http://v.juhe.cn/calendar/day",method: "POST",data:{
-    "key": "5b0588d13fa598a5423a41d0346a2cae",
-    "date": "2015-1-1"
- }}, {})
-  // return request.post('v1/mock/real', {
-  //   "url": "https://jsonplaceholder.typicode.com/todos/1",
-  //   "method": "GET"
-  // }, {})
+// const testApi = () => {
+//   return request.post('v1/mock/real', {url: "http://v.juhe.cn/calendar/day",method: "POST",data:{
+//     "key": "bed4ca7594bf9198ce6e3879633ec21f",
+//     "date": "2015-1-1"
+//  }}, {})
+
+const testApi = (requestObj:requestType) => {
+  return request.post('v1/mock/real', {
+    url: requestObj.url,
+    method: requestObj.method,
+    params:requestObj.params
+  }, {})
 }
 export default testApi

@@ -36,8 +36,8 @@ export interface ResponseType {
 // API信息结构
 export interface IAPIInfo {
   meta_info: {
-    created: string
-    status: string
+    created: number
+    status: number
     owner_id: string
     tags: string[]
     desc: string

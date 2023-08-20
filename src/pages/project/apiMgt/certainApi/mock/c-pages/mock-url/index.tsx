@@ -6,11 +6,12 @@ import ApiOperator from '@/components/ApiOperator'
 import './index.less'
 import { useAppSelector, shallowEqualApp, useAppDispatch } from '@/store'
 import {
+  changeBodyAction,
   changeMethodAction,
   changePathAction,
   changePrefixAction,
 } from '@/store/modules/mock'
-import { BaseInfoType } from '@/types/api'
+import { BaseInfoType, IAPIInfo, RequestParamsType } from '@/types/api'
 import withMode from '../with-mode'
 import testApi from '@/api/testApi'
 type MockUrlProps = {
@@ -19,18 +20,18 @@ type MockUrlProps = {
 }
 
 const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
-  console.log(props)
-
   const dispatch = useAppDispatch()
   // 根据模式，获取对应的数据
-  const { userReqInfo } = useAppSelector((state) => {
-    let res = {} as BaseInfoType
+  const { userReqInfo, reqParams } = useAppSelector((state) => {
+    let res = {} as { userReqInfo: BaseInfoType; reqParams: RequestParamsType }
     if (props.mode === 'mock') {
-      res = state.mock.mockData.apiInfo.base
+      res.userReqInfo = state.mock.mockData.apiInfo.base
+      res.reqParams = state.mock.mockData.apiInfo.request
     } else {
-      res = state.mock.runData.apiInfo.base
+      res.userReqInfo = state.mock.runData.apiInfo.base
+      res.reqParams = state.mock.runData.apiInfo.request
     }
-    return { userReqInfo: res }
+    return res
   }, shallowEqualApp)
 
   // 由于组件需要额外冗余增加一个属性，需要保持与userReqInfo中的method一致
@@ -60,12 +61,31 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
 
   // 发送按钮点击事件
   const handleSendBtnClick = (): void => {
-    console.log(userReqInfo);
+    // console.log(userReqInfo);
     
-    const requestObj={}
-    const {params} = userReqInfo.method.apiInfo.request
-    const url = userReqInfo.prefix + (userReqInfo.path ? ('/' + userReqInfo.path) : '')
-    const {method} = userReqInfo.method.apiInfo.base
+    // const requestObj={}
+    // const {params} = userReqInfo.method.apiInfo.request
+    // const url = userReqInfo.prefix + (userReqInfo.path ? ('/' + userReqInfo.path) : '')
+    // const {method} = userReqInfo.method.apiInfo.base
+    // const paramsObj = {}
+    // if(params.length){
+    //   params.forEach(v=>{
+    //     console.log(v);
+    //     paramsObj[v.paramName]=v.value
+    //   })
+    // }
+    // console.log(paramsObj);
+    // requestObj.params=paramsObj
+    // requestObj.url=url
+    // requestObj.method=method
+    // console.log(requestObj);
+    
+    // testApi(requestObj)
+    ////
+
+
+    const { prefix, path, method } = userReqInfo
+    const { params, headers, cookie, body } = reqParams
     const paramsObj = {}
     if(params.length){
       params.forEach(v=>{
@@ -73,13 +93,20 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
         paramsObj[v.paramName]=v.value
       })
     }
-    console.log(paramsObj);
-    requestObj.params=paramsObj
-    requestObj.url=url
-    requestObj.method=method
-    console.log(requestObj);
-    
+    const requestObj = {
+      url:prefix + (path ? ('/' + path) : ''),
+      method,
+      params:paramsObj,
+      headers,
+      cookie,
+      data:body,
+    }
+    console.log(requestObj)
     testApi(requestObj)
+    // 假如这是响应内容
+    // const responseExample = JSON.stringify({ name: 'LuoKing' })
+    // 设置响应内容
+    // dispatch(changeBodyAction(responseExample))
   }
 
   return (

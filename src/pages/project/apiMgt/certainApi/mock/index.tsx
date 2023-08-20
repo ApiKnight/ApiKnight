@@ -9,14 +9,14 @@ import { IMockProps } from './type'
 import ModeContext from './context'
 
 const Mock: React.FunctionComponent<IMockProps> = (props) => {
-  const { mode } = props //run为运行,mock为mock
+  const { mode, data } = props //run为运行,mock为mock
 
   const dispatch = useAppDispatch()
   dispatch(changeMockModeAction(mode))
 
   useEffect(() => {
-    // 获取接口信息
-    dispatch(fetchApiDataAction())
+    // 根据接口id获取接口信息
+    dispatch(fetchApiDataAction(data))
   }, [dispatch])
 
   return (

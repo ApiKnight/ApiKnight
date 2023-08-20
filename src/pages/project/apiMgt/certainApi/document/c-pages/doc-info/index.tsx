@@ -1,17 +1,13 @@
 import React, { memo, useState } from 'react'
 import { Input, Select } from 'antd'
 const { TextArea } = Input
+
+import { StatusValue } from '@/types/enum'
+
 import './index.less'
 
 type SelectType = 'status' | 'owner' | 'tag'
 type InputType = 'name' | 'desc'
-
-enum StatusValue {
-  RELEASE = 1,
-  TESTING = 2,
-  DEPRECATE = 3,
-  DEVELOPING = 4,
-}
 
 type DevStatus = { label: string; value: StatusValue }
 

@@ -3,15 +3,7 @@ import { ReactNode } from 'react'
 interface FlatArrayItem {
   key: string
   title: string
-  type:
-    | 'GET'
-    | 'POST'
-    | 'PUT'
-    | 'DELETE'
-    | 'OPTIONS'
-    | 'HEAD'
-    | 'PATCH'
-    | 'FILE'
+  type: ArrayItemType
   pid: null | string
 }
 
@@ -21,32 +13,29 @@ interface AddDir {
   pid?: string
 }
 
+interface ArrayItemTitle {
+  key: string
+  title: string
+  pid: string | null
+  type: ArrayItemType
+}
+
+type ArrayItemType =
+  | 'GET'
+  | 'POST'
+  | 'PUT'
+  | 'DELETE'
+  | 'OPTIONS'
+  | 'HEAD'
+  | 'PATCH'
+  | 'FILE'
+
 interface ArrayItem {
   key: string
-  title: {
-    key: string
-    title: string
-    pid: string | null
-    type:
-      | 'GET'
-      | 'POST'
-      | 'PUT'
-      | 'DELETE'
-      | 'OPTIONS'
-      | 'HEAD'
-      | 'PATCH'
-      | 'FILE'
-  }
+  title: ArrayItemTitle
   pid: string | null
-  type:
-    | 'GET'
-    | 'POST'
-    | 'PUT'
-    | 'DELETE'
-    | 'OPTIONS'
-    | 'HEAD'
-    | 'PATCH'
-    | 'FILE'
+  type: ArrayItemType
+
   isLeaf?: boolean | undefined
 }
 
@@ -54,17 +43,25 @@ interface ArrayNode {
   key: string
   title: ReactNode
   pid: string | null
-  type: string
+  type: ArrayItemTitle
   isLeaf?: boolean | undefined
 }
 
 interface TreeNode {
   key: string
   title: ReactNode
-  type: string
+  type: ArrayItemTitle
   pid: string | null
   children?: TreeNode[]
   isLeaf?: boolean
 }
 
-export type { TreeNode, ArrayItem, ArrayNode, FlatArrayItem, AddDir }
+export type {
+  TreeNode,
+  ArrayItem,
+  ArrayNode,
+  FlatArrayItem,
+  AddDir,
+  ArrayItemTitle,
+  ArrayItemType,
+}

@@ -4,12 +4,12 @@ import request from './request'
  * @param {Object} requestObj 请求所需参数
  * @returns
  */
-type requestType={
-    url:string,
-    method:string,
-    params:Object,
-    data:Object,
-    header:Object
+type requestType = {
+  url: string
+  method: string
+  params: Object
+  data: Object
+  header: Object
 }
 
 // const testApi = () => {

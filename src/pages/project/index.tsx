@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateProjectId } from '@/store/modules/projectSlice'
 import { RootState } from '@/store/index.ts'
 import ProjectNav from '@/components/ProjectNav'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Project: React.FunctionComponent = () => {
   const navigate = useNavigate()
@@ -18,7 +18,7 @@ const Project: React.FunctionComponent = () => {
       console.log('当前project_id', project_id)
       // dispatch(updateProjectId({ project_id: project_id }))
     }
-    navigate('/project/apiMgt',{state:{project_id:project_id}})
+    navigate('/project/apiMgt', { state: { project_id: project_id } })
   }, [])
   return (
     <div className='project'>

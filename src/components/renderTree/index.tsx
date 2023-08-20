@@ -55,15 +55,15 @@ const renderTree: React.FC = (props) => {
         if (resp.data.code == 200) {
           setData(
             mergeFlatArrays(
-              resp.data.data.folder_list,
-              resp.data.data.api_list,
+              (resp.data as any).data.folder_list,
+              (resp.data as any).data.api_list,
               projectId,
             ),
           )
           setMakeValue({
             value: mergeFlatArrays(
-              resp.data.data.folder_list,
-              resp.data.data.api_list,
+              (resp.data as any).data.folder_list,
+              (resp.data as any).data.api_list,
               projectId,
             ),
           })
@@ -85,8 +85,9 @@ const renderTree: React.FC = (props) => {
           <InterfaceBlock
             data={{
               title: item.title,
-              api_id: item.id,
-              project_id: props.project_id,
+              key: item.key,
+              pid: item.pid,
+              type: item.type
             }}
           />
         ), // 将之前提取出的数据重新放入组件中
@@ -131,7 +132,8 @@ const renderTree: React.FC = (props) => {
         blockNode
         onDrop={onDrop}
         style={{ width: '270px' }}
-        className='renderTree'></Tree>
+        className='renderTree'
+      ></Tree>
       {showLoading && (
         <Spin tip='Loading' size='large'>
           <div className='content' />

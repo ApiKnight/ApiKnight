@@ -4,10 +4,8 @@ import request from './request'
  * @param {Object} loginData 登录所需参数
  * @returns
  */
-type mockReq={
-
-}
-const mockReq = (mockReqObj:mockReq) => {
+type mockReq = {}
+const mockReq = (mockReqObj: mockReq) => {
   console.log(mockReqObj)
   return request.post('v1/user/mockReq', mockReqObj, {})
 }

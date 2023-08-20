@@ -1,16 +1,16 @@
-import { ArrayItem, ArrayItemTitle } from '@/types/arrayToTree'
+import { ArrayItem, ArrayItemTitle, ArrayItemType } from '@/types/arrayToTree'
 
 interface AddData {
   key: string
   pid: string | null
-  type?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
+  type?: ArrayItemType
 }
 
 interface TitleNode {
   key: string
   title: ArrayItemTitle
   pid: string | null
-  types: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH'
+  type: ArrayItemTitle
 }
 
 interface Props {

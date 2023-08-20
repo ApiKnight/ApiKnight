@@ -26,7 +26,6 @@ export class Request {
     this.instance.interceptors.request.use(
       // config:AxiosRequestConfig
       (config: any) => {
-
         // CORS
         config.headers['Access-Control-Allow-Origin'] = '*'
         config.headers['Content-Type'] = 'application/json'

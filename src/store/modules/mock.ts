@@ -64,7 +64,16 @@ const mockSlice = createSlice({
           break
       }
     },
-    changeBodyAction(state, { payload }) {
+    changeRequestBodyAction(state, { payload }) {
+      console.log(payload)
+
+      if (state.mockMode === 'run') {
+        state.runData.apiInfo.request.body = payload
+      } else {
+        state.mockData.apiInfo.request.body = payload
+      }
+    },
+    changeResponseBodyAction(state, { payload }) {
       console.log(payload)
 
       if (state.mockMode === 'run') {
@@ -136,7 +145,8 @@ export const {
   changeMethodAction,
   changePathAction,
   changePrefixAction,
-  changeBodyAction,
+  changeRequestBodyAction,
+  changeResponseBodyAction,
   changeNormalParamsAction,
   changeParamsItemOptAction,
   changeMockModeAction,

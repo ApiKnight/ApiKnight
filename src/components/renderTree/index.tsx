@@ -102,21 +102,21 @@ const renderTree: React.FC = (props) => {
   }
   const dispatch = useDispatch()
   const onDrop = (info) => {
-    if (info.node.type === "FILE") {
+    if (info.node.type === 'FILE') {
       const url =
-      info.dragNode.type === 'FILE' ? '/v1/folder/update' : '/v1/apis/update'
-    const urlData =
-      info.dragNode.type === 'FILE'
-        ? { folder_id: info.dragNodesKeys[0], parent_id: info.node.key }
-        : { apis_id: info.dragNodesKeys[0], folder_id: info.node.key }
-    setShowLoading(true)
-    request.post(url, urlData, {}).then((res) => {
-      console.log(res)
-
-      // 在这里处理返回的数据
-      dispatch(increment())
+        info.dragNode.type === 'FILE' ? '/v1/folder/update' : '/v1/apis/update'
+      const urlData =
+        info.dragNode.type === 'FILE'
+          ? { folder_id: info.dragNodesKeys[0], parent_id: info.node.key }
+          : { apis_id: info.dragNodesKeys[0], folder_id: info.node.key }
       setShowLoading(true)
-    })
+      request.post(url, urlData, {}).then((res) => {
+        console.log(res)
+
+        // 在这里处理返回的数据
+        dispatch(increment())
+        setShowLoading(true)
+      })
     }
   }
   const renderData = restoreData(makeValue.value)

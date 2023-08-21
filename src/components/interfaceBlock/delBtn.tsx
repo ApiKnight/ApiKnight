@@ -9,8 +9,8 @@ import { removeData } from '@/store/modules/tabSlice'
 import { setValue } from '@/store/modules/rightSlice'
 import ReactDOM from 'react-dom'
 import type { delProps } from '@/types/arrayToTree'
-import { notification } from 'antd';
-import type { NotificationPlacement } from 'antd/es/notification/interface';
+import { notification } from 'antd'
+import type { NotificationPlacement } from 'antd/es/notification/interface'
 
 const DelBtn: React.FunctionComponent<{ data: delProps }> = (props) => {
   const state = useLocation().state
@@ -24,7 +24,7 @@ const DelBtn: React.FunctionComponent<{ data: delProps }> = (props) => {
   const [confirmLoading, setConfirmLoading] = useState(false)
   const [modalText, setModalText] =
     useState('确定要删除该节点吗？该操作不可逆!')
-    const [api, contextHolder] = notification.useNotification();
+  const [api, contextHolder] = notification.useNotification()
   const showModal = () => {
     setOpen(true)
   }
@@ -53,19 +53,18 @@ const DelBtn: React.FunctionComponent<{ data: delProps }> = (props) => {
         if (data.type !== 'FILE') {
           dispatch(removeData(data.key))
         }
-      }
-      else {
+      } else {
         const openNotification = (placement: NotificationPlacement) => {
           api.info({
             message: `错误提示`,
             description: res.data.message,
             placement,
-          });
-        };
+          })
+        }
         openNotification('topRight')
-        setTimeout(()=>{
+        setTimeout(() => {
           setOpen(false)
-        },1500)
+        }, 1500)
       }
     })
     dispatch(setValue('gl'))

@@ -1,4 +1,4 @@
-import React , { useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import './addBtn.less'
 import { useDispatch } from 'react-redux'
 import { increment } from '@/store/modules/watchDir.ts'
@@ -6,19 +6,18 @@ import type { AddData } from '@/types/treeComponents.js'
 import { PlusOutlined } from '@ant-design/icons'
 import request from '@/api/request'
 import { useLocation } from 'react-router-dom'
-import { notification } from 'antd';
-import type { NotificationPlacement } from 'antd/es/notification/interface';
+import { notification } from 'antd'
+import type { NotificationPlacement } from 'antd/es/notification/interface'
 
-const Context = React.createContext({ name: 'Default' });
-
+const Context = React.createContext({ name: 'Default' })
 
 const AddBtn: React.FunctionComponent<{ data: AddData }> = (props) => {
   const dispatch = useDispatch()
   const { data } = props
   const state = useLocation().state
   const projectId = state.project_id
-  const [api, contextHolder] = notification.useNotification();
-  const contextValue = useMemo(() => ({ name: '错误提示' }), []);
+  const [api, contextHolder] = notification.useNotification()
+  const contextValue = useMemo(() => ({ name: '错误提示' }), [])
   return (
     <span
       style={{ display: 'inline' }}
@@ -39,15 +38,14 @@ const AddBtn: React.FunctionComponent<{ data: AddData }> = (props) => {
           .then((res) => {
             if (res.data.code == 200) {
               dispatch(increment())
-            }
-            else {
+            } else {
               const openNotification = (placement: NotificationPlacement) => {
                 api.info({
                   message: `错误提示`,
                   description: res.data.message,
                   placement,
-                });
-              };
+                })
+              }
               openNotification('topRight')
             }
           })

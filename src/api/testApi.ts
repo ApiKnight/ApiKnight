@@ -18,11 +18,15 @@ type requestType = {
 //     "date": "2015-1-1"
 //  }}, {})
 
-const testApi = (requestObj:requestType) => {
-  return request.post('v1/mock/real', {
-    url: requestObj.url,
-    method: requestObj.method,
-    params:requestObj.params
-  }, {})
+const testApi = (requestObj: requestType) => {
+  return request.post(
+    'v1/mock/real',
+    {
+      url: requestObj.url,
+      method: requestObj.method,
+      params: requestObj.params,
+    },
+    {},
+  )
 }
 export default testApi

@@ -12,7 +12,7 @@ import {
   changePrefixAction,
 } from '@/store/modules/mock'
 import { BaseInfoType, IAPIInfo, RequestParamsType } from '@/types/api'
-import withMode from '../with-mode'
+import withMode from '../../../with-mode'
 import testApi from '@/api/testApi'
 type MockUrlProps = {
   mode: 'run' | 'mock'
@@ -100,8 +100,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
         onInputChange={(e) => handleInputChange(e, 'path')}
         inputValue={userReqInfo.path}
         urlPrefixValue={mode === 'run' ? userReqInfo.prefix : props.mockPrefix}
-        disablePrefix={mode === 'mock'}
-      >
+        disablePrefix={mode === 'mock'}>
         <Button className='btn' type='primary' onClick={handleSendBtnClick}>
           发送
         </Button>

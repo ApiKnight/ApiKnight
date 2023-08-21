@@ -1,5 +1,5 @@
 import React from 'react'
-import ModeContext from '../context'
+import ModeContext from './mode-context'
 
 // 高阶组件：统一添加mode属性
 function withMode(WrappedComponent: React.FunctionComponent<any>) {

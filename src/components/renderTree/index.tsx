@@ -102,7 +102,8 @@ const renderTree: React.FC = (props) => {
   }
   const dispatch = useDispatch()
   const onDrop = (info) => {
-    const url =
+    if (info.node.type === "FILE") {
+      const url =
       info.dragNode.type === 'FILE' ? '/v1/folder/update' : '/v1/apis/update'
     const urlData =
       info.dragNode.type === 'FILE'
@@ -116,6 +117,7 @@ const renderTree: React.FC = (props) => {
       dispatch(increment())
       setShowLoading(true)
     })
+    }
   }
   const renderData = restoreData(makeValue.value)
   // 数组转树形结构

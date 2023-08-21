@@ -87,7 +87,7 @@ const renderTree: React.FC = (props) => {
               title: item.title,
               key: item.key,
               pid: item.pid,
-              type: item.type
+              type: item.type,
             }}
           />
         ), // 将之前提取出的数据重新放入组件中

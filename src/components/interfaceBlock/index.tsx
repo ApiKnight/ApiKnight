@@ -46,9 +46,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
         title: data.title,
         type: data.type,
       }
-      dispatch(
-        addData(d as any),
-      )
+      dispatch(addData(d as any))
       dispatch(setValue(data.key))
       // navigate('/project/apiMgt/certainApi', { state: {api_id:api_id, project_id:project_id} })
     }

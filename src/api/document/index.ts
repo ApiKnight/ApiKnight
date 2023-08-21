@@ -1,10 +1,10 @@
 import request from '@/api/request'
 import { IAPIInfo } from '@/types/api'
-import { IApiResult, IFetchApiTransfer } from './type'
+import type { IApiResult, IFetchApiTransfer } from './type'
 import { getInitialApiInfoObj } from '@/utils/documents'
 
 /**
- * 获取接口信息
+ * 获取纯前端定义的接口信息
  * @param apiId 接口id
  * @returns 接口信息
  */
@@ -14,6 +14,21 @@ export async function getApiData(apiId: string): Promise<IAPIInfo> {
   console.log('str', apiDataStr)
 
   return JSON.parse(apiDataStr)
+}
+
+/**
+ * 获取完整且原始的接口信息
+ * @param appId 接口id
+ * @returns 包含前端定义的接口信息之外的全部接口信息（后端返回的原始信息）
+ */
+export async function getFullApiData(
+  apiId: string,
+): Promise<IFetchApiTransfer> {
+  const { data }: { data: IApiResult<IFetchApiTransfer> } = await request.post(
+    '/v1/apis/query',
+    { apis_id: apiId },
+  )
+  return data.data
 }
 
 /**

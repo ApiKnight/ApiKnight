@@ -6,7 +6,7 @@ import ApiOperator from '@/components/ApiOperator'
 import './index.less'
 import { useAppSelector, shallowEqualApp, useAppDispatch } from '@/store'
 import {
-  changeBodyAction,
+  changeResponseBodyAction,
   changeMethodAction,
   changePathAction,
   changePrefixAction,
@@ -88,7 +88,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
     // 假如这是响应内容
     const responseExample = JSON.stringify({ name: 'LuoKing' })
     // 设置响应内容
-    dispatch(changeBodyAction(responseExample))
+    dispatch(changeResponseBodyAction(responseExample))
   }
 
   return (

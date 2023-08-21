@@ -12,9 +12,9 @@ import type { NormalParamsType, RequestParamsType } from '@/types/api'
 import './index.less'
 import { useAppSelector, shallowEqualApp, useAppDispatch } from '@/store'
 import {
-  changeBodyAction,
   changeNormalParamsAction,
   changeParamsItemOptAction,
+  changeRequestBodyAction,
 } from '@/store/modules/mock'
 import { NavItem } from './type'
 import withMode from '../../../with-mode'
@@ -129,7 +129,7 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
 
   // 获取表格数据
   const handleBodyChange = (value: string): void => {
-    dispatch(changeBodyAction(value))
+    dispatch(changeRequestBodyAction(value))
   }
 
   // 请求参数内容渲染

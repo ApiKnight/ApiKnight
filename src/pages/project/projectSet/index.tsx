@@ -21,7 +21,8 @@ interface childProps {
   user_id: string
 }
 
-const ProjectSet: React.FC<childProps> = () => {
+const ProjectSet: React.FC = () => {
+  // const ProjectSet: React.FC<childProps> = () => {
   const navigate = useNavigate()
   // const project_id = useSelector((state: RootState) => state.project.project_id)
   const { project_id } = useLocation().state

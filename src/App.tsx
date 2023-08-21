@@ -58,7 +58,7 @@ const App: React.FunctionComponent = () => {
               </Route>
             </Route>
             <Route path='/project/memberMgt' element={<MemberMgt />}></Route>
-            {/* <Route path='/project/projectSet' element={<ProjectSet />}></Route> */}
+            <Route path='/project/projectSet' element={<ProjectSet />}></Route>
           </Route>
 
           {/* User */}

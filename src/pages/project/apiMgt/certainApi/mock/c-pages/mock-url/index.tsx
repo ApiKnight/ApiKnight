@@ -6,7 +6,7 @@ import ApiOperator from '@/components/ApiOperator'
 import './index.less'
 import { useAppSelector, shallowEqualApp, useAppDispatch } from '@/store'
 import {
-  changeBodyAction,
+  changeResponseBodyAction,
   changeMethodAction,
   changePathAction,
   changePrefixAction,
@@ -88,7 +88,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
     // 假如这是响应内容
     const responseExample = JSON.stringify({ name: 'LuoKing' })
     // 设置响应内容
-    dispatch(changeBodyAction(responseExample))
+    dispatch(changeResponseBodyAction(responseExample))
   }
 
   return (
@@ -100,8 +100,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
         onInputChange={(e) => handleInputChange(e, 'path')}
         inputValue={userReqInfo.path}
         urlPrefixValue={mode === 'run' ? userReqInfo.prefix : props.mockPrefix}
-        disablePrefix={mode === 'mock'}
-      >
+        disablePrefix={mode === 'mock'}>
         <Button className='btn' type='primary' onClick={handleSendBtnClick}>
           发送
         </Button>

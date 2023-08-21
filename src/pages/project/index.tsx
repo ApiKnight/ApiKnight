@@ -2,14 +2,9 @@ import React, { useEffect } from 'react'
 import './index.less'
 import { Outlet, Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { updateProjectId } from '@/store/modules/projectSlice'
-import { RootState } from '@/store/index.ts'
 import ProjectNav from '@/components/ProjectNav'
 import { useNavigate } from 'react-router-dom'
-import UserInfo from '@/components/UserInfo'
-import { Button } from 'antd'
-import { setValue } from '@/store/modules/userInfoSlice'
+import ApiTab from '@/components/ApiTab'
 
 const Project: React.FunctionComponent = () => {
   const navigate = useNavigate()
@@ -23,17 +18,11 @@ const Project: React.FunctionComponent = () => {
     }
     navigate('/project/apiMgt', { state: { project_id: project_id } })
   }, [])
-  const dispatch = useDispatch()
-  const userInfoSlice = useSelector(
-    (state: RootState) => state.userInfoSlice.value,
-  )
-  function showUserInfo() {
-    dispatch(setValue(true))
-  }
+  
   return (
-    <div className='project'>
-      <Button onClick={showUserInfo}>个人</Button>
-      {userInfoSlice && <UserInfo />}
+    <>
+      <ApiTab/>
+      <div className='project'>
       <div className='left'>
         <ProjectNav project_id={project_id} />
       </div>
@@ -41,6 +30,7 @@ const Project: React.FunctionComponent = () => {
         <Outlet />
       </div>
     </div>
+    </>
   )
 }
 

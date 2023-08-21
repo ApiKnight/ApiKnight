@@ -52,21 +52,21 @@ const UserInfo: React.FunctionComponent = () => {
       key: '1',
       type: '名称',
       value: '',
-      use: <Button onClick={showUpdate('username')}>修改</Button>,
+      use: <Button onClick={showUpdate('username')} danger>修改</Button>,
     },
     {
       id: 'email',
       key: '2',
       type: '邮箱',
       value: '',
-      use: <Button onClick={showUpdate('email')}>修改</Button>,
+      use: <Button onClick={showUpdate('email')} danger>修改</Button>,
     },
     {
       id: 'phone',
       key: '3',
       type: '电话',
       value: '',
-      use: <Button onClick={showUpdate('phone')}>修改</Button>,
+      use: <Button onClick={showUpdate('phone')} danger>修改</Button>,
     },
   ])
   function closeThisPage() {
@@ -86,21 +86,21 @@ const UserInfo: React.FunctionComponent = () => {
           key: '1',
           type: '名称',
           value: resp.data.data.username,
-          use: <Button onClick={showUpdate('username')}>修改</Button>,
+          use: <Button onClick={showUpdate('username')} danger>修改</Button>,
         },
         {
           id: 'email',
           key: '2',
           type: '邮箱',
           value: resp.data.data.email,
-          use: <Button onClick={showUpdate('email')}>修改</Button>,
+          use: <Button onClick={showUpdate('email')} danger>修改</Button>,
         },
         {
           id: 'phone',
           key: '3',
           type: '电话',
           value: resp.data.data.phone,
-          use: <Button onClick={showUpdate('phone')}>修改</Button>,
+          use: <Button onClick={showUpdate('phone')} danger>修改</Button>,
         },
       ])
     })

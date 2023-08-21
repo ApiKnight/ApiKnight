@@ -13,6 +13,7 @@ import { addData } from '@/store/modules/tabSlice'
 import { useDispatch } from 'react-redux'
 import { setValue } from '@/store/modules/rightSlice'
 import Swagger from '@/components/Swagger'
+import ApiTab from '@/components/ApiTab'
 
 const ApiMgt: React.FunctionComponent = () => {
   const dispatch = useDispatch()

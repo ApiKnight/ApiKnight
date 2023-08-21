@@ -8,17 +8,7 @@ import { useLocation } from 'react-router-dom'
 import { addData, assign } from '@/store/modules/tabSlice'
 import { Button } from 'antd'
 import { ArrayItemType } from '@/types/arrayToTree'
-import {setValue} from "@/store/modules/rightSlice";
-
-interface TabSlice {
-  data: [
-    {
-      key: string
-      title: string
-      type: ArrayItemType
-    },
-  ]
-}
+import { setValue } from '@/store/modules/rightSlice'
 
 const Tabs: React.FunctionComponent = () => {
   const [tabList, setTabList] = useState<Array<TabsSetItem>>([
@@ -33,14 +23,14 @@ const Tabs: React.FunctionComponent = () => {
   const state = useLocation().state
   const projectId = state.project_id
   useEffect(() => {
-    const d: any = [{
-      key: projectId,
-      title: '项目概览',
-      type: 'gl',
-    }]
-    dispatch(
-      assign(d),
-    )
+    const d: any = [
+      {
+        key: projectId,
+        title: '项目概览',
+        type: 'gl',
+      },
+    ]
+    dispatch(assign(d))
     dispatch(setValue('gl'))
   }, [])
   useEffect(() => {
@@ -52,9 +42,7 @@ const Tabs: React.FunctionComponent = () => {
       title: '新建页面',
       type: '',
     }
-    dispatch(
-      addData(d),
-    )
+    dispatch(addData(d))
   }
   return (
     <>

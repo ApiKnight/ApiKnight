@@ -19,7 +19,7 @@ export const createFileSlice = createSlice({
   initialState,
   reducers: {
     setValue(state, action: PayloadAction<CreateFileValue>) {
-      (state.value as any) = action.payload
+      ;(state.value as any) = action.payload
     },
   },
 })

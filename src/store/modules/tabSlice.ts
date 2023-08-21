@@ -1,15 +1,6 @@
 import { ArrayItemType } from '@/types/arrayToTree'
+import type { TabSlice } from '@/types/tabSlice'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-
-interface TabSlice {
-  data: [
-    {
-      key: string
-      title: string
-      type: ArrayItemType
-    },
-  ]
-}
 
 const initialState: TabSlice = {
   data: [

@@ -1,4 +1,4 @@
-import { ArrayItemType } from "./arrayToTree"
+import { ArrayItemType } from './arrayToTree'
 
 interface TabsSetItem {
   key: string

@@ -29,7 +29,7 @@ const Title: React.FunctionComponent<{ projectid: string }> = (props) => {
       <div className='invite-title__close' onClick={closeInvite}>
         <PoweroffOutlined />
       </div>
-      {flag && <Overlay />}
+      {flag && <Overlay data={10000} />}
     </div>
   )
 }

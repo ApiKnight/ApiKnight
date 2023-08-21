@@ -22,7 +22,9 @@ import tabSliceReducer from '@/store/modules/tabSlice'
 import tabsSliceReducer from '@/store/modules/tabsSlice'
 import rightSliceReducer from '@/store/modules/rightSlice'
 import showRightMenuReducer from '@/store/modules/showRightMenu'
-
+import userInfoSliceReducer from '@/store/modules/userInfoSlice.ts'
+import updateUserInfoSliceReducer from '@/store/modules/updateUserInfoSlice.ts'
+import isUpdateSliceReducer from '@/store/modules/isUpdateSlice.ts'
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
@@ -38,6 +40,9 @@ export const store = configureStore({
     tabsSlice: tabsSliceReducer,
     rightSlice: rightSliceReducer,
     showRightMenu: showRightMenuReducer,
+    userInfoSlice: userInfoSliceReducer,
+    updateUserInfoSlice: updateUserInfoSliceReducer,
+    isUpdateSlice: isUpdateSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

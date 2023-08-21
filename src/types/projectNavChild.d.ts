@@ -1,10 +1,10 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react'
 
 interface ProjectNavChildType {
-    key: string
-    avatar: ReactNode
-    content: string
-    props?: any
+  key: string
+  avatar: ReactNode
+  content: string
+  props?: any
 }
 
-export type {ProjectNavChildType}
+export type { ProjectNavChildType }

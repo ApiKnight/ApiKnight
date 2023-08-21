@@ -78,7 +78,7 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
           title={titleInfo}
         />
       )}
-      {show && <Overlay />}
+      {show && <Overlay data={10000} />}
     </span>
   )
 }

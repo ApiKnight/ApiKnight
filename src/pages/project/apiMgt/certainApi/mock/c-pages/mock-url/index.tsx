@@ -12,7 +12,7 @@ import {
   changePrefixAction,
 } from '@/store/modules/mock'
 import { BaseInfoType, IAPIInfo, RequestParamsType } from '@/types/api'
-import withMode from '../../../with-mode'
+import withMode from '../../with-mode'
 import testApi from '@/api/testApi'
 type MockUrlProps = {
   mode: 'run' | 'mock'

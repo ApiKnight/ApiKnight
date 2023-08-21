@@ -17,7 +17,7 @@ import {
   changeRequestBodyAction,
 } from '@/store/modules/mock'
 import { NavItem } from './type'
-import withMode from '../../../with-mode'
+import withMode from '../../with-mode'
 
 const NavItems: NavItem[] = [
   { label: 'Params', value: NavType.Params },

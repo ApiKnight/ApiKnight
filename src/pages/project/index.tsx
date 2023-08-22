@@ -2,17 +2,14 @@ import React, { useEffect } from 'react'
 import './index.less'
 import { Outlet, Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { updateProjectId } from '@/store/modules/projectSlice'
-import { RootState } from '@/store/index.ts'
 import ProjectNav from '@/components/ProjectNav'
 import { useNavigate } from 'react-router-dom'
 import getCurrentRole from '@/api/getCurrentRole'
 // import { setRole } from '@/store/modules/roleSlice'
+import ApiTab from '@/components/ApiTab'
 
 const Project: React.FunctionComponent = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   const state = useLocation().state
   const project_id = state.project_id?state.project_id:''
 
@@ -23,8 +20,11 @@ const Project: React.FunctionComponent = () => {
     })
     
   }, [])
+  
   return (
-    <div className='project'>
+    <>
+      <ApiTab/>
+      <div className='project'>
       <div className='left'>
         <ProjectNav project_id={project_id} />
       </div>
@@ -32,6 +32,7 @@ const Project: React.FunctionComponent = () => {
         <Outlet />
       </div>
     </div>
+    </>
   )
 }
 

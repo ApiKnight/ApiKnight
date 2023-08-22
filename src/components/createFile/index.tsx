@@ -3,19 +3,20 @@ import { Button, Input } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
 import './index.less'
 import ReactDOM from 'react-dom'
-import { RootState } from '@/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { AddDir } from '@/types/arrayToTree'
 import { setFalse, setTrue } from '@/store/modules/createFileState'
 import { increment } from '@/store/modules/watchDir'
-import Overlay from '@/components/overlay'
 import request from '../../api/request'
+import { notification } from 'antd'
+import type { NotificationPlacement } from 'antd/es/notification/interface'
 
 const CreateFile: React.FunctionComponent<{
   handleClick: any
   data: AddDir
   title: string
 }> = (props) => {
+  const [api, contextHolder] = notification.useNotification()
   const dispatch = useDispatch()
   const [dirName, setDirName] = useState('')
   function change(e: any): void {
@@ -25,6 +26,16 @@ const CreateFile: React.FunctionComponent<{
   function closeThis(): void {
     props.handleClick(false)
     dispatch(setFalse())
+  }
+  function alertTip(alertData: string): void {
+    const openNotification = (placement: NotificationPlacement) => {
+      api.info({
+        message: `错误提示`,
+        description: alertData,
+        placement,
+      })
+    }
+    openNotification('topRight')
   }
   function addChildDir(e: any): void {
     e.stopPropagation()
@@ -43,6 +54,8 @@ const CreateFile: React.FunctionComponent<{
           // 在这里处理返回的数据
           if (res.data.code == 200) {
             dispatch(increment())
+          } else {
+            alert(res.data.message)
           }
         })
     } else {
@@ -60,6 +73,8 @@ const CreateFile: React.FunctionComponent<{
           // 在这里处理返回的数据
           if (res.data.code == 200) {
             dispatch(increment())
+          } else {
+            alert(res.data.message)
           }
         })
     }
@@ -73,6 +88,7 @@ const CreateFile: React.FunctionComponent<{
         e.stopPropagation()
       }}
     >
+      {contextHolder}
       <div className='createFile-title'>
         <span>
           <h3>{props.title}</h3>

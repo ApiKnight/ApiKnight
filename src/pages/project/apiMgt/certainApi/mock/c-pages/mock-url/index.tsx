@@ -6,13 +6,14 @@ import ApiOperator from '@/components/ApiOperator'
 import './index.less'
 import { useAppSelector, shallowEqualApp, useAppDispatch } from '@/store'
 import {
-  changeBodyAction,
+  changeResponseBodyAction,
   changeMethodAction,
   changePathAction,
   changePrefixAction,
+  changeRequestBodyAction
 } from '@/store/modules/mock'
 import { BaseInfoType, IAPIInfo, RequestParamsType } from '@/types/api'
-import withMode from '../with-mode'
+import withMode from '../../with-mode'
 import testApi from '@/api/testApi'
 import { log } from 'console'
 type MockUrlProps = {
@@ -20,7 +21,7 @@ type MockUrlProps = {
   mockPrefix?: string
 }
 const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
-  const {mode} = props
+  const { mode } = props
   const dispatch = useAppDispatch()
   // 根据模式，获取对应的数据
   const { userReqInfo, reqParams } = useAppSelector((state) => {
@@ -63,22 +64,25 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
   // 发送按钮点击事件
   const handleSendBtnClick = (): void => {
     const { prefix, path, method } = userReqInfo
-    const { params, headers, cookie, body } = reqParams
+    const { params, headers:header, cookie, body } = reqParams
     const paramsObj = {}
-    if(params.length){
-      params.forEach(v=>{
-        console.log(v);
-        paramsObj[v.paramName]=v.value
+    if (params.length) {
+      params.forEach((v) => {
+        console.log(v)
+        paramsObj[v.paramName] = v.value
       })
     }
-    const url = mode === 'mock' ? 'http://www.apiknight.com/api/mock' : (prefix + (path ? ('/' + path) : ''))
-    const requestObj:any = {
+    const url =
+      mode === 'mock'
+        ? 'http://www.apiknight.com/api/mock'
+        : prefix + (path ? '/' + path : '')
+    const requestObj = {
       url,
       method,
-      params:paramsObj,
-      headers,
+      params: paramsObj,
+      header,
       cookie,
-      data:body,
+      data: body,
     }
     console.log(requestObj)
     testApi(requestObj).then(res=>{
@@ -86,14 +90,14 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       
       res.status === 200
       ?
-      dispatch(changeBodyAction(JSON.stringify(res.data)))
+      dispatch(changeRequestBodyAction(JSON.stringify(res.data)))
       :
       ''
     })
     // // 假如这是响应内容
     // const responseExample = JSON.stringify({ name: 'LuoKing' })
     // // 设置响应内容
-    // dispatch(changeBodyAction(responseExample))
+    // dispatch(changeRequestBodyAction(responseExample))
   }
 
   return (
@@ -104,9 +108,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
         onPrefixInputChange={(e) => handleInputChange(e, 'prefix')}
         onInputChange={(e) => handleInputChange(e, 'path')}
         inputValue={userReqInfo.path}
-        urlPrefixValue={
-          mode === 'run' ? userReqInfo.prefix : props.mockPrefix
-        }
+        urlPrefixValue={mode === 'run' ? userReqInfo.prefix : props.mockPrefix}
         disablePrefix={mode === 'mock'}>
         <Button className='btn' type='primary' onClick={handleSendBtnClick}>
           发送

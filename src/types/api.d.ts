@@ -3,6 +3,20 @@ import { Method } from '@/types/components'
 
 type DataType = 'string' | 'number' | 'boolean' | 'object' | 'array' | 'null'
 
+// 文档元信息
+export interface MetaInfo {
+  created: number
+  status: number
+  owner_id: string
+  tags: string[]
+  desc: string
+  api_id?: string
+  folder_id?: string
+  description?: string
+  name?: string
+  notes?: string
+}
+
 // 键值对类型参数
 export interface NormalParamsType {
   id: number
@@ -35,13 +49,7 @@ export interface ResponseType {
 
 // API信息结构
 export interface IAPIInfo {
-  meta_info: {
-    created: number
-    status: number
-    owner_id: string
-    tags: string[]
-    desc: string
-  }
+  meta_info: MetaInfo
 
   apiInfo: {
     base: BaseInfoType

@@ -1,24 +1,7 @@
+import { TabsSlice } from '@/types/tabSlice'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-interface TabSlice {
-  data: [
-    {
-      id: string
-      folder_id: string
-      create_user: string
-      create_time: string
-      operate_time: string
-      operate_user: string
-      request_data: string
-      response_data: string
-      project_id: number
-      description: string
-      name: string
-    },
-  ]
-}
-
-const initialState: TabSlice = {
+const initialState: TabsSlice = {
   data: [
     {
       id: '',
@@ -40,8 +23,8 @@ const tabsSlice = createSlice({
   name: 'tabsSlice',
   initialState,
   reducers: {
-    assign(state, action: PayloadAction<Array<TabSlice>>) {
-      (state.data as any) = action.payload
+    assign(state, action: PayloadAction<Array<TabsSlice>>) {
+      ;(state.data as any) = action.payload
     },
   },
 })

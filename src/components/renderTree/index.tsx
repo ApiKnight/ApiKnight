@@ -87,7 +87,7 @@ const renderTree: React.FC = (props) => {
               title: item.title,
               key: item.key,
               pid: item.pid,
-              type: item.type
+              type: item.type,
             }}
           />
         ), // 将之前提取出的数据重新放入组件中
@@ -102,20 +102,22 @@ const renderTree: React.FC = (props) => {
   }
   const dispatch = useDispatch()
   const onDrop = (info) => {
-    const url =
-      info.dragNode.type === 'FILE' ? '/v1/folder/update' : '/v1/apis/update'
-    const urlData =
-      info.dragNode.type === 'FILE'
-        ? { folder_id: info.dragNodesKeys[0], parent_id: info.node.key }
-        : { apis_id: info.dragNodesKeys[0], folder_id: info.node.key }
-    setShowLoading(true)
-    request.post(url, urlData, {}).then((res) => {
-      console.log(res)
-
-      // 在这里处理返回的数据
-      dispatch(increment())
+    if (info.node.type === 'FILE') {
+      const url =
+        info.dragNode.type === 'FILE' ? '/v1/folder/update' : '/v1/apis/update'
+      const urlData =
+        info.dragNode.type === 'FILE'
+          ? { folder_id: info.dragNodesKeys[0], parent_id: info.node.key }
+          : { apis_id: info.dragNodesKeys[0], folder_id: info.node.key }
       setShowLoading(true)
-    })
+      request.post(url, urlData, {}).then((res) => {
+        console.log(res)
+
+        // 在这里处理返回的数据
+        dispatch(increment())
+        setShowLoading(true)
+      })
+    }
   }
   const renderData = restoreData(makeValue.value)
   // 数组转树形结构

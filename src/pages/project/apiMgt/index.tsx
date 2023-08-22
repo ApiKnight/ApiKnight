@@ -13,21 +13,19 @@ import { addData } from '@/store/modules/tabSlice'
 import { useDispatch } from 'react-redux'
 import { setValue } from '@/store/modules/rightSlice'
 import Swagger from '@/components/Swagger'
+import ApiTab from '@/components/ApiTab'
 
 const ApiMgt: React.FunctionComponent = () => {
   const dispatch = useDispatch()
   const state = useLocation().state
   const projectId = state.project_id
-  function openTab() {
-    const data = {
+  function openTab(): void {
+    const adata: any = {
       key: projectId,
       title: '项目概览',
       type: 'gl',
     }
-    dispatch(
-      
-      addData(data as any),
-    )
+    dispatch(addData(adata))
     dispatch(setValue('gl'))
   }
   return (

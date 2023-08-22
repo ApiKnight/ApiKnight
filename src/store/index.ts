@@ -25,6 +25,8 @@ import showRightMenuReducer from '@/store/modules/showRightMenu'
 import userInfoSliceReducer from '@/store/modules/userInfoSlice.ts'
 import updateUserInfoSliceReducer from '@/store/modules/updateUserInfoSlice.ts'
 import isUpdateSliceReducer from '@/store/modules/isUpdateSlice.ts'
+import templateSliceReducer from '@/store/modules/templateSlice.ts'
+
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
@@ -43,6 +45,7 @@ export const store = configureStore({
     userInfoSlice: userInfoSliceReducer,
     updateUserInfoSlice: updateUserInfoSliceReducer,
     isUpdateSlice: isUpdateSliceReducer,
+    templateSlice: templateSliceReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -8,6 +8,8 @@ import request from '@/api/request'
 import { useLocation } from 'react-router-dom'
 import { notification } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
+import { createApi } from '@/api'
+import { getUserId } from '@/utils/storage/storage'
 
 const Context = React.createContext({ name: 'Default' })
 
@@ -22,32 +24,9 @@ const AddBtn: React.FunctionComponent<{ data: AddData }> = (props) => {
     <span
       style={{ display: 'inline' }}
       onClick={() => {
-        request
-          .post(
-            '/v1/apis/create',
-            {
-              project_id: projectId,
-              folder_id: data.key,
-              request_data: "{type:'GET'}",
-              response_data: 'xxxx',
-              description: 'xxxx',
-              name: 'getList1',
-            },
-            {},
-          )
+        createApi(projectId,data.key,getUserId())
           .then((res) => {
-            if (res.data.code == 200) {
-              dispatch(increment())
-            } else {
-              const openNotification = (placement: NotificationPlacement) => {
-                api.info({
-                  message: `错误提示`,
-                  description: res.data.message,
-                  placement,
-                })
-              }
-              openNotification('topRight')
-            }
+            dispatch(increment())
           })
       }}
     >

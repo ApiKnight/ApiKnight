@@ -14,9 +14,10 @@ type DocumentPropsType = {
 
 const Document: React.FunctionComponent<DocumentPropsType> = memo((props) => {
   const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(fetchDocumentApiAction(props.data))
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchDocumentApiAction(props.data))
+  // }, [dispatch])
+  dispatch(fetchDocumentApiAction(props.data))
   return (
     <div className='document-page'>
       <DocOperator />

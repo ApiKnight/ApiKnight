@@ -9,6 +9,7 @@ import { NavType } from '@/types/enum'
 import { getRangeRandom } from '@/utils/math'
 import { NormalParamsActionType, ParamsOptActionType } from '../../type'
 import { UpdateStatusActionType } from './type'
+import { increment } from '../watchDir'
 
 const initialData: IAPIInfo = getInitialApiInfoObj('unknown')
 
@@ -71,6 +72,7 @@ export const updateDocumentApiAction = createAsyncThunk(
     if (res.code === 200) {
       console.log('更新成功')
       dispatch(fetchDocumentApiAction(state.apiId))
+      dispatch(increment())
     }
     console.log(res, res.code, res.code === 200)
   },

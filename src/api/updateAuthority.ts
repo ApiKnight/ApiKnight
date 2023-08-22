@@ -1,7 +1,8 @@
 import request from './request'
 interface AuthorityType {
-  id: 'string'
-  role: 'string'
+  user_id: string
+  role: number | '',
+  project_id: string
 }
 /**
  * 更改成员权限

@@ -19,12 +19,14 @@ const ApiMgt: React.FunctionComponent = () => {
   const state = useLocation().state
   const projectId = state.project_id
   function openTab() {
+    const data = {
+      key: projectId,
+      title: '项目概览',
+      type: 'gl',
+    }
     dispatch(
-      addData({
-        key: projectId,
-        title: '项目概览',
-        type: 'gl',
-      }),
+      
+      addData(data as any),
     )
     dispatch(setValue('gl'))
   }

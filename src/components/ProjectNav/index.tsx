@@ -8,7 +8,9 @@ import { reversal, setFalse } from '@/store/modules/stateFlag'
 import Invite from '@/components/Invite'
 
 type MenuItem = Required<MenuProps>['items'][number]
-
+type ChildrenProps = {
+  project_id:string
+}
 function getItem(
   label: React.ReactNode,
   key: React.Key,
@@ -43,7 +45,7 @@ const items: MenuProps['items'] = [
   // getItem('Group', 'grp', null, [getItem('Option 13', '13'), getItem('Option 14', '14')], 'group'),
 ]
 
-const ProjectNav: React.FC = (props) => {
+const ProjectNav: React.FC<ChildrenProps> = (props) => {
   console.log('props', props)
 
   const dispatch = useDispatch()

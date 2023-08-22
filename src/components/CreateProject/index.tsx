@@ -62,7 +62,7 @@ const UpdateProject: React.FC<childProps> = (props) => {
         onFinishFailed={onFinishFailed}
         autoComplete='off'
       >
-        <Form.Item<FieldType>
+        <Form.Item<any>
           label='项目名称'
           name='projectname'
           rules={[{ required: true, message: '请输入项目名称!' }]}
@@ -70,7 +70,7 @@ const UpdateProject: React.FC<childProps> = (props) => {
           <Input />
         </Form.Item>
 
-        <Form.Item<FieldType>
+        <Form.Item<any>
           label='项目描述'
           name='description'
           rules={[{ required: true, message: '请输入项目描述!' }]}

@@ -1,30 +1,5 @@
-// // Login
-// import React, { useRef } from 'react'
-// import { useNavigate } from 'react-router-dom'
-
-// const Login: React.FC = () => {
-//   const navigate = useNavigate()
-//   const usernameRef = useRef(null)
-
-//   const login = () => {
-//     if (usernameRef.current) {
-//       localStorage.setItem('login_token', usernameRef.current.value)
-//       navigate('/user', { replace: true })
-//     } else {
-//       alert('请输入用户名')
-//     }
-//   }
-//   return (
-//     <div>
-//       <input type='text' name='username' id='username' ref={usernameRef} />
-//       <button onClick={login}>登录</button>
-//     </div>
-//   )
-// }
-
-// export default Login
 import React, { useState } from 'react'
-import { Button, Checkbox, Form, Input, Layout } from 'antd'
+import { Button, Checkbox, Form, Input, Layout,App } from 'antd'
 import HeaderNav from '@/components/HeaderNav'
 import { Menu, message } from 'antd'
 import type { MenuProps } from 'antd'
@@ -78,7 +53,7 @@ const Login: React.FC = () => {
           remember: values.remember,
         }),
         login(loginData).then(
-          (res) => {
+          (res:any) => {
             res.data.code === 200
               ? (message.success('登录成功'),
                 localStorage.setItem('token', res.data.data.token),
@@ -115,7 +90,7 @@ const Login: React.FC = () => {
   }
 
   return (
-    <>
+    <App>
       <HeaderNav ifHideUser={false} />
       <Content
         style={{ backgroundColor: '#fbf7ff', height: '89vh', width: '100vw' }}
@@ -142,7 +117,7 @@ const Login: React.FC = () => {
           onFinishFailed={onFinishFailed}
           autoComplete='off'
         >
-          <Form.Item<LoginType>
+          <Form.Item<any>
             label={current === 'login' ? '用户名或邮箱' : '用户名'}
             name={current === 'login' ? 'log_username' : 'reg_username'}
             rules={[
@@ -156,7 +131,7 @@ const Login: React.FC = () => {
             <Input />
           </Form.Item>
 
-          <Form.Item<LoginType>
+          <Form.Item<any>
             label='密码'
             name={current === 'login' ? 'log_password' : 'reg_password'}
             rules={[{ required: true, message: '输入密码!' }]}
@@ -174,14 +149,14 @@ const Login: React.FC = () => {
             </Form.Item>
           ) : (
             <>
-              <Form.Item<LoginType>
+              <Form.Item<any>
                 label='邮箱'
                 name='email'
                 rules={[{ required: true, message: '输入邮箱!' }]}
               >
                 <Input />
               </Form.Item>
-              <Form.Item<LoginType>
+              <Form.Item<any>
                 label='手机号'
                 name='phone'
                 rules={[{ required: true, message: '输入手机号码!' }]}
@@ -199,7 +174,7 @@ const Login: React.FC = () => {
           </Form.Item>
         </Form>
       </Content>
-    </>
+    </App>
   )
 }
 

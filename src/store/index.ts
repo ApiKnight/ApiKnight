@@ -23,6 +23,8 @@ import tabsSliceReducer from '@/store/modules/tabsSlice'
 import rightSliceReducer from '@/store/modules/rightSlice'
 import showRightMenuReducer from '@/store/modules/showRightMenu'
 
+// import roleReducer from '@/store/modules/roleSlice'
+
 export const store = configureStore({
   reducer: {
     counter: counterReducer,

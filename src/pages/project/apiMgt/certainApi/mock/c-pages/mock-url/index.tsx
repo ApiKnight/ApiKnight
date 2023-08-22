@@ -14,11 +14,11 @@ import {
 import { BaseInfoType, IAPIInfo, RequestParamsType } from '@/types/api'
 import withMode from '../with-mode'
 import testApi from '@/api/testApi'
+import { log } from 'console'
 type MockUrlProps = {
   mode: 'run' | 'mock'
   mockPrefix?: string
 }
-
 const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
   const {mode} = props
   const dispatch = useAppDispatch()
@@ -72,7 +72,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       })
     }
     const url = mode === 'mock' ? 'http://www.apiknight.com/api/mock' : (prefix + (path ? ('/' + path) : ''))
-    const requestObj = {
+    const requestObj:any = {
       url,
       method,
       params:paramsObj,
@@ -81,11 +81,19 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       data:body,
     }
     console.log(requestObj)
-    testApi(requestObj)
-    // 假如这是响应内容
-    const responseExample = JSON.stringify({ name: 'LuoKing' })
-    // 设置响应内容
-    dispatch(changeBodyAction(responseExample))
+    testApi(requestObj).then(res=>{
+      console.log(res.data);
+      
+      res.status === 200
+      ?
+      dispatch(changeBodyAction(JSON.stringify(res.data)))
+      :
+      ''
+    })
+    // // 假如这是响应内容
+    // const responseExample = JSON.stringify({ name: 'LuoKing' })
+    // // 设置响应内容
+    // dispatch(changeBodyAction(responseExample))
   }
 
   return (

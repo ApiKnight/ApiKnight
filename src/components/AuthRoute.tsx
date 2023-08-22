@@ -7,7 +7,7 @@ interface AuthRouteProps {
   children: ReactNode
 }
 const AuthRoute = ({ children }: AuthRouteProps) => {
-  const [isLogin, setIsLogin] = useState(<div>Loading</div>)
+  const [isLogin, setIsLogin] = useState<any>(<div>Loading</div>)
   useEffect(() => {
     useAuth().then((result) => {
       return setIsLogin(result ? children : <Navigate to='/user/login' />)

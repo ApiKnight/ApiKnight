@@ -4,11 +4,11 @@ import { Avatar } from 'antd'
 import { Link } from 'react-router-dom'
 import './index.less'
 
-interface Props {
+interface ChildrenProps {
   ifHideUser?: boolean
-  user_info?: Object
+  user_info?: any
 }
-const HeaderNav: React.FC<Props> = (props) => {
+const HeaderNav: React.FC<ChildrenProps> = (props) => {
   // localStorage.setItem('token','')
   // localStorage.setItem('user_id','')
   let { ifHideUser, user_info } = props

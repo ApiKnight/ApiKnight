@@ -17,36 +17,9 @@ const apiDataTemplate: IAPIInfo = {
       prefix: '',
     },
     request: {
-      params: [
-        {
-          paramName: '参数名',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
-          id: new Date().getTime() + getRangeRandom(1, 1000),
-        },
-      ],
-      headers: [
-        {
-          paramName: '参数名',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
-          id: new Date().getTime() + getRangeRandom(1, 1000),
-        },
-      ],
-      cookie: [
-        {
-          paramName: '参数名',
-          type: 'string',
-          desc: '',
-          required: false,
-          value: '',
-          id: new Date().getTime() + getRangeRandom(1, 1000),
-        },
-      ],
+      params: [],
+      headers: [],
+      cookie: [],
       body: '{}',
     },
     response: {

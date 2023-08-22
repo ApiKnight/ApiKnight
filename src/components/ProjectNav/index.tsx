@@ -5,7 +5,7 @@ import Invite from '@/components/Invite'
 import { ProjectNavChildType } from '@/types/projectNavChild'
 import ProjectNavChild from '../ProjectNavChild'
 
-const ProjectNav: React.FC = (props) => {
+const ProjectNav: React.FC<any> = (props) => {
   const items: Array<ProjectNavChildType> = [
     {
       key: '1',

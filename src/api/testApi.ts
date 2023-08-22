@@ -5,11 +5,12 @@ import request from './request'
  * @returns
  */
 type requestType = {
+  cookie:any,
   url: string
   method: string
-  params: Object
-  data: Object
-  header: Object
+  params: any
+  data: any
+  header: any
 }
 
 // const testApi = () => {

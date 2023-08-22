@@ -193,14 +193,20 @@ const MemberMgt: React.FC = () => {
       key: '1',
     },
   ]
-  const qualitySetBtn = (user_id) =>
-    role === 1 ? (
+  
+  const qualitySetBtn = (user_id) =>{
+    // 如果是自己，不展示按钮
+    if(user_id===localStorage.getItem('user_id')) return ''
+    
+    return role === 1 ? (
       <Dropdown menu={{ items }} trigger={['click']}>
         <a onClick={() => setCurrentUid(user_id)}>权限设置</a>
       </Dropdown>
     ) : (
       ''
     )
+  }
+    
 
   const delMemberHandler = (user_id) => {
     reqDelMember(project_id, user_id).then((res) => {
@@ -211,6 +217,9 @@ const MemberMgt: React.FC = () => {
   }
 
   const delMemberBtn = (userRole, user_id) => {
+    // 如果是自己，不展示按钮
+    if(user_id===localStorage.getItem('user_id')) return ''
+
     console.log(role, userRole)
 
     return role < userRole && role !== 0 ? (

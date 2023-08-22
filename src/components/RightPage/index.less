@@ -1,20 +1,13 @@
 .cpn-right-page {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
-  // 隐藏滚动条
-  overflow: -moz-scrollbars-none;
-  -ms-overflow-style: none;
-  box-sizing: border-box;
-  &::-webkit-scrollbar {
-    display: none;
-    width: 0 !important;
-  }
 
   .tabs-wrap {
   }
 
   .other-wrap {
     flex: 1;
+    overflow: hidden;
   }
 }

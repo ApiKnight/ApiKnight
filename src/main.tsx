@@ -17,7 +17,7 @@ const theme: ThemeConfig = {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <ConfigProvider theme={theme}>
-    <AntdApp>
+    <AntdApp style={{ height: '100%' }}>
       <Provider store={store}>
         <BrowserRouter>
           <App />

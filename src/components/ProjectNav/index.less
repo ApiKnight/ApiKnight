@@ -1,6 +1,17 @@
-.ProjectNavMenu {
+.menu-wrap {
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .project-nav-menu {
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     gap: 3%;
     height: 100%;
+
+    .active {
+      color: @theme-color-primary;
+    }
+  }
 }

@@ -1,15 +1,44 @@
 .projectNavChild {
-    display: flex;
-    flex-direction: column;
-    .projectNavChild-avater {
-        text-align: center;
-    }
-    .projectNavChild-content {
-        h5 {
-            text-align: center;
-        }
-    }
-}
-.projectNavChild :hover {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  transition: all 100ms ease;
+  box-sizing: border-box;
+
+  &:hover {
+    background-color: #f0f0f0;
     cursor: pointer;
+  }
+
+  .projectNavChild-avater {
+    margin-bottom: 5px;
+    text-align: center;
+
+    // 重置图表背景
+    .ant-avatar {
+      background-color: transparent;
+      width: auto;
+      height: auto;
+    }
+  }
+
+  .projectNavChild-content {
+    h5 {
+      font-size: 12px;
+      font-weight: 400;
+      text-align: center;
+    }
+  }
+
+  .func-icon {
+    font-size: 20px;
+    color: #767b84;
+  }
+}
+
+.projectNavChild.active {
+  .func-icon {
+    color: @theme-color-primary;
+  }
 }

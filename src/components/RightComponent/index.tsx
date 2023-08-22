@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import RightMenu from '@/components/RightMenu'
 import Overview from '@/pages/project/apiMgt/overview'
+import './index.less'
 
 const RightComponent: React.FunctionComponent = () => {
   const rightSlice = useSelector((state: RootState) => state.rightSlice.value)
   return (
-    <>
+    <div className='right-component-wrap'>
       {/* <>
         {rightSlice === '0' && rightSlice === '' && rightSlice !== 'gl' && (
         {rightSlice === '0' ||
@@ -24,7 +25,7 @@ const RightComponent: React.FunctionComponent = () => {
           // </div>
         )}
       </>
-    </>
+    </div>
   )
 }
 

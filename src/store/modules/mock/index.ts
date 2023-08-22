@@ -4,21 +4,9 @@ import { cloneDeep } from 'lodash'
 import type { IAPIInfo } from '@/types/api'
 import { NavType } from '@/types/enum'
 import { getRangeRandom } from '@/utils/math'
-import { getApiData } from '@/api/document'
+import { getApiData } from '@/api/apis'
 import { getInitialApiInfoObj } from '@/utils/documents'
-
-type NormalParamsActionType = {
-  payload: {
-    key: 'value' | 'paramName'
-    value: string
-    index: number
-    paramType: NavType
-  }
-}
-
-type ParamsOptActionType = {
-  payload: { isInsert: boolean; removeIndex: number; paramType: NavType }
-}
+import { NormalParamsActionType, ParamsOptActionType } from './type'
 
 const initialData: IAPIInfo = getInitialApiInfoObj('unknown')
 

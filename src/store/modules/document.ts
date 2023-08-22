@@ -2,20 +2,27 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { IAPIInfo } from '@/types/api'
 import { getInitialApiInfoObj } from '@/utils/documents'
 import { getFullApiData } from '@/api/document'
+import { getUserInfoById } from '@/api/user'
+import { IUserInfo } from '@/api/user/type'
 
 const initialData: IAPIInfo = getInitialApiInfoObj('unknown')
 
-// 获取接口数据
+// 获取文档相关的数据
 export const fetchDocumentApiAction = createAsyncThunk(
   'document/fetchDocumentApiAction',
   async (apiId: string, { dispatch }) => {
-    const res = await getFullApiData(apiId)
     try {
+      // 获取文档信息
+      const res = await getFullApiData(apiId)
       const apiData: IAPIInfo = JSON.parse(res.request_data)
-      apiData.meta_info.api_id = res.id
-      apiData.meta_info.name = res.name
-      apiData.meta_info.folder_id = res.folder_id
-      apiData.meta_info.description = res.description
+      const { id, name, folder_id, create_user, description } = res
+      apiData.meta_info.api_id = id
+      apiData.meta_info.name = name
+      apiData.meta_info.folder_id = folder_id
+      apiData.meta_info.description = description
+      // 获取用户信息
+      const ownerInfo = await getUserInfoById(create_user)
+      dispatch(changeUserInfoAction(ownerInfo))
       dispatch(changeApiDataAction(apiData))
       dispatch(changeApiIdAction(res.id))
     } catch (err) {
@@ -31,8 +38,12 @@ const documentSlice = createSlice({
   initialState: {
     apiData: initialData,
     apiId: '',
+    ownerUser: {} as IUserInfo,
   },
   reducers: {
+    changeUserInfoAction(state, { payload }) {
+      state.ownerUser = payload
+    },
     changeApiIdAction(state, { payload }) {
       state.apiId = payload
     },
@@ -48,6 +59,18 @@ const documentSlice = createSlice({
     changePrefixAction(state, { payload }) {
       state.apiData.apiInfo.base.prefix = payload
     },
+    changeApiNameAction(state, { payload }) {
+      state.apiData.meta_info.name = payload
+    },
+    changeApiDescAction(state, { payload }) {
+      state.apiData.meta_info.desc = payload
+    },
+    changeDevStatusAction(state, { payload }) {
+      state.apiData.meta_info.status = payload
+    },
+    changeTagsAction(state, { payload }) {
+      state.apiData.meta_info.tags = payload
+    },
   },
 })
 
@@ -57,5 +80,10 @@ export const {
   changeMethodAction,
   changePathAction,
   changePrefixAction,
+  changeUserInfoAction,
+  changeApiNameAction,
+  changeApiDescAction,
+  changeDevStatusAction,
+  changeTagsAction,
 } = documentSlice.actions
 export default documentSlice.reducer

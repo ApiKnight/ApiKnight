@@ -4,7 +4,8 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 interface Result<T> {
   code: number
   message: string
-  result: T
+  result?: T
+  data?: T
 }
 // 导出Request，传入配置以创建实例
 export class Request {

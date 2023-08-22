@@ -136,12 +136,17 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
   const renderContent = (): JSX.Element => {
     if (currentNav === NavType.Body) {
       return (
-        <TextArea
-          rows={6}
-          placeholder='请求体内容'
-          value={requestInfo.body}
-          onChange={(e) => handleBodyChange(e.target.value)}
-        />
+        <>
+          <div className='section-title' style={{ marginBottom: '10px' }}>
+            请输入JSON格式的请求体
+          </div>
+          <TextArea
+            rows={6}
+            placeholder='请求体内容'
+            value={requestInfo.body}
+            onChange={(e) => handleBodyChange(e.target.value)}
+          />
+        </>
       )
     } else {
       return (

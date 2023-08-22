@@ -45,7 +45,7 @@ export async function createApi(
   folderId: string,
   userId: string,
   name = '新建的接口',
-  desc = '',
+  desc = '新建的接口描述',
 ): Promise<any> {
   const apiData = getInitialApiInfoObj(userId)
   const { data } = await request.post('/v1/apis/create', {

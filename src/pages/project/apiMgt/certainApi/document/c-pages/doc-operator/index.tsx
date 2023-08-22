@@ -12,6 +12,9 @@ import {
   updateDocumentApiAction,
 } from '@/store/modules/document/document'
 import { deleteApi } from '@/api'
+import { increment } from '@/store/modules/watchDir'
+import { removeData } from '@/store/modules/tabSlice'
+import { setValue } from '@/store/modules/rightSlice'
 
 const DocOperator: React.FunctionComponent = memo(() => {
   const { message, modal } = App.useApp()
@@ -69,7 +72,9 @@ const DocOperator: React.FunctionComponent = memo(() => {
         const res = await deleteApi(apiId)
         message.success(res.message)
         // 刷新页面
-        window.location.reload()
+        dispatch(increment())
+        dispatch(removeData(apiId))
+        dispatch(setValue('gl'))
       },
       onCancel: () => {},
     })

@@ -7,7 +7,7 @@ import type { ParamsProps } from './type'
 import type { NormalParamsType } from '@/types/api'
 import './index.less'
 
-const Home: React.FunctionComponent<ParamsProps> = memo((props) => {
+const NormalParamTable: React.FunctionComponent<ParamsProps> = memo((props) => {
   const { dataSource, onParamDelClick, onParamAddClick, onParamInfoChange } =
     props
 
@@ -85,4 +85,4 @@ const Home: React.FunctionComponent<ParamsProps> = memo((props) => {
   )
 })
 
-export default Home
+export default NormalParamTable

@@ -1,6 +1,6 @@
 import request from '@/api/request'
 import { IAPIInfo } from '@/types/api'
-import type { IApiResult, IFetchApiTransfer } from './type'
+import type { IApiResult, IFetchApiTransfer, IUpdateApiTransfer } from './type'
 import { getInitialApiInfoObj } from '@/utils/documents'
 
 /**
@@ -69,15 +69,8 @@ export async function createApi(
  * @param apiData api信息
  * @param responseData Mock响应信息
  */
-export async function updateApi(
-  apiId: number,
-  folderId: string,
-  name: string,
-  desc: string,
-  notes: string,
-  apiData: IAPIInfo,
-  responseData: string,
-): Promise<any> {
+export async function updateApi(options: IUpdateApiTransfer): Promise<any> {
+  const { apiId, folderId, name, desc, notes, apiData, responseData } = options
   const { data } = await request.post('/v1/apis/update', {
     folder_id: folderId,
     request_data: JSON.stringify(apiData),
@@ -87,5 +80,15 @@ export async function updateApi(
     notes: notes,
     apis_id: apiId,
   })
+  return data
+}
+
+/**
+ * 删除接口信息
+ * @param apiId 接口id
+ * @returns
+ */
+export async function deleteApi(apiId: string) {
+  const { data } = await request.post('/v1/apis/delete', { apis_id: apiId })
   return data
 }

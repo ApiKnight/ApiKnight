@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import { Input, Select, message } from 'antd'
 const { TextArea } = Input
 
@@ -11,7 +11,7 @@ import {
   changeApiNameAction,
   changeDevStatusAction,
   changeTagsAction,
-} from '@/store/modules/document'
+} from '@/store/modules/document/document'
 import tagRender from './tag-render'
 
 type SelectType = 'status' | 'owner' | 'tag'
@@ -61,7 +61,6 @@ const getItemByVal: <T>(arr: T[], value: T) => T = (list, value) => {
 type Owner = { label: string; value: any }
 
 const DocInfo: React.FunctionComponent = () => {
-  const [messageApi, contextHolder] = message.useMessage()
   const dispatch = useAppDispatch()
   const { metaInfo, ownerUser } = useAppSelector((state) => ({
     metaInfo: state.document.apiData.meta_info,
@@ -84,7 +83,7 @@ const DocInfo: React.FunctionComponent = () => {
   // 候选负责人列表
   const directors: Owner[] = [
     {
-      label: ownerUser.username,
+      label: '@' + ownerUser.username,
       value: ownerUser.id,
     },
   ]
@@ -137,7 +136,6 @@ const DocInfo: React.FunctionComponent = () => {
 
   return (
     <div className='doc-info'>
-      {contextHolder}
       {/* 接口名称 */}
       <div className='api-name'>
         <Input
@@ -186,6 +184,7 @@ const DocInfo: React.FunctionComponent = () => {
         <TextArea
           placeholder='接口说明信息'
           rows={3}
+          value={metaInfo.desc}
           onChange={(e) => handleInputChange(e.target.value, 'desc')}
         />
       </div>

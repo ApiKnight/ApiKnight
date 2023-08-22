@@ -1,3 +1,6 @@
+import { IAPIInfo } from '@/types/api'
+import exp from 'constants'
+
 // 传输类型:获取接口信息
 export interface IFetchApiTransfer {
   id: string
@@ -11,6 +14,17 @@ export interface IFetchApiTransfer {
   project_id: number
   description: string
   name: string
+}
+
+// 传输类型：更新接口信息
+export interface IUpdateApiTransfer {
+  apiId: string
+  folderId: string
+  name: string
+  desc: string
+  notes: string
+  apiData: IAPIInfo
+  responseData: string
 }
 
 export interface IApiResult<T> {

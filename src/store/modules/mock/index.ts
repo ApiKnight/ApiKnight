@@ -110,7 +110,7 @@ const mockSlice = createSlice({
       }
       if (isInsert) {
         dataSource.apiInfo.request[key].push({
-          paramName: 'ParamName',
+          paramName: '',
           type: 'string',
           desc: '',
           required: false,

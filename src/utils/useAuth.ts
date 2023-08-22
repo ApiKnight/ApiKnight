@@ -10,6 +10,7 @@ export async function useAuth() {
   data.code === 200
     ? ''
     : (localStorage.setItem('token', ''), localStorage.setItem('user_id', ''))
-
+    console.log('datacode',data.code === 200);
+    
   return data.code === 200
 }

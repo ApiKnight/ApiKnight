@@ -30,7 +30,7 @@ const ProjectSet: React.FC = () => {
   const navigate = useNavigate()
   // const project_id = useSelector((state: RootState) => state.project.project_id)
   const { project_id } = useLocation().state
-  const [projectInfo, setProjectInfo] = useState<ProjectInfoType>()
+  const [projectInfo, setProjectInfo] = useState<ProjectInfoType>({description:'',projectname:''})
   const [role, setRoleState] = useState<number>(0)
 
   const onFinish = (values: any) => {

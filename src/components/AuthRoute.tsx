@@ -10,6 +10,8 @@ const AuthRoute = ({ children }: AuthRouteProps) => {
   const [isLogin, setIsLogin] = useState<any>(<div>Loading</div>)
   useEffect(() => {
     useAuth().then((result) => {
+      console.log('result',result);
+      
       return setIsLogin(result ? children : <Navigate to='/user/login' />)
     })
   }, [])

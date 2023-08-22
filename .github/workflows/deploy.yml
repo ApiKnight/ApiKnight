@@ -19,4 +19,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist # The folder the action should deploy.
-          github_token: ${{ secrets.GITHUB_TOKEN}} # GitHub 读写仓库的权限token，自动生成无需关心
+          github_token: ${{ secrets.TOKEN }} # GitHub 读写仓库的权限token，自动生成无需关心

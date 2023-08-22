@@ -1,17 +1,26 @@
-import React, { memo, useState } from 'react'
-import { Input, Select } from 'antd'
+import React, { memo, useMemo, useState } from 'react'
+import { Input, Select, message } from 'antd'
 const { TextArea } = Input
 
 import { StatusValue } from '@/types/enum'
-
 import './index.less'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { IUserInfo } from '@/api/user/type'
+import {
+  changeApiDescAction,
+  changeApiNameAction,
+  changeDevStatusAction,
+  changeTagsAction,
+} from '@/store/modules/document'
+import tagRender from './tag-render'
 
 type SelectType = 'status' | 'owner' | 'tag'
 type InputType = 'name' | 'desc'
 
 type DevStatus = { label: string; value: StatusValue }
+type TagType = { label: string; value: string }
 
-// 开发状态
+// 全部开发状态
 const allDevStatus: DevStatus[] = [
   { label: '已发布', value: StatusValue.RELEASE },
   { label: '测试中', value: StatusValue.TESTING },
@@ -19,54 +28,121 @@ const allDevStatus: DevStatus[] = [
   { label: '开发中', value: StatusValue.DEVELOPING },
 ]
 
-type Owner = { label: string; value: any }
-// 候选负责人
-const directors: Owner[] = [{ label: '张三(@张三)', value: 1 }]
+const tagsColor = {
+  默认标签: '#1697ff',
+  查询: '#1677ff',
+  机密: '#f5222d',
+  内部: '#fa541c',
+  外部: '#7cb305',
+  未发布: '#13c2c2',
+  已发布: '#52c41a',
+}
 
-const DocInfo: React.FunctionComponent = memo(() => {
-  // 状态
-  const [devStatus, setDevStatus] = useState(allDevStatus[0])
-  // 责任人
-  const [owner, setOwner] = useState(directors[0])
-  // 接口名称
-  const [apiName, setApiName] = useState('')
-  // 接口描述
-  const [apiDesc, setApiDesc] = useState('')
-  // console.log(apiDesc)
+const allTags: TagType[] = [
+  '默认标签',
+  '查询',
+  '机密',
+  '内部',
+  '外部',
+  '未发布',
+  '已发布',
+].map((item) => ({ label: item, value: tagsColor[item] }))
+
+/**
+ *
+ * @param value value值
+ * @returns 索引
+ */
+const getItemByVal: <T>(arr: T[], value: T) => T = (list, value) => {
+  const index = allDevStatus.findIndex((item) => item.value === value)
+  return list[index]
+}
+
+type Owner = { label: string; value: any }
+
+const DocInfo: React.FunctionComponent = () => {
+  const [messageApi, contextHolder] = message.useMessage()
+  const dispatch = useAppDispatch()
+  const { metaInfo, ownerUser } = useAppSelector((state) => ({
+    metaInfo: state.document.apiData.meta_info,
+    ownerUser: state.document.ownerUser,
+  }))
+  // 开发状态信息
+  const devStatus = useMemo(() => {
+    return getItemByVal(allDevStatus, metaInfo.status as unknown as DevStatus)
+  }, [metaInfo.status])
+
+  // 标签信息
+  const tags = useMemo(() => {
+    const values = metaInfo.tags.map((item) => ({
+      label: item,
+      value: tagsColor[item],
+    }))
+
+    return values
+  }, [metaInfo.tags])
+  // 候选负责人列表
+  const directors: Owner[] = [
+    {
+      label: ownerUser.username,
+      value: ownerUser.id,
+    },
+  ]
+  // 责任人信息
+  const owner = useMemo(() => {
+    return directors[0]
+  }, [ownerUser])
 
   // 下拉框选择事件
   const handleSelectChange = (value: any, type: SelectType) => {
     switch (type) {
       case 'status':
-        setDevStatus(value)
+        dispatch(changeDevStatusAction(value))
         break
       case 'owner':
-        setOwner(value)
+        handleChangeOwnerInfo(value)
         break
       case 'tag':
+        handleTagChange(value)
         break
     }
+  }
+
+  // 改变用户信息
+  const handleChangeOwnerInfo = (ownerInfo: IUserInfo) => {
+    // 暂无处理逻辑
+    console.log(owner)
+  }
+  // 标签改变事件
+  const handleTagChange = (value: TagType[]) => {
+    if (value.length > 4) {
+      message.error('最多选择4个标签')
+      return
+    }
+    const tagValues = value.map((item) => item.label)
+    dispatch(changeTagsAction(tagValues))
   }
 
   // 输入框输入事件
   const handleInputChange = (value: string, type: InputType) => {
     switch (type) {
       case 'name':
-        setApiName(value)
+        dispatch(changeApiNameAction(value))
         break
       case 'desc':
-        setApiDesc(value)
+        dispatch(changeApiDescAction(value))
         break
     }
   }
 
   return (
     <div className='doc-info'>
+      {contextHolder}
       {/* 接口名称 */}
       <div className='api-name'>
         <Input
           placeholder='未命名接口'
-          value={apiName}
+          value={metaInfo.name}
           onChange={(e) => handleInputChange(e.target.value, 'name')}
         />
       </div>
@@ -94,15 +170,13 @@ const DocInfo: React.FunctionComponent = memo(() => {
         <div className='status-item'>
           <div className='label'>标签</div>
           <Select
-            defaultValue='不确定是否需要加，暂时留空'
+            value={tags}
+            tagRender={tagRender}
+            mode='multiple'
+            key='label'
             style={{ width: '90%' }}
-            onChange={(value) => handleSelectChange(value, 'tag')}
-            options={[
-              {
-                value: '不确定是否需要加，暂时留空',
-                label: '不确定是否需要加，暂时留空',
-              },
-            ]}
+            onChange={(_, option) => handleSelectChange(option, 'tag')}
+            options={allTags}
           />
         </div>
       </div>
@@ -117,6 +191,6 @@ const DocInfo: React.FunctionComponent = memo(() => {
       </div>
     </div>
   )
-})
+}
 
-export default DocInfo
+export default memo(DocInfo)

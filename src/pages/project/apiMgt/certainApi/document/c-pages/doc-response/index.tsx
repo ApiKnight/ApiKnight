@@ -5,6 +5,7 @@ const { TextArea } = Input
 
 import { useAppDispatch, useAppSelector } from '@/store'
 import { changeResponseBodyAction } from '@/store/modules/document/document'
+import './index.less'
 
 const DocResponse: React.FunctionComponent = memo(() => {
   const dispatch = useAppDispatch()

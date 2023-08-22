@@ -10,7 +10,7 @@ import {
   changeMethodAction,
   changePathAction,
   changePrefixAction,
-  changeRequestBodyAction
+  changeRequestBodyAction,
 } from '@/store/modules/mock'
 import { BaseInfoType, IAPIInfo, RequestParamsType } from '@/types/api'
 import withMode from '../../with-mode'
@@ -64,7 +64,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
   // 发送按钮点击事件
   const handleSendBtnClick = (): void => {
     const { prefix, path, method } = userReqInfo
-    const { params, headers:header, cookie, body } = reqParams
+    const { params, headers: header, cookie, body } = reqParams
     const paramsObj = {}
     if (params.length) {
       params.forEach((v) => {
@@ -85,14 +85,12 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       data: body,
     }
     console.log(requestObj)
-    testApi(requestObj).then(res=>{
-      console.log(res.data);
-      
+    testApi(requestObj).then((res) => {
+      console.log(res.data)
+
       res.status === 200
-      ?
-      dispatch(changeRequestBodyAction(JSON.stringify(res.data)))
-      :
-      ''
+        ? dispatch(changeRequestBodyAction(JSON.stringify(res.data)))
+        : ''
     })
     // // 假如这是响应内容
     // const responseExample = JSON.stringify({ name: 'LuoKing' })

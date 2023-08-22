@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react'
-import { Button } from 'antd'
+import { Button, App, Modal, Input } from 'antd'
 import type { ApiOptReqOptType } from '@/types/components'
 import './index.less'
 import ApiOperator from '@/components/ApiOperator'
@@ -8,17 +8,25 @@ import {
   changeMethodAction,
   changePrefixAction,
   changePathAction,
-} from '@/store/modules/document'
+  changeUpdateStatusAction,
+  updateDocumentApiAction,
+} from '@/store/modules/document/document'
+import { deleteApi } from '@/api'
 
 const DocOperator: React.FunctionComponent = memo(() => {
+  const { message, modal } = App.useApp()
   const dispatch = useAppDispatch()
-  const { baseInfo, apiData } = useAppSelector(
+  const { baseInfo, apiId, onUpdating, onUploading } = useAppSelector(
     (state) => ({
       baseInfo: state.document.apiData.apiInfo.base,
-      apiData: state.document.apiData,
+      apiId: state.document.apiId,
+      onUpdating: state.document.onUpdating,
+      onUploading: state.document.onUploading,
     }),
     shallowEqualApp,
   )
+  // 保存接口备注
+  const [saveRemark, setSaveRemark] = useState<string>('')
 
   // 由于组件需要额外冗余增加一个属性，需要保持与userReqInfo中的method一致
   const [method, setMethod] = useState<ApiOptReqOptType>({
@@ -46,15 +54,25 @@ const DocOperator: React.FunctionComponent = memo(() => {
     }
   }
 
-  // 保存信息
-  const handleSaveInfo = () => {
-    console.log({ baseInfo, apiData })
+  // 确认保存信息
+  const handleConfimSave = () => {
+    dispatch(updateDocumentApiAction(saveRemark))
   }
 
   // 删除信息
   const handleDelInfo = () => {
-    console.log('删除接口')
-    console.log({ baseInfo })
+    modal.confirm({
+      title: '删除接口',
+      content: '确定要删除该接口吗？删除后不可恢复',
+      onOk: async () => {
+        // 删除接口信息
+        const res = await deleteApi(apiId)
+        message.success(res.message)
+        // 刷新页面
+        window.location.reload()
+      },
+      onCancel: () => {},
+    })
   }
 
   return (
@@ -66,13 +84,35 @@ const DocOperator: React.FunctionComponent = memo(() => {
         onInputChange={(e) => handleInputChange(e, 'path')}
         urlPrefixValue={baseInfo.prefix}
         inputValue={baseInfo.path}>
-        <Button className='btn' type='primary' onClick={handleSaveInfo}>
+        <Button
+          className='btn'
+          type='primary'
+          onClick={() =>
+            dispatch(changeUpdateStatusAction({ onUpdating: true }))
+          }>
           保存
         </Button>
         <Button className='btn' onClick={handleDelInfo}>
           删除
         </Button>
       </ApiOperator>
+
+      {/* 确认保存对话框 */}
+      <Modal
+        title='保存接口信息'
+        open={onUpdating}
+        confirmLoading={onUploading}
+        onOk={handleConfimSave}
+        onCancel={(e) =>
+          dispatch(changeUpdateStatusAction({ onUpdating: false }))
+        }>
+        <Input
+          style={{ marginTop: '15px' }}
+          placeholder='接口修改备注'
+          value={saveRemark}
+          onChange={(e) => setSaveRemark(e.target.value)}
+        />
+      </Modal>
     </div>
   )
 })

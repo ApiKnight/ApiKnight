@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import getCurrentRole from '@/api/getCurrentRole'
 // import { setRole } from '@/store/modules/roleSlice'
 import ApiTab from '@/components/ApiTab'
+import './index.less'
 
 const Project: React.FunctionComponent = () => {
   const navigate = useNavigate()
@@ -21,7 +22,7 @@ const Project: React.FunctionComponent = () => {
   }, [])
 
   return (
-    <>
+    <div className='project-wrap'>
       <ApiTab />
       <div className='project'>
         <div className='left'>
@@ -31,7 +32,7 @@ const Project: React.FunctionComponent = () => {
           <Outlet />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

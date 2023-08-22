@@ -41,9 +41,9 @@ const App: React.FunctionComponent = () => {
           <Route
             path='/project'
             element={
-              <AuthRoute>
+              // <AuthRoute>
               <Project />
-              </AuthRoute>
+              // </AuthRoute>
             }>
             <Route path='/project/apiMgt' element={<ApiMgt />}>
               <Route

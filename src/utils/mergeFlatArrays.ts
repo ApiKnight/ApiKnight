@@ -1,5 +1,6 @@
 import { ArrayItem, FlatArrayItem } from '@/types/arrayToTree'
 import { FlatItem } from '@/types/mergeFlatArrays'
+import { parseAPIInfo } from './api'
 
 // arr_1 -> 文件目录数组 arr_2 -> 接口文件数组
 export function mergeFlatArrays(
@@ -13,10 +14,14 @@ export function mergeFlatArrays(
   let realArray_2 = arr_2.filter((item: FlatItem) => {
     return item.project_id === targetId
   })
-  realArray_1.map((item) => {
+  realArray_1.map((item: FlatItem) => {
     item.type = 'FILE'
   })
-  realArray_2.map((item) => (item.type = 'GET'))
+  realArray_2.map((item: FlatItem) => {
+      let tempData = parseAPIInfo(item.request_data)
+      item.type = tempData.getMethod() as any
+  }
+  )
   realArray_2.map((item) => {
     item.parent_id = item.folder_id
   })

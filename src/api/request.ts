@@ -1,5 +1,6 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import NProgress from 'nprogress'
 
 interface Result<T> {
   code: number
@@ -27,6 +28,8 @@ export class Request {
     this.instance.interceptors.request.use(
       // config:AxiosRequestConfig
       (config: any) => {
+        // 顶部进度条
+        NProgress.start()
         // CORS
         config.headers['Access-Control-Allow-Origin'] = '*'
         config.headers['Content-Type'] = 'application/json'
@@ -47,6 +50,8 @@ export class Request {
     //响应拦截,根据响应状态码做统一的提示信息，整理响应数据
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
+        // 顶部进度条
+        NProgress.done()
         // 统一处理响应数据
         // 系统如果有自定义code也可以在这里处理
         // console.log('响应拦截成功', res)

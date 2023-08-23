@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { UnorderedListOutlined } from '@ant-design/icons'
-import { Button, Popover, Space } from 'antd'
-import { increment } from '@/store/modules/watchDir'
+import { Button, Popover } from 'antd'
 import { AddData } from '@/types/treeComponents'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setTrue } from '@/store/modules/createFileState'
 import CreateFile from '@/components/createFile'
 import Overlay from '@/components/overlay'
 import { useLocation } from 'react-router-dom'
 import './menu.less'
-import { RootState } from '@/store'
 
 const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
   const { data } = props

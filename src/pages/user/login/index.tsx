@@ -7,7 +7,7 @@ import request from '@/api/request'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import login from '@/api/login'
-
+import randomNum from '@/utils/randomNum'
 const { Header, Content } = Layout
 
 type LoginType = {
@@ -39,7 +39,13 @@ const Login: React.FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [current, setCurrent] = useState('login')
-
+  /**
+   * 生成[min,max)区间的随机整数
+   * @param min 最小值
+   * @param max 最大值
+   * @returns 
+   */
+  
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key)
   }
@@ -70,7 +76,7 @@ const Login: React.FC = () => {
       : ((registerData = {
           username: values.reg_username,
           password: values.reg_password,
-          avatar_url: 'https://avatars.githubusercontent.com/u/19998011?v=4',
+          avatar_url: `src/assets/images/avatar${randomNum(1,6)}.jpg`,
           email: values.email,
           phone: values.phone,
         }),

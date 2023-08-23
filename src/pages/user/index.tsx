@@ -87,6 +87,7 @@ const User: React.FunctionComponent = () => {
                       dec={value.description}
                       project_id={value.id}
                       iconPath={value.iconPath}
+                      project_img={value.project_img}
                     ></ProjectItem>
                   </div>
                 )

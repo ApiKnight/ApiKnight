@@ -17,7 +17,8 @@ const Project: React.FunctionComponent = () => {
   useEffect(() => {
     console.log('当前project_id', project_id)
     getCurrentRole(project_id).then((res: any) => {
-      res.data.code === 200 ? navigate('/project/apiMgt', { state: { project_id: project_id } }) : ''
+      navigate('/project/apiMgt', { state: { project_id: project_id } })
+      // res.data.code === 200 ? navigate('/project/apiMgt', { state: { project_id: project_id } }) : ''
       // res.data.code === 200 ? (dispatch(setRole(res.data.data.role)),navigate('/project/apiMgt', { state: { project_id: project_id } })) :  ''
     })
   }, [])

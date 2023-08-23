@@ -19,6 +19,7 @@ import type { MenuProps } from 'antd'
 import updateAuthority from '@/api/updateAuthority'
 import getCurrentRole from '@/api/getCurrentRole'
 import reqDelMember from '@/api/reqDelMember'
+import chgProjAdmin from '@/api/chgProjAdmin'
 // interface DataType {
 //   gender?: string;
 //   name: {
@@ -60,7 +61,7 @@ const MemberMgt: React.FC = () => {
   }
 
   const updateApplyList = () => {
-    getApplyList(project_id).then((res:any) => {
+    getApplyList(project_id).then((res: any) => {
       if (res.data.code === 200) {
         setApplyList(res.data.data.reverse())
       } else {
@@ -69,8 +70,14 @@ const MemberMgt: React.FC = () => {
     })
   }
 
+  async function getCurRole(project_id) {
+    let res: any = await getCurrentRole(project_id)
+    res.data.code === 200 ? setRoleState(res.data.data.role) : ''
+    updateMemberList()
+  }
+
   const updateMemberList = () =>
-    getProjectMember(project_id).then((res:any) => {
+    getProjectMember(project_id).then((res: any) => {
       if (res.data.code === 200) {
         let data = res.data.data
         setMemberList(
@@ -86,11 +93,6 @@ const MemberMgt: React.FC = () => {
     })
 
   useEffect(() => {
-    async function getCurRole(project_id) {
-      let res:any = await getCurrentRole(project_id)
-      res.data.code === 200 ? setRoleState(res.data.data.role) : ''
-      updateMemberList()
-    }
     getCurRole(project_id)
   }, [])
 
@@ -107,7 +109,6 @@ const MemberMgt: React.FC = () => {
   }
 
   const closeModal = () => {
-    updateMemberList()
     setIsModalOpen(false)
   }
 
@@ -120,7 +121,7 @@ const MemberMgt: React.FC = () => {
           height: 32,
           lineHeight: '32px',
         }}>
-        <Button onClick={onLoadMore}>loading more</Button>
+        {/* <Button onClick={onLoadMore}>loading more</Button> */}
       </div>
     ) : null
 
@@ -133,7 +134,7 @@ const MemberMgt: React.FC = () => {
       }
       updateApply(apply_obj).then((res) => {
         res.data.code === 200
-          ? (message.success('已同意'), updateApplyList())
+          ? (message.success('已同意'), updateApplyList(), updateMemberList())
           : message.error('操作失败')
       })
     }
@@ -156,23 +157,33 @@ const MemberMgt: React.FC = () => {
 
   const setAuthority = (authority) => {
     return () => {
-      console.log(authority)
-      updateAuthority({
-        user_id: currentUid,
-        project_id: project_id,
-        role:
-          authority === 'member'
-            ? 3
-            : authority === 'operator'
-            ? 2
-            : authority === 'admin'
-            ? 1
-            : '',
-      }).then((res) => {
-        res.data.code === 200
-          ? (message.success('修改成功'), updateMemberList())
-          : message.error('修改失败')
-      })
+      if (authority === 'admin') {
+        chgProjAdmin({
+          user_id: currentUid,
+          project_id: project_id,
+        }).then((res) => {
+          res.data.code === 200
+            ? (message.success('修改成功'), getCurRole(project_id),updateMemberList())
+            : message.error('修改失败')
+        })
+      } else {
+        updateAuthority({
+          user_id: currentUid,
+          project_id: project_id,
+          role:
+            authority === 'member'
+              ? 3
+              : authority === 'operator'
+              ? 2
+              : authority === 'admin'
+              ? 1
+              : '',
+        }).then((res) => {
+          res.data.code === 200
+            ? (message.success('修改成功'), updateMemberList())
+            : message.error('修改失败')
+        })
+      }
     }
   }
 
@@ -193,14 +204,19 @@ const MemberMgt: React.FC = () => {
       key: '1',
     },
   ]
-  const qualitySetBtn = (user_id) =>
-    role === 1 ? (
+
+  const qualitySetBtn = (user_id) => {
+    // 如果是自己，不展示按钮
+    if (user_id === localStorage.getItem('user_id')) return ''
+
+    return role === 1 ? (
       <Dropdown menu={{ items }} trigger={['click']}>
         <a onClick={() => setCurrentUid(user_id)}>权限设置</a>
       </Dropdown>
     ) : (
       ''
     )
+  }
 
   const delMemberHandler = (user_id) => {
     reqDelMember(project_id, user_id).then((res) => {
@@ -211,12 +227,15 @@ const MemberMgt: React.FC = () => {
   }
 
   const delMemberBtn = (userRole, user_id) => {
+    // 如果是自己，不展示按钮
+    if (user_id === localStorage.getItem('user_id')) return ''
+
     console.log(role, userRole)
 
     return role < userRole && role !== 0 ? (
       <Popconfirm
         title='谨慎操作！'
-        description='确定删除本项目吗?'
+        description='确定移除该成员吗?'
         onConfirm={() => {
           delMemberHandler(user_id)
         }}
@@ -305,7 +324,7 @@ const MemberMgt: React.FC = () => {
                     <Skeleton avatar title={false} loading={initLoading} active>
                       <List.Item.Meta
                         // avatar={<Avatar src={item.avatar_url} />}
-                        title={<a href='https://ant.design'>{item.name}</a>}
+                        title={item.name}
                         // description={`身份${item.role}`}
                       />
                     </Skeleton>
@@ -334,7 +353,7 @@ const MemberMgt: React.FC = () => {
               <Skeleton avatar title={false} loading={initLoading} active>
                 <List.Item.Meta
                   avatar={<Avatar src={item.avatar_url} />}
-                  title={<a href='https://ant.design'>{item.name}</a>}
+                  title={item.name}
                   description={`身份${item.role}`}
                 />
               </Skeleton>

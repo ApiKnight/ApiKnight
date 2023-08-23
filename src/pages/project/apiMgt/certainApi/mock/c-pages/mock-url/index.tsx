@@ -89,8 +89,10 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       console.log(res.data)
 
       res.status === 200
-        ? dispatch(changeRequestBodyAction(JSON.stringify(res.data)))
-        : ''
+      ?
+      dispatch(changeResponseBodyAction(JSON.stringify(res.data)))
+      :
+      ''
     })
     // // 假如这是响应内容
     // const responseExample = JSON.stringify({ name: 'LuoKing' })

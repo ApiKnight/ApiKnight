@@ -68,7 +68,9 @@ const ProjectSet: React.FC = () => {
     async function getCurRole(project_id) {
       let res:any = await getCurrentRole(project_id)
       res.data.code === 200 ? setRoleState(res.data.data.role) : ''
+      
     }
+
     getCurRole(project_id)
 
     getProjectBase(project_id).then((res:any) => {

@@ -77,11 +77,13 @@ const DocOperator: React.FunctionComponent = () => {
   // 确认保存信息
   const handleConfimSave = () => {
     dispatch(updateDocumentApiAction(saveRemark))
-    dispatch(upData({
-      key: apiId,
-      type: method,
-      title: apiName
-    }))
+    dispatch(
+      upData({
+        key: apiId,
+        type: method,
+        title: apiName,
+      }),
+    )
   }
 
   // 删除信息
@@ -90,7 +92,11 @@ const DocOperator: React.FunctionComponent = () => {
     const okEvent = async () => {
       // 删除接口信息
       const res = await deleteApi(apiId)
-      message.success(res.message)
+      if (res.code === 200) {
+        message.success(res.message)
+      } else {
+        message.error(res.message)
+      }
       // 刷新页面
       dispatch(increment())
       dispatch(removeData(apiId))

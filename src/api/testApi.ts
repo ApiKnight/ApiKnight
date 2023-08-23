@@ -1,3 +1,4 @@
+import { log } from 'console'
 import request from './request'
 /**
  * 提供HTTP 接口描述(URL、Method、参数、返回结构等)后，服务器根据接口描述代理转发请求，返回结果
@@ -20,12 +21,28 @@ type requestType = {
 //  }}, {})
 
 const testApi = (requestObj: requestType) => {
+  // console.log(eval('('+requestObj.data+')'));
+  // console.log(requestObj.data);
+  // const dataObj = JSON.parse('\''+requestObj.data.slice(1,requestObj.data.length-1)+'\'')
+  // const dataObj = JSON.parse(requestObj.data)
+
+  console.log({
+    url: requestObj.url,
+    method: requestObj.method,
+    params: requestObj.params,
+    // data: JSON.parse(requestObj.data)
+    data: eval('('+requestObj.data+')')
+  },);
+
+  // {"name":"aays"}
+  
   return request.post(
     'v1/mock/real',
     {
       url: requestObj.url,
       method: requestObj.method,
       params: requestObj.params,
+      data: eval('('+requestObj.data+')')
     },
     {},
   )

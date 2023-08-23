@@ -90,7 +90,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       
       res.status === 200
       ?
-      dispatch(changeRequestBodyAction(JSON.stringify(res.data)))
+      dispatch(changeResponseBodyAction(JSON.stringify(res.data)))
       :
       ''
     })

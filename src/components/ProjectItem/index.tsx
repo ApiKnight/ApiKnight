@@ -7,7 +7,7 @@ const ProjectItem = (params: ProjectItemType) => {
   const navigate = useNavigate()
   const toProject = () => {
     console.log('toProject');
-    navigate('/project', { state: { project_id: params.project_id } })
+    navigate('/project/apiMgt', { state: { project_id: params.project_id } })
   }
   return (
     <div onClick={toProject}>

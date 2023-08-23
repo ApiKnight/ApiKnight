@@ -35,7 +35,7 @@ export class Request {
         if (token) {
           config.headers!.Authorization = 'Bearer ' + token
         }
-        console.log('请求拦截成功', config)
+        // console.log('请求拦截成功', config)
         return config
       },
       (err: any) => {
@@ -49,7 +49,7 @@ export class Request {
       (res: AxiosResponse) => {
         // 统一处理响应数据
         // 系统如果有自定义code也可以在这里处理
-        console.log('响应拦截成功', res)
+        // console.log('响应拦截成功', res)
         return res
       },
       (err: any) => {

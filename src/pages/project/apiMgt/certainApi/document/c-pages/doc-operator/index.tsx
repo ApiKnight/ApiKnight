@@ -13,7 +13,7 @@ import {
 } from '@/store/modules/document/document'
 import { deleteApi } from '@/api'
 import { increment } from '@/store/modules/watchDir'
-import { removeData } from '@/store/modules/tabSlice'
+import { removeData, upData } from '@/store/modules/tabSlice'
 import { setValue } from '@/store/modules/rightSlice'
 
 const DocOperator: React.FunctionComponent = memo(() => {
@@ -60,6 +60,11 @@ const DocOperator: React.FunctionComponent = memo(() => {
   // 确认保存信息
   const handleConfimSave = () => {
     dispatch(updateDocumentApiAction(saveRemark))
+    dispatch(upData({
+      key: apiId,
+      type: method,
+      title: "新建的接口"
+    }))
   }
 
   // 删除信息

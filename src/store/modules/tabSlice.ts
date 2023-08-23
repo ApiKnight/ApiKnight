@@ -37,9 +37,19 @@ const tabSlice = createSlice({
         )
       })
     },
+    upData(state: any, action: PayloadAction<any>) {
+      console.log("update")
+      console.log(action.payload)
+      state.data.map((item)=>{
+        console.log(item)
+        if (item.key == action.payload.key) {
+          item.type = action.payload.type.value
+        }
+      })
+    }
   },
 })
 
-export const { assign, removeData, addData } = tabSlice.actions
+export const { assign, removeData, addData , upData } = tabSlice.actions
 
 export default tabSlice.reducer

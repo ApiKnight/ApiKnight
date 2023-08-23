@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://prod-apiknkght.github.io/github-actions-demo",
+  "homepage": "https://super-luoki.github.io/apiknight",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -40,5 +40,9 @@
     "redux-logger": "^3.0.6",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
+  },
+  "volta": {
+    "node": "18.17.0",
+    "pnpm": "8.6.11"
   }
 }

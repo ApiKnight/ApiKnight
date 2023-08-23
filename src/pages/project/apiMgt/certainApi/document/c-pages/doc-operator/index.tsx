@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { Button, App, Modal, Input } from 'antd'
 import type { ApiOptReqOptType } from '@/types/components'
 import './index.less'
@@ -15,19 +15,36 @@ import { deleteApi } from '@/api'
 import { increment } from '@/store/modules/watchDir'
 import { removeData, upData } from '@/store/modules/tabSlice'
 import { setValue } from '@/store/modules/rightSlice'
+import { usePrevious } from '@/hooks/usePrevious'
 
-const DocOperator: React.FunctionComponent = memo(() => {
+const DocOperator: React.FunctionComponent = () => {
   const { message, modal } = App.useApp()
   const dispatch = useAppDispatch()
-  const { baseInfo, apiId, onUpdating, onUploading } = useAppSelector(
+  const { baseInfo, apiId, apiName, onUpdating, onUploading } = useAppSelector(
     (state) => ({
       baseInfo: state.document.apiData.apiInfo.base,
       apiId: state.document.apiId,
       onUpdating: state.document.onUpdating,
       onUploading: state.document.onUploading,
+      apiName: state.document.apiName,
     }),
     shallowEqualApp,
   )
+  // 保存上一次的更新状态
+  const previousOnloading = usePrevious(onUploading)
+  useEffect(() => {
+    // 如果此次onloading从true变为false，说明此次上传已经完成
+    if (previousOnloading && !onUploading) {
+      updateOthers()
+    }
+  }, [onUploading])
+
+  // 通知其他redux等更新数据
+  const updateOthers = () => {
+    dispatch(increment())
+    console.log(apiName)
+  }
+
   // 保存接口备注
   const [saveRemark, setSaveRemark] = useState<string>('')
 
@@ -69,18 +86,21 @@ const DocOperator: React.FunctionComponent = memo(() => {
 
   // 删除信息
   const handleDelInfo = () => {
+    // 删除接口成功事件
+    const okEvent = async () => {
+      // 删除接口信息
+      const res = await deleteApi(apiId)
+      message.success(res.message)
+      // 刷新页面
+      dispatch(increment())
+      dispatch(removeData(apiId))
+      dispatch(setValue('gl'))
+    }
+
     modal.confirm({
       title: '删除接口',
       content: '确定要删除该接口吗？删除后不可恢复',
-      onOk: async () => {
-        // 删除接口信息
-        const res = await deleteApi(apiId)
-        message.success(res.message)
-        // 刷新页面
-        dispatch(increment())
-        dispatch(removeData(apiId))
-        dispatch(setValue('gl'))
-      },
+      onOk: okEvent,
       onCancel: () => {},
     })
   }
@@ -125,6 +145,6 @@ const DocOperator: React.FunctionComponent = memo(() => {
       </Modal>
     </div>
   )
-})
+}
 
-export default DocOperator
+export default memo(DocOperator)

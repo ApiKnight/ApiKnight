@@ -11,6 +11,7 @@ import {
   Dropdown,
   App,
   Popconfirm,
+  Tag
 } from 'antd'
 import './index.less'
 import getApplyList from '@/api/getApplyList'
@@ -20,6 +21,7 @@ import updateAuthority from '@/api/updateAuthority'
 import getCurrentRole from '@/api/getCurrentRole'
 import reqDelMember from '@/api/reqDelMember'
 import chgProjAdmin from '@/api/chgProjAdmin'
+import ShowMember from '@/components/ShowMember'
 // interface DataType {
 //   gender?: string;
 //   name: {
@@ -53,6 +55,20 @@ const MemberMgt: React.FC = () => {
 
   const [apply_list, setApplyList] = useState([])
 
+  const [dNumber,setDNumber] = useState(0)
+
+  const [number,setNumber] = useState(1)
+
+  useEffect(()=>{
+    getApplyList(project_id).then((res: any) => {
+      if (res.data.code === 200) {
+        setDNumber(res.data.data.length)
+      } else {
+        console.log('审批列表拉取失败')
+      }
+    })
+  },[])
+
   const [currentUid, setCurrentUid] = useState<string>('')
   const [role, setRoleState] = useState<number>(0)
   const showModal = () => {
@@ -80,6 +96,7 @@ const MemberMgt: React.FC = () => {
     getProjectMember(project_id).then((res: any) => {
       if (res.data.code === 200) {
         let data = res.data.data
+        setNumber(data.length)
         setMemberList(
           data.map((value) => {
             setInitLoading(false)
@@ -248,12 +265,16 @@ const MemberMgt: React.FC = () => {
       ''
     )
   }
-
+  const showData = {
+    numberCount: number,
+    dNumberCount:dNumber
+  }
   return (
     <App>
       <div className='membermgt'>
-        <div className='title'>成员/权限管理</div>
-
+        {/* <div className='title'>成员/权限管理</div> */}
+        <Tag color="#2db7f5"><h2>成员/权限管理</h2></Tag>
+        <ShowMember data={showData}/>
         {role === 1 || role === 2 ? (
           <div className='apply'>
             <Button type='primary' onClick={showModal} className='button'>
@@ -352,7 +373,7 @@ const MemberMgt: React.FC = () => {
               key={item.user_id}>
               <Skeleton avatar title={false} loading={initLoading} active>
                 <List.Item.Meta
-                  avatar={<Avatar src={item.avatar_url} />}
+                  avatar={<Avatar src={item.avatar_url} alt='头像'/>}
                   title={item.name}
                   description={`身份${item.role}`}
                 />

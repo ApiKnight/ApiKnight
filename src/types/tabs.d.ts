@@ -8,6 +8,7 @@ interface TabsSetItem {
 
 interface Props {
   data: TabsSetItem
+  active?: boolean
 }
 
 export type { TabsSetItem, Props }

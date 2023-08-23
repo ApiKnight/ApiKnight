@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import classNames from 'classnames'
 import MethodList from '@/components/MethodList'
 import './index.less'
 import { CloseOutlined } from '@ant-design/icons'
@@ -36,11 +37,10 @@ const Tab: React.FunctionComponent<Props> = (props) => {
   }, [])
   return (
     <div
-      className='tab'
+      className={classNames('tab', { 'tab-active': props.active })}
       onMouseEnter={changeShowState}
       onMouseLeave={changeShowState}
-      onClick={openTab}
-    >
+      onClick={openTab}>
       <div className='tab-title'>
         <span style={{ marginRight: '7px' }}>
           <MethodList value={props.data.type} />

@@ -1,12 +1,16 @@
 .tab {
-  border: #9373ee solid 0.2px;
-  background-color: aliceblue;
+  border-bottom: 0;
   width: auto;
   height: 20px;
-  padding: 5px;
+  padding: 7px 0 7px 10px;
   text-overflow: ellipsis;
   display: flex;
   font-size: 14px;
+  margin-bottom: -1px;
+  color: rgba(16, 24, 40, 0.56);
+  display: flex;
+  align-items: center;
+
   .tab-title {
     display: flex;
     align-items: center;
@@ -15,6 +19,7 @@
     width: auto;
     display: flex;
     align-items: center;
+    margin: 0 10px 0 5px;
   }
   .tab-closed {
     width: 30px;
@@ -25,4 +30,13 @@
   .tab-closed:hover {
     cursor: pointer;
   }
+}
+
+.tab-active {
+  background-color: #fff;
+  border: #ccc solid 1px;
+  border-bottom: none;
+  // background-color: #fff;
+  border-radius: 5px 5px 0 0;
+  color: rgba(16, 24, 40, 0.8);
 }

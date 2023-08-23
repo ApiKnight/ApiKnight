@@ -3,7 +3,7 @@ import { TabsSetItem } from '@/types/tabs'
 import Tab from '@/components/Tab'
 import './index.less'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/store'
+import { RootState, useAppSelector } from '@/store'
 import { useLocation } from 'react-router-dom'
 import { addData, assign } from '@/store/modules/tabSlice'
 import { Button } from 'antd'
@@ -11,6 +11,11 @@ import { ArrayItemType } from '@/types/arrayToTree'
 import { setValue } from '@/store/modules/rightSlice'
 
 const Tabs: React.FunctionComponent = () => {
+  // 获取当前页面展示的接口id
+  const { currApiId } = useAppSelector((state) => ({
+    currApiId: state.document.apiId,
+  }))
+
   const [tabList, setTabList] = useState<Array<TabsSetItem>>([
     {
       key: '1111111',
@@ -48,7 +53,9 @@ const Tabs: React.FunctionComponent = () => {
     <>
       <div className='tabs'>
         {tabList.map((item) => {
-          return <Tab data={item} key={item.key} />
+          return (
+            <Tab data={item} key={item.key} active={item.key === currApiId} />
+          )
         })}
         <div className='tabs-btn'>
           <Button onClick={openTab} size='small'>

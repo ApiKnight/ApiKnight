@@ -15,6 +15,7 @@ const Email: React.FunctionComponent<any> = (props) => {
     await setUserEmail(e.target.value)
   }
   const [info, setInfo] = useState('')
+  const [api, contextHolder] = notification.useNotification()
   // const projectId = useSelector((state: RootState) => state.project.project_id)
   function sendInfo(): void {
     request
@@ -28,9 +29,15 @@ const Email: React.FunctionComponent<any> = (props) => {
           (resp as any).data.code !== 403 ||
           (resp as any).data.data.code !== 500
         ) {
-          openNotification('topLeft')
-          console.log(typeof (resp as any).data.message)
           setInfo((resp as any).data.message)
+          const openNotification = (placement: NotificationPlacement) => {
+            api.info({
+              message: <p>{(resp as any).data.message}</p>,
+              description: <p></p>,
+              placement,
+            })
+          }
+          openNotification('topLeft')
         }
       })
   }
@@ -48,15 +55,6 @@ const Email: React.FunctionComponent<any> = (props) => {
         })
       })
   }, [userEmail])
-  const [api, contextHolder] = notification.useNotification()
-
-  const openNotification = (placement: NotificationPlacement) => {
-    api.info({
-      message: <p>{info}</p>,
-      description: <p></p>,
-      placement,
-    })
-  }
 
   const contextValue = useMemo(() => ({ name: 'Ant Design' }), [])
   return (

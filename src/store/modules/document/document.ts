@@ -9,6 +9,7 @@ import { NavType } from '@/types/enum'
 import { getRangeRandom } from '@/utils/math'
 import { NormalParamsActionType, ParamsOptActionType } from '../../type'
 import { UpdateStatusActionType } from './type'
+import { getFolderName } from '@/api/folder'
 
 const initialData: IAPIInfo = getInitialApiInfoObj('unknown')
 
@@ -28,12 +29,16 @@ export const fetchDocumentApiAction = createAsyncThunk(
       apiData.meta_info.api_id = id
       apiData.meta_info.name = name
       apiData.meta_info.folder_id = folder_id
-      // apiData.meta_info.desc = description
+      // 获取文件夹名字
+      const folderName = await getFolderName(folder_id)
+      // console.log({ folderName })
+
       // 获取用户信息
       const ownerInfo = await getUserInfoById(create_user)
       dispatch(changeUserInfoAction(ownerInfo))
       dispatch(changeApiDataAction(apiData))
       dispatch(changeApiIdAction(res.id))
+      dispatch(changeFolderNameAction(folderName))
     } catch (err) {
       console.log('出错了')
 
@@ -86,6 +91,7 @@ const documentSlice = createSlice({
     operateTime: '',
     create_time: '',
     apiName: '',
+    folderName: '',
     ownerUser: {} as IUserInfo,
     // 开始更新（动作上）
     onUpdating: false,
@@ -178,6 +184,9 @@ const documentSlice = createSlice({
       if (payload.onUploading !== undefined)
         state.onUploading = payload.onUploading
     },
+    changeFolderNameAction(state, { payload }) {
+      state.folderName = payload
+    },
   },
 })
 
@@ -197,5 +206,6 @@ export const {
   changeRequestBodyAction,
   changeResponseBodyAction,
   changeUpdateStatusAction,
+  changeFolderNameAction,
 } = documentSlice.actions
 export default documentSlice.reducer

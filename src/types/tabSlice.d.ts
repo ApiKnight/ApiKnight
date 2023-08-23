@@ -1,13 +1,12 @@
 import { type } from 'os'
 
 interface TabSlice {
-  data: [
-    {
-      key: string
-      title: string
-      type: ArrayItemType
-    },
-  ]
+  data: {
+    key: string
+    title: string
+    type: ArrayItemType
+  }[]
+  currentKey: string
 }
 
 interface TabsSlice {
@@ -26,6 +25,7 @@ interface TabsSlice {
       name: string
     },
   ]
+  currentKey?: string
 }
 
 export type { TabSlice, TabsSlice }

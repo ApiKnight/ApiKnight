@@ -8,7 +8,9 @@ const MethodList: React.FunctionComponent<MethodTypes> = (props) => {
     <div>
       {props.value !== 'FILE' ? (
         <div className={`color-${props.value}`}>
-          <div className='ant-select-selection-item'>{props.value}</div>
+          <div className='ant-select-selection-item'>
+            {props.value === 'gl' ? '' : props.value}
+          </div>
         </div>
       ) : (
         <div>

@@ -80,7 +80,7 @@ const DocOperator: React.FunctionComponent = () => {
     dispatch(upData({
       key: apiId,
       type: method,
-      title: "新建的接口"
+      title: apiName
     }))
   }
 

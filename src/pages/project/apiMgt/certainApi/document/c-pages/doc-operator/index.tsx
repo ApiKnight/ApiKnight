@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { Button, App, Modal, Input } from 'antd'
 import type { ApiOptReqOptType } from '@/types/components'
 import './index.less'
@@ -15,6 +15,7 @@ import { deleteApi } from '@/api'
 import { increment } from '@/store/modules/watchDir'
 import { removeData } from '@/store/modules/tabSlice'
 import { setValue } from '@/store/modules/rightSlice'
+import { usePrevious } from '@/hooks/usePrevious'
 
 const DocOperator: React.FunctionComponent = memo(() => {
   const { message, modal } = App.useApp()
@@ -28,6 +29,14 @@ const DocOperator: React.FunctionComponent = memo(() => {
     }),
     shallowEqualApp,
   )
+  const previousOnloading = usePrevious(onUploading)
+  useEffect(() => {
+    // 如果此次onloading从true变为false，说明此次上传已经完成
+    if (previousOnloading && !onUploading) {
+      console.log('通知其他redux等更新数据')
+    }
+  }, [onUploading])
+
   // 保存接口备注
   const [saveRemark, setSaveRemark] = useState<string>('')
 

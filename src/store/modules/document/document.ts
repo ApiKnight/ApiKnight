@@ -83,6 +83,11 @@ const documentSlice = createSlice({
   initialState: {
     apiData: initialData,
     apiId: '',
+    folderId: '',
+    projectId: '',
+    operateTime: '',
+    create_time: '',
+    apiName: '',
     ownerUser: {} as IUserInfo,
     // 开始更新（动作上）
     onUpdating: false,

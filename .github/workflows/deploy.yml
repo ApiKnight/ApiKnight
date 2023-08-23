@@ -14,8 +14,13 @@ jobs:
         run: |
           yarn install
           yarn run build
-          
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build # The folder the action should deploy.
+          folder: dist # The folder the action should deploy.
+          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub 读写仓库的权限token，自动生成无需关心
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: main
+          FOLDER: dist

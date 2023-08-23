@@ -12,9 +12,9 @@ import watchDirReducer from './modules/watchDir.ts'
 import watchStateFlagReducer from './modules/stateFlag.ts'
 import createFileStateReducer from './modules/createFileState.ts'
 // 文档编辑
-import documentReducer from './modules/document.ts'
+import documentReducer from './modules/document/document.ts'
 // 运行/mock
-import mockReducer from './modules/mock.ts'
+import mockReducer from './modules/mock/index.ts'
 // 文档
 import introductionReducer from './modules/introduction.ts'
 
@@ -25,6 +25,8 @@ import showRightMenuReducer from '@/store/modules/showRightMenu'
 import userInfoSliceReducer from '@/store/modules/userInfoSlice.ts'
 import updateUserInfoSliceReducer from '@/store/modules/updateUserInfoSlice.ts'
 import isUpdateSliceReducer from '@/store/modules/isUpdateSlice.ts'
+import templateSliceReducer from '@/store/modules/templateSlice.ts'
+
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
@@ -43,6 +45,7 @@ export const store = configureStore({
     userInfoSlice: userInfoSliceReducer,
     updateUserInfoSlice: updateUserInfoSliceReducer,
     isUpdateSlice: isUpdateSliceReducer,
+    templateSlice: templateSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

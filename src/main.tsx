@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
+import { App as AntdApp } from 'antd'
 import './assets/css/index.less'
 import { BrowserRouter } from 'react-router-dom'
 import { store } from './store/index.ts'
@@ -16,10 +17,12 @@ const theme: ThemeConfig = {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <ConfigProvider theme={theme}>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <AntdApp style={{ height: '100%' }}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </AntdApp>
   </ConfigProvider>,
 )

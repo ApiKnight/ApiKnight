@@ -5,6 +5,9 @@ import { Badge, Descriptions } from 'antd'
 import type { DescriptionsProps } from 'antd'
 import getProjectBase from '@/api/getProjectBase'
 import testApi from '@/api/testApi'
+
+import './index.less'
+
 const Overview: React.FunctionComponent = () => {
   const state = useLocation().state
   const [projectBase, setProjectBase] = useState<any>({})
@@ -58,12 +61,8 @@ const Overview: React.FunctionComponent = () => {
   ]
   useEffect(() => {
     // testApi()
-    getProjectBase(state.project_id).then((res:any)=>{
-      res.data.code === 200
-      ?
-      setProjectBase(res.data.data)
-      :
-      ''
+    getProjectBase(state.project_id).then((res: any) => {
+      res.data.code === 200 ? setProjectBase(res.data.data) : ''
     })
   }, [])
   return (

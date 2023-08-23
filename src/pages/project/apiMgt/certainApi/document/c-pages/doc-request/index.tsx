@@ -27,7 +27,7 @@ const NavItems: NavItem[] = [
   { label: 'Body', value: NavType.Body },
   { label: 'Cookie', value: NavType.Cookie },
   { label: 'Header', value: NavType.Header },
-  { label: 'Auth', value: NavType.Auth },
+  // { label: 'Auth', value: NavType.Auth },
 ]
 
 const DocRequest: React.FunctionComponent = memo(() => {
@@ -44,8 +44,7 @@ const DocRequest: React.FunctionComponent = memo(() => {
               active: currentNav === item.value,
             })}
             key={item.value}
-            onClick={() => setCurrentNav(item.value)}
-          >
+            onClick={() => setCurrentNav(item.value)}>
             {item.label}
           </div>
         ))}
@@ -56,7 +55,7 @@ const DocRequest: React.FunctionComponent = memo(() => {
         {currentNav === NavType.Body && <RequestBody />}
         {currentNav === NavType.Cookie && <RequestCookie />}
         {currentNav === NavType.Header && <RequestHeader />}
-        {currentNav === NavType.Auth && <RequestAuth />}
+        {/* {currentNav === NavType.Auth && <RequestAuth />} */}
       </div>
     </div>
   )

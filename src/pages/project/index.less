@@ -1,9 +1,16 @@
-.project {
-  display: flex;
+.project-wrap {
   height: 100%;
-  .left {
-  }
-  .right {
+  display: flex;
+  flex-direction: column;
+  .project {
+    height: calc(100vh - 60px);
     flex: 1;
+    display: flex;
+    .left {
+      border-right: 1px solid #e8e8e8;
+    }
+    .right {
+      flex: 1;
+    }
   }
 }

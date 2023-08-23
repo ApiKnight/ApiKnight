@@ -48,15 +48,6 @@ const ProjectNavChild: React.FunctionComponent<{
   // 判断当前选项是否代表当前页面
   const getIsActive = () => {
     if (pathList.includes(location.pathname)) {
-      console.log(
-        '当前选项',
-        props.data.key,
-        '当前页面',
-        location.pathname,
-        pathList[Number(props.data.key) - 1],
-        location.pathname === pathList[Number(props.data.key) - 1],
-      )
-
       return location.pathname === pathList[Number(props.data.key) - 1]
     }
     return false

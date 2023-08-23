@@ -74,7 +74,7 @@ export const updateDocumentApiAction = createAsyncThunk(
       dispatch(fetchDocumentApiAction(state.apiId))
       dispatch(increment())
     }
-    console.log(res, res.code, res.code === 200)
+    // console.log(res, res.code, res.code === 200)
   },
 )
 

@@ -2,9 +2,10 @@ import React, { memo } from 'react'
 import { Input } from 'antd'
 const { TextArea } = Input
 
-import './index.less'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { changeRequestBodyAction } from '@/store/modules/document/document'
+import CodeEditor from '@/components/CodeEditor'
+import './index.less'
 
 const RequestBody: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
@@ -12,12 +13,19 @@ const RequestBody: React.FunctionComponent = () => {
     requestBody: state.document.apiData.apiInfo.request.body,
   }))
   return (
-    <TextArea
-      rows={6}
-      placeholder='请求体内容'
-      value={requestBody}
-      onChange={(e) => dispatch(changeRequestBodyAction(e.target.value))}
-    />
+    <div className='doc-req-body'>
+      <CodeEditor
+        height='200px'
+        defaultValue={requestBody}
+        onChange={(val) => dispatch(changeRequestBodyAction(val))}
+      />
+    </div>
+    // <TextArea
+    //   rows={6}
+    //   placeholder='请求体内容'
+    //   value={requestBody}
+    //   onChange={(e) => dispatch(changeRequestBodyAction(e.target.value))}
+    // />
   )
 }
 

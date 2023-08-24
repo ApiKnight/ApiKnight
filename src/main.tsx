@@ -16,7 +16,7 @@ const theme: ThemeConfig = {
   },
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <ConfigProvider theme={theme}>
     <AntdApp style={{ height: '100%' }}>
       <Provider store={store}>
@@ -27,3 +27,17 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     </AntdApp>
   </ConfigProvider>,
 )
+
+// const rest = `{
+//   "code": 200,
+//   "server_upload_time": 1692885244471,
+//   "payload_size_bytes": 9502,
+//   "events_ingested": 11
+// }
+// `
+
+// ReactDOM.createRoot(document.getElementById('root')).render(
+//   <div>
+//     <Editor height='90vh' defaultLanguage='json' defaultValue={rest} />;
+//   </div>,
+// )

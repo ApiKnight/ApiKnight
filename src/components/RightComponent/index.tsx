@@ -6,14 +6,14 @@ import Overview from '@/pages/project/apiMgt/overview'
 import './index.less'
 import LogoPage from '@/pages/project/apiMgt/certainApi/logo-page'
 
-const RightComponent: React.FunctionComponent = () => {
+const RightComponent = (props) => {
   const rightSlice = useSelector((state: RootState) => state.rightSlice.value)
   return (
     <div className='right-component-wrap'>
       {rightSlice == 'gl' && <Overview />}
       {rightSlice === 'blank' && <LogoPage />}
       {rightSlice !== 'gl' && rightSlice !== 'blank' && (
-        <RightMenu data={rightSlice} />
+        <RightMenu data={rightSlice} project_id={props.project_id}/>
       )}
     </div>
   )

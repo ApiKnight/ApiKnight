@@ -76,11 +76,8 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
         paramsObj[v.paramName] = v.value
       })
     }
-    const url =
-      mode === 'mock'
-        ? path
-        : prefix + (path ? '/' + path : '')
-    const requestObj:any = {
+    const url = mode === 'mock' ? path : prefix + (path ? '/' + path : '')
+    const requestObj: any = {
       url,
       method,
       params: paramsObj,
@@ -88,16 +85,14 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       cookie,
       data: body,
     }
-    
+
     console.log(requestObj)
     testApi(requestObj).then((res) => {
       console.log(res.data)
 
       res.status === 200
-      ?
-      dispatch(changeResponseBodyAction(JSON.stringify(res.data)))
-      :
-      ''
+        ? dispatch(changeResponseBodyAction(JSON.stringify(res.data)))
+        : ''
     })
     // // 假如这是响应内容
     // const responseExample = JSON.stringify({ name: 'LuoKing' })
@@ -107,9 +102,9 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
 
   /**
    * mock的创建和执行，通过参数区分
-   * @param mockMode 
+   * @param mockMode
    */
-  const handleMock = (mockMode)=> {
+  const handleMock = (mockMode) => {
     const { prefix, path, method } = userReqInfo
     const { params, headers: header, cookie, body } = reqParams
     const paramsObj = {}
@@ -120,7 +115,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       })
     }
     const url = path
-    const requestObj:any = {
+    const requestObj: any = {
       url,
       method,
       params: paramsObj,
@@ -128,29 +123,25 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       cookie,
       data: body,
     }
-      requestObj.project_id = project_id
-      requestObj.api_id = api_id
-      requestObj.response = {}
+    requestObj.project_id = project_id
+    requestObj.api_id = api_id
+    requestObj.response = {}
     console.log(requestObj)
-    
+
     // 创建mock服务
-    if(mockMode === 'create'){
-      mockReq(requestObj).then((res:any)=>{
+    if (mockMode === 'create') {
+      mockReq(requestObj).then((res: any) => {
         res.data.code === 200
-        ?
-        message.success('创建成功')
-        :
-        message.error('创建失败')
+          ? message.success('创建成功')
+          : message.error('创建失败')
       })
       // 执行mock
-    }else if(mockMode === 'execute'){
-      runMock(requestObj).then((res:any)=>{
+    } else if (mockMode === 'execute') {
+      runMock(requestObj).then((res: any) => {
         res.status === 200
-        ?
-        // 将执行mock的响应数据放到响应栏
-        dispatch(changeResponseBodyAction(JSON.stringify(res.data)))
-        :
-        ''
+          ? // 将执行mock的响应数据放到响应栏
+            dispatch(changeResponseBodyAction(JSON.stringify(res.data)))
+          : ''
       })
     }
   }
@@ -164,24 +155,28 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
         onInputChange={(e) => handleInputChange(e, 'path')}
         inputValue={userReqInfo.path}
         urlPrefixValue={mode === 'run' ? userReqInfo.prefix : props.mockPrefix}
-        disablePrefix={mode === 'mock'}>
-          {/* 运行的发送由handleSendBtnClick控制，mock的发送和创建由handleMock控制 */}
-        <Button className='btn' type='primary' onClick={mode === 'run' ? handleSendBtnClick : ()=>handleMock('execute')}>
+        disablePrefix={mode === 'mock'}
+        rightWidth={mode === 'mock' ? '250px' : '150px'}>
+        {/* 运行的发送由handleSendBtnClick控制，mock的发送和创建由handleMock控制 */}
+        <Button
+          className='btn'
+          type='primary'
+          onClick={
+            mode === 'run' ? handleSendBtnClick : () => handleMock('execute')
+          }>
           发送
         </Button>
 
-        {
-          mode === 'mock'
-          ?
-          (
-            <Button type='primary' style={{marginLeft:'10px'}} onClick={()=>{handleMock('create')}}>
+        {mode === 'mock' && (
+          <Button
+            type='primary'
+            style={{ marginLeft: '10px' }}
+            onClick={() => {
+              handleMock('create')
+            }}>
             创建mock服务
-            </Button>
-          )
-          :
-          ''
-        }
-
+          </Button>
+        )}
       </ApiOperator>
     </div>
   )

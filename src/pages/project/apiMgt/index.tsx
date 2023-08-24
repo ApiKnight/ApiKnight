@@ -7,16 +7,15 @@ import RightPage from '@/components/RightPage'
 import { addData } from '@/store/modules/tabSlice'
 import { useDispatch } from 'react-redux'
 import { setValue } from '@/store/modules/rightSlice'
-
 import './index.less'
 
 const ApiMgt: React.FunctionComponent = () => {
   const dispatch = useDispatch()
   const state = useLocation().state
-  const projectId = state.project_id
+  const project_id = state.project_id
   function openTab(): void {
     const adata: any = {
-      key: projectId,
+      key: project_id,
       title: '项目概览',
       type: 'gl',
     }

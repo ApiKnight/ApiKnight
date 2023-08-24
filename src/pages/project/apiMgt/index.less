@@ -2,15 +2,34 @@
   display: flex;
   height: 100%;
 
-  .project-api__left {
+  .project-api-left {
+    box-sizing: border-box;
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+
+    .opt-item {
+      width: 100%;
+      margin-bottom: 10px;
+      text-align: start;
+    }
+
+    .opt-item-active {
+      border: 1px dashed @theme-color-primary;
+      color: @theme-color-primary;
+    }
+
+    .api-dir {
+      flex: 1;
+    }
   }
 
-  .project-api__right {
+  .project-api-right {
     background: #fff;
     border: 1px solid #e8e8e8;
     border-top: none;
     // 增加样式使得右侧可以铺满剩余空间
     flex: 1;
-    margin-left: 20px;
   }
 }

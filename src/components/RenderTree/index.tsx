@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Spin, Tree } from 'antd'
+import { Skeleton, Tree } from 'antd'
 import { arrayToTree } from '@/utils/arrayToTree'
 import type { TreeNode, ArrayItem, ArrayNode } from '@/types/arrayToTree'
 import './index.less'
@@ -126,21 +126,27 @@ const renderTree: React.FC = (props) => {
   const { DirectoryTree } = Tree
   //startMonitor()
   return (
-    <div>
-      <Tree
-        treeData={tree}
-        defaultExpandAll
-        draggable
-        blockNode
-        onDrop={onDrop}
-        style={{ width: '270px' }}
-        className='renderTree'
-      ></Tree>
-      {showLoading && (
-        <Spin tip='Loading' size='large'>
-          <div className='content' />
-        </Spin>
-      )}
+    <div className='tree-part'>
+      {(() => {
+        if (showLoading) {
+          return (
+            <div className='loading'>
+              <Skeleton style={{ height: '100%' }} />
+            </div>
+          )
+        } else {
+          return (
+            <Tree
+              treeData={tree}
+              defaultExpandAll
+              draggable
+              blockNode
+              onDrop={onDrop}
+              style={{ width: '250px' }}
+              className='renderTree'></Tree>
+          )
+        }
+      })()}
     </div>
   )
 }

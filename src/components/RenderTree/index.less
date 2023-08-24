@@ -1,22 +1,45 @@
-//:where(.css-dev-only-do-not-override-txh9fw).ant-tree.ant-tree-directory .ant-tree-treenode .ant-tree-node-content-wrapper {
-//    border-radius: 0;
-//    user-select: none;
-//    display: flex;
-//}
-:where(.css-dev-only-do-not-override-txh9fw).ant-tree .ant-tree-node-content-wrapper {
+.tree-part {
+  width: 250px;
+  height: 100%;
+  :where(.css-dev-only-do-not-override-txh9fw).ant-tree
+    .ant-tree-node-content-wrapper {
     line-height: 24px;
     user-select: none;
     width: 100%;
-}
+  }
 
-:where(.css-dev-only-do-not-override-txh9fw).ant-tree .ant-tree-treenode {
+  :where(.css-dev-only-do-not-override-txh9fw).ant-tree .ant-tree-treenode {
     display: flex;
     align-items: flex-start;
     padding: 0 0 4px 0;
     outline: none;
     width: 100%;
-}
+  }
 
-.ant-tree-title {
+  //   重置antd样式
+  .ant-tree-treenode {
+    .ant-tree-node-content-wrapper,
+    .ant-tree-switcher,
+    .ant-tree-draggable-icon {
+      transition: all 250ms ease;
+    }
+
+    &:hover {
+      .ant-tree-node-content-wrapper,
+      .ant-tree-switcher,
+      .ant-tree-draggable-icon {
+        background-color: #e6f4ff;
+        border-radius: 0;
+        //   transition: none;
+      }
+    }
+  }
+
+  .ant-tree-title {
     width: 100%;
+  }
+
+  .loading {
+    height: 100%;
+  }
 }

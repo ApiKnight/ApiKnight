@@ -18,8 +18,12 @@ export function mergeFlatArrays(
     item.type = 'FILE'
   })
   realArray_2.map((item: FlatItem) => {
-    let tempData = parseAPIInfo(item.request_data)
-    item.type = tempData.getMethod() as any
+    try {
+      let tempData = parseAPIInfo(item.request_data)
+      item.type = tempData.getMethod() as any
+    } catch (error) {
+      console.log(error)
+    }
   })
   realArray_2.map((item) => {
     item.parent_id = item.folder_id

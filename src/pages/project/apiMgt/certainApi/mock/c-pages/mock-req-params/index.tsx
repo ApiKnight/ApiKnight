@@ -18,6 +18,7 @@ import {
 } from '@/store/modules/mock'
 import { NavItem } from './type'
 import withMode from '../../with-mode'
+import CodeEditor from '@/components/CodeEditor'
 
 const NavItems: NavItem[] = [
   { label: 'Params', value: NavType.Params },
@@ -141,12 +142,18 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
           <div className='section-title' style={{ marginBottom: '10px' }}>
             请输入JSON格式的请求体
           </div>
-          <TextArea
+          <CodeEditor
+            defaultValue={requestInfo.body}
+            height='200px'
+            onChange={(val) => handleBodyChange(val)}
+            withBorder
+          />
+          {/* <TextArea
             rows={6}
             placeholder='请求体内容'
             value={requestInfo.body}
             onChange={(e) => handleBodyChange(e.target.value)}
-          />
+          /> */}
         </>
       )
     } else {

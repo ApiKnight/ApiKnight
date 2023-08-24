@@ -20,6 +20,10 @@
     display: flex;
     align-items: center;
     margin: 0 10px 0 5px;
+    // 禁止文本换行
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .tab-closed {
     width: 30px;
@@ -35,8 +39,7 @@
 .tab-active {
   background-color: #fff;
   border: #ccc solid 1px;
-  border-bottom: none;
-  // background-color: #fff;
+  border-bottom: 0;
   border-radius: 5px 5px 0 0;
   color: rgba(16, 24, 40, 0.8);
 }

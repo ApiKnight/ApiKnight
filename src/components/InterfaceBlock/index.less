@@ -1,18 +1,26 @@
 .InterfaceBlock {
+  width: 100%;
+  display: flex;
+  .interface-type {
+  }
+
+  .InterfaceBlock-title {
+    flex: 1;
+    padding: 0 5px;
+    max-width: 84px;
+    // 字符不换行而改用省略号
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .btn {
+    margin-left: auto;
     display: flex;
     flex-direction: row;
-    .btn {
-        margin-left: auto;
-        display: flex;
-        flex-direction: row;
-        // visibility: hidden;
-    }
-    // .btn:hover {
-    //     visibility: visible !important;
-    // }
-
-}
-
-.InterfaceBlock-title {
-    margin-left: 5%;
+    // visibility: hidden;
+  }
+  // .btn:hover {
+  //     visibility: visible !important;
+  // }
 }

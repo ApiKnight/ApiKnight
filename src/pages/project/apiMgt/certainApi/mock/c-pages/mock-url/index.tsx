@@ -156,30 +156,26 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
         inputValue={userReqInfo.path}
         urlPrefixValue={mode === 'run' ? userReqInfo.prefix : props.mockPrefix}
         disablePrefix={mode === 'mock'}
-      >
+        rightWidth={mode === 'mock' ? '250px' : '150px'}>
         {/* 运行的发送由handleSendBtnClick控制，mock的发送和创建由handleMock控制 */}
         <Button
           className='btn'
           type='primary'
           onClick={
             mode === 'run' ? handleSendBtnClick : () => handleMock('execute')
-          }
-        >
+          }>
           发送
         </Button>
 
-        {mode === 'mock' ? (
+        {mode === 'mock' && (
           <Button
             type='primary'
             style={{ marginLeft: '10px' }}
             onClick={() => {
               handleMock('create')
-            }}
-          >
+            }}>
             创建mock服务
           </Button>
-        ) : (
-          ''
         )}
       </ApiOperator>
     </div>

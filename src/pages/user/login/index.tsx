@@ -159,31 +159,7 @@ const Login: React.FC = () => {
       >
         <div className='login'>
           <div className='container'>
-            {isSignIn ? (
-              <div className='form-container sign-in-container'>
-                <div className='form'>
-                  <h2>sign in</h2>
-                  <input
-                    type='email'
-                    name='email'
-                    id='email'
-                    placeholder='Email/Phone/User...'
-                    value={loginUserName}
-                    onChange={changeSetLoginState}
-                  />
-                  <input
-                    type='password'
-                    name='password'
-                    id='password'
-                    placeholder='Password...'
-                    value={loginPassword}
-                    onChange={changeSetLoginPassword}
-                  />
-                  <button className='signIn' onClick={handleSignUpClick}>sign in</button>
-                </div>
-              </div>
-            ) : (
-              <div className='form-container sign-up-container'>
+          <div className='form-container sign-up-container'>
                 <div className='form'>
                   <h2>sign up</h2>
                   <input
@@ -221,8 +197,29 @@ const Login: React.FC = () => {
                   <button className='signUp' onClick={handleSignUpClick}>sign up</button>
                 </div>
               </div>
-            )}
-            <div className='overlay_container'>
+          <div className='form-container sign-in-container'>
+                <div className='form'>
+                  <h2>sign in</h2>
+                  <input
+                    type='email'
+                    name='email'
+                    id='email'
+                    placeholder='Email/Phone/User...'
+                    value={loginUserName}
+                    onChange={changeSetLoginState}
+                  />
+                  <input
+                    type='password'
+                    name='password'
+                    id='password'
+                    placeholder='Password...'
+                    value={loginPassword}
+                    onChange={changeSetLoginPassword}
+                  />
+                  <button className='signIn' onClick={handleSignUpClick}>sign in</button>
+                </div>
+              </div>
+              <div className='overlay_container'>
               <div className='overlay'>
                 <div className='overlay_panel overlay_left_container'>
                   <h2>welcome back!</h2>

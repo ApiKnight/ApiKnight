@@ -14,6 +14,8 @@ import { useDispatch } from 'react-redux'
 import { setValue } from '@/store/modules/rightSlice'
 import { useNavigate } from 'react-router-dom'
 import { delProps } from '@/types/arrayToTree'
+import { changeCurrentKeyAction } from '@/store/modules/tabSlice'
+
 function startMonitor() {
   createJsErrorMonitor('renderTree').start()
   createResourceErrorMonitor('renderTree').start()
@@ -48,6 +50,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
       }
       dispatch(addData(d as any))
       dispatch(setValue(data.key))
+      dispatch(changeCurrentKeyAction(data.key))
       // navigate('/project/apiMgt/certainApi', { state: {api_id:api_id, project_id:project_id} })
     }
   }

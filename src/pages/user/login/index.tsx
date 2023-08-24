@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Button, Checkbox, Form, Input, Layout,App } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Button, Checkbox, Form, Input, Layout, App } from 'antd'
 import HeaderNav from '@/components/HeaderNav'
 import { Menu, message } from 'antd'
 import type { MenuProps } from 'antd'
@@ -9,11 +9,12 @@ import { useDispatch } from 'react-redux'
 import login from '@/api/login'
 import randomNum from '@/utils/randomNum'
 const { Header, Content } = Layout
+import './index.less'
 
 type LoginType = {
   usernameOrEmail: string
   password: string
-  remember: string
+  remember?: string
 }
 interface RegisterType {
   username: string
@@ -22,6 +23,7 @@ interface RegisterType {
   phone: string
   avatar_url: string
 }
+type LoginState = "Login" | "Regist"
 const items: MenuProps['items'] = [
   {
     label: '注册',
@@ -43,23 +45,50 @@ const Login: React.FC = () => {
    * 生成[min,max)区间的随机整数
    * @param min 最小值
    * @param max 最大值
-   * @returns 
+   * @returns
    */
-  
+
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key)
   }
-  const onFinish = (values: any) => {
+  const [loginState,setLoginState] = useState<LoginState>('Login')
+  const [loginUserName,setLoginUsername] = useState('')
+  const [loginPassword,setLoginPassword] = useState('')
+  const [registUserName,setRegistUserNamed] = useState('')
+  const [registPassword,setRegistPassword] = useState('')
+  const [registEmail,setRegistEmail] = useState('')
+  const [registPhone,setRegistPhone] = useState('')
+  function changeSetLoginState(e:any):void {
+    setLoginUsername(e.target.value)
+  }
+  function changeSetLoginUsername(e:any):void {
+    setLoginUsername(e.target.value)
+  }
+  function changeSetLoginPassword(e:any):void {
+    setLoginPassword(e.target.value)
+  }
+  function changeSetRegistUserNamed(e:any):void {
+    setRegistUserNamed(e.target.value)
+  }
+  function changeSetRegistPassword(e:any):void {
+    setRegistPassword(e.target.value)
+  }
+  function changeSetRegistEmail(e:any):void {
+    setRegistEmail(e.target.value)
+  }
+  function changeSetRegistPhone(e:any):void {
+    setRegistPhone(e.target.value)
+  }
+  const onFinish = () => {
     let loginData: LoginType
     let registerData: RegisterType
-    current === 'login'
+    loginState === 'Login'
       ? ((loginData = {
-          usernameOrEmail: values.log_username,
-          password: values.log_password,
-          remember: values.remember,
+          usernameOrEmail: loginUserName,
+          password: loginPassword
         }),
         login(loginData).then(
-          (res:any) => {
+          (res: any) => {
             res.data.code === 200
               ? (message.success('登录成功'),
                 localStorage.setItem('token', res.data.data.token),
@@ -74,11 +103,11 @@ const Login: React.FC = () => {
           },
         ))
       : ((registerData = {
-          username: values.reg_username,
-          password: values.reg_password,
-          avatar_url: `src/assets/images/avatar${randomNum(1,6)}.jpg`,
-          email: values.email,
-          phone: values.phone,
+          username: registUserName,
+          password: registPassword,
+          avatar_url: `src/assets/images/avatar${randomNum(1, 6)}.jpg`,
+          email: registEmail,
+          phone: registPhone,
         }),
         request.post('v1/user/checkExist', registerData, {}).then((res) => {
           if (res.data.code === 200) {
@@ -95,90 +124,127 @@ const Login: React.FC = () => {
     console.log('Failed:', errorInfo)
   }
 
+  const [isSignIn, setIsSignIn] = useState(true)
+
+  const handleSignInClick = () => {
+    setIsSignIn(true)
+    onFinish()
+  }
+
+  const handleSignUpClick = () => {
+    setIsSignIn(false)
+    onFinish()
+  }
+
+  useEffect(() => {
+    const container = document.getElementsByClassName('container')[0]
+    const signIn = document.getElementById('sign-in')
+    const signUp = document.getElementById('sign-up')
+
+    signUp.onclick = function () {
+      container.classList.add('active')
+      setLoginState('Regist')
+    }
+    signIn.onclick = function () {
+      container.classList.remove('active')
+      setLoginState('Login')
+    }
+  }, [])
+
   return (
     <App>
       <HeaderNav ifHideUser={false} />
       <Content
-        style={{ backgroundColor: '#fbf7ff', height: '89vh', width: '100vw' }}
+        style={{ backgroundColor: '#fbf7ff', height: '89vh', width: '98vw' }}
       >
-        <Menu
-          onClick={onClick}
-          style={{
-            width: '100%',
-            backgroundColor: '#fbf7ff',
-            justifyContent: 'center',
-            marginBottom: '20px',
-          }}
-          selectedKeys={[current]}
-          mode='horizontal'
-          items={items}
-        />
-        <Form
-          name='basic'
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          style={{ maxWidth: 600 }}
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete='off'
-        >
-          <Form.Item<any>
-            label={current === 'login' ? '用户名或邮箱' : '用户名'}
-            name={current === 'login' ? 'log_username' : 'reg_username'}
-            rules={[
-              {
-                required: true,
-                message:
-                  current === 'login' ? '输入用户名或邮箱!' : '输入用户名!',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item<any>
-            label='密码'
-            name={current === 'login' ? 'log_password' : 'reg_password'}
-            rules={[{ required: true, message: '输入密码!' }]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          {current === 'login' ? (
-            <Form.Item<LoginType>
-              name='remember'
-              valuePropName='checked'
-              wrapperCol={{ offset: 8, span: 16 }}
-            >
-              <Checkbox>下次自动登录</Checkbox>
-            </Form.Item>
-          ) : (
-            <>
-              <Form.Item<any>
-                label='邮箱'
-                name='email'
-                rules={[{ required: true, message: '输入邮箱!' }]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item<any>
-                label='手机号'
-                name='phone'
-                rules={[{ required: true, message: '输入手机号码!' }]}
-              >
-                <Input />
-              </Form.Item>
-            </>
-          )}
-
-          <Form.Item wrapperCol={{ offset: 14, span: 16 }}>
-            <Button type='primary' htmlType='submit'>
-              {/* {current==='login'?'登录':'注册'} */}
-              提交
-            </Button>
-          </Form.Item>
-        </Form>
+        <div className='login'>
+          <div className='container'>
+            {isSignIn ? (
+              <div className='form-container sign-in-container'>
+                <div className='form'>
+                  <h2>sign in</h2>
+                  <input
+                    type='email'
+                    name='email'
+                    id='email'
+                    placeholder='Email/Phone/User...'
+                    value={loginUserName}
+                    onChange={changeSetLoginState}
+                  />
+                  <input
+                    type='password'
+                    name='password'
+                    id='password'
+                    placeholder='Password...'
+                    value={loginPassword}
+                    onChange={changeSetLoginPassword}
+                  />
+                  <button className='signIn' onClick={handleSignUpClick}>sign in</button>
+                </div>
+              </div>
+            ) : (
+              <div className='form-container sign-up-container'>
+                <div className='form'>
+                  <h2>sign up</h2>
+                  <input
+                    type='text'
+                    name='username'
+                    id='username'
+                    placeholder='Username...'
+                    value={registUserName}
+                    onChange={changeSetRegistUserNamed}
+                  />
+                  <input
+                    type='password'
+                    name='password'
+                    id='password'
+                    placeholder='Password...'
+                    value={registPassword}
+                    onChange={changeSetRegistPassword}
+                  />
+                  <input
+                    type='email'
+                    name='email'
+                    id='email'
+                    placeholder='Email...'
+                    value={registEmail}
+                    onChange={changeSetRegistEmail}
+                  />
+                  <input
+                    type='phone'
+                    name='phone'
+                    id='phone'
+                    placeholder='Phone...'
+                    value={registPhone}
+                    onChange={changeSetRegistPhone}
+                  />
+                  <button className='signUp' onClick={handleSignUpClick}>sign up</button>
+                </div>
+              </div>
+            )}
+            <div className='overlay_container'>
+              <div className='overlay'>
+                <div className='overlay_panel overlay_left_container'>
+                  <h2>welcome back!</h2>
+                  <p>
+                    To keep connected with us please login with your personal
+                    info
+                  </p>
+                  <Button id='sign-in'>
+                    sign in
+                  </Button>
+                </div>
+                <div className='overlay_panel overlay_right_container'>
+                  <h2>hello friend!</h2>
+                  <p>Enter your personal details and start journey with us</p>
+                  <Button id='sign-up'>
+                    sign up
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </Content>
     </App>
   )

@@ -1,7 +1,12 @@
-import { ArrayItemType } from "@/types/arrayToTree";
+import { ArrayItemType } from '@/types/arrayToTree'
 
-function createOkHttpTemplate(url:string,method: ArrayItemType,headers:any,redirect?:string):string {
-    return `
+function createOkHttpTemplate(
+  url: string,
+  method: ArrayItemType,
+  headers: any,
+  redirect?: string,
+): string {
+  return `
         OkHttpClient client = new OkHttpClient().newBuilder()
             .build();
         MediaType mediaType = MediaType.parse("application/json");

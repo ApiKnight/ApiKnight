@@ -54,7 +54,8 @@ const IntroInfo: React.FunctionComponent = memo(() => {
           <Button type='primary'>生成代码</Button>
           <Button
             style={{ marginLeft: '10px', marginRight: '20px' }}
-            onClick={handleDel}>
+            onClick={handleDel}
+          >
             删除
           </Button>
         </div>

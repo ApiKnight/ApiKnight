@@ -21,16 +21,19 @@ interface childProps {
   getUserInfo: Function
   user_id: string
 }
-interface ProjectInfoType{
-  description:string,
-  projectname:string
+interface ProjectInfoType {
+  description: string
+  projectname: string
 }
 const ProjectSet: React.FC = () => {
   // const ProjectSet: React.FC<childProps> = () => {
   const navigate = useNavigate()
   // const project_id = useSelector((state: RootState) => state.project.project_id)
   const { project_id } = useLocation().state
-  const [projectInfo, setProjectInfo] = useState<ProjectInfoType>({description:'',projectname:''})
+  const [projectInfo, setProjectInfo] = useState<ProjectInfoType>({
+    description: '',
+    projectname: '',
+  })
   const [role, setRoleState] = useState<number>(0)
 
   const onFinish = (values: any) => {
@@ -66,14 +69,13 @@ const ProjectSet: React.FC = () => {
   useEffect(() => {
     //获取用户身份
     async function getCurRole(project_id) {
-      let res:any = await getCurrentRole(project_id)
+      let res: any = await getCurrentRole(project_id)
       res.data.code === 200 ? setRoleState(res.data.data.role) : ''
-      
     }
 
     getCurRole(project_id)
 
-    getProjectBase(project_id).then((res:any) => {
+    getProjectBase(project_id).then((res: any) => {
       res.data.code === 200 ? setProjectInfo(res.data.data) : ''
     })
   }, [])
@@ -90,14 +92,16 @@ const ProjectSet: React.FC = () => {
             initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
-            autoComplete='off'>
+            autoComplete='off'
+          >
             {projectInfo.description ? (
               <Form.Item
                 label='项目名称'
                 name='projectname'
                 rules={[{ required: true, message: '请输入项目名称!' }]}
-                initialValue={projectInfo.projectname}>
-                <Input disabled={role!==1}/>
+                initialValue={projectInfo.projectname}
+              >
+                <Input disabled={role !== 1} />
               </Form.Item>
             ) : (
               ''
@@ -108,8 +112,9 @@ const ProjectSet: React.FC = () => {
                 label='项目描述'
                 name='description'
                 rules={[{ required: true, message: '请输入项目描述!' }]}
-                initialValue={projectInfo.description}>
-                <Input disabled={role!==1}/>
+                initialValue={projectInfo.description}
+              >
+                <Input disabled={role !== 1} />
               </Form.Item>
             ) : (
               ''
@@ -120,7 +125,8 @@ const ProjectSet: React.FC = () => {
                 <Button
                   type='primary'
                   htmlType='submit'
-                  style={{ marginRight: '10px' }}>
+                  style={{ marginRight: '10px' }}
+                >
                   确定
                 </Button>
               </Form.Item>
@@ -137,7 +143,8 @@ const ProjectSet: React.FC = () => {
                 onConfirm={confirm}
                 onCancel={cancel}
                 okText='确定'
-                cancelText='取消'>
+                cancelText='取消'
+              >
                 <Button danger>删除项目</Button>
               </Popconfirm>
             </div>

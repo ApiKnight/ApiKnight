@@ -11,7 +11,7 @@ import {
   Dropdown,
   App,
   Popconfirm,
-  Tag
+  Tag,
 } from 'antd'
 import './index.less'
 import getApplyList from '@/api/getApplyList'
@@ -55,11 +55,11 @@ const MemberMgt: React.FC = () => {
 
   const [apply_list, setApplyList] = useState([])
 
-  const [dNumber,setDNumber] = useState(0)
+  const [dNumber, setDNumber] = useState(0)
 
-  const [number,setNumber] = useState(1)
+  const [number, setNumber] = useState(1)
 
-  useEffect(()=>{
+  useEffect(() => {
     getApplyList(project_id).then((res: any) => {
       if (res.data.code === 200) {
         setDNumber(res.data.data.length)
@@ -67,7 +67,7 @@ const MemberMgt: React.FC = () => {
         console.log('审批列表拉取失败')
       }
     })
-  },[])
+  }, [])
 
   const [currentUid, setCurrentUid] = useState<string>('')
   const [role, setRoleState] = useState<number>(0)
@@ -137,7 +137,8 @@ const MemberMgt: React.FC = () => {
           marginTop: 12,
           height: 32,
           lineHeight: '32px',
-        }}>
+        }}
+      >
         {/* <Button onClick={onLoadMore}>loading more</Button> */}
       </div>
     ) : null
@@ -180,7 +181,9 @@ const MemberMgt: React.FC = () => {
           project_id: project_id,
         }).then((res) => {
           res.data.code === 200
-            ? (message.success('修改成功'), getCurRole(project_id),updateMemberList())
+            ? (message.success('修改成功'),
+              getCurRole(project_id),
+              updateMemberList())
             : message.error('修改失败')
         })
       } else {
@@ -258,7 +261,8 @@ const MemberMgt: React.FC = () => {
         }}
         // onCancel={cancel}
         okText='确定'
-        cancelText='取消'>
+        cancelText='取消'
+      >
         <Button danger>移除</Button>
       </Popconfirm>
     ) : (
@@ -267,120 +271,146 @@ const MemberMgt: React.FC = () => {
   }
   const showData = {
     numberCount: number,
-    dNumberCount:dNumber
+    dNumberCount: dNumber,
   }
   return (
     <App>
       <div className='membermgt'>
         {/* <div className='title'>成员/权限管理</div> */}
-        <Tag color="#2db7f5"><h2>成员/权限管理</h2></Tag>
-        <ShowMember data={showData}/>
+        <Tag color='#2db7f5'>
+          <h2>成员/权限管理</h2>
+        </Tag>
+        <ShowMember data={showData} />
         {role === 1 || role === 2 ? (
           <div className='apply'>
+            <Tag color='blue'>
+              <h3>成员管理</h3>
+            </Tag>
             <Button type='primary' onClick={showModal} className='button'>
               审批列表
             </Button>
-
-            <Modal
-              title='申请人'
-              open={isModalOpen}
-              onCancel={closeModal}
-              footer={null}>
-              <List
-                className='list'
-                loading={initLoading}
-                itemLayout='horizontal'
-                // loadMore={loadMore}
-                dataSource={apply_list}
-                renderItem={(item) => (
-                  <List.Item
-                    actions={[
-                      <>
-                        {item.status === 0 ? (
-                          <>
+            <div>
+              <Modal
+                title='申请人'
+                open={isModalOpen}
+                onCancel={closeModal}
+                footer={null}
+              >
+                <List
+                  className='list'
+                  loading={initLoading}
+                  itemLayout='horizontal'
+                  // loadMore={loadMore}
+                  dataSource={apply_list}
+                  renderItem={(item) => (
+                    <List.Item
+                      actions={[
+                        <>
+                          {item.status === 0 ? (
+                            <>
+                              <Button
+                                type='primary'
+                                style={{ backgroundColor: 'purple' }}
+                                onClick={refuse(item.id)}
+                                disabled={role !== 1 && role !== 2}
+                              >
+                                拒绝
+                              </Button>
+                              ,
+                              <Button
+                                type='primary'
+                                style={{ backgroundColor: 'green' }}
+                                onClick={approval(item.id)}
+                                disabled={role !== 1 && role !== 2}
+                              >
+                                同意
+                              </Button>
+                            </>
+                          ) : item.status === 1 ? (
                             <Button
+                              disabled
                               type='primary'
-                              style={{ backgroundColor: 'purple' }}
-                              onClick={refuse(item.id)}
-                              disabled={role !== 1 && role !== 2}>
-                              拒绝
+                              style={{
+                                backgroundColor: 'green',
+                                opacity: '50%',
+                                color: 'black',
+                              }}
+                            >
+                              已同意
                             </Button>
-                            ,
+                          ) : item.status === -1 ? (
                             <Button
+                              disabled
                               type='primary'
-                              style={{ backgroundColor: 'green' }}
-                              onClick={approval(item.id)}
-                              disabled={role !== 1 && role !== 2}>
-                              同意
+                              style={{
+                                backgroundColor: 'red',
+                                opacity: '50%',
+                                color: 'black',
+                              }}
+                            >
+                              已拒绝
                             </Button>
-                          </>
-                        ) : item.status === 1 ? (
-                          <Button
-                            disabled
-                            type='primary'
-                            style={{
-                              backgroundColor: 'green',
-                              opacity: '50%',
-                              color: 'black',
-                            }}>
-                            已同意
-                          </Button>
-                        ) : item.status === -1 ? (
-                          <Button
-                            disabled
-                            type='primary'
-                            style={{
-                              backgroundColor: 'red',
-                              opacity: '50%',
-                              color: 'black',
-                            }}>
-                            已拒绝
-                          </Button>
-                        ) : (
-                          ''
-                        )}
-                      </>,
-                    ]}
-                    key={item.id}>
-                    <Skeleton avatar title={false} loading={initLoading} active>
-                      <List.Item.Meta
-                        // avatar={<Avatar src={item.avatar_url} />}
-                        title={item.name}
-                        // description={`身份${item.role}`}
-                      />
-                    </Skeleton>
-                  </List.Item>
-                )}
-              />
-            </Modal>
+                          ) : (
+                            ''
+                          )}
+                        </>,
+                      ]}
+                      key={item.id}
+                    >
+                      <Skeleton
+                        avatar
+                        title={false}
+                        loading={initLoading}
+                        active
+                      >
+                        <List.Item.Meta
+                          // avatar={<Avatar src={item.avatar_url} />}
+                          title={item.name}
+                          // description={`身份${item.role}`}
+                        />
+                      </Skeleton>
+                    </List.Item>
+                  )}
+                />
+              </Modal>
+            </div>
           </div>
         ) : (
           ''
         )}
 
-        <List
-          className='list'
-          loading={initLoading}
-          itemLayout='horizontal'
-          loadMore={loadMore}
-          dataSource={member_list}
-          renderItem={(item) => (
-            <List.Item
-              actions={[
-                qualitySetBtn(item.user_id),
-                delMemberBtn(item.role, item.user_id),
-              ]}
-              key={item.user_id}>
-              <Skeleton avatar title={false} loading={initLoading} active>
-                <List.Item.Meta
-                  avatar={<Avatar src={item.avatar_url} alt='头像'/>}
-                  title={item.name}
-                  description={`身份${item.role}`}
-                />
-              </Skeleton>
-            </List.Item>
-          )}
-        />
+        <div className='apply-modal'>
+          <List
+            className='list'
+            loading={initLoading}
+            itemLayout='horizontal'
+            loadMore={loadMore}
+            dataSource={member_list}
+            renderItem={(item) => (
+              <List.Item
+                actions={[
+                  qualitySetBtn(item.user_id),
+                  delMemberBtn(item.role, item.user_id),
+                ]}
+                key={item.user_id}
+              >
+                <Skeleton avatar title={false} loading={initLoading} active>
+                  <List.Item.Meta
+                    avatar={<Avatar src={item.avatar_url} alt='头像' />}
+                    title={item.name}
+                    description={`身份：${
+                      item.role === 1
+                        ? '管理者'
+                        : item.role === 2
+                        ? '管理员'
+                        : '成员'
+                    }`}
+                  />
+                </Skeleton>
+              </List.Item>
+            )}
+          />
+        </div>
       </div>
     </App>
   )

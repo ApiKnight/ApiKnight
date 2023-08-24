@@ -5,7 +5,7 @@ const ProjectItem = (params: ProjectItemType) => {
   const navigate = useNavigate()
   // useEffect(() => {}, [])
   const toProject = () => {
-    console.log('toProject');
+    console.log('toProject')
     navigate('/project', { state: { project_id: params.project_id } })
   }
   return (

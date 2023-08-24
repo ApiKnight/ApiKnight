@@ -16,7 +16,8 @@ const IntroRequest: React.FunctionComponent = memo(() => {
         <Card
           size='small'
           title={paramType.slice(0, 1).toUpperCase() + paramType.slice(1)}
-          style={{ width: '100%' }}>
+          style={{ width: '100%' }}
+        >
           <span className='req-label-sm'>示例值</span>
           <Tag color='default'>{requestInfo[paramType]}</Tag>
         </Card>
@@ -27,7 +28,8 @@ const IntroRequest: React.FunctionComponent = memo(() => {
           size='small'
           title={paramType.slice(0, 1).toUpperCase() + paramType.slice(1)}
           extra={<a href='#'>生成代码</a>}
-          style={{ width: '100%' }}>
+          style={{ width: '100%' }}
+        >
           {requestInfo[paramType].map((paramItem) => {
             return getNormalParamItem(paramItem)
           })}

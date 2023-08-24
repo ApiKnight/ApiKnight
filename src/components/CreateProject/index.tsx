@@ -21,7 +21,7 @@ const UpdateProject: React.FC<childProps> = (props) => {
   const { isModalOpen, closeModal, updateUserInfo, user_id } = props
 
   const onFinish = (values: any) => {
-    values.project_img=`src/assets/images/project${randomNum(1,6)}.jpg`
+    values.project_img = `src/assets/images/project${randomNum(1, 6)}.jpg`
     request.post('v1/project/create', values, {}).then(() => {
       updateUserInfo(user_id)
       closeModal()

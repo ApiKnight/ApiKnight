@@ -1,7 +1,12 @@
-import { ArrayItemType } from "@/types/arrayToTree";
+import { ArrayItemType } from '@/types/arrayToTree'
 
-function createNativeTemplate(url:string,method: ArrayItemType,headers:any,redirect?:string):string {
-    return `
+function createNativeTemplate(
+  url: string,
+  method: ArrayItemType,
+  headers: any,
+  redirect?: string,
+): string {
+  return `
         package main
         import (
         "fmt"

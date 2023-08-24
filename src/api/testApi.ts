@@ -6,7 +6,7 @@ import request from './request'
  * @returns
  */
 type requestType = {
-  cookie:any,
+  cookie: any
   url: string
   method: string
   params: any
@@ -31,18 +31,18 @@ const testApi = (requestObj: requestType) => {
     method: requestObj.method,
     params: requestObj.params,
     // data: JSON.parse(requestObj.data)
-    data: eval('('+requestObj.data+')')
-  },);
+    data: eval('(' + requestObj.data + ')'),
+  })
 
   // {"name":"aays"}
-  
+
   return request.post(
     'v1/mock/real',
     {
       url: requestObj.url,
       method: requestObj.method,
       params: requestObj.params,
-      data: eval('('+requestObj.data+')')
+      data: eval('(' + requestObj.data + ')'),
     },
     {},
   )

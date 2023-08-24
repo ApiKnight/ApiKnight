@@ -16,7 +16,8 @@ const IntroResponse: React.FunctionComponent = memo(() => {
           size='small'
           title='响应示例'
           extra={<a href='#'>生成代码</a>}
-          style={{ width: '100%' }}>
+          style={{ width: '100%' }}
+        >
           <div className='content-value'>{responseInfo.body}</div>
         </Card>
       </div>

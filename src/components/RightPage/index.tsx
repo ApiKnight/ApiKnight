@@ -13,7 +13,7 @@ const RightPage = (props) => {
         <Tabs />
       </div>
       <div className='other-wrap'>
-        <RightComponent project_id={props.project_id}/>
+        <RightComponent project_id={props.project_id} />
       </div>
     </div>
   )

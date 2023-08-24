@@ -1,7 +1,12 @@
-import { ArrayItemType } from "@/types/arrayToTree";
+import { ArrayItemType } from '@/types/arrayToTree'
 
-function createXHRTemplate(url:string,method: ArrayItemType,headers:any,redirect?:string):string {
-    return `
+function createXHRTemplate(
+  url: string,
+  method: ArrayItemType,
+  headers: any,
+  redirect?: string,
+): string {
+  return `
         var xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
         

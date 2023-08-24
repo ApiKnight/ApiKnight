@@ -68,9 +68,7 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
       <div className='btn'>
         {show && (
           <div style={{ display: 'flex' }}>
-            {
-              data.pid !== null && <DelBtn data={delData} />
-            }
+            {data.pid !== null && <DelBtn data={delData} />}
             {data.type === 'FILE' && (
               <div>
                 <AddBtn data={addDatas} />

@@ -44,7 +44,8 @@ const DocRequest: React.FunctionComponent = memo(() => {
               active: currentNav === item.value,
             })}
             key={item.value}
-            onClick={() => setCurrentNav(item.value)}>
+            onClick={() => setCurrentNav(item.value)}
+          >
             {item.label}
           </div>
         ))}

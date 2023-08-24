@@ -16,8 +16,23 @@
     width: 100%;
   }
 
-  .ant-tree-node-content-wrapper {
-    background-color: red;
+  //   重置antd样式
+  .ant-tree-treenode {
+    .ant-tree-node-content-wrapper,
+    .ant-tree-switcher,
+    .ant-tree-draggable-icon {
+      transition: all 250ms ease;
+    }
+
+    &:hover {
+      .ant-tree-node-content-wrapper,
+      .ant-tree-switcher,
+      .ant-tree-draggable-icon {
+        background-color: #e6f4ff;
+        border-radius: 0;
+        //   transition: none;
+      }
+    }
   }
 
   .ant-tree-title {

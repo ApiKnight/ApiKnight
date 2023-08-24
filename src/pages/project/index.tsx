@@ -3,9 +3,8 @@ import './index.less'
 import { Outlet, Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import ProjectNav from '@/components/ProjectNav'
-import { useNavigate } from 'react-router-dom'
+import { Navigate,useNavigate } from 'react-router-dom'
 import getCurrentRole from '@/api/getCurrentRole'
-// import { setRole } from '@/store/modules/roleSlice'
 import ApiTab from '@/components/ApiTab'
 import './index.less'
 import getSelfInfo from '@/api/getSelfInfo'
@@ -14,12 +13,12 @@ const Project: React.FunctionComponent = () => {
   const navigate = useNavigate()
   let project_id
   const state = useLocation().state
+  if(!state){
+    return <Navigate to='/' />
+  }else{
+     project_id = state.project_id ? state.project_id : ''
+  }
   useEffect(() => {
-      if(!state){
-        navigate('/user/login')
-      }else{
-         project_id = state.project_id ? state.project_id : ''
-      }
       async function useAuth() {
       console.log(
         'token',

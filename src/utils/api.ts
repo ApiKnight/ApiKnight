@@ -30,10 +30,14 @@ export interface IAPIInfoPlus extends IAPIInfo {
  */
 export function parseAPIInfo(dataJsonStr: string): IAPIInfoPlus {
   const res = {} as IAPIInfoPlus
-  const apiData = JSON.parse(dataJsonStr)
-  res.value = apiData
-  res.getMethod = () => apiData.apiInfo.base.method
-  res.getPath = () => apiData.apiInfo.base.path
-  res.getFullUrl = () => res.getPath() + '/' + apiData.apiInfo.base.prefix
-  return res
+  try {
+    const apiData = JSON.parse(dataJsonStr)
+    res.value = apiData
+    res.getMethod = () => apiData.apiInfo.base.method
+    res.getPath = () => apiData.apiInfo.base.path
+    res.getFullUrl = () => res.getPath() + '/' + apiData.apiInfo.base.prefix
+    return res
+  } catch (e) {
+    throw new Error(`parseAPIInfo Fail:${e.message}`)
+  }
 }

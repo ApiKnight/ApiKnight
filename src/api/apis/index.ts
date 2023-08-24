@@ -73,8 +73,8 @@ export async function updateApi(options: IUpdateApiTransfer): Promise<any> {
   const { apiId, folderId, name, desc, notes, apiData, responseData } = options
   const { data } = await request.post('/v1/apis/update', {
     folder_id: folderId,
-    request_data: JSON.stringify(apiData),
-    response_data: responseData,
+    request_data: JSON.stringify(apiData).replace(/\\s/g, ''),
+    response_data: responseData.replace(/\\s/g, ''),
     description: desc,
     name: name,
     notes: notes,

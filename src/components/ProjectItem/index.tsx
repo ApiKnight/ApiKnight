@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import { Card, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
 const ProjectItem = (params: ProjectItemType) => {
-  useEffect(() => {}, [])
   const navigate = useNavigate()
+  // useEffect(() => {}, [])
   const toProject = () => {
     console.log('toProject');
-    navigate('/project/apiMgt', { state: { project_id: params.project_id } })
+    navigate('/project', { state: { project_id: params.project_id } })
   }
   return (
     <div onClick={toProject}>

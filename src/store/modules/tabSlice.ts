@@ -27,6 +27,14 @@ const tabSlice = createSlice({
       })
     },
     addData(state: any, action: PayloadAction<TabSlice>) {
+      // 限制标签栏的数量最多为7个
+      if (state.data.length >= 7) {
+        // 删除第一个不是项目概览的标签
+        const delIndex = state.data.findIndex(
+          (item) => item.key !== 'project-summary',
+        )
+        state.data.splice(delIndex, 1)
+      }
       const temp = state.data
       temp.push(action.payload)
       state.data = temp.filter((value, index, self) => {

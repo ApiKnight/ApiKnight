@@ -64,6 +64,22 @@ const tabSlice = createSlice({
     removeTabAction(state, { payload }: { payload: number }) {
       state.data.splice(payload, 1)
     },
+    addDataItemAction(
+      state,
+      { payload }: { payload: { item: any; index?: number } },
+    ) {
+      // 如果有index，就在index的位置插入，否则就在最后插入
+      const { item, index } = payload
+      // 如果已经存在当前的key，就不再添加
+      const isExist = state.data.some((i) => i.key === item.key)
+      if (isExist) return
+
+      if (index) {
+        state.data.splice(index, 0, item)
+      } else {
+        state.data.push(item)
+      }
+    },
   },
 })
 
@@ -74,6 +90,7 @@ export const {
   upData,
   changeCurrentKeyAction,
   removeTabAction,
+  addDataItemAction,
 } = tabSlice.actions
 
 export default tabSlice.reducer

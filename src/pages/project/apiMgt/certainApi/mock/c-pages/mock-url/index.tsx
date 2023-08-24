@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react'
-import { Button } from 'antd'
+import { Button, message } from 'antd'
 
 import type { ApiOptReqOptType } from '@/types/components'
 import ApiOperator from '@/components/ApiOperator'
@@ -15,13 +15,17 @@ import {
 import { BaseInfoType, IAPIInfo, RequestParamsType } from '@/types/api'
 import withMode from '../../with-mode'
 import testApi from '@/api/testApi'
-import { log } from 'console'
+import mockReq from '@/api/mockReq'
+import runMock from '@/api/runMock'
+
 type MockUrlProps = {
   mode: 'run' | 'mock'
   mockPrefix?: string
+  project_id: string
 }
 const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
-  const { mode } = props
+  const { mode, project_id } = props
+  const api_id = ''
   const dispatch = useAppDispatch()
   // 根据模式，获取对应的数据
   const { userReqInfo, reqParams } = useAppSelector((state) => {
@@ -74,9 +78,9 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
     }
     const url =
       mode === 'mock'
-        ? 'http://www.apiknight.com/api/mock'
+        ? path
         : prefix + (path ? '/' + path : '')
-    const requestObj = {
+    const requestObj:any = {
       url,
       method,
       params: paramsObj,
@@ -84,6 +88,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       cookie,
       data: body,
     }
+    
     console.log(requestObj)
     testApi(requestObj).then((res) => {
       console.log(res.data)
@@ -100,6 +105,56 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
     // dispatch(changeRequestBodyAction(responseExample))
   }
 
+  /**
+   * mock的创建和执行，通过参数区分
+   * @param mockMode 
+   */
+  const handleMock = (mockMode)=> {
+    const { prefix, path, method } = userReqInfo
+    const { params, headers: header, cookie, body } = reqParams
+    const paramsObj = {}
+    if (params.length) {
+      params.forEach((v) => {
+        console.log(v)
+        paramsObj[v.paramName] = v.value
+      })
+    }
+    const url = path
+    const requestObj:any = {
+      url,
+      method,
+      params: paramsObj,
+      header,
+      cookie,
+      data: body,
+    }
+      requestObj.project_id = project_id
+      requestObj.api_id = api_id
+      requestObj.response = {}
+    console.log(requestObj)
+    
+    // 创建mock服务
+    if(mockMode === 'create'){
+      mockReq(requestObj).then((res:any)=>{
+        res.data.code === 200
+        ?
+        message.success('创建成功')
+        :
+        message.error('创建失败')
+      })
+      // 执行mock
+    }else if(mockMode === 'execute'){
+      runMock(requestObj).then((res:any)=>{
+        res.status === 200
+        ?
+        // 将执行mock的响应数据放到响应栏
+        dispatch(changeResponseBodyAction(JSON.stringify(res.data)))
+        :
+        ''
+      })
+    }
+  }
+
   return (
     <div className='doc-operator'>
       <ApiOperator
@@ -110,9 +165,23 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
         inputValue={userReqInfo.path}
         urlPrefixValue={mode === 'run' ? userReqInfo.prefix : props.mockPrefix}
         disablePrefix={mode === 'mock'}>
-        <Button className='btn' type='primary' onClick={handleSendBtnClick}>
+          {/* 运行的发送由handleSendBtnClick控制，mock的发送和创建由handleMock控制 */}
+        <Button className='btn' type='primary' onClick={mode === 'run' ? handleSendBtnClick : ()=>handleMock('execute')}>
           发送
         </Button>
+
+        {
+          mode === 'mock'
+          ?
+          (
+            <Button type='primary' style={{marginLeft:'10px'}} onClick={()=>{handleMock('create')}}>
+            创建mock服务
+            </Button>
+          )
+          :
+          ''
+        }
+
       </ApiOperator>
     </div>
   )

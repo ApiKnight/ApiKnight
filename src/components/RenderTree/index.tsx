@@ -142,7 +142,7 @@ const renderTree: React.FC = (props) => {
               draggable
               blockNode
               onDrop={onDrop}
-              style={{ width: '270px' }}
+              style={{ width: '250px' }}
               className='renderTree'></Tree>
           )
         }

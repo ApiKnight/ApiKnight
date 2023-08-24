@@ -59,18 +59,15 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
       className='InterfaceBlock'
       onMouseEnter={changeBtnState}
       onMouseLeave={changeBtnState}
-      onDoubleClick={openTab}
-    >
-      <div>
+      onDoubleClick={openTab}>
+      <div className='interface-type'>
         <MethodList value={data.type} />
       </div>
       <div className='InterfaceBlock-title'>{data.title}</div>
       <div className='btn'>
         {show && (
           <div style={{ display: 'flex' }}>
-            {
-              data.pid !== null && <DelBtn data={delData} />
-            }
+            {data.pid !== null && <DelBtn data={delData} />}
             {data.type === 'FILE' && (
               <div>
                 <AddBtn data={addDatas} />

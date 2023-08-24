@@ -17,9 +17,10 @@ const Receive: React.FunctionComponent = () => {
         {},
       )
       .then((resp) => {
+        const logInfo = isJoin === false ? resp.data.message : "您已加入该项目组"
         const openNotification = (placement: NotificationPlacement) => {
           api.info({
-            message: <p>{resp.data.message}</p>,
+            message: <p>{logInfo}</p>,
             description: <p>3s后返回主界面</p>,
             placement,
           })
@@ -31,6 +32,7 @@ const Receive: React.FunctionComponent = () => {
       })
   }
   const [projectName, setProjectName] = useState('')
+  const [isJoin,setIsJoin] = useState(false)
   useEffect(() => {
     request
       .post(
@@ -41,13 +43,29 @@ const Receive: React.FunctionComponent = () => {
       .then((resp: any) => {
         setProjectName(resp.data.data.projectname as string)
       })
+      request.post(
+        `/v1/members/list`,
+        { projectid: Number(searchParams.get('projectid')) },
+        {},
+      )
+      .then((resp: any) => {
+        const user_id = localStorage.getItem("user_id")
+        const dataList = resp.data.data
+        dataList.map((item)=>{
+          console.log(item.user_id)
+          console.log(user_id)
+          if (item.user_id === user_id) {
+            setIsJoin(true)
+          }
+        })
+      })
   }, [])
   return (
     <div className='receive'>
       {contextHolder}
       <h1>ApiKnight</h1>
       <p>
-        刘宇洋 在 ApiKnight 中邀请您加入 <strong>{projectName}</strong> 项目
+        我们 在 ApiKnight 中邀请您加入 <strong>{projectName}</strong> 项目
       </p>
       <div className='receive-btn'>
         <Button type='primary' size='large' onClick={sendJoin}>

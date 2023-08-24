@@ -1,5 +1,7 @@
 import React, { memo } from 'react'
 import { App, Button } from 'antd'
+import classNames from 'classnames'
+
 import { useAppDispatch, useAppSelector } from '@/store'
 import './index.less'
 import { formatTime } from '@/utils/math'
@@ -11,12 +13,13 @@ import { setValue } from '@/store/modules/rightSlice'
 const IntroInfo: React.FunctionComponent = memo(() => {
   const { message, modal } = App.useApp()
   const dispatch = useAppDispatch()
-  const { metaInfo, ownerInfo, folderName, apiId } = useAppSelector(
+  const { metaInfo, ownerInfo, folderName, apiId, baseInfo } = useAppSelector(
     (state) => ({
       metaInfo: state.document.apiData.meta_info,
       ownerInfo: state.document.ownerUser,
       folderName: state.document.folderName,
       apiId: state.document.apiId,
+      baseInfo: state.document.apiData.apiInfo.base,
     }),
   )
 
@@ -49,6 +52,13 @@ const IntroInfo: React.FunctionComponent = memo(() => {
   return (
     <div className='intro-request'>
       <div className='name-wrap'>
+        <div
+          className={classNames(
+            'method',
+            'method-' + baseInfo.method.toLowerCase(),
+          )}>
+          {baseInfo.method}
+        </div>
         <div className='title'>{metaInfo.name}</div>
         <div className='opt-wrap'>
           <Button type='primary'>生成代码</Button>

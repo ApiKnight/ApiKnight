@@ -4,6 +4,7 @@ import { Card, Tag } from 'antd'
 import './index.less'
 import { useAppSelector } from '@/store'
 import { NormalParamsType } from '@/types/api'
+import CodeEditor from '@/components/CodeEditor'
 
 const IntroRequest: React.FunctionComponent = memo(() => {
   const { requestInfo } = useAppSelector((state) => ({
@@ -17,8 +18,18 @@ const IntroRequest: React.FunctionComponent = memo(() => {
           size='small'
           title={paramType.slice(0, 1).toUpperCase() + paramType.slice(1)}
           style={{ width: '100%' }}>
-          <span className='req-label-sm'>示例值</span>
-          <Tag color='default'>{requestInfo[paramType]}</Tag>
+          <div className='code-card-body-info'>
+            <span className='body-title'>示例值</span>
+            <div className='body-content'>
+              <CodeEditor
+                height='250px'
+                lang='json'
+                readOnly
+                withBorder
+                defaultValue={requestInfo[paramType]}
+              />
+            </div>
+          </div>
         </Card>
       )
     } else {

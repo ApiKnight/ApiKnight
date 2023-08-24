@@ -6,6 +6,7 @@ import './index.less'
 import { shallowEqualApp, useAppSelector } from '@/store'
 import { ResponseType } from '@/types/api'
 import withMode from '../../with-mode'
+import CodeEditor from '@/components/CodeEditor'
 
 const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
   props,
@@ -24,7 +25,12 @@ const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
     <div className='response-page'>
       <div className='section-title'>返回响应</div>
       <div className='content'>
-        <TextArea rows={6} placeholder='响应内容' value={responseInfo.body} />
+        <CodeEditor
+          defaultValue={responseInfo.body}
+          height='200px'
+          withBorder
+        />
+        {/* <TextArea rows={6} placeholder='响应内容' value={responseInfo.body} /> */}
       </div>
     </div>
   )

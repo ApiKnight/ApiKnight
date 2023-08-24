@@ -3,6 +3,7 @@ import { Card } from 'antd'
 import './index.less'
 import { useSelector } from 'react-redux'
 import { useAppSelector } from '@/store'
+import CodeEditor from '@/components/CodeEditor'
 
 const IntroResponse: React.FunctionComponent = memo(() => {
   const { responseInfo } = useAppSelector((state) => ({
@@ -17,7 +18,20 @@ const IntroResponse: React.FunctionComponent = memo(() => {
           title='响应示例'
           extra={<a href='#'>生成代码</a>}
           style={{ width: '100%' }}>
-          <div className='content-value'>{responseInfo.body}</div>
+          <div className='content-value'>
+            <div className='code-card-body-info'>
+              <span className='body-title'>示例值</span>
+              <div className='body-content'>
+                <CodeEditor
+                  height='250px'
+                  lang='json'
+                  readOnly
+                  withBorder
+                  defaultValue={responseInfo.body}
+                />
+              </div>
+            </div>
+          </div>
         </Card>
       </div>
     </div>

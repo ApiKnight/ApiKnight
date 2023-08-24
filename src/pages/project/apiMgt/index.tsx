@@ -30,7 +30,7 @@ const ApiMgt: React.FunctionComponent = () => {
         <RenderTree />
       </div>
       <div className='project-api__right'>
-        <RightPage />
+        <RightPage project_id={project_id}/>
       </div>
     </div>
   )

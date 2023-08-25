@@ -3,6 +3,7 @@ import type { MenuProps } from 'antd'
 import { Menu } from 'antd'
 import { createUnirestTemplate } from '@/template/unirestTemplate'
 import { createOkHttpTemplate } from '@/template/pkHttpTemplate'
+import CodeEditor from '../CodeEditor'
 
 const JavaCodeContent: React.FC = () => {
   const items: MenuProps['items'] = [
@@ -33,22 +34,22 @@ const JavaCodeContent: React.FC = () => {
         {
           //  这里做条件渲染，文档，运行，mock等做成条件渲染，比如if e等于多少的时候渲染文档，等于多少的时候渲染运行
           current === '1' ? (
-            <code>
-              {createUnirestTemplate(
+            <CodeEditor defaultValue={
+              createUnirestTemplate(
                 'http://127.0.0.1/xxx',
                 'GET',
                 "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
                 'follow',
-              )}
-            </code>
+              )
+          } lang='javascript' height='360px' width='435px'/>
           ) : (
-            <code>
-              {createOkHttpTemplate(
+            <CodeEditor defaultValue={
+              createOkHttpTemplate(
                 'http://127.0.0.1/xxx',
                 'GET',
                 "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
-              )}
-            </code>
+              )
+          } lang='javascript' height='360px' width='435px'/>
           )
         }
       </div>

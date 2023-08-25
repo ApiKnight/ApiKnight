@@ -13,13 +13,13 @@ export const templateSlice = createSlice({
   name: 'templateSlice',
   initialState,
   reducers: {
-    setValue: (state, action: PayloadAction<boolean>) => {
+    setTemplateValue: (state, action: PayloadAction<boolean>) => {
       state.value = action.payload
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setValue } = templateSlice.actions
+export const { setTemplateValue } = templateSlice.actions
 
 export default templateSlice.reducer

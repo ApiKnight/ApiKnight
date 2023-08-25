@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import type { MenuProps } from 'antd'
 import { Menu } from 'antd'
 import { createNativeTemplate } from '@/template/nativeTemplate'
+import CodeEditor from '../CodeEditor'
 
 const GoCodeContent: React.FC = () => {
   const items: MenuProps['items'] = [
@@ -26,14 +27,14 @@ const GoCodeContent: React.FC = () => {
       />
       <div className='codeTemplate-content__codeBlock'>
         {
-          <code style={{ fontSize: '2px' }}>
-            {createNativeTemplate(
+          <CodeEditor defaultValue={
+            createNativeTemplate(
               'http://127.0.0.1/xxx',
               'GET',
               "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
               'follow',
-            )}
-          </code>
+            )
+        } lang='javascript' height='360px' width='435px'/>
         }
       </div>
     </div>

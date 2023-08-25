@@ -1,7 +1,7 @@
-import React, { memo } from 'react'
-import { App, Button } from 'antd'
+import React, { memo , useState } from 'react'
+import { App, Button, Modal } from 'antd'
 import classNames from 'classnames'
-
+import type { RootState } from '@/store/index.ts'
 import { useAppDispatch, useAppSelector } from '@/store'
 import './index.less'
 import { formatTime } from '@/utils/math'
@@ -9,6 +9,9 @@ import { deleteApi } from '@/api'
 import { increment } from '@/store/modules/watchDir'
 import { removeData } from '@/store/modules/tabSlice'
 import { setValue } from '@/store/modules/rightSlice'
+import { useSelector } from 'react-redux'
+import { setTemplateValue } from '@/store/modules/templateSlice'
+import CodeTemplate from '@/components/CodeTemplate'
 
 const IntroInfo: React.FunctionComponent = memo(() => {
   const { message, modal } = App.useApp()
@@ -48,9 +51,40 @@ const IntroInfo: React.FunctionComponent = memo(() => {
       onCancel: () => {},
     })
   }
+  const templateSlice = useSelector((state: RootState) => state.templateSlice.value)
+  
+  // create code
 
+  const [open, setOpen] = useState(false);
+
+  const showModal = () => {
+    setOpen(true);
+  };
+
+  const handleOk = (e: React.MouseEvent<HTMLElement>) => {
+    console.log(e);
+    setOpen(false);
+  };
+
+  const handleCancel = (e: React.MouseEvent<HTMLElement>) => {
+    console.log(e);
+    setOpen(false);
+  };
+  
+  function showCreateCode():void {
+    setOpen(true);
+  }
   return (
     <div className='intro-request'>
+      <Modal
+        title={<div>生成代码</div>}
+        open={open}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        width={660}
+      >
+        <CodeTemplate/>
+      </Modal>
       <div className='name-wrap'>
         <div
           className={classNames(
@@ -61,7 +95,7 @@ const IntroInfo: React.FunctionComponent = memo(() => {
         </div>
         <div className='title'>{metaInfo.name}</div>
         <div className='opt-wrap'>
-          <Button type='primary'>生成代码</Button>
+          <Button type='primary' onClick={showCreateCode}>生成代码</Button>
           <Button
             style={{ marginLeft: '10px', marginRight: '20px' }}
             onClick={handleDel}

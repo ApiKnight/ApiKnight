@@ -6,6 +6,7 @@ import { createJQueryTemplate } from '@/template/jqueryTemplate'
 import { createRequestTemplate } from '@/template/requestTemplate'
 import { createXHRTemplate } from '@/template/xhrTemplate'
 import { Menu } from 'antd'
+import CodeEditor from '../CodeEditor'
 
 const JSCodeContent: React.FC = () => {
   const items: MenuProps['items'] = [
@@ -46,48 +47,48 @@ const JSCodeContent: React.FC = () => {
       />
       <div className='codeTemplate-content__codeBlock'>
         {
-          //  这里做条件渲染，文档，运行，mock等做成条件渲染，比如if e等于多少的时候渲染文档，等于多少的时候渲染运行
           current === '1' ? (
-            <code>
-              {createFetchTemplate(
+            <CodeEditor defaultValue={
+              createFetchTemplate(
                 'http://127.0.0.1/xxx',
                 'GET',
                 "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
                 'follow',
-              )}
-            </code>
+              )
+          } lang='javascript' height='360px' width='435px'/>
           ) : current === '2' ? (
-            <code>
-              {createAxiosTemplate(
+            <CodeEditor defaultValue={
+              createAxiosTemplate(
                 'http://127.0.0.1/xxx',
                 'GET',
-                "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
-              )}
-            </code>
+                "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'"
+              )
+          } lang='javascript' height='360px' width='435px'/>
           ) : current === '3' ? (
-            <code>
-              {createJQueryTemplate(
+            <CodeEditor defaultValue={
+              createJQueryTemplate(
                 'http://127.0.0.1/xxx',
                 'GET',
                 "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
-              )}
-            </code>
+              )
+          } lang='javascript' height='360px' width='435px'/>
           ) : current === '4' ? (
-            <code>
-              {createRequestTemplate(
+            <CodeEditor defaultValue={
+              createFetchTemplate(
                 'http://127.0.0.1/xxx',
                 'GET',
                 "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
-              )}
-            </code>
+                'follow',
+              )
+          } lang='javascript' height='360px' width='435px'/>
           ) : (
-            <code>
-              {createXHRTemplate(
+            <CodeEditor defaultValue={
+              createXHRTemplate(
                 'http://127.0.0.1/xxx',
                 'GET',
                 "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
-              )}
-            </code>
+              )
+            }/>
           )
         }
       </div>

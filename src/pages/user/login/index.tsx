@@ -155,7 +155,7 @@ const Login: React.FC = () => {
     <App>
       <HeaderNav ifHideUser={false} />
       <Content
-        style={{ backgroundColor: '#fbf7ff', height: '89vh', width: '98vw' }}
+        style={{ height: '89vh', width: '96vw' }}
       >
         <div className='login'>
           <div className='container'>
@@ -227,16 +227,16 @@ const Login: React.FC = () => {
                     To keep connected with us please login with your personal
                     info
                   </p>
-                  <Button id='sign-in'>
+                  <button id='sign-in'>
                     sign in
-                  </Button>
+                  </button>
                 </div>
                 <div className='overlay_panel overlay_right_container'>
                   <h2>hello friend!</h2>
                   <p>Enter your personal details and start journey with us</p>
-                  <Button id='sign-up'>
+                  <button id='sign-up'>
                     sign up
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>

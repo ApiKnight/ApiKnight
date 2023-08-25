@@ -59,7 +59,7 @@ const Login: React.FC = () => {
   const [registEmail,setRegistEmail] = useState('')
   const [registPhone,setRegistPhone] = useState('')
   function changeSetLoginState(e:any):void {
-    setLoginUsername(e.target.value)
+    setLoginState(e.target.value)
   }
   function changeSetLoginUsername(e:any):void {
     setLoginUsername(e.target.value)
@@ -105,7 +105,7 @@ const Login: React.FC = () => {
       : ((registerData = {
           username: registUserName,
           password: registPassword,
-          avatar_url: `src/assets/images/avatar${randomNum(1, 6)}.jpg`,
+          avatar_url: `${window.location.origin}/images/avatar${randomNum(1, 6)}.jpg`,
           email: registEmail,
           phone: registPhone,
         }),
@@ -206,7 +206,7 @@ const Login: React.FC = () => {
                     id='email'
                     placeholder='Email/Phone/User...'
                     value={loginUserName}
-                    onChange={changeSetLoginState}
+                    onChange={changeSetLoginUsername}
                   />
                   <input
                     type='password'

@@ -80,17 +80,22 @@ const DocOperator: React.FunctionComponent = () => {
       dispatch(changePathAction(newVal))
     }
   }
-
+  const [isEmpty,setIsEmpty] = useState<'' | 'error' | 'warning'>('')
   // 确认保存信息
   const handleConfimSave = () => {
-    dispatch(updateDocumentApiAction(saveRemark))
-    dispatch(
-      upData({
-        key: apiId,
-        type: method,
-        title: apiName,
-      }),
-    )
+    if (saveRemark === '') {
+      setIsEmpty('error')
+    }
+    else {
+      dispatch(updateDocumentApiAction(saveRemark))
+      dispatch(
+        upData({
+          key: apiId,
+          type: method,
+          title: apiName,
+        }),
+      )
+    }
   }
 
   // 删除信息
@@ -154,10 +159,14 @@ const DocOperator: React.FunctionComponent = () => {
       >
         <Input
           style={{ marginTop: '15px' }}
+          status={isEmpty}
           placeholder='接口修改备注'
           value={saveRemark}
           onChange={(e) => setSaveRemark(e.target.value)}
         />
+        {
+          isEmpty === "error" && <div style={{color: 'red'}}>输入框信息不能为空</div>
+        }
       </Modal>
     </div>
   )

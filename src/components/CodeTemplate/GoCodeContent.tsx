@@ -34,7 +34,7 @@ const GoCodeContent: React.FC = () => {
               "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
               'follow',
             )
-        } lang='javascript' height='360px' width='435px'/>
+        } lang='go' height='360px' width='435px'/>
         }
       </div>
     </div>

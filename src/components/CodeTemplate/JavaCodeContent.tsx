@@ -41,7 +41,7 @@ const JavaCodeContent: React.FC = () => {
                 "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
                 'follow',
               )
-          } lang='javascript' height='360px' width='435px'/>
+          } lang='java' height='360px' width='435px'/>
           ) : (
             <CodeEditor defaultValue={
               createOkHttpTemplate(
@@ -49,7 +49,7 @@ const JavaCodeContent: React.FC = () => {
                 'GET',
                 "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
               )
-          } lang='javascript' height='360px' width='435px'/>
+          } lang='java' height='360px' width='435px'/>
           )
         }
       </div>

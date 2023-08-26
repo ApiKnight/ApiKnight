@@ -1,13 +1,10 @@
 interface MemberInfoType {
-    count: number
-    label: string
+  count: number
+  label: string
 }
 
 interface MemberProps {
-    data: MemberInfoType
+  data: MemberInfoType
 }
 
-export type {
-    MemberInfoType,
-    MemberProps
-}
+export type { MemberInfoType, MemberProps }

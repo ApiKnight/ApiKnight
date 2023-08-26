@@ -4,10 +4,10 @@ import request from './request'
  * @param projectid
  * @returns
  */
-const reqDelMember = (project_id,user_id) => {
-  return request.post('v1/members/delete',{
+const reqDelMember = (project_id, user_id) => {
+  return request.post('v1/members/delete', {
     project_id: project_id,
-    user_id: user_id
+    user_id: user_id,
   })
 }
 export default reqDelMember

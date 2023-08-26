@@ -16,8 +16,8 @@ const User: React.FunctionComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [user_info, setUserInfo] = useState({})
   const state = useLocation().state
-  const user_id  = localStorage.getItem('user_id')
-  console.log('userid', user_id,state)
+  const user_id = localStorage.getItem('user_id')
+  console.log('userid', user_id, state)
 
   const openModal = () => {
     setIsModalOpen(true)
@@ -26,7 +26,7 @@ const User: React.FunctionComponent = () => {
     setIsModalOpen(false)
   }
   const updateUserInfo = () => {
-    getUserInfo(user_id).then((res:any) => {
+    getUserInfo(user_id).then((res: any) => {
       let data = res.data.data
       setUserInfo(data)
       setProjectList(data.project_list)

@@ -1,7 +1,12 @@
-import { ArrayItemType } from "@/types/arrayToTree";
+import { ArrayItemType } from '@/types/arrayToTree'
 
-function createRequestTemplate(url:string,method: ArrayItemType,headers:any,redirect?:string):string {
-    return `
+function createRequestTemplate(
+  url: string,
+  method: ArrayItemType,
+  headers: any,
+  redirect?: string,
+): string {
+  return `
         var request = require('request');
         var options = {
             'method': '${method}',

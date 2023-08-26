@@ -13,7 +13,7 @@ const RightComponent = (props) => {
       {rightSlice == 'gl' && <Overview />}
       {rightSlice === 'blank' && <LogoPage />}
       {rightSlice !== 'gl' && rightSlice !== 'blank' && (
-        <RightMenu data={rightSlice} project_id={props.project_id}/>
+        <RightMenu data={rightSlice} project_id={props.project_id} />
       )}
     </div>
   )

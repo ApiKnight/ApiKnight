@@ -1,7 +1,7 @@
 import request from './request'
 interface AuthorityType {
   user_id: string
-  role: number | '',
+  role: number | ''
   project_id: string
 }
 /**

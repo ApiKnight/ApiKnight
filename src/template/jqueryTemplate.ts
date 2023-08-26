@@ -1,7 +1,12 @@
-import { ArrayItemType } from "@/types/arrayToTree";
+import { ArrayItemType } from '@/types/arrayToTree'
 
-function createJQueryTemplate(url:string,method: ArrayItemType,headers:any,redirect?:string):string {
-    return `
+function createJQueryTemplate(
+  url: string,
+  method: ArrayItemType,
+  headers: any,
+  redirect?: string,
+): string {
+  return `
     var settings = {
         "url": "${url}",
         "method": "${method}",

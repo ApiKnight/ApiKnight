@@ -1,0 +1,145 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    box-sizing: border-box;
+    h2 {
+        margin-bottom: 10px !important;
+        font-size: 32px !important;
+        text-transform: capitalize !important;
+    box-sizing: border-box;}
+    
+    .container {
+        position: relative !important;
+        width: 768px !important;
+        height: 480px !important;
+        background-color: white !important;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2) !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+    box-sizing: border-box;}
+    
+    .form-container {
+        position: absolute !important;
+        top: 0 !important;
+        width: 50% !important;
+        height: 100% !important;
+        background-color: white !important;
+        transition: all 0.6s ease-in-out !important;
+    box-sizing: border-box;}
+    
+    .form {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        height: 100% !important;
+        width: 100% !important;
+        padding: 0 50px !important;
+    box-sizing: border-box;}
+    
+    input {
+        width: 100% !important;
+        margin: 8px 0 !important;
+        padding: 12px !important;
+        background-color: #eee !important;
+        border: none !important;
+    box-sizing: border-box;}
+    
+    .forget-password {
+        display: inline-block !important;
+        height: 20px !important;
+        text-decoration: none !important;
+        color: #bbb !important;
+        text-transform: capitalize !important;
+        font-size: 12px !important;
+    box-sizing: border-box;}
+    
+    .forget-password:hover {
+        color: lightslategray !important;
+        border-bottom: 2px solid #ff4b2b !important;
+    box-sizing: border-box;}
+    
+    button {
+        background: #ff4b2b !important;
+        padding: 10px 50px !important;
+        border: 1px solid transparent !important;
+        border-radius: 20px !important;
+        text-transform: uppercase !important;
+        color: white !important;
+        margin-top: 10px !important;
+        outline: none !important;
+        transition: transform 80 !important;
+        box-sizing: border-box;}
+    button:hover {
+        cursor: pointer;
+    }
+    button:active {
+        transform: scale(0.95) !important;
+    box-sizing: border-box;}
+    
+    .overlay_container {
+        position: absolute !important;
+        top: 0 !important;
+        width: 50% !important;
+        height: 100% !important;
+        z-index: 100 !important;
+        right: 0 !important;
+        overflow: hidden !important;
+        transition: all 0.6s ease-in-out !important;
+    box-sizing: border-box;}
+    
+    .overlay {
+        position: absolute !important;
+        width: 200% !important;
+        height: 100% !important;
+        left: -100% !important;
+        background-color: #ff4b2b !important;
+    box-sizing: border-box;}
+    
+    .overlay_panel {
+        position: absolute !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 50% !important;
+        height: 100% !important;
+        color: white !important;
+        padding: 0 40px !important;
+        text-align: center !important;
+    box-sizing: border-box;}
+    
+    .overlay_panel button {
+        background-color: transparent !important;
+        border: 1px solid white !important;
+    box-sizing: border-box;}
+    
+    .overlay_panel p {
+        font-size: 12px !important;
+        margin: 10px 0 15px 0 !important;
+    box-sizing: border-box;}
+    
+    .overlay_right_container {
+        right: 0 !important;
+    box-sizing: border-box;}
+    
+    .container.active .sign-up-container {
+        transform: translateX(100%) !important;
+        z-index: 5 !important;
+    box-sizing: border-box;}
+    
+    .container.active .sign-in-container {
+        transform: translateX(100%) !important;
+    box-sizing: border-box;}
+    
+    .container.active .overlay_container {
+        transform: translateX(-100%) !important;
+    box-sizing: border-box;}
+    
+    .container.active .overlay {
+        transform: translateX(50%) !important;
+    box-sizing: border-box;}
+}

@@ -58,7 +58,8 @@ const ProjectNavChild: React.FunctionComponent<{
       className={classNames('projectNavChild', {
         active: getIsActive(),
       })}
-      onClick={onClick}>
+      onClick={onClick}
+    >
       <div className='projectNavChild-avater'>
         <Avatar size='small' icon={props.data.avatar}></Avatar>
       </div>

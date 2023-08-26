@@ -3,7 +3,7 @@ import './index.less'
 import { Outlet, Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import ProjectNav from '@/components/ProjectNav'
-import { Navigate,useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import getCurrentRole from '@/api/getCurrentRole'
 import ApiTab from '@/components/ApiTab'
 import './index.less'
@@ -13,13 +13,13 @@ const Project: React.FunctionComponent = () => {
   const navigate = useNavigate()
   let project_id
   const state = useLocation().state
-  if(!state){
+  if (!state) {
     return <Navigate to='/' />
-  }else{
-     project_id = state.project_id ? state.project_id : ''
+  } else {
+    project_id = state.project_id ? state.project_id : ''
   }
   useEffect(() => {
-      async function useAuth() {
+    async function useAuth() {
       console.log(
         'token',
         localStorage.getItem('token'),
@@ -27,24 +27,22 @@ const Project: React.FunctionComponent = () => {
         localStorage.getItem('user_id'),
       )
       var { data } = await getSelfInfo()
-      
+
       data.code === 200
         ? ''
-        : (localStorage.setItem('token', ''), localStorage.setItem('user_id', ''))
-        console.log('datacode',data.code === 200);
-        
+        : (localStorage.setItem('token', ''),
+          localStorage.setItem('user_id', ''))
+      console.log('datacode', data.code === 200)
+
       return data.code === 200
     }
 
-    useAuth().then(res=>{
-      res === false 
-      ?
-      navigate('/user/login') :
-      (
-        getCurrentRole(project_id).then((res: any) => {
-          navigate('/project/apiMgt', { state: { project_id: project_id } })
-        })
-      )
+    useAuth().then((res) => {
+      res === false
+        ? navigate('/user/login')
+        : getCurrentRole(project_id).then((res: any) => {
+            navigate('/project/apiMgt', { state: { project_id: project_id } })
+          })
     })
 
     // console.log('当前project_id', project_id)
@@ -58,7 +56,7 @@ const Project: React.FunctionComponent = () => {
       <ApiTab />
       <div className='project'>
         <div className='left'>
-          <ProjectNav project_id={project_id?project_id:''} />
+          <ProjectNav project_id={project_id ? project_id : ''} />
         </div>
         <div className='right'>
           <Outlet />

@@ -17,7 +17,8 @@ const Receive: React.FunctionComponent = () => {
         {},
       )
       .then((resp) => {
-        const logInfo = isJoin === false ? resp.data.message : "您已加入该项目组"
+        const logInfo =
+          isJoin === false ? resp.data.message : '您已加入该项目组'
         const openNotification = (placement: NotificationPlacement) => {
           api.info({
             message: <p>{logInfo}</p>,
@@ -32,7 +33,7 @@ const Receive: React.FunctionComponent = () => {
       })
   }
   const [projectName, setProjectName] = useState('')
-  const [isJoin,setIsJoin] = useState(false)
+  const [isJoin, setIsJoin] = useState(false)
   useEffect(() => {
     request
       .post(
@@ -43,15 +44,16 @@ const Receive: React.FunctionComponent = () => {
       .then((resp: any) => {
         setProjectName(resp.data.data.projectname as string)
       })
-      request.post(
+    request
+      .post(
         `/v1/members/list`,
         { projectid: Number(searchParams.get('projectid')) },
         {},
       )
       .then((resp: any) => {
-        const user_id = localStorage.getItem("user_id")
+        const user_id = localStorage.getItem('user_id')
         const dataList = resp.data.data
-        dataList.map((item)=>{
+        dataList.map((item) => {
           console.log(item.user_id)
           console.log(user_id)
           if (item.user_id === user_id) {

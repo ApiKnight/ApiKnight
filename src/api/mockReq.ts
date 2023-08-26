@@ -8,12 +8,12 @@ import request from './request'
  * @param {Object} response 响应模板
  * @returns
  */
-interface mockReqType{
-  name: string,
-  project_id: string,
-  api_id: string,
-  method: string,
-  url: string,
+interface mockReqType {
+  name: string
+  project_id: string
+  api_id: string
+  method: string
+  url: string
   response: any
 }
 const mockReq = (mockReqObj: mockReqType) => {

@@ -1,7 +1,12 @@
-import { ArrayItemType } from "@/types/arrayToTree";
+import { ArrayItemType } from '@/types/arrayToTree'
 
-function createFetchTemplate(url:string,method: ArrayItemType,headers:any,redirect:string):string {
-    return `
+function createFetchTemplate(
+  url: string,
+  method: ArrayItemType,
+  headers: any,
+  redirect: string,
+): string {
+  return `
         var myHeaders = new Headers();
         myHeaders.append(${headers});
         

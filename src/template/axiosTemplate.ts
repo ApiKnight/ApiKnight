@@ -1,7 +1,12 @@
-import { ArrayItemType } from "@/types/arrayToTree";
+import { ArrayItemType } from '@/types/arrayToTree'
 
-function createAxiosTemplate(url:string,method: ArrayItemType,headers:any,redirect?:string):string {
-    return `
+function createAxiosTemplate(
+  url: string,
+  method: ArrayItemType,
+  headers: any,
+  redirect?: string,
+): string {
+  return `
     var axios = require('axios');
 
     var config = {

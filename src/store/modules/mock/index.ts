@@ -7,12 +7,27 @@ import { getRangeRandom } from '@/utils/math'
 import { getApiData } from '@/api/apis'
 import { getInitialApiInfoObj } from '@/utils/documents'
 import { NormalParamsActionType, ParamsOptActionType } from './type'
+import { store } from '@/store'
 
 const initialData: IAPIInfo = getInitialApiInfoObj('unknown')
 
 // 获取接口数据
 export const fetchApiDataAction = createAsyncThunk(
   'mock/fetchApiData',
+  async (apiId: string, { dispatch }) => {
+    const currentState = store.getState().document
+    if (apiId === currentState.apiId) {
+      return
+    }
+    const apiData = await getApiData(apiId)
+    dispatch(changeRunData(apiData))
+    dispatch(changeMockData(cloneDeep(apiData)))
+  },
+)
+
+// 强行重新获取接口数据
+export const forceFetchApiDataAction = createAsyncThunk(
+  'mock/forceFetchApiDataAction',
   async (apiId: string, { dispatch }) => {
     const apiData = await getApiData(apiId)
     dispatch(changeRunData(apiData))

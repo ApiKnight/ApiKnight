@@ -16,6 +16,10 @@ import { increment } from '@/store/modules/watchDir'
 import { removeData, upData } from '@/store/modules/tabSlice'
 import { setValue } from '@/store/modules/rightSlice'
 import { usePrevious } from '@/hooks/usePrevious'
+import {
+  fetchApiDataAction,
+  forceFetchApiDataAction,
+} from '@/store/modules/mock'
 
 const DocOperator: React.FunctionComponent = () => {
   const { message, modal } = App.useApp()
@@ -41,7 +45,10 @@ const DocOperator: React.FunctionComponent = () => {
 
   // 通知其他redux等更新数据
   const updateOthers = () => {
+    // 通知接口目录
     dispatch(increment())
+    // 通知运行和mock
+    dispatch(forceFetchApiDataAction(apiId))
     console.log(apiName)
   }
 

@@ -2,13 +2,18 @@ import React, { memo } from 'react'
 import { Card } from 'antd'
 import './index.less'
 import { useSelector } from 'react-redux'
-import { useAppSelector } from '@/store'
+import { shallowEqualApp, useAppSelector } from '@/store'
 import CodeEditor from '@/components/CodeEditor'
 
 const IntroResponse: React.FunctionComponent = memo(() => {
-  const { responseInfo } = useAppSelector((state) => ({
-    responseInfo: state.document.apiData.apiInfo.response,
-  }))
+  const { responseInfo } = useAppSelector(
+    (state) => ({
+      responseInfo: state.document.apiData.apiInfo.response,
+    }),
+    shallowEqualApp,
+  )
+  console.log('responseInfo', responseInfo)
+
   return (
     <div className='intro-response'>
       <div className='setction-title'>返回响应</div>

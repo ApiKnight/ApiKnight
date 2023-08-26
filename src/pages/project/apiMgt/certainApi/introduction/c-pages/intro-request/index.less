@@ -32,13 +32,26 @@
   }
 
   .example {
+    display: flex;
     .label {
       font-size: 13px;
       margin: 0 10px;
+      min-width: 45px;
     }
 
     .val {
       font-size: 13px;
+      flex: 1;
+      padding-right: 20px;
+      .example-tag {
+        width: fit-content;
+        max-width: calc(100% - 20px);
+        border: 0.8px solid rgb(217, 217, 217);
+        border-radius: 4px;
+        padding: 0 7px;
+        // 允许换行
+        word-break: break-all;
+      }
     }
   }
 }

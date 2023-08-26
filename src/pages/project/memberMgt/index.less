@@ -1,25 +1,52 @@
-.membermgt{
-    padding: 2.5% 9.6% 2.5% 9.6%;
-    .title{
+.membermgt {
+  padding: 2.5% 9.6% 2.5% 9.6%;
+
+  .title {
+    font-weight: 700;
+    color: red;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .list {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .apply {
+    .title-wrap {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h3 {
         font-weight: 700;
-        color: red;
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-    .list {
-            width: 50vw;
+        color: #333;
+        font-size: 18px;
       }
-    .apply{
-        .button{
-            // 变形定位法，如果用子绝父相，会脱离文档流导致高度塌陷
-            position: relative;
-            left: 100%;
-            transform: translate(-100%);
-        }
+      .button {
+        // 变形定位法，如果用子绝父相，会脱离文档流导致高度塌陷
+        // position: relative;
+        // left: 100%;
+        // transform: translate(-100%);
+      }
     }
+  }
 }
 .apply-modal {
-    margin-top: 1.6%;
-    display: flex;
-    justify-content: center;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  border: 0.8px solid rgba(5, 5, 5, 0.06);
+  border-radius: 8px;
+
+  .ant-list {
+    [style] {
+      display: none;
+    }
+
+    .ant-list-item:last-child {
+      border-block-end: none !important;
+    }
+  }
 }

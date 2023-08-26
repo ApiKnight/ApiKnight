@@ -137,8 +137,7 @@ const MemberMgt: React.FC = () => {
           marginTop: 12,
           height: 32,
           lineHeight: '32px',
-        }}
-      >
+        }}>
         {/* <Button onClick={onLoadMore}>loading more</Button> */}
       </div>
     ) : null
@@ -261,8 +260,7 @@ const MemberMgt: React.FC = () => {
         }}
         // onCancel={cancel}
         okText='确定'
-        cancelText='取消'
-      >
+        cancelText='取消'>
         <Button danger>移除</Button>
       </Popconfirm>
     ) : (
@@ -277,25 +275,28 @@ const MemberMgt: React.FC = () => {
     <App>
       <div className='membermgt'>
         {/* <div className='title'>成员/权限管理</div> */}
-        <Tag color='#2db7f5'>
+        {/* <Tag color='#2db7f5'>
           <h2>成员/权限管理</h2>
-        </Tag>
+        </Tag> */}
         <ShowMember data={showData} />
         {role === 1 || role === 2 ? (
           <div className='apply'>
-            <Tag color='blue'>
+            {/* <Tag color='blue'>
               <h3>成员管理</h3>
-            </Tag>
-            <Button type='primary' onClick={showModal} className='button'>
-              审批列表
-            </Button>
+            </Tag> */}
+            <div className='title-wrap'>
+              <h3>成员管理</h3>
+              <Button type='primary' onClick={showModal} className='button'>
+                审批列表
+              </Button>
+            </div>
+
             <div>
               <Modal
                 title='申请人'
                 open={isModalOpen}
                 onCancel={closeModal}
-                footer={null}
-              >
+                footer={null}>
                 <List
                   className='list'
                   loading={initLoading}
@@ -310,31 +311,30 @@ const MemberMgt: React.FC = () => {
                             <>
                               <Button
                                 type='primary'
-                                style={{ backgroundColor: 'purple' }}
+                                danger
+                                // style={{ backgroundColor: 'purple' }}
                                 onClick={refuse(item.id)}
-                                disabled={role !== 1 && role !== 2}
-                              >
+                                disabled={role !== 1 && role !== 2}>
                                 拒绝
                               </Button>
                               ,
                               <Button
                                 type='primary'
-                                style={{ backgroundColor: 'green' }}
+                                // style={{ backgroundColor: 'green' }}
                                 onClick={approval(item.id)}
-                                disabled={role !== 1 && role !== 2}
-                              >
+                                disabled={role !== 1 && role !== 2}>
                                 同意
                               </Button>
                             </>
                           ) : item.status === 1 ? (
                             <Button
                               disabled
-                              type='primary'
-                              style={{
-                                backgroundColor: 'green',
-                                opacity: '50%',
-                                color: 'black',
-                              }}
+                              type='default'
+                              // style={{
+                              //   backgroundColor: 'green',
+                              //   opacity: '50%',
+                              //   color: 'black',
+                              // }}
                             >
                               已同意
                             </Button>
@@ -346,8 +346,7 @@ const MemberMgt: React.FC = () => {
                                 backgroundColor: 'red',
                                 opacity: '50%',
                                 color: 'black',
-                              }}
-                            >
+                              }}>
                               已拒绝
                             </Button>
                           ) : (
@@ -355,14 +354,12 @@ const MemberMgt: React.FC = () => {
                           )}
                         </>,
                       ]}
-                      key={item.id}
-                    >
+                      key={item.id}>
                       <Skeleton
                         avatar
                         title={false}
                         loading={initLoading}
-                        active
-                      >
+                        active>
                         <List.Item.Meta
                           // avatar={<Avatar src={item.avatar_url} />}
                           title={item.name}
@@ -392,8 +389,7 @@ const MemberMgt: React.FC = () => {
                   qualitySetBtn(item.user_id),
                   delMemberBtn(item.role, item.user_id),
                 ]}
-                key={item.user_id}
-              >
+                key={item.user_id}>
                 <Skeleton avatar title={false} loading={initLoading} active>
                   <List.Item.Meta
                     avatar={<Avatar src={item.avatar_url} alt='头像' />}

@@ -173,10 +173,10 @@ const documentSlice = createSlice({
     changeRequestBodyAction(state, { payload }) {
       state.apiData.apiInfo.request.body = payload
     },
-    changeResponseBodyAction(state, { payload }) {
+    changeResponseBodyAction(state, { payload }: { payload: string }) {
       console.log(payload)
 
-      state.apiData.apiInfo.response.body = payload
+      state.apiData.apiInfo.response.body = payload.replace(/\s/g, '')
     },
     changeUpdateStatusAction(state, { payload }: UpdateStatusActionType) {
       if (payload.onUpdating !== undefined)

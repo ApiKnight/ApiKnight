@@ -86,21 +86,19 @@ const ProjectSet: React.FC = () => {
         <div className='form'>
           <Form
             name='basic'
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            style={{ maxWidth: 600 }}
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 20 }}
+            style={{ width: 600 }}
             initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
-            autoComplete='off'
-          >
+            autoComplete='off'>
             {projectInfo.description ? (
               <Form.Item
                 label='项目名称'
                 name='projectname'
                 rules={[{ required: true, message: '请输入项目名称!' }]}
-                initialValue={projectInfo.projectname}
-              >
+                initialValue={projectInfo.projectname}>
                 <Input disabled={role !== 1} />
               </Form.Item>
             ) : (
@@ -112,8 +110,7 @@ const ProjectSet: React.FC = () => {
                 label='项目描述'
                 name='description'
                 rules={[{ required: true, message: '请输入项目描述!' }]}
-                initialValue={projectInfo.description}
-              >
+                initialValue={projectInfo.description}>
                 <Input disabled={role !== 1} />
               </Form.Item>
             ) : (
@@ -125,32 +122,40 @@ const ProjectSet: React.FC = () => {
                 <Button
                   type='primary'
                   htmlType='submit'
-                  style={{ marginRight: '10px' }}
-                >
+                  style={{ marginRight: '10px' }}>
                   确定
                 </Button>
+                <Popconfirm
+                  title='谨慎操作！'
+                  style={{ marginLeft: '40px' }}
+                  description='确定删除本项目吗?'
+                  onConfirm={confirm}
+                  onCancel={cancel}
+                  okText='确定'
+                  cancelText='取消'>
+                  <Button danger>删除项目</Button>
+                </Popconfirm>
               </Form.Item>
             ) : (
               ''
             )}
-          </Form>
 
-          {role === 1 ? (
-            <div className='delete'>
-              <Popconfirm
-                title='谨慎操作！'
-                description='确定删除本项目吗?'
-                onConfirm={confirm}
-                onCancel={cancel}
-                okText='确定'
-                cancelText='取消'
-              >
-                <Button danger>删除项目</Button>
-              </Popconfirm>
-            </div>
-          ) : (
-            ''
-          )}
+            {/* {role === 1 ? (
+              <div className='delete'>
+                <Popconfirm
+                  title='谨慎操作！'
+                  description='确定删除本项目吗?'
+                  onConfirm={confirm}
+                  onCancel={cancel}
+                  okText='确定'
+                  cancelText='取消'>
+                  <Button danger>删除项目</Button>
+                </Popconfirm>
+              </div>
+            ) : (
+              ''
+            )} */}
+          </Form>
         </div>
       </div>
     </App>

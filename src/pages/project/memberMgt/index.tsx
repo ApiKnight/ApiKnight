@@ -275,18 +275,22 @@ const MemberMgt: React.FC = () => {
     <App>
       <div className='membermgt'>
         {/* <div className='title'>成员/权限管理</div> */}
-        <Tag color='#2db7f5'>
+        {/* <Tag color='#2db7f5'>
           <h2>成员/权限管理</h2>
-        </Tag>
+        </Tag> */}
         <ShowMember data={showData} />
         {role === 1 || role === 2 ? (
           <div className='apply'>
-            <Tag color='blue'>
+            {/* <Tag color='blue'>
               <h3>成员管理</h3>
-            </Tag>
-            <Button type='primary' onClick={showModal} className='button'>
-              审批列表
-            </Button>
+            </Tag> */}
+            <div className='title-wrap'>
+              <h3>成员管理</h3>
+              <Button type='primary' onClick={showModal} className='button'>
+                审批列表
+              </Button>
+            </div>
+
             <div>
               <Modal
                 title='申请人'
@@ -325,12 +329,13 @@ const MemberMgt: React.FC = () => {
                           ) : item.status === 1 ? (
                             <Button
                               disabled
-                              type='primary'
-                              style={{
-                                backgroundColor: 'green',
-                                opacity: '50%',
-                                color: 'black',
-                              }}>
+                              type='default'
+                              // style={{
+                              //   backgroundColor: 'green',
+                              //   opacity: '50%',
+                              //   color: 'black',
+                              // }}
+                            >
                               已同意
                             </Button>
                           ) : item.status === -1 ? (

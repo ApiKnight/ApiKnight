@@ -12,6 +12,7 @@ import { setValue } from '@/store/modules/rightSlice'
 import { useSelector } from 'react-redux'
 import { setTemplateValue } from '@/store/modules/templateSlice'
 import CodeTemplate from '@/components/CodeTemplate'
+import VersionBack from '@/components/versionBack'
 
 const IntroInfo: React.FunctionComponent = memo(() => {
   const { message, modal } = App.useApp()
@@ -56,9 +57,19 @@ const IntroInfo: React.FunctionComponent = memo(() => {
   // create code
 
   const [open, setOpen] = useState(false);
-
+  const [versionOpen,setVersionOpen] = useState(false)
   const showModal = () => {
-    setOpen(true);
+    setVersionOpen(true);
+  };
+
+  const versionOk = (e: React.MouseEvent<HTMLElement>) => {
+    console.log(e);
+    setVersionOpen(false);
+  };
+
+  const versionCancel = (e: React.MouseEvent<HTMLElement>) => {
+    console.log(e);
+    setVersionOpen(false);
   };
 
   const handleOk = (e: React.MouseEvent<HTMLElement>) => {
@@ -85,6 +96,14 @@ const IntroInfo: React.FunctionComponent = memo(() => {
       >
         <CodeTemplate/>
       </Modal>
+      <Modal
+        title={<div>历史版本</div>}
+        open={versionOpen}
+        onOk={versionOk}
+        onCancel={versionCancel}
+      >
+        <VersionBack apis_id={apiId} />
+      </Modal>
       <div className='name-wrap'>
         <div
           className={classNames(
@@ -96,9 +115,14 @@ const IntroInfo: React.FunctionComponent = memo(() => {
         <div className='title'>{metaInfo.name}</div>
         <div className='opt-wrap'>
           <Button type='primary' onClick={showCreateCode}>生成代码</Button>
+          <Button 
+            style={{ marginLeft: '10px' }}
+            onClick={showModal}
+          >版本回滚</Button>
           <Button
             style={{ marginLeft: '10px', marginRight: '20px' }}
             onClick={handleDel}
+            danger
           >
             删除
           </Button>

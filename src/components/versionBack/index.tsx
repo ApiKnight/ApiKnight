@@ -3,20 +3,31 @@ import { Timeline, TimelineItemProps } from 'antd';
 import "./index.less"
 import { getVersionInfo } from '@/api/versionBack/queryVersion';
 import { VersionInfo } from '@/types/versionInfo';
+import { backHistory } from '@/api/versionBack/backHistory';
+import { increment } from "@/store/modules/watchDir";
+import { useDispatch } from "react-redux";
 
 const VersionBack: React.FC<{apis_id: string}> = (props) => {
     let Items: VersionInfo[]
+    const dispatch = useDispatch()
     const [renderItem,setRenderItem] = useState<TimelineItemProps[]>([])
     useEffect(()=>{
         getVersionInfo(props.apis_id).then((returnData)=>{
             Items = returnData
-            let temp:TimelineItemProps[] = []
+            let reactTemp:TimelineItemProps[] = []
             Items.map((it)=>{
-                temp.push({
-                    children: it.notes
-                })
+                reactTemp.push(
+                    {
+                        children: <div onClick={async ()=>{
+                                        await backHistory(it.id)
+                                        window.location.reload()
+                                    }}>
+                                        { it.notes }
+                                    </div>
+                    }
+                )
             })
-            setRenderItem(temp)
+            setRenderItem(reactTemp)
         })
     },[props.apis_id])
     return (

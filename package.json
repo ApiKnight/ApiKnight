@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://super-luoki.github.io/apiknight",
+  "homepage": "https://super-luoki.github.io",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

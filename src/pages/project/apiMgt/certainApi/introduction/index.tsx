@@ -6,11 +6,13 @@ import IntroResponse from './c-pages/intro-response'
 import './index.less'
 import { useAppDispatch } from '@/store'
 import { fetchDocumentApiAction } from '@/store/modules/document/document'
+import { forceFetchApiDataAction } from '@/store/modules/mock'
 
 const Introduction: React.FunctionComponent<IntroductionProps> = (props) => {
   const { data } = props
   const dispatch = useAppDispatch()
   dispatch(fetchDocumentApiAction(data))
+  dispatch(forceFetchApiDataAction(data))
   return (
     <div className='introduction-page'>
       <IntroInfo />

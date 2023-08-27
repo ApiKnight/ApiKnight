@@ -8,9 +8,19 @@ import testApi from '@/api/testApi'
 
 import './index.less'
 import { set } from 'immer/dist/internal.js'
+import { requestByServerProxy } from '@/api/service'
+import { parseAPIInfo, parseSwaggerDoc } from '@/utils/api/api'
+import { getUserId } from '@/utils/storage/storage'
+import { IAPIInfo } from '@/types/api'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { createFolder } from '@/api/folder'
+import { createApi, createFullApi, updateApi } from '@/api'
+import { getProjectInfoById } from '@/api/project'
+import { fetchProjectInfoAction } from '@/store/modules/project'
 
 const Overview: React.FunctionComponent = () => {
   const { message } = App.useApp()
+  const dispatch = useAppDispatch()
   // 导入相关
   const [importUrl, setImportUrl] = useState<string>('')
   const [onImportVisible, setOnImportVisible] = useState<boolean>(false)
@@ -77,16 +87,84 @@ const Overview: React.FunctionComponent = () => {
     })
   }, [])
 
+  const { folderList, projectId } = useAppSelector((state) => ({
+    folderList: state.project.projectInfo.folder_list,
+    projectId: state.project.projectInfo.id,
+  }))
+
   // 确认导入事件
   async function handleConfirmImport() {
-    console.log(importUrl)
     setOnImporting(true)
-    // 测试
-    setTimeout(() => {
+    try {
+      // 测试
+      const { data } = await requestByServerProxy({
+        url: importUrl,
+        method: 'GET',
+      })
+      const apiInfoMap = parseSwaggerDoc(data, getUserId())
+      await startImport(apiInfoMap)
+      message.success('导入成功')
+    } catch (err) {
+      message.error('导入失败，请检查URL是否正确\n' + err)
+      console.log(err)
+
+      console.trace(err)
+    } finally {
       setOnImporting(false)
       setOnImportVisible(false)
-      message.success('导入成功')
-    }, 1000)
+    }
+  }
+
+  /**
+   * 导入swagger文档
+   * @param apiInfoMap 来自swagger转换而来的api信息
+   */
+  async function startImport(apiInfoMap: Map<string, IAPIInfo[]>) {
+    // 第一步遍历所有的目录，将不存在的目录创建
+    const rootFolderId = folderList.find((item) => item.name === '根目录')?.id
+    for (let [folderName] of apiInfoMap) {
+      // 如果目录名存在则直接添加
+      const folderIndexInProj = folderList.findIndex(
+        (item) => item.name === folderName,
+      )
+      if (folderIndexInProj === -1) {
+        // 目录不存在则创建目录
+        await createFolder(projectId, rootFolderId, folderName)
+      }
+    }
+    // 第二步 获取最新项目信息
+    const { folder_list: newestFolderList } = await getProjectInfoById(
+      projectId,
+    )
+
+    // 第三步遍历所有的api，所有api创建
+    for (let [folderName, apiList] of apiInfoMap) {
+      // 如果目录名存在则直接添加
+      const folderIndexInProj = newestFolderList.findIndex(
+        (item) => item.name === folderName,
+      )
+      if (folderIndexInProj !== -1) {
+        // 创建接口
+        for (let apiItem of apiList) {
+          const folderId = newestFolderList[folderIndexInProj].id
+          // 创建接口
+          // await createApi(projectId, newestFolderList[folderIndexInProj].id, apiItem.meta_info.name, apiItem.meta_info.description)
+          await createFullApi({
+            projectId,
+            folderId,
+            name: apiItem.meta_info.name,
+            description: apiItem.meta_info.description || '无描述',
+            requestData: apiItem,
+            responseDataStr: apiItem.apiInfo.response.body,
+          })
+        }
+      }
+    }
+
+    // 刷新本地的项目信息
+    dispatch(fetchProjectInfoAction(projectId))
+    // 暂时用刷新页面替代
+    window.location.reload()
   }
 
   // 开始分享,准备分享链接

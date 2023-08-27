@@ -1,6 +1,6 @@
 import { ArrayItem, FlatArrayItem } from '@/types/arrayToTree'
 import { FlatItem } from '@/types/mergeFlatArrays'
-import { parseAPIInfo } from './api'
+import { parseAPIInfo } from './api/api'
 
 // arr_1 -> 文件目录数组 arr_2 -> 接口文件数组
 export function mergeFlatArrays(

@@ -32,7 +32,7 @@ export async function getFullApiData(
 }
 
 /**
- * 创建新接口
+ * 创建空接口（基本信息自动生成）
  * @param projectId 接口所在的项目id
  * @param folderId 接口所在的文件夹id
  * @param userId 接口所有者id
@@ -55,6 +55,36 @@ export async function createApi(
     description: desc,
     request_data: JSON.stringify(apiData),
     response_data: '{}',
+  })
+  return data
+}
+
+/**
+ * 基于完整的信息创建接口
+ */
+export async function createFullApi(options: {
+  projectId: number
+  folderId: string
+  requestData: IAPIInfo
+  responseDataStr: string
+  description: string
+  name: string
+}): Promise<any> {
+  const {
+    projectId,
+    folderId,
+    requestData,
+    responseDataStr,
+    description,
+    name,
+  } = options
+  const { data } = await request.post('/v1/apis/create', {
+    project_id: projectId,
+    folder_id: folderId,
+    name: name,
+    description: description,
+    request_data: JSON.stringify(requestData).replace(/\\s/g, ''),
+    response_data: responseDataStr,
   })
   return data
 }
@@ -92,3 +122,10 @@ export async function deleteApi(apiId: string) {
   const { data } = await request.post('/v1/apis/delete', { apis_id: apiId })
   return data
 }
+
+// // 导入swagger文档
+// export async function importSwaggerDoc(swaggerDocMap: Map<string, IAPIInfo>) {
+//   // 获取项目中的所有文件夹
+//   for (let [folderName, apiData] of swaggerDocMap) {
+//   }
+// }

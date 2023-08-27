@@ -1,3 +1,4 @@
+import { IApiResult } from '..'
 import request from '../request'
 
 /**
@@ -10,4 +11,17 @@ export async function getFolderName(folderId: string): Promise<string> {
     folder_id: folderId,
   })
   return data.data
+}
+
+export async function createFolder(
+  projectId: number,
+  parentId: string,
+  name: string,
+): Promise<IApiResult<any>> {
+  const { data } = await request.post('/v1/folder/create', {
+    project_id: projectId,
+    parent_id: parentId,
+    name: name,
+  })
+  return data
 }

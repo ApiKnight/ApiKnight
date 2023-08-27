@@ -8,6 +8,8 @@ import testApi from '@/api/testApi'
 
 import './index.less'
 import { set } from 'immer/dist/internal.js'
+import { requestByServerProxy } from '@/api/service'
+import { parseAPIInfo, parseSwaggerDoc } from '@/utils/api/api'
 
 const Overview: React.FunctionComponent = () => {
   const { message } = App.useApp()
@@ -79,14 +81,21 @@ const Overview: React.FunctionComponent = () => {
 
   // 确认导入事件
   async function handleConfirmImport() {
-    console.log(importUrl)
     setOnImporting(true)
-    // 测试
-    setTimeout(() => {
+    try {
+      // 测试
+      const { data } = await requestByServerProxy({
+        url: importUrl,
+        method: 'GET',
+      })
+      const apiInfo = parseSwaggerDoc(data)
+      console.log(apiInfo)
+    } catch (err) {
+      message.error('导入失败，请检查URL是否正确\n' + err)
+    } finally {
       setOnImporting(false)
-      setOnImportVisible(false)
-      message.success('导入成功')
-    }, 1000)
+      // setOnImportVisible(false)
+    }
   }
 
   // 开始分享,准备分享链接

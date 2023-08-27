@@ -3,14 +3,20 @@ import { Input } from 'antd'
 const { TextArea } = Input
 
 import './index.less'
-import { shallowEqualApp, useAppSelector } from '@/store'
+import { shallowEqualApp, useAppDispatch, useAppSelector } from '@/store'
 import { ResponseType } from '@/types/api'
 import withMode from '../../with-mode'
 import CodeEditor from '@/components/CodeEditor'
+import {
+  changeRequestBodyAction,
+  changeResponseBodyAction,
+} from '@/store/modules/mock'
 
 const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
   props,
 ) => {
+  const dispatch = useAppDispatch()
+
   const { responseInfo } = useAppSelector((state) => {
     const res = {} as { responseInfo: ResponseType }
     if (props.mode === 'mock') {
@@ -19,7 +25,7 @@ const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
       res.responseInfo = state.mock.runData.apiInfo.response
     }
     return res
-  }, shallowEqualApp)
+  })
 
   return (
     <div className='response-page'>
@@ -29,6 +35,7 @@ const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
           defaultValue={responseInfo.body}
           height='200px'
           withBorder
+          onChange={(value) => dispatch(changeResponseBodyAction(value))}
         />
         {/* <TextArea rows={6} placeholder='响应内容' value={responseInfo.body} /> */}
       </div>

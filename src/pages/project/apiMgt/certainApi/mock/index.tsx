@@ -46,7 +46,7 @@ const Mock: React.FunctionComponent<IMockProps> = (props) => {
   return (
     <div>
       {/* mock列表弹框 */}
-      <Modal
+      {/* <Modal
         title='mock服务列表'
         open={isModalOpen}
         onCancel={closeModal}
@@ -69,24 +69,23 @@ const Mock: React.FunctionComponent<IMockProps> = (props) => {
             </List.Item>
           )}
         />
-      </Modal>
+      </Modal> */}
 
       <div className='mock-page'>
         <ModeContext.Provider value={{ ...props }}>
           {/* 请求参数组件，当为mock,改成响应格式 */}
           <MockUrl project_id={project_id} mode={{ mode }} />
           {/* 当选中mock的时候，显示 mock列表 按钮 */}
-          {mode === 'mock' ? (
+          {/* {mode === 'mock' ? (
             <Button
               type='primary'
               style={{ margin: '10px 0' }}
-              onClick={openModal}
-            >
+              onClick={openModal}>
               mock列表
             </Button>
           ) : (
             ''
-          )}
+          )} */}
           <MockReqParams />
           <MockResponse />
         </ModeContext.Provider>

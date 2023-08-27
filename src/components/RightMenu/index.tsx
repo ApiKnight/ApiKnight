@@ -53,12 +53,7 @@ const RightMenu = (props) => {
             <Mock data={data} mode='run' project_id={project_id} />
           ) : (
             // <div>Mock组件,同时父组件传入的id为{data}</div>
-            <Mock
-              data={data}
-              mode='mock'
-              project_id={project_id}
-              mockPrefix='http://www.apiknight.com'
-            />
+            <Mock data={data} mode='mock' project_id={project_id} />
           )
         }
       </div>

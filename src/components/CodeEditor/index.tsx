@@ -42,8 +42,10 @@ const CodeEditor: React.FunctionComponent<ICodeEditorProps> = memo((props) => {
       <Editor
         width={width}
         height={height}
+        value={defaultValue}
         defaultLanguage={lang}
-        defaultValue={defaultValue}
+        language={lang}
+        // defaultValue={defaultValue}
         onChange={(value) => onChange && onChange(value)}
         options={defaultOptions}
         {...options}

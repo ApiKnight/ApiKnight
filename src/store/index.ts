@@ -6,7 +6,6 @@ import {
 } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './modules/counterSlice.ts'
-import projectReducer from './modules/projectSlice.ts'
 import dirArrayReducer from './modules/dirArraySlice.ts'
 import watchDirReducer from './modules/watchDir.ts'
 import watchStateFlagReducer from './modules/stateFlag.ts'
@@ -26,11 +25,11 @@ import userInfoSliceReducer from '@/store/modules/userInfoSlice.ts'
 import updateUserInfoSliceReducer from '@/store/modules/updateUserInfoSlice.ts'
 import isUpdateSliceReducer from '@/store/modules/isUpdateSlice.ts'
 import templateSliceReducer from '@/store/modules/templateSlice.ts'
+import projectReducer from '@/store/modules/project'
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    project: projectReducer,
     dirArray: dirArrayReducer,
     watchDir: watchDirReducer,
     stateFlag: watchStateFlagReducer,
@@ -46,6 +45,7 @@ export const store = configureStore({
     updateUserInfoSlice: updateUserInfoSliceReducer,
     isUpdateSlice: isUpdateSliceReducer,
     templateSlice: templateSliceReducer,
+    project: projectReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

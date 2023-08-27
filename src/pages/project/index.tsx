@@ -8,11 +8,20 @@ import getCurrentRole from '@/api/getCurrentRole'
 import ApiTab from '@/components/ApiTab'
 import './index.less'
 import getSelfInfo from '@/api/getSelfInfo'
+import { useAppDispatch } from '@/store'
+import { fetchProjectInfoAction } from '@/store/modules/project'
 
 const Project: React.FunctionComponent = () => {
   const navigate = useNavigate()
   let project_id
   const state = useLocation().state
+
+  // 获取project_id后更新projectReducer，统一存储
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(fetchProjectInfoAction(state.project_id))
+  }, [dispatch])
+
   if (!state) {
     return <Navigate to='/' />
   } else {

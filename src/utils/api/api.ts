@@ -32,17 +32,19 @@ export function parseAPIInfo(dataJsonStr: string): IAPIInfoPlus {
  * 将swagger2.0的JSON文档转换成ApiKnight的JSON文档
  * @param dataJsonStr Swagger2.0文档JSON
  * @param ownerId 接口拥者的id
- * @returns
+ * @returns Map<目录名 string, 目录下的所有接口列表 IAPIInfo[]>
  */
-export function parseSwaggerDoc(dataJsonStr: string, ownerId): IAPIInfo[] {
-  const rst = {} as IAPIInfo[]
-  const swaggerObj = JSON.parse(dataJsonStr)
-  const basePath = swaggerObj.Path
-  const swaggerPaths = swaggerObj.paths
+export function parseSwaggerDoc(
+  swaggerDoc: any,
+  ownerId,
+): Map<string, IAPIInfo[]> {
+  const rst = new Map<string, IAPIInfo[]>()
+  const basePath = swaggerDoc.Path
+  const swaggerPaths = swaggerDoc.paths
+  // debugger
   Object.keys(swaggerPaths).map((pathKey: string) => {
-    const rstItem = {} as IAPIInfo
     const fullInfo = swaggerPaths[pathKey]
-    const method = fullInfo[0]
+    const method = Object.keys(fullInfo)[0]
     const needInfo = fullInfo[method]
     // 接口本身的描述信息
     const meta_info: MetaInfo = {
@@ -50,38 +52,66 @@ export function parseSwaggerDoc(dataJsonStr: string, ownerId): IAPIInfo[] {
       status: StatusValue.DEVELOPING,
       owner_id: ownerId,
       tags: ['默认标签'],
-      desc: needInfo.description,
+      desc: needInfo?.description,
+      name: needInfo?.summary,
+      notes: '从swagger2.0文档转换而来',
     }
 
     // 接口请求信息
     const apiInfo: IAPIInfo['apiInfo'] = {
       base: {
-        method: method as Method,
+        method: method.toUpperCase() as Method,
         path: pathKey.slice(1),
-        prefix: basePath,
+        prefix: basePath || '',
       },
       request: parseSwaggerParameters(needInfo.parameters),
-      response: ResponseType,
+      response: { status: 200, body: '{}' },
+    }
+    const folderName = needInfo?.tags?.[0] || '根目录'
+    if (rst.has(folderName)) {
+      rst.get(folderName).push({ meta_info, apiInfo })
+    } else {
+      rst.set(folderName, [{ meta_info, apiInfo }])
     }
   })
-
   return rst
 }
 
-function parseSwaggerParameters(swaggerParamsJsonStr): RequestParamsType {
-  const rst = {} as RequestParamsType
-  const swaggerParams = JSON.parse(swaggerParamsJsonStr)
+function parseSwaggerParameters(swaggerParams): RequestParamsType {
   const paramsInfo: NormalParamsType[] = []
   const headersInfo: NormalParamsType[] = []
   const cookieInfo: NormalParamsType[] = []
-  const bodyInfo: NormalParamsType[] = []
+  let bodyInfo: string = ''
 
-  swaggerParams.map((paramItem) => {
-    const paramInfo: NormalParamsType = {} as NormalParamsType
-    paramInfo.id = Date.now() + getRangeRandom(1000, 9999)
-    paramInfo.paramName = paramItem.name
-    paramInfo.required = paramItem.required
+  swaggerParams.forEach((paramItem) => {
+    const singleApiInfo: NormalParamsType = {} as NormalParamsType
+    singleApiInfo.id = Date.now() + getRangeRandom(1000, 9999)
+    singleApiInfo.paramName = paramItem?.name
+    singleApiInfo.required = paramItem?.required
+    singleApiInfo.desc = paramItem?.description
+    singleApiInfo.type = paramItem?.type
+    singleApiInfo.value = paramItem?.['x-example']?.[0]
+    switch (paramItem.in) {
+      case 'query':
+        paramsInfo.push(singleApiInfo)
+        break
+      case 'header':
+        headersInfo.push(singleApiInfo)
+        break
+      case 'cookie':
+        cookieInfo.push(singleApiInfo)
+        break
+      case 'body':
+        bodyInfo = '{}'
+    }
   })
+  const rst = {
+    params: paramsInfo,
+    headers: headersInfo,
+    cookie: cookieInfo,
+    body: bodyInfo,
+  }
+  return rst
 }
 
 // const api_crete = function ({ project_id, folder_id, request_data, response_data, description, name }) {

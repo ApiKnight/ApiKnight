@@ -1,4 +1,4 @@
-import React, { memo , useState } from 'react'
+import React, { memo, useState } from 'react'
 import { App, Button, Modal } from 'antd'
 import classNames from 'classnames'
 import type { RootState } from '@/store/index.ts'
@@ -52,38 +52,40 @@ const IntroInfo: React.FunctionComponent = memo(() => {
       onCancel: () => {},
     })
   }
-  const templateSlice = useSelector((state: RootState) => state.templateSlice.value)
-  
+  const templateSlice = useSelector(
+    (state: RootState) => state.templateSlice.value,
+  )
+
   // create code
 
-  const [open, setOpen] = useState(false);
-  const [versionOpen,setVersionOpen] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [versionOpen, setVersionOpen] = useState(false)
   const showModal = () => {
-    setVersionOpen(true);
-  };
+    setVersionOpen(true)
+  }
 
   const versionOk = (e: React.MouseEvent<HTMLElement>) => {
-    console.log(e);
-    setVersionOpen(false);
-  };
+    console.log(e)
+    setVersionOpen(false)
+  }
 
   const versionCancel = (e: React.MouseEvent<HTMLElement>) => {
-    console.log(e);
-    setVersionOpen(false);
-  };
+    console.log(e)
+    setVersionOpen(false)
+  }
 
   const handleOk = (e: React.MouseEvent<HTMLElement>) => {
-    console.log(e);
-    setOpen(false);
-  };
+    console.log(e)
+    setOpen(false)
+  }
 
   const handleCancel = (e: React.MouseEvent<HTMLElement>) => {
-    console.log(e);
-    setOpen(false);
-  };
-  
-  function showCreateCode():void {
-    setOpen(true);
+    console.log(e)
+    setOpen(false)
+  }
+
+  function showCreateCode(): void {
+    setOpen(true)
   }
   return (
     <div className='intro-request'>
@@ -92,16 +94,14 @@ const IntroInfo: React.FunctionComponent = memo(() => {
         open={open}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={660}
-      >
-        <CodeTemplate/>
+        width={660}>
+        <CodeTemplate />
       </Modal>
       <Modal
-        title={<div>历史版本</div>}
+        title={<div>历史版本(点击记录即回滚)</div>}
         open={versionOpen}
         onOk={versionOk}
-        onCancel={versionCancel}
-      >
+        onCancel={versionCancel}>
         <VersionBack apis_id={apiId} />
       </Modal>
       <div className='name-wrap'>
@@ -114,16 +114,16 @@ const IntroInfo: React.FunctionComponent = memo(() => {
         </div>
         <div className='title'>{metaInfo.name}</div>
         <div className='opt-wrap'>
-          <Button type='primary' onClick={showCreateCode}>生成代码</Button>
-          <Button 
-            style={{ marginLeft: '10px' }}
-            onClick={showModal}
-          >版本回滚</Button>
+          <Button type='primary' onClick={showCreateCode}>
+            生成代码
+          </Button>
+          <Button style={{ marginLeft: '10px' }} onClick={showModal}>
+            版本回滚
+          </Button>
           <Button
             style={{ marginLeft: '10px', marginRight: '20px' }}
             onClick={handleDel}
-            danger
-          >
+            danger>
             删除
           </Button>
         </div>

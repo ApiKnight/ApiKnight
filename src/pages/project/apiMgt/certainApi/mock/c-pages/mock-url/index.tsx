@@ -10,7 +10,6 @@ import {
   changeMethodAction,
   changePathAction,
   changePrefixAction,
-  changeRequestBodyAction,
 } from '@/store/modules/mock'
 import {
   BaseInfoType,
@@ -19,9 +18,6 @@ import {
   RequestParamsType,
 } from '@/types/api'
 import withMode from '../../with-mode'
-import testApi from '@/api/testApi'
-import mockReq from '@/api/mockReq'
-import runMock from '@/api/runMock'
 import { requestByServerProxy } from '@/api/service'
 import { createMock } from '@/api'
 
@@ -92,87 +88,6 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
     dispatch(changeMethodAction(methodOpt.value))
   }
 
-  // 发送按钮点击事件
-  // const handleSendBtnClick = (): void => {
-  //   const { prefix, path, method } = userReqInfo
-  //   const { params, headers: header, cookie, body } = reqParams
-  //   const paramsObj = {}
-  //   if (params.length) {
-  //     params.forEach((v) => {
-  //       console.log(v)
-  //       paramsObj[v.paramName] = v.value
-  //     })
-  //   }
-  //   const url = mode === 'mock' ? path : prefix + (path ? '/' + path : '')
-  //   const requestObj: any = {
-  //     url,
-  //     method,
-  //     params: paramsObj,
-  //     header,
-  //     cookie,
-  //     data: body,
-  //   }
-
-  //   console.log(requestObj)
-  //   testApi(requestObj).then((res) => {
-  //     console.log(res.data)
-
-  //     res.status === 200
-  //       ? dispatch(changeResponseBodyAction(JSON.stringify(res.data)))
-  //       : ''
-  //   })
-  //   // // 假如这是响应内容
-  //   // const responseExample = JSON.stringify({ name: 'LuoKing' })
-  //   // // 设置响应内容
-  //   // dispatch(changeRequestBodyAction(responseExample))
-  // }
-
-  /**
-   * mock的创建和执行，通过参数区分
-   * @param mockMode
-   */
-  // const handleMock = (mockMode) => {
-  //   const { prefix, path, method } = userReqInfo
-  //   const { params, headers: header, cookie, body } = reqParams
-  //   const paramsObj = {}
-  //   if (params.length) {
-  //     params.forEach((v) => {
-  //       console.log(v)
-  //       paramsObj[v.paramName] = v.value
-  //     })
-  //   }
-  //   const url = path
-  //   const requestObj: any = {
-  //     url,
-  //     method,
-  //     params: paramsObj,
-  //     header,
-  //     cookie,
-  //     data: body,
-  //   }
-  //   requestObj.project_id = project_id
-  //   requestObj.api_id = api_id
-  //   requestObj.response = {}
-  //   console.log(requestObj)
-
-  //   // 创建mock服务
-  //   if (mockMode === 'create') {
-  //     mockReq(requestObj).then((res: any) => {
-  //       res.data.code === 200
-  //         ? message.success('创建成功')
-  //         : message.error('创建失败')
-  //     })
-  //     // 执行mock
-  //   } else if (mockMode === 'execute') {
-  //     runMock(requestObj).then((res: any) => {
-  //       res.status === 200
-  //         ? // 将执行mock的响应数据放到响应栏
-  //           dispatch(changeResponseBodyAction(JSON.stringify(res.data)))
-  //         : ''
-  //     })
-  //   }
-  // }
-
   // 普通的发送请求按钮，与运行页面功能一致当是mock时，改为发送mock请求
   const handleSend = async () => {
     // 将ApiKnight文档中的参数格式转换成发送请求的格式
@@ -203,7 +118,6 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       dispatch(changeResponseBodyAction(jsonResBody))
     } catch (err) {
       console.log('response body translate to json failed')
-
       dispatch(changeResponseBodyAction(data + ''))
     }
   }
@@ -231,9 +145,27 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       name: metaInfo.name,
       headers: JSON.stringify(headers),
       params: JSON.stringify(queries),
-      response: JSON.stringify({ params: apiData.apiInfo.response.body }),
-      data: apiData.apiInfo.request.body,
+      response: getMockNeedResponse(apiData.apiInfo.response.body),
+      data: apiData.apiInfo.response.body,
     })
+  }
+
+  // 对用户对response进行处理
+  const getMockNeedResponse = (body: string) => {
+    let res = {}
+    try {
+      const respObj = JSON.parse(body)
+      res = {
+        example: respObj,
+      }
+    } catch (error) {
+      res = {
+        example: { data: body },
+      }
+    }
+    console.log(JSON.stringify(res))
+
+    return JSON.stringify(res)
   }
 
   return (

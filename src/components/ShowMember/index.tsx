@@ -13,7 +13,7 @@ const ShowMember: React.FC<Props> = (props) => {
     {
       key: '2',
       count: props.data.dNumberCount,
-      label: '待定',
+      label: '申请',
     },
   ]
   return (

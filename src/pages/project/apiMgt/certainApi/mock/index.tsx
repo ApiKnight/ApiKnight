@@ -25,7 +25,6 @@ const Mock: React.FunctionComponent<IMockProps> = (props) => {
       dispatch(changeMockModeAction(mode))
       // 根据接口id获取接口信息
       dispatch(forceFetchApiDataAction(apiId))
-      console.log({ apiId })
     }
   }, [dispatch, apiId])
 

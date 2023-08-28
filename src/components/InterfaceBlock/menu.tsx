@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { UnorderedListOutlined } from '@ant-design/icons'
-import { Button, Popover } from 'antd'
+import { Button, Modal, Popover, App } from 'antd'
 import { AddData } from '@/types/treeComponents'
 import { useDispatch } from 'react-redux'
 import { setTrue } from '@/store/modules/createFileState'
@@ -8,10 +8,16 @@ import CreateFile from '@/components/createFile'
 import Overlay from '@/components/overlay'
 import { useLocation } from 'react-router-dom'
 import './menu.less'
+import { shareApi } from '@/api'
+import { useAppSelector } from '@/store'
 
 const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
   const { data } = props
+  const { modal } = App.useApp()
   const dispatch = useDispatch()
+  const { prijectInfo } = useAppSelector((state) => ({
+    prijectInfo: state.project.projectInfo,
+  }))
   function addChildDir(e: any): void {
     dispatch(setTrue())
     setShow(true)
@@ -32,8 +38,23 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
     })
   }, [])
 
-  function handleShare(): void {
-    console.log('导出')
+  /**
+   * 导出api
+   */
+  async function handleShare() {
+    setShow(false)
+    const shareURL = await shareApi(prijectInfo.api_list, prijectInfo.id)
+    // 复制链接到剪切板
+    navigator.clipboard.writeText(shareURL)
+    modal.success({
+      title: '分享成功',
+      content: (
+        <div>
+          <p>分享链接已经复制到剪切板</p>
+          <p style={{ color: '#1677ff' }}>{shareURL}</p>
+        </div>
+      ),
+    })
   }
   const content = (
     <div>

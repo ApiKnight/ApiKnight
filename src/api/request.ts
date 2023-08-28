@@ -1,3 +1,4 @@
+import { baseURL } from '@/config/config'
 import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import NProgress from 'nprogress'
@@ -16,7 +17,7 @@ export class Request {
   // 测试接口，id:bolpgeq7pltiflnj,  secret:d0JZQ2N1bUQ2djJBSXFFSm92ZVpWdz09
   // https://www.mxnzp.com/api/holiday/single/20181121?ignoreHoliday=false&app_id=bolpgeq7pltiflnj&app_secret=d0JZQ2N1bUQ2djJBSXFFSm92ZVpWdz09
   baseConfig: AxiosRequestConfig = {
-    baseURL: 'http://polaris.lyyfsq.club:7002/api/',
+    baseURL: baseURL,
     timeout: 60000,
     // withCredentials: true,
   }

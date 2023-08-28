@@ -5,6 +5,7 @@ import { getInitialApiInfoObj } from '@/utils/documents'
 import { IRawApiInfo } from '../project/type'
 import { getRangeRandom } from '@/utils/math'
 import { createMock } from '..'
+import { baseURL } from '@/config/config'
 
 /**
  * 获取纯前端定义的接口信息
@@ -153,5 +154,5 @@ export async function shareApi(apiList: IRawApiInfo[], projectId: number) {
     response: JSON.stringify({ example: { data: list, type: 'apiknight' } }),
     data: '{}',
   })
-  return `http://47.112.108.202:7002/api/v1/mock/${projectId}${sharePath}`
+  return `${baseURL}/v1/mock/${projectId}${sharePath}`
 }

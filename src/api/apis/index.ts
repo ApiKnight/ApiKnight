@@ -11,8 +11,6 @@ import { getInitialApiInfoObj } from '@/utils/documents'
 export async function getApiData(apiId: string): Promise<IAPIInfo> {
   const { data } = await request.post('/v1/apis/query', { apis_id: apiId })
   const apiDataStr = (data as IApiResult<IFetchApiTransfer>).data.request_data
-  console.log('str', apiDataStr)
-
   return JSON.parse(apiDataStr)
 }
 

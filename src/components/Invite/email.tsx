@@ -2,10 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { Button, Input, message, notification } from 'antd'
 import request from '@/api/request'
 import './email.less'
-const { TextArea } = Input
 import type { NotificationPlacement } from 'antd/es/notification/interface'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store'
 
 const Context = React.createContext({ name: 'Default' })
 const Email: React.FunctionComponent<any> = (props) => {
@@ -16,7 +13,6 @@ const Email: React.FunctionComponent<any> = (props) => {
   }
   const [info, setInfo] = useState('')
   const [api, contextHolder] = notification.useNotification()
-  // const projectId = useSelector((state: RootState) => state.project.project_id)
   function sendInfo(): void {
     request
       .post(

@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react'
+import Editor from '@monaco-editor/react'
 import { ICodeEditorProps } from './type'
 import classNames from 'classnames'
 import './index.less'
@@ -45,7 +45,6 @@ const CodeEditor: React.FunctionComponent<ICodeEditorProps> = memo((props) => {
         value={defaultValue}
         defaultLanguage={lang}
         language={lang}
-        // defaultValue={defaultValue}
         onChange={(value) => onChange && onChange(value)}
         options={defaultOptions}
         {...options}

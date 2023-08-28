@@ -1,15 +1,11 @@
 import React, { memo, useEffect } from 'react'
 import { Input, Space } from 'antd'
-
 import type { ApiOptProps } from '@/types/components'
 import './index.less'
 import MethodSelect from '../MethodSelect'
 
 const ApiOperator: React.FunctionComponent<ApiOptProps> = memo((props) => {
   const { urlPrefixValue, inputValue } = props
-
-  // const [prefix, setPrefix] = React.useState(urlPrefixValue)
-  // const [path, setPath] = React.useState(inputValue)
 
   // 前缀输入框长度
   const [prefixInputWidth, setPrefixInputWidth] = React.useState(0)
@@ -28,14 +24,6 @@ const ApiOperator: React.FunctionComponent<ApiOptProps> = memo((props) => {
 
   // url前缀输入框改变事件
   function onPrefixInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    // const value = e.target.value
-    // // 获取元素的字体大小
-    // const fontSize = window.getComputedStyle(e.target).fontSize
-    // setPrefixInputWidth(
-    //   value.length * Number(fontSize.slice(0, -2)) + 10,
-    // )
-
-    // setPrefix(value)
     if (props.onPrefixInputChange) props.onPrefixInputChange(e)
   }
 

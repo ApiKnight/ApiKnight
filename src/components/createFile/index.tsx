@@ -55,7 +55,7 @@ const CreateFile: React.FunctionComponent<{
           if (res.data.code == 200) {
             dispatch(increment())
           } else {
-            alert(res.data.message)
+            alertTip(res.data.message)
           }
         })
     } else {

@@ -3,19 +3,7 @@ import { Button, Checkbox, Form, Input, Modal } from 'antd'
 import './index.less'
 import request from '@/api/request'
 import randomNum from '@/utils/randomNum'
-
-type FieldType = {
-  username?: string
-  password?: string
-  remember?: string
-}
-
-interface childProps {
-  isModalOpen: boolean
-  closeModal: Function
-  updateUserInfo: Function
-  user_id: string
-}
+import type { childProps } from './type'
 
 const UpdateProject: React.FC<childProps> = (props) => {
   const { isModalOpen, closeModal, updateUserInfo, user_id } = props
@@ -29,22 +17,9 @@ const UpdateProject: React.FC<childProps> = (props) => {
   }
 
   const onFinishFailed = (errorInfo: any) => {
-    // closeModal()
-  }
-
-  // const showModal = () => {
-  //   setIsModalOpen(true);
-  // };
-
-  // const handleOk = () => {
-  //   setIsModalOpen(false);
-  // };
-
-  // const handleCancel = () => {
-  //   setIsModalOpen(false);
-  // };
+    
+  };
   return (
-    // onOk={handleOk} onCancel={handleCancel}
     <Modal
       title='创建新项目'
       open={isModalOpen}

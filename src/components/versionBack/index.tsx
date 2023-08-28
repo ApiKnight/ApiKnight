@@ -4,7 +4,6 @@ import "./index.less"
 import { getVersionInfo } from '@/api/versionBack/queryVersion';
 import { VersionInfo } from '@/types/versionInfo';
 import { backHistory } from '@/api/versionBack/backHistory';
-import { increment } from "@/store/modules/watchDir";
 import { useDispatch } from "react-redux";
 
 const VersionBack: React.FC<{apis_id: string}> = (props) => {

@@ -6,7 +6,7 @@ import Overview from '@/pages/project/apiMgt/overview'
 import './index.less'
 import LogoPage from '@/pages/project/apiMgt/certainApi/logo-page'
 
-const RightComponent = (props) => {
+const RightComponent:React.FC<{project_id: string}> = (props) => {
   const rightSlice = useSelector((state: RootState) => state.rightSlice.value)
   return (
     <div className='right-component-wrap'>

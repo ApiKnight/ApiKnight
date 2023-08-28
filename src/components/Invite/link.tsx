@@ -10,7 +10,6 @@ const Link: React.FunctionComponent<any> = (props) => {
   console.log(props)
 
   const [api, contextHolder] = notification.useNotification()
-  // const project_id = useSelector((state: RootState) => state.project.project_id)
   // 示例链接
   const link = `http://polaris.lyyfsq.club/receive?projectid=${Number(
     props.project_id,

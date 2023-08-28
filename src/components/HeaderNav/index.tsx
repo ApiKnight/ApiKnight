@@ -3,14 +3,8 @@ import React from 'react'
 import { Avatar } from 'antd'
 import { Link } from 'react-router-dom'
 import './index.less'
-
-interface ChildrenProps {
-  ifHideUser?: boolean
-  user_info?: any
-}
+import type { ChildrenProps } from './type.d.ts'
 const HeaderNav: React.FC<ChildrenProps> = (props) => {
-  // localStorage.setItem('token','')
-  // localStorage.setItem('user_id','')
   let { ifHideUser, user_info } = props
 
   // 默认值

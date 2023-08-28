@@ -17,16 +17,11 @@ import { FlatItem } from '@/types/mergeFlatArrays'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
 import request from '@/api/request'
 import { increment } from '@/store/modules/watchDir'
+import { MakeValue } from './type'
 
-interface Props {
-  data: ArrayItem[]
-}
 
-interface MakeValue {
-  value: ArrayItem[]
-}
 
-const renderTree: React.FC = (props) => {
+const renderTree: React.FC = () => {
   function startMonitor() {
     createJsErrorMonitor('renderTree').start()
     createResourceErrorMonitor('renderTree').start()

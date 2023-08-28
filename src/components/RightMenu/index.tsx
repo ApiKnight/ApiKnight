@@ -1,33 +1,15 @@
 import React, { useState } from 'react'
 import { Menu } from 'antd'
 import { MenuProps } from 'antd'
-
 import './index.less'
-// import Document from '@/components/Document'
 import Mock from '@/pages/project/apiMgt/certainApi/mock'
 import Document from '@/pages/project/apiMgt/certainApi/document'
 import Introduction from '@/pages/project/apiMgt/certainApi/introduction'
+import { items } from './constant.ts'
+import { Props } from './type'
 
-const RightMenu = (props) => {
+const RightMenu:React.FC<Props> = (props) => {
   const { data, project_id } = props
-  const items: MenuProps['items'] = [
-    {
-      label: '文档',
-      key: '1',
-    },
-    {
-      label: '修改文档',
-      key: '2',
-    },
-    {
-      label: '运行',
-      key: '3',
-    },
-    {
-      label: 'Mock',
-      key: '4',
-    },
-  ]
   const [current, setCurrent] = useState('1')
 
   const onClick: MenuProps['onClick'] = (e) => {

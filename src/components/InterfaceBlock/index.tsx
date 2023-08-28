@@ -23,7 +23,6 @@ function startMonitor() {
   createXhrMonitor('renderTree').start()
 }
 
-// const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
 const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
   props: Props,
 ) => {
@@ -35,8 +34,6 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
     e.stopPropagation()
   }
   const { title: data } = props.data
-  // const { api_id } = props.data
-  // const { project_id } = props.data
   const addDatas: AddData = { key: data.key, pid: data.pid, type: data.type }
   const menuData: AddData = { key: data.key, pid: data.pid, type: data.type }
   const delData: delProps = { key: data.key, type: data.type }
@@ -51,7 +48,6 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
       dispatch(addData(d as any))
       dispatch(setValue(data.key))
       dispatch(changeCurrentKeyAction(data.key))
-      // navigate('/project/apiMgt/certainApi', { state: {api_id:api_id, project_id:project_id} })
     }
   }
   return (

@@ -3,34 +3,12 @@ import type { MenuProps } from 'antd'
 import { createFetchTemplate } from '@/template/fetchTemplate'
 import { createAxiosTemplate } from '@/template/axiosTemplate'
 import { createJQueryTemplate } from '@/template/jqueryTemplate'
-import { createRequestTemplate } from '@/template/requestTemplate'
 import { createXHRTemplate } from '@/template/xhrTemplate'
 import { Menu } from 'antd'
 import CodeEditor from '../CodeEditor'
+import { itemsJsCode } from './constant'
 
 const JSCodeContent: React.FC = () => {
-  const items: MenuProps['items'] = [
-    {
-      label: 'fetch',
-      key: '1',
-    },
-    {
-      label: 'axios',
-      key: '2',
-    },
-    {
-      label: 'jquery',
-      key: '3',
-    },
-    {
-      label: 'request',
-      key: '4',
-    },
-    {
-      label: 'XHR',
-      key: '5',
-    },
-  ]
   const [current, setCurrent] = useState('1')
 
   const onClick: MenuProps['onClick'] = (e: any) => {
@@ -43,7 +21,7 @@ const JSCodeContent: React.FC = () => {
         onClick={onClick}
         selectedKeys={[current]}
         mode='horizontal'
-        items={items}
+        items={itemsJsCode}
       />
       <div className='codeTemplate-content__codeBlock'>
         {

@@ -6,12 +6,7 @@ import { useDispatch } from 'react-redux'
 import './index.less'
 import { ProjectNavChildType } from '@/types/projectNavChild'
 import { reversal, setFalse } from '@/store/modules/stateFlag'
-
-const pathList = [
-  '/project/apiMgt',
-  '/project/memberMgt',
-  '/project/projectSet',
-]
+import { pathList } from './constant'
 
 const ProjectNavChild: React.FunctionComponent<{
   data: ProjectNavChildType

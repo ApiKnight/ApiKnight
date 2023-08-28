@@ -9,15 +9,11 @@ import { setIValue } from '@/store/modules/updateUserInfoSlice'
 import { SendProps } from '@/types/userInfo'
 import request from '@/api/request'
 import { increment } from '@/store/modules/isUpdateSlice'
+import { SendData } from './type'
 
 const UpdateUserInfo: React.FunctionComponent<{ data: SendProps }> = (
   props,
 ) => {
-  interface SendData {
-    email?: string
-    phone?: string
-    username?: string
-  }
   const [inputValue, setInputValue] = useState('')
   function ChangeValue(e: any): void {
     setInputValue(e.target.value)

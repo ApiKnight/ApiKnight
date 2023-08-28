@@ -1,13 +1,7 @@
 import MemberInfo from './MemberInfo'
 import './index.less'
-import React, { useEffect } from 'react'
-
-interface Props {
-  data: {
-    numberCount: number
-    dNumberCount: number
-  }
-}
+import React from 'react'
+import { Props } from './type'
 
 const ShowMember: React.FC<Props> = (props) => {
   const d = [

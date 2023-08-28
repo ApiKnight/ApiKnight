@@ -1,5 +1,4 @@
 import { cloneDeep } from 'lodash'
-import { getRangeRandom } from './math'
 import { IAPIInfo } from '@/types/api'
 
 const apiDataTemplate: IAPIInfo = {

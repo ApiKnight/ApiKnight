@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 import { Table, Input, Button } from 'antd'
 import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
-
 import type { ParamsProps } from './type'
 import type { NormalParamsType } from '@/types/api'
 import './index.less'

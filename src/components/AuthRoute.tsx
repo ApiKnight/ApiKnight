@@ -1,8 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '@/utils/useAuth'
 import { Spin } from 'antd'
-import { ReactNode, useState, useEffect, useLayoutEffect } from 'react'
-import ReactDOM from 'react-dom'
+import { ReactNode, useState, useEffect } from 'react'
 import './AuthRoute.less'
 
 interface AuthRouteProps {
@@ -18,8 +17,6 @@ const AuthRoute = ({ children }: AuthRouteProps) => {
   )
   useEffect(() => {
     useAuth().then((result) => {
-      console.log('result', result)
-
       return setIsLogin(result ? children : <Navigate to='/user/login' />)
     })
   }, [])

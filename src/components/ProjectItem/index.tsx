@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Card, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
-const ProjectItem:React.FC = (params: ProjectItemType) => {
+const ProjectItem:React.FC<any> = (params) => {
   const navigate = useNavigate()
   const toProject = () => {
     console.log('toProject')

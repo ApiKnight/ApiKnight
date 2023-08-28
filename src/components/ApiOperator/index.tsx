@@ -30,8 +30,7 @@ const ApiOperator: React.FunctionComponent<ApiOptProps> = memo((props) => {
   return (
     <div className='api-operator'>
       <div
-        className={['left-info', props.methodValue?.colorClassName].join(' ')}
-      >
+        className={['left-info', props.methodValue?.colorClassName].join(' ')}>
         <Space.Compact block>
           <MethodSelect
             defaultMethod={props.defaultMethod}
@@ -49,7 +48,7 @@ const ApiOperator: React.FunctionComponent<ApiOptProps> = memo((props) => {
                 style={{
                   width: prefixInputWidth + 'px',
                   minWidth: '150px',
-                  maxWidth: '250px',
+                  maxWidth: '600px',
                   borderRight: 'none',
                   paddingRight: '0',
                 }}

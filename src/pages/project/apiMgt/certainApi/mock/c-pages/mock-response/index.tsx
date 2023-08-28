@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { Input } from 'antd'
 const { TextArea } = Input
 
@@ -35,7 +35,10 @@ const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
           defaultValue={responseInfo.body}
           height='200px'
           withBorder
-          onChange={(value) => dispatch(changeResponseBodyAction(value))}
+          onChange={(value) =>
+            props.mode === 'run' && dispatch(changeResponseBodyAction(value))
+          }
+          readOnly={props.mode === 'mock'}
         />
         {/* <TextArea rows={6} placeholder='响应内容' value={responseInfo.body} /> */}
       </div>

@@ -1,18 +1,26 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { IntroductionProps } from './type'
 import IntroInfo from './c-pages/intro-info'
 import IntroRequest from './c-pages/intro-request'
 import IntroResponse from './c-pages/intro-response'
 import './index.less'
-import { useAppDispatch } from '@/store'
+import { useAppDispatch, useAppSelector } from '@/store'
 import { fetchDocumentApiAction } from '@/store/modules/document/document'
-import { forceFetchApiDataAction } from '@/store/modules/mock'
 
 const Introduction: React.FunctionComponent<IntroductionProps> = (props) => {
-  const { data } = props
+  // const { data } = props
   const dispatch = useAppDispatch()
-  dispatch(fetchDocumentApiAction(data))
-  dispatch(forceFetchApiDataAction(data))
+  const { apiId } = useAppSelector((state) => ({
+    apiId: state.rightSlice.value,
+  }))
+
+  useEffect(() => {
+    if (apiId !== 'gl') {
+      dispatch(fetchDocumentApiAction(apiId))
+      // dispatch(forceFetchApiDataAction(apiId))
+    }
+  }, [dispatch, apiId])
+
   return (
     <div className='introduction-page'>
       <IntroInfo />

@@ -54,7 +54,7 @@ export class Request {
         NProgress.done()
         // 统一处理响应数据
         // 系统如果有自定义code也可以在这里处理
-        console.log('响应拦截成功', res)
+        // console.log('响应拦截成功', res)
         return res
       },
       (err: any) => {

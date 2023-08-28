@@ -56,7 +56,7 @@ const ProjectNavChild: React.FunctionComponent<{
       onClick={onClick}
     >
       <div className='projectNavChild-avater'>
-        <Avatar size='small' icon={props.data.avatar}></Avatar>
+        <Avatar size='small' icon={props.data.avatar} alt='头像信息'></Avatar>
       </div>
       <div className={classNames('projectNavChild-content')}>
         <h5>{props.data.content}</h5>

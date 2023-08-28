@@ -28,7 +28,7 @@ const HeaderNav: React.FC<ChildrenProps> = (props) => {
                 size={54}
                 style={{ backgroundColor: 'black' }}
                 icon={<GithubOutlined />}
-                // src={user_info.avatar_url}
+                alt='用户头像'
               />
             </a>
           </div>

@@ -3,8 +3,12 @@ import './index.less'
 import MockReqParams from './c-pages/mock-req-params'
 import MockResponse from './c-pages/mock-response'
 import MockUrl from './c-pages/mock-url'
-import { useAppDispatch } from '@/store'
-import { changeMockModeAction, fetchApiDataAction } from '@/store/modules/mock'
+import { useAppDispatch, useAppSelector } from '@/store'
+import {
+  changeMockModeAction,
+  fetchApiDataAction,
+  forceFetchApiDataAction,
+} from '@/store/modules/mock'
 import { IMockProps } from './type'
 import ModeContext from './mode-context'
 import getMockList from '@/api/getMockList'
@@ -12,12 +16,18 @@ import getMockList from '@/api/getMockList'
 const Mock: React.FunctionComponent<IMockProps> = (props) => {
   const { mode, data, project_id } = props //run为运行,mock为mock
 
+  const { apiId } = useAppSelector((state) => ({
+    apiId: state.rightSlice.value,
+  }))
   const dispatch = useAppDispatch()
   useEffect(() => {
-    dispatch(changeMockModeAction(mode))
-    // 根据接口id获取接口信息
-    dispatch(fetchApiDataAction(data))
-  }, [dispatch])
+    if (apiId !== 'gl') {
+      dispatch(changeMockModeAction(mode))
+      // 根据接口id获取接口信息
+      dispatch(forceFetchApiDataAction(apiId))
+      console.log({ apiId })
+    }
+  }, [dispatch, apiId])
 
   return (
     <div>
@@ -25,7 +35,7 @@ const Mock: React.FunctionComponent<IMockProps> = (props) => {
         <ModeContext.Provider value={{ ...props }}>
           <MockUrl project_id={project_id} mode={{ mode }} />
           <MockReqParams />
-          <MockResponse />
+          <MockResponse mode={{ mode }} />
         </ModeContext.Provider>
       </div>
     </div>

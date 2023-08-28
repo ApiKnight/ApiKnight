@@ -4,7 +4,7 @@ import { Button, message } from 'antd'
 import type { ApiOptReqOptType } from '@/types/components'
 import ApiOperator from '@/components/ApiOperator'
 import './index.less'
-import { useAppSelector, shallowEqualApp, useAppDispatch } from '@/store'
+import { useAppSelector, useAppDispatch } from '@/store'
 import {
   changeResponseBodyAction,
   changeMethodAction,
@@ -28,7 +28,7 @@ type MockUrlProps = {
 const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
   const { mode } = props
   const [mockPrefix, setMockPrefix] = useState(
-    'http://47.112.108.202:7002/project_id',
+    'http://47.112.108.202:7002/api/v1/mock/project_id',
   )
   const dispatch = useAppDispatch()
   // 根据模式，获取对应的数据
@@ -55,7 +55,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
     })
 
   useEffect(
-    () => setMockPrefix(`http://47.112.108.202:7002/${projectId}`),
+    () => setMockPrefix(`http://47.112.108.202:7002/api/v1/mock/${projectId}`),
     [projectId],
   )
 
@@ -148,6 +148,9 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       response: getMockNeedResponse(apiData.apiInfo.response.body),
       data: apiData.apiInfo.response.body,
     })
+    if (res.code === 200) {
+      message.success('创建成功')
+    }
   }
 
   // 对用户对response进行处理

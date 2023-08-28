@@ -11,7 +11,7 @@ const UpdateProject: React.FC<childProps> = (props) => {
   const onFinish = (values: any) => {
     values.project_img = `${window.location.origin}/images/project${randomNum(
       1,
-      6,
+      10,
     )}.jpg`
     request.post('v1/project/create', values, {}).then(() => {
       updateUserInfo(user_id)

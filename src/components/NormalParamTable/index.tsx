@@ -26,6 +26,17 @@ const NormalParamTable: React.FunctionComponent<ParamsProps> = memo((props) => {
       ),
     },
     {
+      title: '类型',
+      width: 150,
+      render: (text: string, _: any, index: number) => (
+        <Input
+          placeholder='类型'
+          value={'string'}
+          style={{ color: '#1677ff', textAlign: 'center', fontWeight: 'bold' }}
+        />
+      ),
+    },
+    {
       title: '参数值',
       dataIndex: 'value',
       render: (text: string, _: any, index: number) => (
@@ -47,8 +58,7 @@ const NormalParamTable: React.FunctionComponent<ParamsProps> = memo((props) => {
           type='text'
           size='small'
           onClick={() => onParamDelClick(index, record)}
-          block
-        >
+          block>
           <MinusCircleOutlined />
         </Button>
       ),
@@ -63,8 +73,7 @@ const NormalParamTable: React.FunctionComponent<ParamsProps> = memo((props) => {
           type='link'
           size='small'
           onClick={() => onParamAddClick()}
-          block
-        >
+          block>
           <PlusOutlined />
         </Button>
       </div>

@@ -16,7 +16,7 @@ export class Request {
   // 测试接口，id:bolpgeq7pltiflnj,  secret:d0JZQ2N1bUQ2djJBSXFFSm92ZVpWdz09
   // https://www.mxnzp.com/api/holiday/single/20181121?ignoreHoliday=false&app_id=bolpgeq7pltiflnj&app_secret=d0JZQ2N1bUQ2djJBSXFFSm92ZVpWdz09
   baseConfig: AxiosRequestConfig = {
-    baseURL: 'http://47.112.108.202:7002/api/',
+    baseURL: 'http://polaris.lyyfsq.club:7002/api/',
     timeout: 60000,
     // withCredentials: true,
   }

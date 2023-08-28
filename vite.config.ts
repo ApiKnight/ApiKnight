@@ -7,6 +7,10 @@ const resolve = (dir: string) => path.join(__dirname, dir)
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  esbuild: {
+    pure: ['console.log'], // 删除 console.log
+    drop: ['debugger'], // 删除 debugger
+  },
   build: {
     terserOptions: {
       mangle: true
@@ -15,7 +19,7 @@ export default defineConfig({
   plugins: [
     react(),
     viteCompression({
-      threshold: 102400 // 对大于 1mb 的文件进行压缩
+      threshold: 102400 // 对大于 0.1mb 的文件进行压缩
     })
   ],
   resolve: {

@@ -2,6 +2,9 @@ import request from '@/api/request'
 import { IAPIInfo } from '@/types/api'
 import type { IApiResult, IFetchApiTransfer, IUpdateApiTransfer } from './type'
 import { getInitialApiInfoObj } from '@/utils/documents'
+import { IRawApiInfo } from '../project/type'
+import { getRangeRandom } from '@/utils/math'
+import { createMock } from '..'
 
 /**
  * 获取纯前端定义的接口信息
@@ -121,9 +124,34 @@ export async function deleteApi(apiId: string) {
   return data
 }
 
-// // 导入swagger文档
-// export async function importSwaggerDoc(swaggerDocMap: Map<string, IAPIInfo>) {
-//   // 获取项目中的所有文件夹
-//   for (let [folderName, apiData] of swaggerDocMap) {
-//   }
-// }
+/**
+ * 分享接口(会自动抹除敏感信息)
+ * @param apiList 需要分享的api列表
+ * @param projectId 该api列表所在的项目id
+ * @returns 用于导入的url
+ */
+export async function shareApi(apiList: IRawApiInfo[], projectId: number) {
+  let list: any = apiList.map((item) => {
+    // 删除重要信息
+    const apiInfo: IAPIInfo = JSON.parse(item.request_data)
+    apiInfo.meta_info.created = Date.now()
+    apiInfo.meta_info.owner_id = 'unknown'
+    apiInfo.meta_info.folder_id = item.folder_id
+    return apiInfo
+  })
+  list = JSON.stringify(list)
+  const identity = getRangeRandom(10000, 99999)
+  const sharePath = '/share&identity=' + identity
+  await createMock({
+    project_id: projectId,
+    url: sharePath,
+    method: 'get',
+    apis_id: 'metaInfo.api_id',
+    name: 'share-api-' + identity,
+    headers: '{}',
+    params: '{}',
+    response: JSON.stringify({ example: { data: list, type: 'apiknight' } }),
+    data: '{}',
+  })
+  return `http://47.112.108.202:7002/api/v1/mock/${projectId}${sharePath}`
+}

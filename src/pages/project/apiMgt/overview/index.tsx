@@ -13,10 +13,18 @@ import { parseAPIInfo, parseSwaggerDoc } from '@/utils/api/api'
 import { getUserId } from '@/utils/storage/storage'
 import { IAPIInfo } from '@/types/api'
 import { useAppDispatch, useAppSelector } from '@/store'
-import { createFolder } from '@/api/folder'
-import { createApi, createFullApi, updateApi } from '@/api'
+import { createFolder, getFolderName } from '@/api/folder'
+import {
+  createApi,
+  createFullApi,
+  createMock,
+  shareApi,
+  updateApi,
+} from '@/api'
 import { getProjectInfoById } from '@/api/project'
 import { fetchProjectInfoAction } from '@/store/modules/project'
+import { getRangeRandom } from '@/utils/math'
+import { IRawApiInfo } from '@/api/project/type'
 
 const Overview: React.FunctionComponent = () => {
   const { message } = App.useApp()
@@ -80,6 +88,10 @@ const Overview: React.FunctionComponent = () => {
       span: 1,
     },
   ]
+
+  const { apiList } = useAppSelector((state) => ({
+    apiList: state.project.projectInfo.api_list,
+  }))
   useEffect(() => {
     // testApi()
     getProjectBase(state.project_id).then((res: any) => {
@@ -96,13 +108,19 @@ const Overview: React.FunctionComponent = () => {
   async function handleConfirmImport() {
     setOnImporting(true)
     try {
-      // 测试
       const { data } = await requestByServerProxy({
         url: importUrl,
         method: 'GET',
       })
-      const apiInfoMap = parseSwaggerDoc(data, getUserId())
-      await startImport(apiInfoMap)
+      if (data?.type === 'apiknight') {
+        // apiknight文档
+        await startImportApiKnightDoc(data.data, getUserId())
+      } else {
+        // swagger2.0文档
+        const apiInfoMap = parseSwaggerDoc(data, getUserId())
+        await startImport(apiInfoMap)
+      }
+
       message.success('导入成功')
     } catch (err) {
       message.error('导入失败，请检查URL是否正确\n' + err)
@@ -112,7 +130,99 @@ const Overview: React.FunctionComponent = () => {
     } finally {
       setOnImporting(false)
       setOnImportVisible(false)
+      setTimeout(() => {
+        // 暂时用刷新页面替代
+        window.location.reload()
+      }, 1000)
     }
+  }
+
+  /**
+   *
+   * @param apiInfoListStr 来自apknight分享的接口信息中的api列表
+   */
+  async function startImportApiKnightDoc(
+    apiInfoListStr: string,
+    userId: string,
+  ) {
+    const createdFolderList: string[] = []
+    // 将string转成对象
+    const apiInfoList: IAPIInfo[] = JSON.parse(apiInfoListStr)
+    // 第一步遍历所有的目录，将不存在的目录创建
+    const rootFolderId = folderList.find((item) => item.name === '根目录')?.id
+    for (let i = 0; i < apiInfoList.length; i++) {
+      const apiInfoItem = apiInfoList[i]
+      // 注入信息
+      apiInfoItem.meta_info.owner_id = userId
+      apiInfoItem.meta_info.notes = '来自分享的ApiKnight接口'
+      if (!apiInfoItem?.apiInfo?.response?.body) {
+        apiInfoItem.apiInfo.response.body = '{}'
+      }
+      if (!apiInfoItem?.meta_info?.name) {
+        apiInfoItem.meta_info.name = '未命名接口'
+      }
+
+      // 查询目录名称
+      let folderName = '根目录'
+      if (apiInfoItem?.meta_info?.folder_id) {
+        folderName = await getFolderName(apiInfoItem.meta_info.folder_id)
+        // 将目录名暂时赋予到folder_id中
+        apiInfoList[i].meta_info.folder_id = folderName
+      } else {
+        apiInfoList[i].meta_info.folder_id = '根目录'
+      }
+      // 如果目录名存在则直接添加
+      const folderIndexInProj = folderList.findIndex(
+        (item) => item.name === folderName,
+      )
+
+      // debugger
+      if (folderIndexInProj === -1) {
+        // 并且此目录并没有被创建过
+        if (createdFolderList.indexOf(folderName) === -1) {
+          // 目录不存在则创建目录
+          await createFolder(projectId, rootFolderId, folderName)
+          createdFolderList.push(folderName)
+        }
+      }
+    }
+
+    // console.log({ apiInfoList })
+
+    // return
+    // 第二步 获取最新项目信息
+    const { folder_list: newestFolderList } = await getProjectInfoById(
+      projectId,
+    )
+
+    console.log({ newestFolderList })
+
+    // return
+
+    // 第三步遍历所有的api，所有api创建
+    for (let apiInfoItem of apiInfoList) {
+      // 如果目录名存在则直接添加
+      const folderIndexInProj = newestFolderList.findIndex(
+        (item) => item.name === apiInfoItem.meta_info.folder_id,
+      )
+      if (folderIndexInProj !== -1) {
+        // 创建接口
+        const folderId = newestFolderList[folderIndexInProj].id
+        // 创建接口
+        // await createApi(projectId, newestFolderList[folderIndexInProj].id, apiItem.meta_info.name, apiItem.meta_info.description)
+        await createFullApi({
+          projectId,
+          folderId,
+          name: apiInfoItem.meta_info.name,
+          description: apiInfoItem.meta_info.description || '无描述',
+          requestData: apiInfoItem,
+          responseDataStr: apiInfoItem.apiInfo.response.body,
+        })
+      }
+    }
+
+    // 刷新本地的项目信息
+    dispatch(fetchProjectInfoAction(projectId))
   }
 
   /**
@@ -120,6 +230,7 @@ const Overview: React.FunctionComponent = () => {
    * @param apiInfoMap 来自swagger转换而来的api信息
    */
   async function startImport(apiInfoMap: Map<string, IAPIInfo[]>) {
+    const createdFolderList: string[] = []
     // 第一步遍历所有的目录，将不存在的目录创建
     const rootFolderId = folderList.find((item) => item.name === '根目录')?.id
     for (let [folderName] of apiInfoMap) {
@@ -128,8 +239,12 @@ const Overview: React.FunctionComponent = () => {
         (item) => item.name === folderName,
       )
       if (folderIndexInProj === -1) {
-        // 目录不存在则创建目录
-        await createFolder(projectId, rootFolderId, folderName)
+        // 并且此目录并没有被创建过
+        if (createdFolderList.indexOf(folderName) === -1) {
+          // 目录不存在则创建目录
+          await createFolder(projectId, rootFolderId, folderName)
+          createdFolderList.push(folderName)
+        }
       }
     }
     // 第二步 获取最新项目信息
@@ -163,14 +278,14 @@ const Overview: React.FunctionComponent = () => {
 
     // 刷新本地的项目信息
     dispatch(fetchProjectInfoAction(projectId))
-    // 暂时用刷新页面替代
-    window.location.reload()
   }
 
   // 开始分享,准备分享链接
-  function startShare() {
-    setShareUrl('http://localhost:3000/project/1')
+  async function startShare() {
+    setShareUrl('正在生成分享链接...')
     setOnShareVisible(true)
+    const shareURL = await shareApi(apiList, projectId)
+    setShareUrl(shareURL)
   }
 
   // 确认分享事件
@@ -225,7 +340,7 @@ const Overview: React.FunctionComponent = () => {
         onCancel={() => setOnImportVisible(false)}>
         <Input
           style={{ marginTop: '15px' }}
-          placeholder='OpenAPI（Swagger）在线URL'
+          placeholder='OpenAPI（Swagger2.0）在线URL获取ApiKnight的分享链接'
           value={importUrl}
           onChange={(e) => setImportUrl(e.target.value)}
         />
@@ -240,7 +355,7 @@ const Overview: React.FunctionComponent = () => {
         okText='复制接口链接'>
         <Input
           style={{ marginTop: '15px' }}
-          placeholder='OpenAPI（Swagger）在线URL'
+          placeholder='分享链接'
           value={shareUrl}
         />
       </Modal>

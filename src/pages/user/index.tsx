@@ -30,7 +30,14 @@ const User: React.FunctionComponent = () => {
     getUserInfo(user_id).then((res: any) => {
       let data = res.data.data
       setUserInfo(data)
-      setProjectList(data.project_list)
+      // 项目按照创建时间，后创建的在前面
+      let sortedProjectList = data.project_list
+      sortedProjectList.sort((a: any, b: any) => {
+        const aTime = new Date(a.create_time).getTime()
+        const bTime = new Date(b.create_time).getTime()
+        return bTime - aTime
+      })
+      setProjectList(sortedProjectList)
     })
   }
   useEffect(() => {

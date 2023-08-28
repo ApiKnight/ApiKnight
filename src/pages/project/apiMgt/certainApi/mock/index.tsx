@@ -21,12 +21,10 @@ const Mock: React.FunctionComponent<IMockProps> = (props) => {
   const dispatch = useAppDispatch()
   dispatch(changeMockModeAction(mode))
 
-  useEffect(() => {
-    // 根据接口id获取接口信息
-    dispatch(fetchApiDataAction(data))
-  }, [dispatch])
+  // 根据接口id获取接口信息
+  dispatch(fetchApiDataAction(data))
 
-  useEffect(() => {}, [])
+  // useEffect(() => {}, [])
 
   /**
    * 关闭mock列表弹框

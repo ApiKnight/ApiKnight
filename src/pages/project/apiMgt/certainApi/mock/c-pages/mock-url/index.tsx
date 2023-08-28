@@ -69,6 +69,10 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
     value: 'GET',
   })
 
+  useEffect(() => {
+    setUserMethod({ label: userReqInfo.method, value: userReqInfo.method })
+  }, [userReqInfo])
+
   // 输入框改变事件
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -230,19 +234,6 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       response: JSON.stringify({ params: apiData.apiInfo.response.body }),
       data: apiData.apiInfo.request.body,
     })
-    console.log(res)
-
-    // console.log({
-    //   project_id: projectId,
-    //   url: '/' + userReqInfo.path,
-    //   method: userReqInfo.method.toLowerCase(),
-    //   apis_id: metaInfo.api_id,
-    //   name: metaInfo.name,
-    //   headers: JSON.stringify(headers),
-    //   params: JSON.stringify(queries),
-    //   response: JSON.stringify({ params: apiData.apiInfo.response.body }),
-    //   data: apiData.apiInfo.request.body,
-    // })
   }
 
   return (

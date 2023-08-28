@@ -32,7 +32,6 @@ const DocOperator: React.FunctionComponent = () => {
       onUploading: state.document.onUploading,
       apiName: state.document.apiName,
     }),
-    shallowEqualApp,
   )
   // 保存上一次的更新状态
   const previousOnloading = usePrevious(onUploading)
@@ -61,6 +60,10 @@ const DocOperator: React.FunctionComponent = () => {
     value: 'GET',
   })
 
+  useEffect(() => {
+    setMethod({ label: baseInfo.method, value: baseInfo.method })
+  }, [baseInfo])
+
   // 请求方式改变事件
   const handleMethodChange = (methodOpt: ApiOptReqOptType): void => {
     setMethod(methodOpt)
@@ -80,13 +83,12 @@ const DocOperator: React.FunctionComponent = () => {
       dispatch(changePathAction(newVal))
     }
   }
-  const [isEmpty,setIsEmpty] = useState<'' | 'error' | 'warning'>('')
+  const [isEmpty, setIsEmpty] = useState<'' | 'error' | 'warning'>('')
   // 确认保存信息
   const handleConfimSave = () => {
     if (saveRemark === '') {
       setIsEmpty('error')
-    }
-    else {
+    } else {
       dispatch(updateDocumentApiAction(saveRemark))
       dispatch(
         upData({
@@ -131,15 +133,13 @@ const DocOperator: React.FunctionComponent = () => {
         onPrefixInputChange={(e) => handleInputChange(e, 'prefix')}
         onInputChange={(e) => handleInputChange(e, 'path')}
         urlPrefixValue={baseInfo.prefix}
-        inputValue={baseInfo.path}
-      >
+        inputValue={baseInfo.path}>
         <Button
           className='btn'
           type='primary'
           onClick={() =>
             dispatch(changeUpdateStatusAction({ onUpdating: true }))
-          }
-        >
+          }>
           保存
         </Button>
         <Button className='btn' onClick={handleDelInfo}>
@@ -155,8 +155,7 @@ const DocOperator: React.FunctionComponent = () => {
         onOk={handleConfimSave}
         onCancel={(e) =>
           dispatch(changeUpdateStatusAction({ onUpdating: false }))
-        }
-      >
+        }>
         <Input
           style={{ marginTop: '15px' }}
           status={isEmpty}
@@ -164,9 +163,9 @@ const DocOperator: React.FunctionComponent = () => {
           value={saveRemark}
           onChange={(e) => setSaveRemark(e.target.value)}
         />
-        {
-          isEmpty === "error" && <div style={{color: 'red'}}>输入框信息不能为空</div>
-        }
+        {isEmpty === 'error' && (
+          <div style={{ color: 'red' }}>输入框信息不能为空</div>
+        )}
       </Modal>
     </div>
   )

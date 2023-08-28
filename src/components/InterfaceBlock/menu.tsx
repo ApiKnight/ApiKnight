@@ -31,6 +31,10 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
       pid: data.pid,
     })
   }, [])
+
+  function handleShare(): void {
+    console.log('导出')
+  }
   const content = (
     <div>
       <div>
@@ -48,7 +52,9 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
         )}
       </div>
       <div>
-        <Button block>导出</Button>
+        <Button block onClick={handleShare}>
+          导出
+        </Button>
       </div>
     </div>
   )

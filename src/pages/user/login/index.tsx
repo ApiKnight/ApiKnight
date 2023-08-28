@@ -10,7 +10,7 @@ import login from '@/api/login'
 import randomNum from '@/utils/randomNum'
 const { Header, Content } = Layout
 import './index.less'
-import { createAllMonitor } from '../../../../sdk/index';
+import { createAllMonitor } from '../../../../sdk/index'
 
 type LoginType = {
   usernameOrEmail: string
@@ -24,7 +24,7 @@ interface RegisterType {
   phone: string
   avatar_url: string
 }
-type LoginState = "Login" | "Regist"
+type LoginState = 'Login' | 'Regist'
 const items: MenuProps['items'] = [
   {
     label: '注册',
@@ -52,32 +52,32 @@ const Login: React.FC = () => {
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key)
   }
-  const [loginState,setLoginState] = useState<LoginState>('Login')
-  const [loginUserName,setLoginUsername] = useState('')
-  const [loginPassword,setLoginPassword] = useState('')
-  const [registUserName,setRegistUserNamed] = useState('')
-  const [registPassword,setRegistPassword] = useState('')
-  const [registEmail,setRegistEmail] = useState('')
-  const [registPhone,setRegistPhone] = useState('')
-  function changeSetLoginState(e:any):void {
+  const [loginState, setLoginState] = useState<LoginState>('Login')
+  const [loginUserName, setLoginUsername] = useState('')
+  const [loginPassword, setLoginPassword] = useState('')
+  const [registUserName, setRegistUserNamed] = useState('')
+  const [registPassword, setRegistPassword] = useState('')
+  const [registEmail, setRegistEmail] = useState('')
+  const [registPhone, setRegistPhone] = useState('')
+  function changeSetLoginState(e: any): void {
     setLoginState(e.target.value)
   }
-  function changeSetLoginUsername(e:any):void {
+  function changeSetLoginUsername(e: any): void {
     setLoginUsername(e.target.value)
   }
-  function changeSetLoginPassword(e:any):void {
+  function changeSetLoginPassword(e: any): void {
     setLoginPassword(e.target.value)
   }
-  function changeSetRegistUserNamed(e:any):void {
+  function changeSetRegistUserNamed(e: any): void {
     setRegistUserNamed(e.target.value)
   }
-  function changeSetRegistPassword(e:any):void {
+  function changeSetRegistPassword(e: any): void {
     setRegistPassword(e.target.value)
   }
-  function changeSetRegistEmail(e:any):void {
+  function changeSetRegistEmail(e: any): void {
     setRegistEmail(e.target.value)
   }
-  function changeSetRegistPhone(e:any):void {
+  function changeSetRegistPhone(e: any): void {
     setRegistPhone(e.target.value)
   }
   const onFinish = () => {
@@ -86,7 +86,7 @@ const Login: React.FC = () => {
     loginState === 'Login'
       ? ((loginData = {
           usernameOrEmail: loginUserName,
-          password: loginPassword
+          password: loginPassword,
         }),
         login(loginData).then(
           (res: any) => {
@@ -106,7 +106,10 @@ const Login: React.FC = () => {
       : ((registerData = {
           username: registUserName,
           password: registPassword,
-          avatar_url: `${window.location.origin}/images/avatar${randomNum(1, 6)}.jpg`,
+          avatar_url: `${window.location.origin}/images/avatar${randomNum(
+            1,
+            6,
+          )}.jpg`,
           email: registEmail,
           phone: registPhone,
         }),
@@ -155,89 +158,84 @@ const Login: React.FC = () => {
   return (
     <App>
       <HeaderNav ifHideUser={false} />
-      <Content
-        style={{ height: '89vh', width: '96vw' }}
-      >
+      <Content style={{ height: '89vh', width: '96vw' }}>
         <div className='login'>
           <div className='container'>
-          <div className='form-container sign-up-container'>
-                <div className='form'>
-                  <h2>sign up</h2>
-                  <input
-                    type='text'
-                    name='username'
-                    id='username'
-                    placeholder='Username...'
-                    value={registUserName}
-                    onChange={changeSetRegistUserNamed}
-                  />
-                  <input
-                    type='password'
-                    name='password'
-                    id='password'
-                    placeholder='Password...'
-                    value={registPassword}
-                    onChange={changeSetRegistPassword}
-                  />
-                  <input
-                    type='email'
-                    name='email'
-                    id='email'
-                    placeholder='Email...'
-                    value={registEmail}
-                    onChange={changeSetRegistEmail}
-                  />
-                  <input
-                    type='phone'
-                    name='phone'
-                    id='phone'
-                    placeholder='Phone...'
-                    value={registPhone}
-                    onChange={changeSetRegistPhone}
-                  />
-                  <button className='signUp' onClick={handleSignUpClick}>sign up</button>
-                </div>
+            <div className='form-container sign-up-container'>
+              <div className='form'>
+                <h2>sign up</h2>
+                <input
+                  type='text'
+                  name='username'
+                  id='username'
+                  placeholder='用户名'
+                  value={registUserName}
+                  onChange={changeSetRegistUserNamed}
+                />
+                <input
+                  type='password'
+                  name='password'
+                  id='password'
+                  placeholder='密码'
+                  value={registPassword}
+                  onChange={changeSetRegistPassword}
+                />
+                <input
+                  type='email'
+                  name='email'
+                  id='email'
+                  placeholder='邮箱'
+                  value={registEmail}
+                  onChange={changeSetRegistEmail}
+                />
+                <input
+                  type='phone'
+                  name='phone'
+                  id='phone'
+                  placeholder='手机号'
+                  value={registPhone}
+                  onChange={changeSetRegistPhone}
+                />
+                <button className='signUp' onClick={handleSignUpClick}>
+                  注册
+                </button>
               </div>
-          <div className='form-container sign-in-container'>
-                <div className='form'>
-                  <h2>sign in</h2>
-                  <input
-                    type='email'
-                    name='email'
-                    id='email'
-                    placeholder='Email/Phone/User...'
-                    value={loginUserName}
-                    onChange={changeSetLoginUsername}
-                  />
-                  <input
-                    type='password'
-                    name='password'
-                    id='password'
-                    placeholder='Password...'
-                    value={loginPassword}
-                    onChange={changeSetLoginPassword}
-                  />
-                  <button className='signIn' onClick={handleSignUpClick}>sign in</button>
-                </div>
+            </div>
+            <div className='form-container sign-in-container'>
+              <div className='form'>
+                <h2>sign in</h2>
+                <input
+                  type='email'
+                  name='email'
+                  id='email'
+                  placeholder='邮箱/手机号/用户名'
+                  value={loginUserName}
+                  onChange={changeSetLoginUsername}
+                />
+                <input
+                  type='password'
+                  name='password'
+                  id='password'
+                  placeholder='密码'
+                  value={loginPassword}
+                  onChange={changeSetLoginPassword}
+                />
+                <button className='signIn' onClick={handleSignUpClick}>
+                  登录
+                </button>
               </div>
-              <div className='overlay_container'>
+            </div>
+            <div className='overlay_container'>
               <div className='overlay'>
                 <div className='overlay_panel overlay_left_container'>
                   <h2>welcome back!</h2>
-                  <p>
-                    To keep connected with us please login with your personal
-                    info
-                  </p>
-                  <button id='sign-in'>
-                    sign in
-                  </button>
+                  <p>你还没有新账号呢？注册一个吧！</p>
+                  <button id='sign-in'>登录</button>
                 </div>
                 <div className='overlay_panel overlay_right_container'>
                   <h2>hello friend!</h2>
-                  <p>Enter your personal details and start journey with us</p>
-                  <button id='sign-up'>
-                    sign up
-                  </button>
+                  <p>加入我们一起参加ApiKnight的体验吧</p>
+                  <button id='sign-up'>注册</button>
                 </div>
               </div>
             </div>

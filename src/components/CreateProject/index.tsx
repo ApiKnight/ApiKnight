@@ -9,16 +9,17 @@ const UpdateProject: React.FC<childProps> = (props) => {
   const { isModalOpen, closeModal, updateUserInfo, user_id } = props
 
   const onFinish = (values: any) => {
-    values.project_img = `${window.location.origin}/images/project${randomNum(1, 6)}.jpg`;
+    values.project_img = `${window.location.origin}/images/project${randomNum(
+      1,
+      6,
+    )}.jpg`
     request.post('v1/project/create', values, {}).then(() => {
       updateUserInfo(user_id)
       closeModal()
     })
   }
 
-  const onFinishFailed = (errorInfo: any) => {
-    
-  };
+  const onFinishFailed = (errorInfo: any) => {}
   return (
     <Modal
       title='创建新项目'
@@ -26,31 +27,30 @@ const UpdateProject: React.FC<childProps> = (props) => {
       onCancel={() => {
         props.closeModal()
       }}
-      footer={null}
-    >
+      footer={null}>
       <Form
         name='basic'
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
+        labelCol={{ span: 4 }}
+        wrapperCol={{ span: 20 }}
+        className='create-project-form'
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        autoComplete='off'
-      >
+        autoComplete='off'>
         <Form.Item<any>
           label='项目名称'
           name='projectname'
-          rules={[{ required: true, message: '请输入项目名称!' }]}
-        >
+          style={{ width: '100%' }}
+          rules={[{ required: true, message: '请输入项目名称!' }]}>
           <Input />
         </Form.Item>
 
         <Form.Item<any>
           label='项目描述'
           name='description'
-          rules={[{ required: true, message: '请输入项目描述!' }]}
-        >
+          style={{ width: '100%' }}
+          labelAlign='left'
+          rules={[{ required: true, message: '请输入项目描述!' }]}>
           <Input />
         </Form.Item>
 
@@ -58,8 +58,7 @@ const UpdateProject: React.FC<childProps> = (props) => {
           <Button
             type='primary'
             htmlType='submit'
-            style={{ marginRight: '10px' }}
-          >
+            style={{ marginRight: '10px' }}>
             确定
           </Button>
         </Form.Item>

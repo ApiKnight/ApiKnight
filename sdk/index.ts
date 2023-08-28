@@ -11,12 +11,12 @@ export function createAllMonitor(url?: string) {
     url = window.location.pathname
   }
   function start() {
-    createBlankScreenMonitor(url).start()
-    createJsErrorMonitor(url).start()
-    createPerfMonitor(url).start()
-    createResourceErrorMonitor(url).start()
-    // createXhrMonitor(url).start()
-    createPromiseErrorMonitor(url).start()
+    // createBlankScreenMonitor(url).start()
+    // createJsErrorMonitor(url).start()
+    // createPerfMonitor(url).start()
+    // createResourceErrorMonitor(url).start()
+    // // createXhrMonitor(url).start()
+    // createPromiseErrorMonitor(url).start()
   }
   return { name, start }
 }

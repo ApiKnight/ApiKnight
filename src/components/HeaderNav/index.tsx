@@ -15,7 +15,7 @@ const HeaderNav: React.FC<ChildrenProps> = (props) => {
     <div className='header-nav'>
       <div className='left'>
         <div className='title'>
-          <i>ApiKnight</i>
+          <a href='/user'>ApiKnight</a>
         </div>
       </div>
 
@@ -25,10 +25,10 @@ const HeaderNav: React.FC<ChildrenProps> = (props) => {
           <div className='url'>
             <a href='https://github.com/ApiKnight' target='_blank'>
               <Avatar
-                size={54}
+                size={40}
                 style={{ backgroundColor: 'black' }}
                 icon={<GithubOutlined />}
-                alt='用户头像'
+                alt='Github'
               />
             </a>
           </div>
@@ -36,14 +36,13 @@ const HeaderNav: React.FC<ChildrenProps> = (props) => {
         {ifHideUser ? (
           ''
         ) : (
-          <div className='user'>
+          <div className='user-icon'>
             <div className='avatar'>
               <Link
                 to='/user'
-                state={{ user_id: localStorage.getItem('user_id') }}
-              >
+                state={{ user_id: localStorage.getItem('user_id') }}>
                 <Avatar
-                  size={54}
+                  size={40}
                   style={{ backgroundColor: 'black', marginLeft: '10px' }}
                   icon={user_info.avatar_url ? '' : <UserOutlined />}
                   src={user_info.avatar_url ? user_info.avatar_url : null}

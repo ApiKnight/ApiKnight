@@ -1,6 +1,15 @@
 .project-overview {
   height: 100%;
-
+  overflow: scroll;
+  // 隐藏滚动条
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  box-sizing: border-box;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
+  scrollbar-width: none; /* Firefox */
   .content-item {
     box-sizing: border-box;
     padding: 20px 40px;

@@ -1,9 +1,33 @@
-.Spin-Style {
-    position: fixed;
+.Router-Cpn {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  .Spin-Style {
+    // box-sizing: border-box;
+    // padding: 20px;
+    // height: 100%;
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .block-box {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      color: @theme-color-primary;
+      font-size: 15px;
+      font-weight: 700;
+      padding-top: 120px;
+      box-sizing: border-box;
+      padding-left: 35%;
+    }
+  }
+}
+
+.ant-spin-container.ant-spin-blur {
+  opacity: 1 !important;
 }

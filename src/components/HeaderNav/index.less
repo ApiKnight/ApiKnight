@@ -1,38 +1,64 @@
 .header-nav {
-  width: 99vw;
+  width: 100%;
   height: 10vh;
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #ffffff;
-  padding-top: 1vh;
+  // padding-top: 1vh;
   .left {
+    display: flex;
+    align-items: center;
     padding-left: 30px;
     .title {
-      position: relative;
-      top: 1vh;
-      font-weight: 800;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      font-size: 30px;
+      a {
+        height: 100%;
+        // position: relative;
+        // top: 1vh;
+        color: rgba(0, 0, 0, 0.88);
+        font-weight: 800;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 30px;
+        font-style: italic;
+      }
     }
   }
-  .right{
+  .right {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding-right: 30px;
-    .github{
+    .github {
       margin-right: 16px;
-    }
-    .user{
-      height: 10vh;
-      position: relative;
-      // align-items: center;
-      // justify-content: center;
-      .avatar{
+      border-radius: 20px;
+      transition: all 250ms ease;
+      &:hover {
+        transform: scale(1.02);
       }
-      .name{
+    }
+    .user-icon {
+      // height: 10vh;
+      // position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 36px !important;
+      .avatar {
+        line-height: 36px !important;
+
+        a {
+          display: block;
+          transition: all 250ms ease;
+          &:hover {
+            transform: scale(1.02);
+          }
+        }
+      }
+      .name {
         text-align: center;
-        color:rgb(75, 75, 163);
+        color: rgb(75, 75, 163);
+        margin-left: 10px;
         // position: absolute;
         // bottom: 2vh;
       }

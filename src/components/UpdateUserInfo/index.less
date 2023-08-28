@@ -1,27 +1,29 @@
 .updateUserInfo {
-    z-index: 10002;
-    background-color: white;
-    padding: 1.2%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    .updateUserInfo-title {
-        width: 100%;
-        display: flex;
-        .updateUserInfo-title__closed {
-            margin-left: auto;
-        }
-        .updateUserInfo-title__closed:hover {
-            cursor: pointer;
-        }
+  z-index: 10002;
+  background-color: white;
+  padding: 1.2%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 6px;
+  overflow: hidden;
+  .updateUserInfo-title {
+    width: 100%;
+    display: flex;
+    .updateUserInfo-title__closed {
+      margin-left: auto;
     }
-    .updateUserInfo-content {
-        margin-top: 3%;
+    .updateUserInfo-title__closed:hover {
+      cursor: pointer;
     }
-    .updateUserInfo-btn {
-        margin-top: 5.5%;
-        display: flex;
-        justify-content: center;
-    }
+  }
+  .updateUserInfo-content {
+    margin-top: 3%;
+  }
+  .updateUserInfo-btn {
+    margin-top: 5.5%;
+    display: flex;
+    justify-content: center;
+  }
 }

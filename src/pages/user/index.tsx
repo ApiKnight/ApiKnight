@@ -8,7 +8,7 @@ import CreateProject from '@/components/CreateProject'
 import getUserInfo from '@/api/getUserInfo'
 import { useLocation } from 'react-router-dom'
 import EmptyShow from '@/components/EmptyShow'
-import { createAllMonitor } from '../../../sdk/index';
+import { createAllMonitor } from '../../../sdk/index'
 
 const { Header, Content, Footer } = Layout
 
@@ -19,7 +19,7 @@ const User: React.FunctionComponent = () => {
   const state = useLocation().state
   const user_id = localStorage.getItem('user_id')
   console.log('userid', user_id, state)
-  createAllMonitor("/user").start()
+  createAllMonitor('/user').start()
   const openModal = () => {
     setIsModalOpen(true)
   }
@@ -48,7 +48,9 @@ const User: React.FunctionComponent = () => {
         user_id={user_id}
       />
 
-      <Layout className='layout'>
+      <Layout
+        className='layout'
+        style={{ minHeight: '100%', overflow: 'scroll' }}>
         {/* <Header
           style={{
             // backgroundColor: '#ffffff',
@@ -56,51 +58,56 @@ const User: React.FunctionComponent = () => {
           }}> */}
         <HeaderNav user_info={user_info} />
         {/* </Header> */}
-        <Content
-          className='content'
-          style={{
-            padding: '50px 50px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: 'relative',
-          }}
-        >
-          <div className='title'>
-            <div className='my-project'>我的项目</div>
-            <div className='create-project'>
+        <div className='content-wrap' style={{ height: '100%', flex: '1' }}>
+          <Content
+            className='content'
+            style={{
+              padding: '50px 50px',
+              // justifyContent: 'center',
+              // alignItems: 'center',
+              position: 'relative',
+            }}>
+            <div className='title'>
+              <div className='my-project'>我的项目</div>
               <Button
                 icon={<PlusOutlined />}
-                style={{ backgroundColor: '#9373ee', color: '#ffffff' }}
+                type='primary'
+                // style={{
+                //   backgroundColor: '@theme-primary-color',
+                //   color: '#ffffff',
+                // }}
                 className='button'
-                onClick={() => openModal()}
-              >
+                onClick={() => openModal()}>
                 新建项目
               </Button>
+              {/* <div className='create-project'>
+             
+            </div> */}
             </div>
-          </div>
-          <div className='list'>
-            {projectList.length ? (
-              projectList.map((value, index) => {
-                return (
-                  <div className='item' key={value.id}>
-                    <ProjectItem
-                      name={value.projectname}
-                      dec={value.description}
-                      project_id={value.id}
-                      iconPath={value.iconPath}
-                      project_img={value.project_img}
-                    ></ProjectItem>
-                  </div>
-                )
-              })
-            ) : (
-              <div className='item-empty'>
-                <EmptyShow />
-              </div>
-            )}
-          </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>
+            <div className='list'>
+              {projectList.length ? (
+                projectList.map((value, index) => {
+                  return (
+                    <div className='item' key={value.id}>
+                      <ProjectItem
+                        name={value.projectname}
+                        dec={value.description}
+                        project_id={value.id}
+                        iconPath={value.iconPath}
+                        project_img={value.project_img}></ProjectItem>
+                    </div>
+                  )
+                })
+              ) : (
+                <div className='item-empty'>
+                  <EmptyShow />
+                </div>
+              )}
+            </div>
+          </Content>
+        </div>
+
+        <Footer style={{ textAlign: 'center', color: 'rgba(0, 0, 0, 0.3)' }}>
           ApiKnight ©2023 Created by ApiKnight
         </Footer>
       </Layout>

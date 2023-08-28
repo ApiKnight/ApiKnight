@@ -14,10 +14,14 @@ type DocumentPropsType = {
 
 const Document: React.FunctionComponent<DocumentPropsType> = memo((props) => {
   const dispatch = useAppDispatch()
-  // useEffect(() => {
-  //   dispatch(fetchDocumentApiAction(props.data))
-  // }, [dispatch])
-  dispatch(fetchDocumentApiAction(props.data))
+  const { apiId } = useAppSelector((state) => ({
+    apiId: state.rightSlice.value,
+  }))
+  useEffect(() => {
+    if (apiId !== 'gl') {
+      dispatch(fetchDocumentApiAction(apiId))
+    }
+  }, [dispatch, apiId])
   return (
     <div className='document-page'>
       <DocOperator />

@@ -6,6 +6,7 @@ export interface CounterState {
 }
 
 const initialState: CounterState = {
+  // 优化了结构，这个value指向 'gl' 或者 api_id 非常重要，核心功能都有引用，请勿设置别的值（重要！！！）
   value: '',
 }
 

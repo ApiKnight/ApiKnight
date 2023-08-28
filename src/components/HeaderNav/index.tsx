@@ -47,6 +47,7 @@ const HeaderNav: React.FC<ChildrenProps> = (props) => {
                   style={{ backgroundColor: 'black', marginLeft: '10px' }}
                   icon={user_info.avatar_url ? '' : <UserOutlined />}
                   src={user_info.avatar_url ? user_info.avatar_url : null}
+                  alt='用户头像'
                 />
               </Link>
             </div>

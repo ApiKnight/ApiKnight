@@ -10,12 +10,13 @@ import './index.less'
 import getSelfInfo from '@/api/getSelfInfo'
 import { useAppDispatch } from '@/store'
 import { fetchProjectInfoAction } from '@/store/modules/project'
+import { createAllMonitor } from '../../../sdk'
 
 const Project: React.FunctionComponent = () => {
   const navigate = useNavigate()
   let project_id
   const state = useLocation().state
-
+  createAllMonitor().start()
   // 获取project_id后更新projectReducer，统一存储
   const dispatch = useAppDispatch()
   useEffect(() => {

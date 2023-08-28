@@ -9,13 +9,13 @@ import { reportError } from './reportError'
 export function createPerfMonitor(url?: string) {
   const name = 'performance'
   if (url === '' || url === undefined) {
-    url = `url is ${window.location.pathname}:`
+    url = window.location.pathname
   }
   const entryTypes = ['paint', 'largest-contentful-paint', 'first-input']
   function start() {
     const p = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        reportError({ name, data: entry }, `Performance index(${url}):`)
+        reportError({ name, data: entry }, url,name)
       }
     })
     p.observe({ entryTypes })

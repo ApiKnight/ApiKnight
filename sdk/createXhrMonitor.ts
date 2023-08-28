@@ -4,7 +4,7 @@ import { reportError } from './reportError'
 export function createXhrMonitor(url?: string) {
   const name = 'xhr-error'
   if (url === '' || url === undefined) {
-    url = `url is ${window.location.pathname}:`
+    url = window.location.pathname
   }
   function hookMethod(obj: any, key: string, hookFunc: Function) {
     return (...params: any[]) => {
@@ -32,10 +32,9 @@ export function createXhrMonitor(url?: string) {
           this.addEventListener('readystatechange', function () {
             if (this.readyState === 4 && this.status >= 400) {
               this.payload.status = this.status
-              reportError({ name, data: this.payload }, `Xhr error(${url}):`)
+              reportError({ name, data: this.payload },url,name)
             }
           })
-          // origin.apply(this, ...params)
         },
     )()
   }

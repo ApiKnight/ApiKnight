@@ -5,7 +5,7 @@ import { reportError } from './reportError'
 export function createJsErrorMonitor(url?: string) {
   const name = 'js-error'
   if (url === '' || url === undefined) {
-    url = `url is ${window.location.pathname}:`
+    url = window.location.pathname
   }
   function start() {
     window.addEventListener('error', handleError)
@@ -19,7 +19,8 @@ export function createJsErrorMonitor(url?: string) {
 
       reportError(
         { name, data: { type, message, filename, lineno, colno } },
-        `JS error(url is ${url}):`,
+        url
+        ,name
       )
     }
   }
@@ -27,7 +28,7 @@ export function createJsErrorMonitor(url?: string) {
   function handleRejection(e: any) {
     const { type, reason } = e
 
-    reportError({ name, data: { type, reason } }, 'JS error:')
+    reportError({ name, data: { type, reason } },url,name)
   }
 
   return { name, start }

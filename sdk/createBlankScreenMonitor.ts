@@ -4,7 +4,7 @@ export function createBlankScreenMonitor(url?: string) {
   const name = 'blank-screen'
   const entryType = 'paint'
   if (url === '' || url === undefined) {
-    url = `url is ${window.location.pathname}:`
+    url = window.location.pathname
   }
   function start() {
     const p = new PerformanceObserver((list) => {
@@ -21,7 +21,7 @@ export function createBlankScreenMonitor(url?: string) {
           firstContentfulPaintEntry.startTime - firstPaintEntry.startTime
         reportError(
           { name, data: { blankScreenTime } },
-          `BlackScreen Time(${url})`,
+          url,name,
         )
       }
     })

@@ -22,26 +22,12 @@ import getCurrentRole from '@/api/getCurrentRole'
 import reqDelMember from '@/api/reqDelMember'
 import chgProjAdmin from '@/api/chgProjAdmin'
 import ShowMember from '@/components/ShowMember'
-// interface DataType {
-//   gender?: string;
-//   name: {
-//     title?: string;
-//     first?: string;
-//     last?: string;
-//   };
-//   email?: string;
-//   picture: {
-//     large?: string;
-//     medium?: string;
-//     thumbnail?: string;
-//   };
-//   nat?: string;
-//   loading: boolean;
-// }
+import { createAllMonitor } from '../../../../sdk'
 
 const count = 3
 
 const MemberMgt: React.FC = () => {
+  createAllMonitor().start()
   const state = useLocation().state
   const { project_id } = state
 

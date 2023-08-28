@@ -186,7 +186,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
 
     let url = `${userReqInfo.prefix}/${userReqInfo.path}`
     if (mode === 'mock') {
-      url = `http://47.112.108.202:7002/${projectId}/${userReqInfo.path}`
+      url = `http://47.112.108.202:7002/api/v1/mock/${projectId}/${userReqInfo.path}`
     }
     const { data } = await requestByServerProxy({
       url: url,

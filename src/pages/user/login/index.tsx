@@ -10,6 +10,7 @@ import login from '@/api/login'
 import randomNum from '@/utils/randomNum'
 const { Header, Content } = Layout
 import './index.less'
+import { createAllMonitor } from '../../../../sdk/index';
 
 type LoginType = {
   usernameOrEmail: string
@@ -47,7 +48,7 @@ const Login: React.FC = () => {
    * @param max 最大值
    * @returns
    */
-
+  createAllMonitor().start()
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key)
   }

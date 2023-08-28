@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
 import delProject from '@/api/delProject'
 import getCurrentRole from '@/api/getCurrentRole'
+import { createAllMonitor } from '../../../../sdk'
 
 type FieldType = {
   username?: string
@@ -26,7 +27,7 @@ interface ProjectInfoType {
   projectname: string
 }
 const ProjectSet: React.FC = () => {
-  // const ProjectSet: React.FC<childProps> = () => {
+  createAllMonitor().start()
   const navigate = useNavigate()
   // const project_id = useSelector((state: RootState) => state.project.project_id)
   const { project_id } = useLocation().state

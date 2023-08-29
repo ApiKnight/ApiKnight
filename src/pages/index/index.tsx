@@ -17,7 +17,7 @@ import { createAllMonitor } from '../../../sdk'
 const Index: React.FunctionComponent = () => {
   //清空缓存
   // 过期token
-  createAllMonitor("/index").start()
+  createAllMonitor('/index').start()
   const navigate = useNavigate()
 
   const user_id = localStorage.getItem('user_id')
@@ -261,10 +261,9 @@ const Index: React.FunctionComponent = () => {
       title: '数据导入/导出',
       desc: (
         <ol>
-          <li>支持导出 OpenAPI (Swagger)、Markdown、Html 等数据格式。</li>
+          <li>支持导出 OpenAPI (Swagger2.0)、ApiKnight等数据格式。</li>
           <li>
-            支持导入 OpenAPI
-            (Swagger)、Postman、HAR、RAP2、JMeter、YApi、Eolinker、NEI、RAML、DOClever
+            后续将支持Postman、HAR、RAP2、JMeter、YApi、Eolinker、NEI、RAML、DOClever
             、Apizza 、DOCWAY、ShowDoc、apiDoc、I/O Docs、WADL、Google Discovery
             等数据格式。
           </li>
@@ -278,7 +277,7 @@ const Index: React.FunctionComponent = () => {
       desc: (
         <ol>
           <li>支持 HTTP(s) 接口管理。</li>
-          <li>支持 Socket (TCP) 接口管理。</li>
+          <li>后续将支持 Socket (TCP) 接口管理。</li>
           <li>后续将会支持 GraphQL、Dubbo、gRPC、WebSocket 等协议接口。</li>
         </ol>
       ),
@@ -433,8 +432,7 @@ const Index: React.FunctionComponent = () => {
               <Tag
                 bordered={false}
                 color='volcano'
-                style={{ fontSize: '20px' }}
-              >
+                style={{ fontSize: '20px' }}>
                 发布
               </Tag>
             </div>

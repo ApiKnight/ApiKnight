@@ -4,15 +4,13 @@ import './index.less'
 import request from '@/api/request'
 import randomNum from '@/utils/randomNum'
 import type { childProps } from './type'
+import { ROOT_URL, baseURL } from '@/config/config'
 
 const UpdateProject: React.FC<childProps> = (props) => {
   const { isModalOpen, closeModal, updateUserInfo, user_id } = props
 
   const onFinish = (values: any) => {
-    values.project_img = `${window.location.origin}/images/project${randomNum(
-      1,
-      10,
-    )}.jpg`
+    values.project_img = `${ROOT_URL}/images/project${randomNum(1, 10)}.jpg`
     request.post('v1/project/create', values, {}).then(() => {
       updateUserInfo(user_id)
       closeModal()

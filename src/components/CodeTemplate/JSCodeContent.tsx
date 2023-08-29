@@ -24,51 +24,61 @@ const JSCodeContent: React.FC = () => {
         items={itemsJsCode}
       />
       <div className='codeTemplate-content__codeBlock'>
-        {
-          current === '1' ? (
-            <CodeEditor defaultValue={
-              createFetchTemplate(
-                'http://127.0.0.1/xxx',
-                'GET',
-                "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
-                'follow',
-              )
-          } lang='javascript' height='360px' width='435px'/>
-          ) : current === '2' ? (
-            <CodeEditor defaultValue={
-              createAxiosTemplate(
-                'http://127.0.0.1/xxx',
-                'GET',
-                "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'"
-              )
-          } lang='javascript' height='360px' width='435px'/>
-          ) : current === '3' ? (
-            <CodeEditor defaultValue={
-              createJQueryTemplate(
-                'http://127.0.0.1/xxx',
-                'GET',
-                "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
-              )
-          } lang='javascript' height='360px' width='435px'/>
-          ) : current === '4' ? (
-            <CodeEditor defaultValue={
-              createFetchTemplate(
-                'http://127.0.0.1/xxx',
-                'GET',
-                "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
-                'follow',
-              )
-          } lang='javascript' height='360px' width='435px'/>
-          ) : (
-            <CodeEditor defaultValue={
-              createXHRTemplate(
-                'http://127.0.0.1/xxx',
-                'GET',
-                "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
-              )
-            }/>
-          )
-        }
+        {current === '1' ? (
+          <CodeEditor
+            defaultValue={createFetchTemplate(
+              'http://127.0.0.1/xxx',
+              'GET',
+              "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+              'follow',
+            )}
+            lang='javascript'
+            height='360px'
+            width='435px'
+          />
+        ) : current === '2' ? (
+          <CodeEditor
+            defaultValue={createAxiosTemplate(
+              'http://127.0.0.1/xxx',
+              'GET',
+              "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+            )}
+            lang='javascript'
+            height='360px'
+            width='435px'
+          />
+        ) : current === '3' ? (
+          <CodeEditor
+            defaultValue={createJQueryTemplate(
+              'http://127.0.0.1/xxx',
+              'GET',
+              "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+            )}
+            lang='javascript'
+            height='360px'
+            width='435px'
+          />
+        ) : current === '4' ? (
+          <CodeEditor
+            defaultValue={createFetchTemplate(
+              'http://127.0.0.1/xxx',
+              'GET',
+              "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+              'follow',
+            )}
+            lang='javascript'
+            height='360px'
+            width='435px'
+          />
+        ) : (
+          <CodeEditor
+            defaultValue={createXHRTemplate(
+              'http://127.0.0.1/xxx',
+              'GET',
+              "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+            )}
+          />
+        )}
       </div>
     </div>
   )

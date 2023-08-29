@@ -20,14 +20,17 @@ const GoCodeContent: React.FC = () => {
       />
       <div className='codeTemplate-content__codeBlock'>
         {
-          <CodeEditor defaultValue={
-            createNativeTemplate(
+          <CodeEditor
+            defaultValue={createNativeTemplate(
               'http://127.0.0.1/xxx',
               'GET',
-              "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
+              "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
               'follow',
-            )
-        } lang='go' height='360px' width='435px'/>
+            )}
+            lang='go'
+            height='360px'
+            width='435px'
+          />
         }
       </div>
     </div>

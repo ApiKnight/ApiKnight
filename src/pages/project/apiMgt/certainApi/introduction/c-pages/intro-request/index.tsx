@@ -37,7 +37,7 @@ const IntroRequest: React.FunctionComponent = memo(() => {
         <Card
           size='small'
           title={paramType.slice(0, 1).toUpperCase() + paramType.slice(1)}
-          extra={<a href='#'>生成代码</a>}
+          // extra={<a href='#'>生成代码</a>}
           style={{ width: '100%' }}>
           {requestInfo[paramType].map((paramItem) => {
             return getNormalParamItem(paramItem)

@@ -10,8 +10,8 @@ import CodeEditor from '@/components/CodeEditor'
 
 const DocResponse: React.FunctionComponent = memo(() => {
   const dispatch = useAppDispatch()
-  const { responseBody } = useAppSelector((state) => ({
-    responseBody: state.document.apiData.apiInfo.response.body,
+  const { apiData } = useAppSelector((state) => ({
+    apiData: state.document.apiData,
   }))
   return (
     <div className='doc-response'>
@@ -19,7 +19,7 @@ const DocResponse: React.FunctionComponent = memo(() => {
       <div className='content'>
         <CodeEditor
           height='300px'
-          defaultValue={responseBody}
+          defaultValue={apiData.apiInfo.response.body}
           onChange={(val) => dispatch(changeResponseBodyAction(val))}
         />
         {/* <TextArea

@@ -154,5 +154,5 @@ export async function shareApi(apiList: IRawApiInfo[], projectId: number) {
     response: JSON.stringify({ example: { data: list, type: 'apiknight' } }),
     data: '{}',
   })
-  return `${baseURL}/v1/mock/${projectId}${sharePath}`
+  return `${baseURL}v1/mock/${projectId}${sharePath}`
 }

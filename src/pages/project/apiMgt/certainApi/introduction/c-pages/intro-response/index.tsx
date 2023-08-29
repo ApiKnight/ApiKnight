@@ -6,13 +6,13 @@ import { shallowEqualApp, useAppSelector } from '@/store'
 import CodeEditor from '@/components/CodeEditor'
 
 const IntroResponse: React.FunctionComponent = memo(() => {
-  const { responseInfo } = useAppSelector(
+  const { apiData } = useAppSelector(
     (state) => ({
-      responseInfo: state.document.apiData.apiInfo.response,
+      apiData: state.document.apiData,
     }),
     shallowEqualApp,
   )
-  console.log('responseInfo', responseInfo)
+  // console.log('responseInfo', responseInfo)
 
   return (
     <div className='intro-response'>
@@ -32,7 +32,7 @@ const IntroResponse: React.FunctionComponent = memo(() => {
                   lang='json'
                   readOnly
                   withBorder
-                  defaultValue={responseInfo.body}
+                  defaultValue={apiData.apiInfo.response.body}
                 />
               </div>
             </div>

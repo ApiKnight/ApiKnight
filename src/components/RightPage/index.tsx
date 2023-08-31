@@ -7,14 +7,15 @@ import { useSelector } from 'react-redux'
 import { Button } from 'antd'
 import './index.less'
 
-const RightPage:React.FC<{project_id: string}> = (props) => {
+const RightPage: React.FC<{ project_id: string }> = (props) => {
   const tabContent = useSelector((state: RootState) => state.rightSlice.value)
   return (
     <div className={classNames('cpn-right-page full-height')}>
       <div
         className={classNames('tabs-wrap', {
           hidden: tabContent === 'blank',
-        })}>
+        })}
+      >
         <Tabs />
       </div>
       <div className={classNames('other-wrap')}>

@@ -15,25 +15,25 @@ const CodeTemplate: React.FC = () => {
   return (
     <div className='codeTemplate'>
       <div className='codeTemplate-body'>
-          <Menu
-            onClick={onClick}
-            style={{ width: 120 }}
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            mode='inline'
-            items={itemsIndex}
-          />
-          {
-            //  这里做条件渲染
-            current === '1' ? (
-              <JSCodeContent />
-            ) : current === '2' ? (
-              <JavaCodeContent />
-            ) : (
-              <GoCodeContent />
-            )
-          }
-        </div>
+        <Menu
+          onClick={onClick}
+          style={{ width: 120 }}
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['sub1']}
+          mode='inline'
+          items={itemsIndex}
+        />
+        {
+          //  这里做条件渲染
+          current === '1' ? (
+            <JSCodeContent />
+          ) : current === '2' ? (
+            <JavaCodeContent />
+          ) : (
+            <GoCodeContent />
+          )
+        }
+      </div>
     </div>
   )
 }

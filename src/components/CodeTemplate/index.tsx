@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import './index.less'
-import JSCodeContent from './JSCodeContent'
 import type { MenuProps } from 'antd'
 import { Menu } from 'antd'
-import JavaCodeContent from './JavaCodeContent'
-import GoCodeContent from './GoCodeContent'
 import { itemsIndex } from './constant'
 
 const CodeTemplate: React.FC = () => {
@@ -12,29 +9,31 @@ const CodeTemplate: React.FC = () => {
   const onClick: MenuProps['onClick'] = (e: any) => {
     setCurrent(e.key)
   }
+  let CodeContent = null
+  CodeContent = current === '1' ? (
+    React.lazy(()=>import('./JSCodeContent'))
+  ) : current === '2' ? (
+    React.lazy(()=>import('./JavaCodeContent'))
+  ) : (
+    React.lazy(()=>import('./GoCodeContent'))
+  )
+  console.log(CodeContent)
   return (
-    <div className='codeTemplate'>
-      <div className='codeTemplate-body'>
-        <Menu
-          onClick={onClick}
-          style={{ width: 120 }}
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          mode='inline'
-          items={itemsIndex}
-        />
-        {
-          //  这里做条件渲染
-          current === '1' ? (
-            <JSCodeContent />
-          ) : current === '2' ? (
-            <JavaCodeContent />
-          ) : (
-            <GoCodeContent />
-          )
-        }
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <div className='codeTemplate'>
+        <div className='codeTemplate-body'>
+          <Menu
+            onClick={onClick}
+            style={{ width: 120 }}
+            defaultSelectedKeys={['1']}
+            defaultOpenKeys={['sub1']}
+            mode='inline'
+            items={itemsIndex}
+          />
+          <CodeContent />
+        </div>
       </div>
-    </div>
+    </React.Suspense>
   )
 }
 

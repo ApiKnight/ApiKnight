@@ -26,8 +26,6 @@ function startMonitor() {
 const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
   props: Props,
 ) => {
-  const navigate = useNavigate()
-  //startMonitor()
   const [show, setShowState] = useState(false)
   function changeBtnState(e: any): void {
     setShowState(!show)
@@ -78,4 +76,4 @@ const InterfaceBlock: React.FunctionComponent<{ data: TitleNode }> = (
   )
 }
 
-export default InterfaceBlock
+export default React.memo(InterfaceBlock)

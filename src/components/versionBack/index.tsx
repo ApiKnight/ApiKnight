@@ -39,4 +39,4 @@ const VersionBack: React.FC<{ apis_id: string }> = (props) => {
   )
 }
 
-export default VersionBack
+export default React.memo(VersionBack)

@@ -25,4 +25,4 @@ const RightPage: React.FC<{ project_id: string }> = (props) => {
   )
 }
 
-export default RightPage
+export default React.memo(RightPage)

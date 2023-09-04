@@ -11,4 +11,4 @@ const Overlay: React.FunctionComponent<{ data: number }> = (
   )
 }
 
-export default Overlay
+export default React.memo(Overlay)

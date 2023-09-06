@@ -19,8 +19,6 @@ import request from '@/api/request'
 import { increment } from '@/store/modules/watchDir'
 import { MakeValue } from './type'
 
-
-
 const renderTree: React.FC = () => {
   function startMonitor() {
     createJsErrorMonitor('renderTree').start()
@@ -138,7 +136,8 @@ const renderTree: React.FC = () => {
               blockNode
               onDrop={onDrop}
               style={{ width: '250px' }}
-              className='renderTree'></Tree>
+              className='renderTree'
+            ></Tree>
           )
         }
       })()}

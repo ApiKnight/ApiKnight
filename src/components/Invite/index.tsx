@@ -42,4 +42,4 @@ const Invite: React.FunctionComponent<any> = (props) => {
   }
 }
 
-export default Invite
+export default React.memo(Invite)

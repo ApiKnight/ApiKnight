@@ -4,6 +4,7 @@ import './index.less'
 import request from '@/api/request'
 import randomNum from '@/utils/randomNum'
 import type { childProps } from './type'
+import { RESOURCE_BASE } from '@/config/config'
 
 const UpdateProject: React.FC<childProps> = (props) => {
   const { isModalOpen, closeModal, updateUserInfo, user_id } = props

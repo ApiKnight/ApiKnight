@@ -8,7 +8,7 @@ import Introduction from '@/pages/project/apiMgt/certainApi/introduction'
 import { items } from './constant.ts'
 import { Props } from './type'
 
-const RightMenu:React.FC<Props> = (props) => {
+const RightMenu: React.FC<Props> = (props) => {
   const { data, project_id } = props
   const [current, setCurrent] = useState('1')
 

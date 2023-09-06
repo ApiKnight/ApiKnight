@@ -5,15 +5,14 @@ import { Routes, Route, Outlet } from 'react-router-dom'
 import Project from './pages/project/index.tsx'
 import User from './pages/user/index.tsx'
 //二级路由
-import ApiMgt from './pages/project/apiMgt/index.tsx'
-import MemberMgt from './pages/project/memberMgt/index.tsx'
-import ProjectSet from './pages/project/projectSet/index.tsx'
+const ApiMgt = React.lazy(()=>import('@/pages/project/apiMgt/index.tsx'))
+const MemberMgt = React.lazy(()=>import('@/pages/project/memberMgt/index.tsx'))
+const ProjectSet = React.lazy(()=>import('@/pages/project/projectSet/index.tsx'))
 //三级路由
 import CertainApi from './pages/project/apiMgt/certainApi/index.tsx'
 import Overview from './pages/project/apiMgt/overview/index.tsx'
 //四级路由
 import Document from './pages/project/apiMgt/certainApi/document/index.tsx'
-import Mock from './pages/project/apiMgt/certainApi/mock/index.tsx'
 import AuthRoute from './components/AuthRoute.tsx'
 import Login from './pages/user/login/index.tsx'
 import Index from '@/pages/index'
@@ -38,7 +37,8 @@ const App: React.FunctionComponent = () => {
               <AuthRoute>
                 <Receive />
               </AuthRoute>
-            }></Route>
+            }
+          ></Route>
 
           {/* Home */}
           <Route index element={<Index />}></Route>
@@ -49,23 +49,22 @@ const App: React.FunctionComponent = () => {
               // <AuthRoute>
               <Project />
               // </AuthRoute>
-            }>
-            <Route path='/project/apiMgt' element={<ApiMgt />}>
+            }
+          >
+            <Route path='/project/apiMgt' element={<React.Suspense fallback={<div>Loading...</div>}><ApiMgt /></React.Suspense>}>
               <Route
                 path='/project/apiMgt/overview'
-                element={<Overview />}></Route>
-              <Route path='/project/apiMgt/certainApi' element={<CertainApi />}>
+                element={<Overview />}
+              ></Route>
+              <Route path='/project/apiMgt/certainApi' element={<React.Suspense fallback={<div>Loading...</div>}><CertainApi /></React.Suspense>}>
                 <Route
                   path='/project/apiMgt/certainApi/document'
-                  element={<Document />}></Route>
-                {/* <Route
-                  path='/project/apiMgt/certainApi/mock'
-                  element={<Mock />}
-                ></Route> */}
+                  element={<Document />}
+                ></Route>
               </Route>
             </Route>
-            <Route path='/project/memberMgt' element={<MemberMgt />}></Route>
-            <Route path='/project/projectSet' element={<ProjectSet />}></Route>
+            <Route path='/project/memberMgt' element={<React.Suspense fallback={<div>Loading...</div>}><MemberMgt /></React.Suspense>}></Route>
+            <Route path='/project/projectSet' element={<React.Suspense fallback={<div>Loading...</div>}><ProjectSet /></React.Suspense>}></Route>
           </Route>
 
           {/* User */}
@@ -75,7 +74,8 @@ const App: React.FunctionComponent = () => {
               <AuthRoute>
                 <User />
               </AuthRoute>
-            }></Route>
+            }
+          ></Route>
           <Route path='/user/login' element={<Login />} />
         </Route>
       </Routes>

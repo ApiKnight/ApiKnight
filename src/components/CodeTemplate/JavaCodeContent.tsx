@@ -23,22 +23,28 @@ const JavaCodeContent: React.FC = () => {
         {
           //  这里做条件渲染
           current === '1' ? (
-            <CodeEditor defaultValue={
-              createUnirestTemplate(
+            <CodeEditor
+              defaultValue={createUnirestTemplate(
                 'http://127.0.0.1/xxx',
                 'GET',
-                "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
+                "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
                 'follow',
-              )
-          } lang='java' height='360px' width='435px'/>
+              )}
+              lang='java'
+              height='360px'
+              width='435px'
+            />
           ) : (
-            <CodeEditor defaultValue={
-              createOkHttpTemplate(
+            <CodeEditor
+              defaultValue={createOkHttpTemplate(
                 'http://127.0.0.1/xxx',
                 'GET',
-                "'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'",
-              )
-          } lang='java' height='360px' width='435px'/>
+                "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+              )}
+              lang='java'
+              height='360px'
+              width='435px'
+            />
           )
         }
       </div>

@@ -22,7 +22,8 @@ const VersionBack: React.FC<{ apis_id: string }> = (props) => {
               onClick={async () => {
                 await backHistory(it.id)
                 window.location.reload()
-              }}>
+              }}
+            >
               {it.notes}
             </div>
           ),
@@ -38,4 +39,4 @@ const VersionBack: React.FC<{ apis_id: string }> = (props) => {
   )
 }
 
-export default VersionBack
+export default React.memo(VersionBack)

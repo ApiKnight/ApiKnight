@@ -61,4 +61,4 @@ const Tabs: React.FunctionComponent = () => {
   )
 }
 
-export default Tabs
+export default React.memo(Tabs)

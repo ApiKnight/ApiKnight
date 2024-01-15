@@ -1,25 +1,40 @@
 name: Deploy React App to GitHub Pages
+
 on:
-  [push]
+  push:
+    branches:
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
-      - run: npm install
-      - run: npm run build
-      - name: Remove 'interest-cohort' from Permissions-Policy
+
+      - name: Install Dependencies and Build
         run: |
-          echo "::set-env name=PERMISSIONS_POLICY::$(curl -I https://apiknight.github.io/ApiKnight/ 2>&1 | grep '^Permissions-Policy' | sed -e 's/.*: //')"
+          npm install
+          npm run build
+
+      - name: Get Permissions-Policy header
+        id: get-permissions-policy
+        run: |
+          export PERMISSIONS_POLICY=$(curl -I https://apiknight.github.io/ApiKnight/ 2>&1 | grep '^Permissions-Policy' | sed -e 's/.*: //')
           echo "PERMISSIONS_POLICY=${PERMISSIONS_POLICY//interest-cohort/}" >> $GITHUB_ENV
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          BRANCH: gh-page
+          BRANCH: gh-pages
           FOLDER: dist
+        env:
+          PERMISSIONS_POLICY: ${{ env.PERMISSIONS_POLICY }}

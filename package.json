@@ -10,11 +10,14 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "test": "npx playwright test",
+    "test:debug": "npx playwright test --ui"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.5",
     "@monaco-editor/react": "^4.5.2",
+    "@playwright/test": "^1.40.1",
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "5.8.4",
     "axios": "^1.4.0",

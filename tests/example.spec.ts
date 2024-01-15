@@ -2,14 +2,13 @@ import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
   await page.goto('http://polaris.lyyfsq.club/');
-
-  // Expect a title "to contain" a substring.
-  // await expect(page).toHaveTitle(/ApiKnight/);
-  //const locator = page.locator('.block_1--desc > p')
-  await expect(page.locator('div.block_1--desc > p').nth(0)).toContainText('更先进的 API 设计/开发/测试工具')
-});// a d c c d a a c b c c b a b a 
-   // b d c c d a b b b d c a d a c
-   // 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+  const hName1 = page.getByRole("heading",{name: "API 文档、API 调试、API Mock、API 自动导入"});
+  await expect(hName1).toBeVisible();
+  const hName2 = page.getByRole("heading",{name: "API 一体化协作平台"});
+  await expect(hName2).toBeVisible();
+  const startButton = page.getByRole("button",{name: "开始使用"});
+  await expect(startButton).toBeVisible();
+});
 
 // test('get started link', async ({ page }) => {
 //   await page.goto('http://polaris.lyyfsq.club/');

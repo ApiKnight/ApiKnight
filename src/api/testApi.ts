@@ -14,27 +14,13 @@ type requestType = {
   header: any
 }
 
-// const testApi = () => {
-//   return request.post('v1/mock/real', {url: "http://v.juhe.cn/calendar/day",method: "POST",data:{
-//     "key": "bed4ca7594bf9198ce6e3879633ec21f",
-//     "date": "2015-1-1"
-//  }}, {})
-
 const testApi = (requestObj: requestType) => {
-  // console.log(eval('('+requestObj.data+')'));
-  // console.log(requestObj.data);
-  // const dataObj = JSON.parse('\''+requestObj.data.slice(1,requestObj.data.length-1)+'\'')
-  // const dataObj = JSON.parse(requestObj.data)
-
   console.log({
     url: requestObj.url,
     method: requestObj.method,
     params: requestObj.params,
-    // data: JSON.parse(requestObj.data)
     data: eval('(' + requestObj.data + ')'),
   })
-
-  // {"name":"aays"}
 
   return request.post(
     'v1/mock/real',

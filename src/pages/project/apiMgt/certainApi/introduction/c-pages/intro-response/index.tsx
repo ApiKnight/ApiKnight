@@ -12,7 +12,6 @@ const IntroResponse: React.FunctionComponent = memo(() => {
     }),
     shallowEqualApp,
   )
-  // console.log('responseInfo', responseInfo)
 
   return (
     <div className='intro-response'>

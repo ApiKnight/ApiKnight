@@ -5,9 +5,13 @@ import { Routes, Route, Outlet } from 'react-router-dom'
 import Project from './pages/project/index.tsx'
 import User from './pages/user/index.tsx'
 //二级路由
-const ApiMgt = React.lazy(()=>import('@/pages/project/apiMgt/index.tsx'))
-const MemberMgt = React.lazy(()=>import('@/pages/project/memberMgt/index.tsx'))
-const ProjectSet = React.lazy(()=>import('@/pages/project/projectSet/index.tsx'))
+const ApiMgt = React.lazy(() => import('@/pages/project/apiMgt/index.tsx'))
+const MemberMgt = React.lazy(
+  () => import('@/pages/project/memberMgt/index.tsx'),
+)
+const ProjectSet = React.lazy(
+  () => import('@/pages/project/projectSet/index.tsx'),
+)
 //三级路由
 import CertainApi from './pages/project/apiMgt/certainApi/index.tsx'
 import Overview from './pages/project/apiMgt/overview/index.tsx'
@@ -51,20 +55,48 @@ const App: React.FunctionComponent = () => {
               // </AuthRoute>
             }
           >
-            <Route path='/project/apiMgt' element={<React.Suspense fallback={<div>Loading...</div>}><ApiMgt /></React.Suspense>}>
+            <Route
+              path='/project/apiMgt'
+              element={
+                <React.Suspense fallback={<div>Loading...</div>}>
+                  <ApiMgt />
+                </React.Suspense>
+              }
+            >
               <Route
                 path='/project/apiMgt/overview'
                 element={<Overview />}
               ></Route>
-              <Route path='/project/apiMgt/certainApi' element={<React.Suspense fallback={<div>Loading...</div>}><CertainApi /></React.Suspense>}>
+              <Route
+                path='/project/apiMgt/certainApi'
+                element={
+                  <React.Suspense fallback={<div>Loading...</div>}>
+                    <CertainApi />
+                  </React.Suspense>
+                }
+              >
                 <Route
                   path='/project/apiMgt/certainApi/document'
                   element={<Document />}
                 ></Route>
               </Route>
             </Route>
-            <Route path='/project/memberMgt' element={<React.Suspense fallback={<div>Loading...</div>}><MemberMgt /></React.Suspense>}></Route>
-            <Route path='/project/projectSet' element={<React.Suspense fallback={<div>Loading...</div>}><ProjectSet /></React.Suspense>}></Route>
+            <Route
+              path='/project/memberMgt'
+              element={
+                <React.Suspense fallback={<div>Loading...</div>}>
+                  <MemberMgt />
+                </React.Suspense>
+              }
+            ></Route>
+            <Route
+              path='/project/projectSet'
+              element={
+                <React.Suspense fallback={<div>Loading...</div>}>
+                  <ProjectSet />
+                </React.Suspense>
+              }
+            ></Route>
           </Route>
 
           {/* User */}

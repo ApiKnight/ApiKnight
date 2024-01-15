@@ -8,7 +8,6 @@ import { useLocation } from 'react-router-dom'
 import './index.less'
 import RightPage from '@/components/RightPage'
 import {
-  addData,
   addDataItemAction,
   changeCurrentKeyAction,
 } from '@/store/modules/tabSlice'

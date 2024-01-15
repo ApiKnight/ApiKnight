@@ -17,7 +17,6 @@ const Introduction: React.FunctionComponent<IntroductionProps> = (props) => {
   useEffect(() => {
     if (apiId !== 'gl') {
       dispatch(fetchDocumentApiAction(apiId))
-      // dispatch(forceFetchApiDataAction(apiId))
     }
   }, [dispatch, apiId])
 

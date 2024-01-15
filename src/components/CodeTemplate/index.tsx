@@ -10,13 +10,12 @@ const CodeTemplate: React.FC = () => {
     setCurrent(e.key)
   }
   let CodeContent = null
-  CodeContent = current === '1' ? (
-    React.lazy(()=>import('./JSCodeContent'))
-  ) : current === '2' ? (
-    React.lazy(()=>import('./JavaCodeContent'))
-  ) : (
-    React.lazy(()=>import('./GoCodeContent'))
-  )
+  CodeContent =
+    current === '1'
+      ? React.lazy(() => import('./JSCodeContent'))
+      : current === '2'
+      ? React.lazy(() => import('./JavaCodeContent'))
+      : React.lazy(() => import('./GoCodeContent'))
   console.log(CodeContent)
   return (
     <React.Suspense fallback={<div>Loading...</div>}>

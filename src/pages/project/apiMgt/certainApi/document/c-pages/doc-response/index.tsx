@@ -22,12 +22,6 @@ const DocResponse: React.FunctionComponent = memo(() => {
           defaultValue={apiData.apiInfo.response.body}
           onChange={(val) => dispatch(changeResponseBodyAction(val))}
         />
-        {/* <TextArea
-          rows={6}
-          placeholder='请求体内容'
-          value={requestBody}
-          onChange={(e) => dispatch(changeResponseBodyAction(e.target.value))}
-        /> */}
       </div>
     </div>
   )

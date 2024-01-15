@@ -69,12 +69,6 @@ const Overview: React.FunctionComponent = () => {
         projectBase.apis_count !== undefined ? projectBase.apis_count : '',
       span: 1,
     },
-    // {
-    //   key: '5',
-    //   label: '用例数量',
-    //   children: '6',
-    // },
-
     {
       key: '5',
       label: '成员数量',
@@ -209,7 +203,6 @@ const Overview: React.FunctionComponent = () => {
         // 创建接口
         const folderId = newestFolderList[folderIndexInProj].id
         // 创建接口
-        // await createApi(projectId, newestFolderList[folderIndexInProj].id, apiItem.meta_info.name, apiItem.meta_info.description)
         await createFullApi({
           projectId,
           folderId,
@@ -263,7 +256,6 @@ const Overview: React.FunctionComponent = () => {
         for (let apiItem of apiList) {
           const folderId = newestFolderList[folderIndexInProj].id
           // 创建接口
-          // await createApi(projectId, newestFolderList[folderIndexInProj].id, apiItem.meta_info.name, apiItem.meta_info.description)
           await createFullApi({
             projectId,
             folderId,

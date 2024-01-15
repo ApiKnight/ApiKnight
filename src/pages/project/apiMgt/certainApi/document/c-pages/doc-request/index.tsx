@@ -56,7 +56,6 @@ const DocRequest: React.FunctionComponent = memo(() => {
         {currentNav === NavType.Body && <RequestBody />}
         {currentNav === NavType.Cookie && <RequestCookie />}
         {currentNav === NavType.Header && <RequestHeader />}
-        {/* {currentNav === NavType.Auth && <RequestAuth />} */}
       </div>
     </div>
   )

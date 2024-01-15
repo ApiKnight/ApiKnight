@@ -17,8 +17,6 @@ const ApiOperator: React.FunctionComponent<ApiOptProps> = memo((props) => {
 
   // path输入框改变事件
   function onPathInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    // const value = e.target.value
-    // setPath(value)
     if (props.onInputChange) props.onInputChange(e)
   }
 

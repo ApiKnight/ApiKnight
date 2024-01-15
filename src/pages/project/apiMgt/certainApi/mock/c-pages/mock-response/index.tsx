@@ -40,7 +40,6 @@ const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
           }
           readOnly={props.mode === 'mock'}
         />
-        {/* <TextArea rows={6} placeholder='响应内容' value={responseInfo.body} /> */}
       </div>
     </div>
   )

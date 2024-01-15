@@ -21,10 +21,13 @@ const CodeEditor: React.FunctionComponent<ICodeEditorProps> = memo((props) => {
     minimap: {
       enabled: false, // 禁用右侧预览层
     },
-    wordWrap: autoWrap ? 'on' : 'off', // 自动换行
+    wordWrap: autoWrap ? 'on' : 'off' as const, // 自动换行
     readOnly: readOnly ?? false,
   }
-
+  const editorOptions = {
+    ...options,
+    ...defaultOptions,
+  };
   return (
     <div className={classNames('code-root', { 'with-border': withBorder })}>
       <Editor
@@ -34,8 +37,7 @@ const CodeEditor: React.FunctionComponent<ICodeEditorProps> = memo((props) => {
         defaultLanguage={lang}
         language={lang}
         onChange={(value) => onChange && onChange(value)}
-        options={defaultOptions}
-        {...options}
+        options={editorOptions}
       />
     </div>
   )

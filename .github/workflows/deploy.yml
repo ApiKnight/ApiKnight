@@ -23,12 +23,6 @@ jobs:
           npm install
           npm run build
 
-      - name: Get Permissions-Policy header
-        id: get-permissions-policy
-        run: |
-          export PERMISSIONS_POLICY=$(curl -I https://apiknight.github.io/ApiKnight/ 2>&1 | grep '^Permissions-Policy' | sed -e 's/.*: //')
-          echo "PERMISSIONS_POLICY=${PERMISSIONS_POLICY//interest-cohort/}" >> $GITHUB_ENV
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

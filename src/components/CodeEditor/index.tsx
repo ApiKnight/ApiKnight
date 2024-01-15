@@ -16,12 +16,12 @@ const CodeEditor: React.FunctionComponent<ICodeEditorProps> = memo((props) => {
     options = {},
     withBorder = false,
   } = props
-
+  type WordWrap = "on" | "off" | "wordWrapColumn" | "bounded"
   const defaultOptions = {
     minimap: {
       enabled: false, // 禁用右侧预览层
     },
-    wordWrap: autoWrap ? 'on' : 'off' as const, // 自动换行
+    wordWrap: autoWrap ? 'on' : 'off' as WordWrap, // 自动换行
     readOnly: readOnly ?? false,
   }
   const editorOptions = {

@@ -28,7 +28,9 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: start server for testing the built app
-        run: npm run preview
+        run: nohup npm run preview &
+             echo "Preview app started"
+             sleep 12
 
       - name: Run Playwright tests
         run: npm run test
@@ -42,9 +44,9 @@ jobs:
       - name: Kill Server Process
         if: always()
         run: |
-          kill $(lsof -t -i:3000)
+          kill $(lsof -t -i:4173)
         shell: bash
-        
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

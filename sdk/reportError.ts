@@ -10,5 +10,5 @@ export function reportError(error: any, url: string, type: string) {
     type: type,
     message: JSON.stringify(error),
   }
-  navigator.sendBeacon('https://polaris.lyyfsq.club:7002/api/v1/monitor/upload',JSON.stringify(sendData))
+  navigator.sendBeacon('https://lyyfsq.club:7000/api/v1/monitor/upload',JSON.stringify(sendData))
 }

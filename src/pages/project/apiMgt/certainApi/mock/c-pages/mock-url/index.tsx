@@ -28,7 +28,7 @@ type MockUrlProps = {
 const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
   const { mode } = props
   const [mockPrefix, setMockPrefix] = useState(
-    'https://polaris.lyyfsq.club:7002/api/v1/mock/project_id',
+    'https://lyyfsq.club:7000/api/v1/mock/project_id',
   )
   const dispatch = useAppDispatch()
   // 根据模式，获取对应的数据
@@ -56,7 +56,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
 
   useEffect(
     () =>
-      setMockPrefix(`https://polaris.lyyfsq.club:7002/api/v1/mock/${projectId}`),
+      setMockPrefix(`https://lyyfsq.club:7000/api/v1/mock/${projectId}`),
     [projectId],
   )
 
@@ -106,7 +106,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
 
     let url = `${userReqInfo.prefix}/${userReqInfo.path}`
     if (mode === 'mock') {
-      url = `http://polaris.lyyfsq.club:7002/api/v1/mock/${projectId}/${userReqInfo.path}`
+      url = `https://lyyfsq.club:7000/api/v1/mock/${projectId}/${userReqInfo.path}`
     }
     const { data } = await requestByServerProxy({
       url: url,

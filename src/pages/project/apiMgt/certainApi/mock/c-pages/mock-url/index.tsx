@@ -28,7 +28,7 @@ type MockUrlProps = {
 const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
   const { mode } = props
   const [mockPrefix, setMockPrefix] = useState(
-    'http://polaris.lyyfsq.club:7002/api/v1/mock/project_id',
+    'https://polaris.lyyfsq.club:7002/api/v1/mock/project_id',
   )
   const dispatch = useAppDispatch()
   // 根据模式，获取对应的数据
@@ -56,7 +56,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
 
   useEffect(
     () =>
-      setMockPrefix(`http://polaris.lyyfsq.club:7002/api/v1/mock/${projectId}`),
+      setMockPrefix(`https://polaris.lyyfsq.club:7002/api/v1/mock/${projectId}`),
     [projectId],
   )
 

@@ -11,7 +11,7 @@ const Link: React.FunctionComponent<any> = (props) => {
 
   const [api, contextHolder] = notification.useNotification()
   // 示例链接
-  const link = `http://polaris.lyyfsq.club/receive?projectid=${Number(
+  const link = `https://polaris.lyyfsq.club/receive?projectid=${Number(
     props.project_id,
   )}`
   const openNotification = (placement: NotificationPlacement) => {

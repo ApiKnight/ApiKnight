@@ -22,6 +22,7 @@ jobs:
           
       - name: E2E Test
         run: |
+          npx playwright install 
           npm test
 
       - name: build the project

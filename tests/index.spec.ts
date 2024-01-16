@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe("Index Page",() => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://lyyfsq.club/');
+    await page.goto('http://localhost:4173/ApiKnight');
   })
   test('has title', async ({ page }) => { 
     const hName1 = page.getByRole("heading",{name: "API 文档、API 调试、API Mock、API 自动导入"});

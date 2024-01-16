@@ -19,9 +19,17 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          
+
+      - name: build the project
+        run: |
+          npm run build
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
+      - name: start server for testing the built app
+        run: npm run preview
+
       - name: Run Playwright tests
         run: npm run test
       - uses: actions/upload-artifact@v3
@@ -30,11 +38,13 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-
-      - name: build the project
+          
+      - name: Kill Server Process
+        if: always()
         run: |
-          npm run build
-
+          kill $(lsof -t -i:3000)
+        shell: bash
+        
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

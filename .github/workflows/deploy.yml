@@ -16,10 +16,17 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Install Dependencies and Build
+      - name: Install Dependencies
         run: |
-          npm install
-          npm run build
+          pnpm install
+          
+      - name: E2E Test
+        run: |
+          pnpm test
+
+      - name: build the project
+        run: |
+          pnpm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

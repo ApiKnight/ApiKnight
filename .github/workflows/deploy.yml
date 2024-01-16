@@ -22,8 +22,28 @@ jobs:
           
       - name: E2E Test
         run: |
+          sudo apt-get update
+          sudo apt-get install -y libwoff1 \
+                                  libopus0 \
+                                  libwebp6 \
+                                  libwebpdemux2 \
+                                  libenchant1c2a \
+                                  libgudev-1.0-0 \
+                                  libsecret-1-0 \
+                                  libhyphen0 \
+                                  libgdk-pixbuf2.0-0 \
+                                  libegl1 \
+                                  libnotify4 \
+                                  libxslt1.1 \
+                                  libevent-2.1-7 \
+                                  libgles2 \
+                                  libvpx5 \
+                                  libgst-plugins-base1.0-0 \
+                                  libgst-plugins-good1.0-0 \
+                                  libgst-plugins-bad1.0-0 \
+                                  gstreamer1.0-libav
           npx playwright install 
-          npm test
+          npm run test
 
       - name: build the project
         run: |

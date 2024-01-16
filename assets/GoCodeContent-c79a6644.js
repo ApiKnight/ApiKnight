@@ -1,4 +1,4 @@
-import{r as i,j as e,aa as a,U as s}from"./index-5e64038e.js";import{b as d}from"./index-dd51dac4.js";function l(t,r,n,o){return`
+import{r as i,j as e,aa as a,U as s}from"./index-396c82d8.js";import{b as d}from"./index-3c558a21.js";function l(t,r,n,o){return`
         package main
         import (
         "fmt"

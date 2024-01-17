@@ -1,4 +1,4 @@
-import { ArrayItem, FlatArrayItem } from '@/types/arrayToTree'
+import { ArrayItem } from '@/types/arrayToTree'
 import { FlatItem } from '@/types/mergeFlatArrays'
 import { parseAPIInfo } from './api/api'
 

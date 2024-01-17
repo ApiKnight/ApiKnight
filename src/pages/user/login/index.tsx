@@ -182,7 +182,8 @@ const Login: React.FC = () => {
                 <button
                   className='signUp'
                   onClick={handleSignUpClick}
-                  data-testid='signUp'>
+                  data-testid='signUp'
+                >
                   注册
                 </button>
               </div>
@@ -208,7 +209,8 @@ const Login: React.FC = () => {
                 <button
                   className='signIn'
                   onClick={handleSignUpClick}
-                  data-testid='signIn'>
+                  data-testid='signIn'
+                >
                   登录
                 </button>
               </div>

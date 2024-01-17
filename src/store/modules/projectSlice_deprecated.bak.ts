@@ -6,9 +6,8 @@
  * 操作人：luoking(朱映华)
  */
 
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import request from '../../api/request'
-import { message } from 'antd'
+import { createSlice } from '@reduxjs/toolkit'
+
 export interface ProjectIdType {
   project_id: string
 }

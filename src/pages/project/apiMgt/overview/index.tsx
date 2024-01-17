@@ -4,27 +4,17 @@ import { useLocation } from 'react-router-dom'
 import { Badge, Descriptions, Button, Modal, Input, App } from 'antd'
 import type { DescriptionsProps } from 'antd'
 import getProjectBase from '@/api/getProjectBase'
-import testApi from '@/api/testApi'
 
 import './index.less'
-import { set } from 'immer/dist/internal.js'
 import { requestByServerProxy } from '@/api/service'
-import { parseAPIInfo, parseSwaggerDoc } from '@/utils/api/api'
+import { parseSwaggerDoc } from '@/utils/api/api'
 import { getUserId } from '@/utils/storage/storage'
 import { IAPIInfo } from '@/types/api'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { createFolder, getFolderName } from '@/api/folder'
-import {
-  createApi,
-  createFullApi,
-  createMock,
-  shareApi,
-  updateApi,
-} from '@/api'
+import { createFullApi, shareApi } from '@/api'
 import { getProjectInfoById } from '@/api/project'
 import { fetchProjectInfoAction } from '@/store/modules/project'
-import { getRangeRandom } from '@/utils/math'
-import { IRawApiInfo } from '@/api/project/type'
 
 const Overview: React.FunctionComponent = () => {
   const { message } = App.useApp()
@@ -185,8 +175,9 @@ const Overview: React.FunctionComponent = () => {
 
     // return
     // 第二步 获取最新项目信息
-    const { folder_list: newestFolderList } =
-      await getProjectInfoById(projectId)
+    const { folder_list: newestFolderList } = await getProjectInfoById(
+      projectId,
+    )
 
     console.log({ newestFolderList })
 
@@ -240,8 +231,9 @@ const Overview: React.FunctionComponent = () => {
       }
     }
     // 第二步 获取最新项目信息
-    const { folder_list: newestFolderList } =
-      await getProjectInfoById(projectId)
+    const { folder_list: newestFolderList } = await getProjectInfoById(
+      projectId,
+    )
 
     // 第三步遍历所有的api，所有api创建
     for (const [folderName, apiList] of apiInfoMap) {
@@ -327,7 +319,8 @@ const Overview: React.FunctionComponent = () => {
         open={onImportVisible}
         confirmLoading={onImporting}
         onOk={handleConfirmImport}
-        onCancel={() => setOnImportVisible(false)}>
+        onCancel={() => setOnImportVisible(false)}
+      >
         <Input
           style={{ marginTop: '15px' }}
           placeholder='OpenAPI（Swagger2.0）在线URL获取ApiKnight的分享链接'
@@ -342,7 +335,8 @@ const Overview: React.FunctionComponent = () => {
         confirmLoading={onShareing}
         onOk={handleConfirmShare}
         onCancel={() => setOnShareVisible(false)}
-        okText='复制接口链接'>
+        okText='复制接口链接'
+      >
         <Input
           style={{ marginTop: '15px' }}
           placeholder='分享链接'

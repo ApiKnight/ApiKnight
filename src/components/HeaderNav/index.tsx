@@ -40,7 +40,8 @@ const HeaderNav: React.FC<ChildrenProps> = (props) => {
             <div className='avatar'>
               <Link
                 to='/user'
-                state={{ user_id: localStorage.getItem('user_id') }}>
+                state={{ user_id: localStorage.getItem('user_id') }}
+              >
                 <Avatar
                   size={40}
                   style={{ backgroundColor: 'black', marginLeft: '10px' }}

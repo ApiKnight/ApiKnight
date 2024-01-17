@@ -5,7 +5,6 @@ import RequestParams from './c-cpns/request-params'
 import RequestBody from './c-cpns/request-body'
 import RequestCookie from './c-cpns/request-cookie'
 import RequestHeader from './c-cpns/request-header'
-import RequestAuth from './c-cpns/request-auth'
 
 import './index.less'
 
@@ -44,7 +43,8 @@ const DocRequest: React.FunctionComponent = memo(() => {
               active: currentNav === item.value,
             })}
             key={item.value}
-            onClick={() => setCurrentNav(item.value)}>
+            onClick={() => setCurrentNav(item.value)}
+          >
             {item.label}
           </div>
         ))}

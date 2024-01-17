@@ -4,3 +4,4 @@ interface InputFileData {
   parent_id: string
   project_id: number
 }
+export type { InputFileData }

@@ -14,7 +14,8 @@ const AuthRoute = ({ children }: AuthRouteProps) => {
       <Spin
         indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
         // tip='Loading'
-        size='large'>
+        size='large'
+      >
         <div className='block-box'>Loading</div>
       </Spin>
     </div>,

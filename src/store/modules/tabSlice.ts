@@ -1,4 +1,3 @@
-import { ArrayItemType } from '@/types/arrayToTree'
 import type { TabSlice } from '@/types/tabSlice'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 

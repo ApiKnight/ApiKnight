@@ -1,5 +1,3 @@
-import { type } from 'os'
-
 interface TabSlice {
   data: {
     key: string

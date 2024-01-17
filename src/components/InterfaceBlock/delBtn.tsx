@@ -83,7 +83,8 @@ const DelBtn: React.FunctionComponent<{ data: delProps }> = (props) => {
         open={open}
         onOk={handleOk}
         confirmLoading={confirmLoading}
-        onCancel={handleCancel}>
+        onCancel={handleCancel}
+      >
         {
           <div>
             <ReachableContext.Consumer>

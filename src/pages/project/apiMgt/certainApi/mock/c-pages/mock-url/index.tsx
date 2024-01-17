@@ -55,8 +55,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
     })
 
   useEffect(
-    () =>
-      setMockPrefix(`https://lyyfsq.club:7000/api/v1/mock/${projectId}`),
+    () => setMockPrefix(`https://lyyfsq.club:7000/api/v1/mock/${projectId}`),
     [projectId],
   )
 

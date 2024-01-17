@@ -1,3 +1,4 @@
+playwright-report
 # Logs
 logs
 *.log
@@ -27,5 +28,3 @@ dist-ssr
 
 package-lock.json
 yarn.lock
-
-playwright-report

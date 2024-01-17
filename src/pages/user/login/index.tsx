@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Checkbox, Form, Input, Layout, App } from 'antd'
+import { Layout, App } from 'antd'
 import HeaderNav from '@/components/HeaderNav'
-import { Menu, message } from 'antd'
+import { message } from 'antd'
 import type { MenuProps } from 'antd'
 import request from '@/api/request'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import login from '@/api/login'
 import randomNum from '@/utils/randomNum'
 const { Header, Content } = Layout
 import './index.less'
 import { createAllMonitor } from '../../../../sdk/index'
+import type { LoginType } from '@/api/loginType'
 
-type LoginType = {
-  usernameOrEmail: string
-  password: string
-  remember?: string
-}
 interface RegisterType {
   username: string
   password: string
@@ -39,9 +34,7 @@ const items: MenuProps['items'] = [
 ]
 
 const Login: React.FC = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [current, setCurrent] = useState('login')
   /**
    * 生成[min,max)区间的随机整数
    * @param min 最小值
@@ -49,9 +42,6 @@ const Login: React.FC = () => {
    * @returns
    */
   createAllMonitor().start()
-  const onClick: MenuProps['onClick'] = (e) => {
-    setCurrent(e.key)
-  }
   const [loginState, setLoginState] = useState<LoginState>('Login')
   const [loginUserName, setLoginUsername] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
@@ -59,9 +49,6 @@ const Login: React.FC = () => {
   const [registPassword, setRegistPassword] = useState('')
   const [registEmail, setRegistEmail] = useState('')
   const [registPhone, setRegistPhone] = useState('')
-  function changeSetLoginState(e: any): void {
-    setLoginState(e.target.value)
-  }
   function changeSetLoginUsername(e: any): void {
     setLoginUsername(e.target.value)
   }
@@ -124,10 +111,6 @@ const Login: React.FC = () => {
         }))
   }
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
-
   const [isSignIn, setIsSignIn] = useState(true)
 
   const handleSignInClick = () => {
@@ -167,15 +150,15 @@ const Login: React.FC = () => {
                 <input
                   type='text'
                   name='username'
-                  id='username'
                   placeholder='用户名'
+                  data-testid='sign-up-username'
                   value={registUserName}
                   onChange={changeSetRegistUserNamed}
                 />
                 <input
                   type='password'
                   name='password'
-                  id='password'
+                  data-testid='sign-up-password'
                   placeholder='密码'
                   value={registPassword}
                   onChange={changeSetRegistPassword}
@@ -183,20 +166,24 @@ const Login: React.FC = () => {
                 <input
                   type='email'
                   name='email'
-                  id='email'
                   placeholder='邮箱'
+                  data-testid='sign-up-email'
                   value={registEmail}
                   onChange={changeSetRegistEmail}
                 />
                 <input
                   type='phone'
                   name='phone'
-                  id='phone'
                   placeholder='手机号'
+                  data-testid='sign-up-phone'
                   value={registPhone}
                   onChange={changeSetRegistPhone}
                 />
-                <button className='signUp' onClick={handleSignUpClick}>
+                <button
+                  className='signUp'
+                  onClick={handleSignUpClick}
+                  data-testid='signUp'
+                >
                   注册
                 </button>
               </div>
@@ -207,7 +194,6 @@ const Login: React.FC = () => {
                 <input
                   type='email'
                   name='email'
-                  id='email'
                   placeholder='邮箱/手机号/用户名'
                   value={loginUserName}
                   onChange={changeSetLoginUsername}
@@ -215,12 +201,16 @@ const Login: React.FC = () => {
                 <input
                   type='password'
                   name='password'
-                  id='password'
                   placeholder='密码'
+                  data-testid='sign-in-password'
                   value={loginPassword}
                   onChange={changeSetLoginPassword}
                 />
-                <button className='signIn' onClick={handleSignUpClick}>
+                <button
+                  className='signIn'
+                  onClick={handleSignUpClick}
+                  data-testid='signIn'
+                >
                   登录
                 </button>
               </div>

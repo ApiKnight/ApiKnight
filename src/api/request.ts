@@ -49,13 +49,12 @@ export class Request {
     )
 
     //响应拦截,根据响应状态码做统一的提示信息，整理响应数据
-    this.instance.interceptors.response.use(
+    this?.instance.interceptors.response.use(
       (res: AxiosResponse) => {
         // 顶部进度条
         NProgress.done()
         // 统一处理响应数据
         // 系统如果有自定义code也可以在这里处理
-        // console.log('响应拦截成功', res)
         return res
       },
       (err: any) => {

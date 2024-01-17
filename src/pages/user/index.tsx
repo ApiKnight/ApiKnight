@@ -77,14 +77,10 @@ const User: React.FunctionComponent = () => {
             }}
           >
             <div className='title'>
-              <div className='my-project'>我的项目</div>
+              <h1 className='my-project'>我的项目</h1>
               <Button
                 icon={<PlusOutlined />}
                 type='primary'
-                // style={{
-                //   backgroundColor: '@theme-primary-color',
-                //   color: '#ffffff',
-                // }}
                 className='button'
                 onClick={() => openModal()}
               >

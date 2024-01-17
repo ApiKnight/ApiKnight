@@ -2,4 +2,5 @@ interface AuthType {
     username: string | number;
     password: string;
 }
-export type {AuthType};
+type LoginWay = "defaultLogin" | "phoneLogin" | "nameLogin";
+export type {AuthType,LoginWay};

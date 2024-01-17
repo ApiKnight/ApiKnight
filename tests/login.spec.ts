@@ -19,6 +19,7 @@ test.describe('test login page', () => {
       loginBtn.click(),
       page.waitForNavigation({ waitUntil: 'networkidle' }),
     ])
+    await page.waitForTimeout(1200);
     expect(page.url()).not.toContain('/user/login')
   })
   test('Validate sign up', async ({ page }) => {

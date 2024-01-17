@@ -1,6 +1,6 @@
-import type { AuthType } from "./user-auth-types.d.ts"
+import type { AuthType, LoginWay } from "./user-auth-types.d.ts"
 
-const userAuthMap: Record<string,AuthType> = {
+const userAuthMap: Record<LoginWay,AuthType> = {
     defaultLogin: {
         username: "2281487673@qq.com",
         password: "123456"

@@ -22,8 +22,7 @@ const Tab: React.FunctionComponent<Props> = (props) => {
       className={classNames('tab', { 'tab-active': active })}
       onMouseEnter={changeShowState}
       onMouseLeave={changeShowState}
-      onClick={(e) => onSelected(index)}
-    >
+      onClick={(e) => onSelected(index)}>
       <div className='tab-title'>
         <span style={{ marginRight: '7px' }}>
           <MethodList value={props.data.type} />

@@ -32,7 +32,7 @@ export function createXhrMonitor(url?: string) {
           this.addEventListener('readystatechange', function () {
             if (this.readyState === 4 && this.status >= 400) {
               this.payload.status = this.status
-              reportError({ name, data: this.payload },url,name)
+              reportError({ name, data: this.payload }, url, name)
             }
           })
         },

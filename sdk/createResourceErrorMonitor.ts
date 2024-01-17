@@ -23,7 +23,7 @@ export function createResourceErrorMonitor(url?: string) {
           } else {
             url = target.getAttribute('src')
           }
-          reportError({ name, data: { url } },url,name)
+          reportError({ name, data: { url } }, url, name)
         }
       },
       true,

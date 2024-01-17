@@ -6,7 +6,7 @@ export function createPromiseErrorMonitor(url?: string) {
     url = window.location.pathname
   }
   function handlePromiseError(event: any) {
-    reportError({ name, data: event.reason }, url,name)
+    reportError({ name, data: event.reason }, url, name)
   }
 
   function start() {

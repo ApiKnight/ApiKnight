@@ -36,8 +36,7 @@ const MethodSelect: React.FunctionComponent<MethodSelectProps> = memo(
             <li
               className={classNames('method-item', getColorClassName(item))}
               onClick={() => onReqMethodChange(item)}
-              key={index}
-            >
+              key={index}>
               {item.label}
             </li>
           ))}

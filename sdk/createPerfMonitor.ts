@@ -15,7 +15,7 @@ export function createPerfMonitor(url?: string) {
   function start() {
     const p = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        reportError({ name, data: entry }, url,name)
+        reportError({ name, data: entry }, url, name)
       }
     })
     p.observe({ entryTypes })

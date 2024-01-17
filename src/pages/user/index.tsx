@@ -28,10 +28,10 @@ const User: React.FunctionComponent = () => {
   }
   const updateUserInfo = () => {
     getUserInfo(user_id).then((res: any) => {
-      let data = res.data.data
+      const data = res.data.data
       setUserInfo(data)
       // 项目按照创建时间，后创建的在前面
-      let sortedProjectList = data.project_list
+      const sortedProjectList = data.project_list
       sortedProjectList.sort((a: any, b: any) => {
         const aTime = new Date(a.create_time).getTime()
         const bTime = new Date(b.create_time).getTime()
@@ -57,8 +57,7 @@ const User: React.FunctionComponent = () => {
 
       <Layout
         className='layout'
-        style={{ minHeight: '100%', overflow: 'scroll' }}
-      >
+        style={{ minHeight: '100%', overflow: 'scroll' }}>
         {/* <Header
           style={{
             // backgroundColor: '#ffffff',
@@ -74,16 +73,14 @@ const User: React.FunctionComponent = () => {
               // justifyContent: 'center',
               // alignItems: 'center',
               position: 'relative',
-            }}
-          >
+            }}>
             <div className='title'>
               <h1 className='my-project'>我的项目</h1>
               <Button
                 icon={<PlusOutlined />}
                 type='primary'
                 className='button'
-                onClick={() => openModal()}
-              >
+                onClick={() => openModal()}>
                 新建项目
               </Button>
               {/* <div className='create-project'>
@@ -100,8 +97,7 @@ const User: React.FunctionComponent = () => {
                         dec={value.description}
                         project_id={value.id}
                         iconPath={value.iconPath}
-                        project_img={value.project_img}
-                      ></ProjectItem>
+                        project_img={value.project_img}></ProjectItem>
                     </div>
                   )
                 })

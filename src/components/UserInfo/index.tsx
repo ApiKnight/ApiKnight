@@ -47,7 +47,7 @@ const UserInfo: React.FunctionComponent = () => {
       key: 'use',
     },
   ]
-  let [tableData, setTableData] = useState<UserShowType[]>([
+  const [tableData, setTableData] = useState<UserShowType[]>([
     {
       id: 'username',
       key: '1',

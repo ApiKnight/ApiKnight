@@ -14,8 +14,7 @@ const tagRender = (props: CustomTagProps) => {
       onMouseDown={onPreventMouseDown}
       closable={closable}
       onClose={onClose}
-      style={{ marginRight: 3 }}
-    >
+      style={{ marginRight: 3 }}>
       {label}
     </Tag>
   )

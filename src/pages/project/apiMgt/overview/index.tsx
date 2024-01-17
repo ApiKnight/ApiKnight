@@ -193,7 +193,7 @@ const Overview: React.FunctionComponent = () => {
     // return
 
     // 第三步遍历所有的api，所有api创建
-    for (let apiInfoItem of apiInfoList) {
+    for (const apiInfoItem of apiInfoList) {
       // 如果目录名存在则直接添加
       const folderIndexInProj = newestFolderList.findIndex(
         (item) => item.name === apiInfoItem.meta_info.folder_id,
@@ -225,7 +225,7 @@ const Overview: React.FunctionComponent = () => {
     const createdFolderList: string[] = []
     // 第一步遍历所有的目录，将不存在的目录创建
     const rootFolderId = folderList.find((item) => item.name === '根目录')?.id
-    for (let [folderName] of apiInfoMap) {
+    for (const [folderName] of apiInfoMap) {
       // 如果目录名存在则直接添加
       const folderIndexInProj = folderList.findIndex(
         (item) => item.name === folderName,
@@ -244,14 +244,14 @@ const Overview: React.FunctionComponent = () => {
       await getProjectInfoById(projectId)
 
     // 第三步遍历所有的api，所有api创建
-    for (let [folderName, apiList] of apiInfoMap) {
+    for (const [folderName, apiList] of apiInfoMap) {
       // 如果目录名存在则直接添加
       const folderIndexInProj = newestFolderList.findIndex(
         (item) => item.name === folderName,
       )
       if (folderIndexInProj !== -1) {
         // 创建接口
-        for (let apiItem of apiList) {
+        for (const apiItem of apiList) {
           const folderId = newestFolderList[folderIndexInProj].id
           // 创建接口
           await createFullApi({
@@ -327,8 +327,7 @@ const Overview: React.FunctionComponent = () => {
         open={onImportVisible}
         confirmLoading={onImporting}
         onOk={handleConfirmImport}
-        onCancel={() => setOnImportVisible(false)}
-      >
+        onCancel={() => setOnImportVisible(false)}>
         <Input
           style={{ marginTop: '15px' }}
           placeholder='OpenAPI（Swagger2.0）在线URL获取ApiKnight的分享链接'
@@ -343,8 +342,7 @@ const Overview: React.FunctionComponent = () => {
         confirmLoading={onShareing}
         onOk={handleConfirmShare}
         onCancel={() => setOnShareVisible(false)}
-        okText='复制接口链接'
-      >
+        okText='复制接口链接'>
         <Input
           style={{ marginTop: '15px' }}
           placeholder='分享链接'

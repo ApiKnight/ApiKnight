@@ -94,16 +94,14 @@ const IntroInfo: React.FunctionComponent = memo(() => {
         open={open}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={660}
-      >
+        width={660}>
         <CodeTemplate />
       </Modal>
       <Modal
         title={<div>历史版本(点击记录即回滚)</div>}
         open={versionOpen}
         onOk={versionOk}
-        onCancel={versionCancel}
-      >
+        onCancel={versionCancel}>
         <VersionBack apis_id={apiId} />
       </Modal>
       <div className='name-wrap'>
@@ -111,8 +109,7 @@ const IntroInfo: React.FunctionComponent = memo(() => {
           className={classNames(
             'method',
             'method-' + baseInfo.method.toLowerCase(),
-          )}
-        >
+          )}>
           {baseInfo.method}
         </div>
         <div className='title'>{metaInfo.name}</div>
@@ -126,8 +123,7 @@ const IntroInfo: React.FunctionComponent = memo(() => {
           <Button
             style={{ marginLeft: '10px', marginRight: '20px' }}
             onClick={handleDel}
-            danger
-          >
+            danger>
             删除
           </Button>
         </div>

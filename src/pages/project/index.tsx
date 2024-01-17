@@ -36,7 +36,7 @@ const Project: React.FunctionComponent = () => {
         'userid',
         localStorage.getItem('user_id'),
       )
-      var { data } = await getSelfInfo()
+      const { data } = await getSelfInfo()
 
       data.code === 200
         ? ''

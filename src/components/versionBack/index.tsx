@@ -13,7 +13,7 @@ const VersionBack: React.FC<{ apis_id: string }> = (props) => {
   useEffect(() => {
     getVersionInfo(props.apis_id).then((returnData) => {
       Items = returnData
-      let reactTemp: TimelineItemProps[] = []
+      const reactTemp: TimelineItemProps[] = []
       Items.map((it) => {
         reactTemp.push({
           children: (
@@ -22,8 +22,7 @@ const VersionBack: React.FC<{ apis_id: string }> = (props) => {
               onClick={async () => {
                 await backHistory(it.id)
                 window.location.reload()
-              }}
-            >
+              }}>
               {it.notes}
             </div>
           ),

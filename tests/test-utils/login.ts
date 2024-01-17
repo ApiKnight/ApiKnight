@@ -9,11 +9,8 @@ async function loginTestFunc(loginWay: LoginWay, page: Page): Promise<void> {
     .fill(String(user.username))
   await page.getByTestId('sign-in-password').fill(user.password)
   const loginBtn = page.getByTestId('signIn')
-  await Promise.all([
-    loginBtn.click(),
-    page.waitForNavigation(),
-  ])
-  await page.waitForTimeout(1200);
+  await Promise.all([loginBtn.click(), page.waitForNavigation()])
+  await page.waitForTimeout(1200)
 }
 
 export default loginTestFunc

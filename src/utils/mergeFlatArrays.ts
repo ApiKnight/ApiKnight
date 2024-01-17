@@ -8,10 +8,10 @@ export function mergeFlatArrays(
   arr_2: FlatItem[],
   targetId: number | null,
 ): ArrayItem[] {
-  let realArray_1 = arr_1.filter((item: FlatItem) => {
+  const realArray_1 = arr_1.filter((item: FlatItem) => {
     return item.project_id === targetId
   })
-  let realArray_2 = arr_2.filter((item: FlatItem) => {
+  const realArray_2 = arr_2.filter((item: FlatItem) => {
     return item.project_id === targetId
   })
   realArray_1.map((item: FlatItem) => {
@@ -19,7 +19,7 @@ export function mergeFlatArrays(
   })
   realArray_2.map((item: FlatItem) => {
     try {
-      let tempData = parseAPIInfo(item.request_data)
+      const tempData = parseAPIInfo(item.request_data)
       item.type = tempData.getMethod() as any
     } catch (error) {
       console.log(error)
@@ -29,7 +29,7 @@ export function mergeFlatArrays(
     item.parent_id = item.folder_id
   })
   const newArray = [...realArray_2, ...realArray_1]
-  let mergeArray: any = []
+  const mergeArray: any = []
   newArray.map((item: FlatItem) => {
     const newItem = {
       key: item.id,
@@ -39,10 +39,10 @@ export function mergeFlatArrays(
     }
     mergeArray.push(newItem)
   })
-  let arr: any = mergeArray
+  const arr: any = mergeArray
   arr.map((e) => {
     e.title = { key: e.key, title: e.title, pid: e.pid, type: e.type }
   })
-  let result: ArrayItem[] = arr
+  const result: ArrayItem[] = arr
   return result
 }

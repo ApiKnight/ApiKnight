@@ -34,7 +34,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
   // 根据模式，获取对应的数据
   const { userReqInfo, reqParams, projectId, metaInfo, apiData } =
     useAppSelector((state) => {
-      let res = {} as {
+      const res = {} as {
         userReqInfo: BaseInfoType
         reqParams: RequestParamsType
         metaInfo: MetaInfo
@@ -92,7 +92,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
   const handleSend = async () => {
     // 将ApiKnight文档中的参数格式转换成发送请求的格式
     const headers = {}
-    let queries = {}
+    const queries = {}
     let cookies = ''
     // 组织headers和cookies
     reqParams.params.forEach((item) => (headers[item.paramName] = item.value))
@@ -126,7 +126,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
   const handleCreateMock = async () => {
     // 将ApiKnight文档中的参数格式转换成发送请求的格式
     const headers = {}
-    let queries = {}
+    const queries = {}
     let cookies = ''
     // 组织headers和cookies
     reqParams.params.forEach((item) => (headers[item.paramName] = item.value))
@@ -181,8 +181,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
         inputValue={userReqInfo.path}
         urlPrefixValue={mode === 'run' ? userReqInfo.prefix : mockPrefix}
         disablePrefix={mode === 'mock'}
-        rightWidth={mode === 'mock' ? '250px' : '150px'}
-      >
+        rightWidth={mode === 'mock' ? '250px' : '150px'}>
         {/* 运行的发送由handleSendBtnClick控制，mock的发送和创建由handleMock控制 */}
         <Button className='btn' type='primary' onClick={handleSend}>
           发送
@@ -192,8 +191,7 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
           <Button
             type='primary'
             style={{ marginLeft: '10px' }}
-            onClick={handleCreateMock}
-          >
+            onClick={handleCreateMock}>
             创建Mock
           </Button>
         )}

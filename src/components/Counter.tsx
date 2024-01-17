@@ -16,22 +16,19 @@ export function Counter() {
       <div>
         <button
           aria-label='Increment value'
-          onClick={() => dispatch(increment())}
-        >
+          onClick={() => dispatch(increment())}>
           Increment
         </button>
         <span>{count}</span>
         <button
           aria-label='Decrement value'
-          onClick={() => dispatch(decrement())}
-        >
+          onClick={() => dispatch(decrement())}>
           Decrement
         </button>
         {/* 自定义传参给action */}
         <button
           aria-label='Decrement value'
-          onClick={() => dispatch(incrementByAmount(2))}
-        >
+          onClick={() => dispatch(incrementByAmount(2))}>
           incrementByAmount
         </button>
       </div>

@@ -86,8 +86,7 @@ const CreateFile: React.FunctionComponent<{
       className='createFile'
       onClick={(e: any): void => {
         e.stopPropagation()
-      }}
-    >
+      }}>
       {contextHolder}
       <div className='createFile-title'>
         <span>

@@ -9,7 +9,7 @@ async function getVersionInfo(apis_id: string): Promise<VersionInfo[]> {
     },
     {},
   )
-  let returnData: Array<VersionInfo> = []
+  const returnData: Array<VersionInfo> = []
   resp.data.data.map((item) => {
     returnData.push({
       id: item.id,

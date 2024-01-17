@@ -45,8 +45,7 @@ const ApiMgt: React.FunctionComponent = () => {
             'opt-item-active': currentKey === 'project-summary',
           })}
           icon={<ClusterOutlined />}
-          onClick={handleOverviewClick}
-        >
+          onClick={handleOverviewClick}>
           项目概览
         </Button>
         <Button
@@ -55,8 +54,7 @@ const ApiMgt: React.FunctionComponent = () => {
             'opt-item-active': currentKey !== 'project-summary',
           })}
           icon={<ClusterOutlined />}
-          onClick={handleOverviewClick}
-        >
+          onClick={handleOverviewClick}>
           接口
         </Button>
         <div className='api-dir'>

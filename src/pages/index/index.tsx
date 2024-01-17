@@ -432,8 +432,7 @@ const Index: React.FunctionComponent = () => {
               <Tag
                 bordered={false}
                 color='volcano'
-                style={{ fontSize: '20px' }}
-              >
+                style={{ fontSize: '20px' }}>
                 发布
               </Tag>
             </div>

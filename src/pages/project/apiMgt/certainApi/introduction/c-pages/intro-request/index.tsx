@@ -17,7 +17,8 @@ const IntroRequest: React.FunctionComponent = memo(() => {
         <Card
           size='small'
           title={paramType.slice(0, 1).toUpperCase() + paramType.slice(1)}
-          style={{ width: '100%' }}>
+          style={{ width: '100%' }}
+        >
           <div className='code-card-body-info'>
             <span className='body-title'>示例值</span>
             <div className='body-content'>
@@ -38,7 +39,8 @@ const IntroRequest: React.FunctionComponent = memo(() => {
           size='small'
           title={paramType.slice(0, 1).toUpperCase() + paramType.slice(1)}
           // extra={<a href='#'>生成代码</a>}
-          style={{ width: '100%' }}>
+          style={{ width: '100%' }}
+        >
           {requestInfo[paramType].map((paramItem) => {
             return getNormalParamItem(paramItem)
           })}

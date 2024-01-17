@@ -41,7 +41,8 @@ const App: React.FunctionComponent = () => {
               <AuthRoute>
                 <Receive />
               </AuthRoute>
-            }></Route>
+            }
+          ></Route>
 
           {/* Home */}
           <Route index element={<Index />}></Route>
@@ -52,27 +53,32 @@ const App: React.FunctionComponent = () => {
               // <AuthRoute>
               <Project />
               // </AuthRoute>
-            }>
+            }
+          >
             <Route
               path='/project/apiMgt'
               element={
                 <React.Suspense fallback={<div>Loading...</div>}>
                   <ApiMgt />
                 </React.Suspense>
-              }>
+              }
+            >
               <Route
                 path='/project/apiMgt/overview'
-                element={<Overview />}></Route>
+                element={<Overview />}
+              ></Route>
               <Route
                 path='/project/apiMgt/certainApi'
                 element={
                   <React.Suspense fallback={<div>Loading...</div>}>
                     <CertainApi />
                   </React.Suspense>
-                }>
+                }
+              >
                 <Route
                   path='/project/apiMgt/certainApi/document'
-                  element={<Document />}></Route>
+                  element={<Document />}
+                ></Route>
               </Route>
             </Route>
             <Route
@@ -81,14 +87,16 @@ const App: React.FunctionComponent = () => {
                 <React.Suspense fallback={<div>Loading...</div>}>
                   <MemberMgt />
                 </React.Suspense>
-              }></Route>
+              }
+            ></Route>
             <Route
               path='/project/projectSet'
               element={
                 <React.Suspense fallback={<div>Loading...</div>}>
                   <ProjectSet />
                 </React.Suspense>
-              }></Route>
+              }
+            ></Route>
           </Route>
 
           {/* User */}
@@ -98,7 +106,8 @@ const App: React.FunctionComponent = () => {
               <AuthRoute>
                 <User />
               </AuthRoute>
-            }></Route>
+            }
+          ></Route>
           <Route path='/user/login' element={<Login />} />
         </Route>
       </Routes>

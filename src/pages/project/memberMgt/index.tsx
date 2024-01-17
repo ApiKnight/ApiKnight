@@ -122,7 +122,8 @@ const MemberMgt: React.FC = () => {
           marginTop: 12,
           height: 32,
           lineHeight: '32px',
-        }}>
+        }}
+      >
         {/* <Button onClick={onLoadMore}>loading more</Button> */}
       </div>
     ) : null
@@ -249,7 +250,8 @@ const MemberMgt: React.FC = () => {
         }}
         // onCancel={cancel}
         okText='确定'
-        cancelText='取消'>
+        cancelText='取消'
+      >
         <Button danger>移除</Button>
       </Popconfirm>
     ) : (
@@ -285,7 +287,8 @@ const MemberMgt: React.FC = () => {
                 title='申请人'
                 open={isModalOpen}
                 onCancel={closeModal}
-                footer={null}>
+                footer={null}
+              >
                 <List
                   className='list'
                   loading={initLoading}
@@ -303,7 +306,8 @@ const MemberMgt: React.FC = () => {
                                 danger
                                 // style={{ backgroundColor: 'purple' }}
                                 onClick={refuse(item.id)}
-                                disabled={role !== 1 && role !== 2}>
+                                disabled={role !== 1 && role !== 2}
+                              >
                                 拒绝
                               </Button>
                               ,
@@ -311,7 +315,8 @@ const MemberMgt: React.FC = () => {
                                 type='primary'
                                 // style={{ backgroundColor: 'green' }}
                                 onClick={approval(item.id)}
-                                disabled={role !== 1 && role !== 2}>
+                                disabled={role !== 1 && role !== 2}
+                              >
                                 同意
                               </Button>
                             </>
@@ -335,7 +340,8 @@ const MemberMgt: React.FC = () => {
                                 backgroundColor: 'red',
                                 opacity: '50%',
                                 color: 'black',
-                              }}>
+                              }}
+                            >
                               已拒绝
                             </Button>
                           ) : (
@@ -343,12 +349,14 @@ const MemberMgt: React.FC = () => {
                           )}
                         </>,
                       ]}
-                      key={item.id}>
+                      key={item.id}
+                    >
                       <Skeleton
                         avatar
                         title={false}
                         loading={initLoading}
-                        active>
+                        active
+                      >
                         <List.Item.Meta
                           // avatar={<Avatar src={item.avatar_url} />}
                           title={item.name}
@@ -378,7 +386,8 @@ const MemberMgt: React.FC = () => {
                   qualitySetBtn(item.user_id),
                   delMemberBtn(item.role, item.user_id),
                 ]}
-                key={item.user_id}>
+                key={item.user_id}
+              >
                 <Skeleton avatar title={false} loading={initLoading} active>
                   <List.Item.Meta
                     avatar={<Avatar src={item.avatar_url} alt='头像' />}

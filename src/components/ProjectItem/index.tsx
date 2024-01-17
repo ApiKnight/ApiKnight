@@ -26,7 +26,8 @@ const ProjectItem: React.FC<any> = (params) => {
             style={{ objectFit: 'cover', borderRadius: '8px' }}
             alt='项目图片'
           />
-        }>
+        }
+      >
         <Meta title={params.name} description={params.dec} />
         {/* <div>{params.dec}</div> */}
       </Card>

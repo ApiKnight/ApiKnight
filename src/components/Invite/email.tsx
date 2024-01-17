@@ -78,7 +78,8 @@ const Email: React.FunctionComponent<any> = (props) => {
           type='primary'
           block
           style={{ marginTop: '5%' }}
-          onClick={sendInfo}>
+          onClick={sendInfo}
+        >
           发送邀请
         </Button>
       </div>

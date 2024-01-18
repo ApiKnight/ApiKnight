@@ -351,11 +351,6 @@ const Index: React.FunctionComponent = () => {
               />
               <Avatar
                 size={64}
-                src='https://avatars.githubusercontent.com/u/82299744?s=70&v=4'
-                alt='成员头像'
-              />
-              <Avatar
-                size={64}
                 src='https://avatars.githubusercontent.com/u/64735802?s=70&v=4'
                 alt='成员头像'
               />
@@ -367,11 +362,6 @@ const Index: React.FunctionComponent = () => {
               <Avatar
                 size={64}
                 src='https://avatars.githubusercontent.com/u/73152010?s=70&v=4'
-                alt='成员头像'
-              />
-              <Avatar
-                size={64}
-                src='https://avatars.githubusercontent.com/u/122713025?s=70&v=4'
                 alt='成员头像'
               />
             </Space>

@@ -207,7 +207,7 @@ const Index: React.FunctionComponent = () => {
     },
     {
       key: '3',
-      label: '独创的“接口用例”功能',
+      label: '“接口用例”功能',
       children: <div>{text7}</div>,
     },
   ]

@@ -202,7 +202,7 @@ const Index: React.FunctionComponent = () => {
     },
     {
       key: '2',
-      label: '“自动校验”返回数据结构的正确性',
+      label: '“自动校验”返回数据的正确性',
       children: <div>{text6}</div>,
     },
     {

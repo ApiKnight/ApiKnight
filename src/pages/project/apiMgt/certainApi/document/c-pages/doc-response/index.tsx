@@ -1,8 +1,5 @@
 import React, { memo } from 'react'
 
-import { Input } from 'antd'
-const { TextArea } = Input
-
 import { useAppDispatch, useAppSelector } from '@/store'
 import { changeResponseBodyAction } from '@/store/modules/document/document'
 import './index.less'

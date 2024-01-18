@@ -4,11 +4,9 @@ import './index.less'
 import { getVersionInfo } from '@/api/versionBack/queryVersion'
 import { VersionInfo } from '@/types/versionInfo'
 import { backHistory } from '@/api/versionBack/backHistory'
-import { useDispatch } from 'react-redux'
 
 const VersionBack: React.FC<{ apis_id: string }> = (props) => {
   let Items: VersionInfo[]
-  const dispatch = useDispatch()
   const [renderItem, setRenderItem] = useState<TimelineItemProps[]>([])
   useEffect(() => {
     getVersionInfo(props.apis_id).then((returnData) => {

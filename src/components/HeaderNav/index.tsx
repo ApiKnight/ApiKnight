@@ -15,7 +15,7 @@ const HeaderNav: React.FC<ChildrenProps> = (props) => {
     <div className='header-nav'>
       <div className='left'>
         <div className='title'>
-          <a href='/user'>ApiKnight</a>
+          <a href='/ApiKnight/user'>ApiKnight</a>
         </div>
       </div>
 

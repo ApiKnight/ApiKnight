@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Tab from '@/components/Tab'
 import './index.less'
 import { useDispatch } from 'react-redux'

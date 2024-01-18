@@ -62,7 +62,7 @@ const Document: React.FunctionComponent<{ data: string }> = (props) => {
   const [apiName, setApiName] = useState('ApiName')
   const [floderName, setFolderName] = useState('根目录')
   // url这里正常应该包含在rquest_data中，这里未定结构，暂时写死
-  const [url, setUrl] = useState('/example')
+  const [url] = useState('/example')
   function getFolderName(folderId: string): void {
     request
       .post(

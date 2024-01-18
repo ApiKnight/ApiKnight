@@ -4,12 +4,10 @@ import MethodList from '@/components/MethodList'
 import './index.less'
 import { CloseOutlined } from '@ant-design/icons'
 import { Props } from '@/types/tabs'
-import { useDispatch } from 'react-redux'
 
 const Tab: React.FunctionComponent<Props> = (props) => {
-  const { active, data, onRemoveTab, onSelected, index } = props
+  const { active, onRemoveTab, onSelected, index } = props
   const [show, setShow] = useState(false)
-  const dispatch = useDispatch()
   function changeShowState(): void {
     setShow(!show)
   }
@@ -22,7 +20,7 @@ const Tab: React.FunctionComponent<Props> = (props) => {
       className={classNames('tab', { 'tab-active': active })}
       onMouseEnter={changeShowState}
       onMouseLeave={changeShowState}
-      onClick={(e) => onSelected(index)}
+      onClick={(_e) => onSelected(index)}
     >
       <div className='tab-title'>
         <span style={{ marginRight: '7px' }}>

@@ -7,11 +7,6 @@ import './index.less'
 import { useLocation } from 'react-router-dom'
 import { RootState } from '@/store/index.ts'
 import { useSelector, useDispatch } from 'react-redux'
-// 导入监控
-import { createJsErrorMonitor } from '../../../sdk/createJsErrorMonitor'
-import { createResourceErrorMonitor } from '../../../sdk/createResourceErrorMonitor'
-import { createPromiseErrorMonitor } from '../../../sdk/createPromiseErrorMonitor'
-import { createXhrMonitor } from '../../../sdk/createXhrMonitor'
 import InterfaceBlock from '../InterfaceBlock'
 import { FlatItem } from '@/types/mergeFlatArrays'
 import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
@@ -19,14 +14,8 @@ import request from '@/api/request'
 import { increment } from '@/store/modules/watchDir'
 import { MakeValue } from './type'
 
-const renderTree: React.FC = () => {
-  function startMonitor() {
-    createJsErrorMonitor('renderTree').start()
-    createResourceErrorMonitor('renderTree').start()
-    createPromiseErrorMonitor('renderTree').start()
-    createXhrMonitor('renderTree').start()
-  }
-  const [showLoading, setShowLoading] = useState(false)
+const RenderTree: React.FC = () => {
+  const [showLoading, setShowLoading] = useState<boolean>(false)
   const a1: FlatItem[] = [
     {
       id: '694948f6-7908-4388-8da7-c744b13f76b6',
@@ -105,7 +94,6 @@ const renderTree: React.FC = () => {
       setShowLoading(true)
       request.post(url, urlData, {}).then((res) => {
         console.log(res)
-
         // 在这里处理返回的数据
         dispatch(increment())
         setShowLoading(true)
@@ -116,6 +104,7 @@ const renderTree: React.FC = () => {
   // 数组转树形结构
   const tree: TreeNode[] = arrayToTree(renderData)
   console.log('tree', tree)
+  // eslint-disable-next-line
   const { DirectoryTree } = Tree
   //startMonitor()
   return (
@@ -145,4 +134,4 @@ const renderTree: React.FC = () => {
   )
 }
 
-export default renderTree
+export default RenderTree

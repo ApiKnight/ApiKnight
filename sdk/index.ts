@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createBlankScreenMonitor } from './createBlankScreenMonitor'
 import { createJsErrorMonitor } from './createJsErrorMonitor'
 import { createPerfMonitor } from './createPerfMonitor'

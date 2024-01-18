@@ -108,7 +108,7 @@ const DocInfo: React.FunctionComponent = () => {
   }
 
   // 改变用户信息
-  const handleChangeOwnerInfo = (ownerInfo: IUserInfo) => {
+  const handleChangeOwnerInfo = (_ownerInfo: IUserInfo) => {
     // 暂无处理逻辑
     console.log(owner)
   }

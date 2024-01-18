@@ -1,5 +1,5 @@
 import getSelfInfo from '@/api/getSelfInfo'
-export async function useAuth() {
+export async function isAuth() {
   console.log(
     'token',
     localStorage.getItem('token'),

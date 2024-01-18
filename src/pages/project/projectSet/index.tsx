@@ -3,25 +3,11 @@ import { Button, Form, Input, message, Popconfirm, App } from 'antd'
 import './index.less'
 import getProjectBase from '@/api/getProjectBase'
 import updateProject from '@/api/updateProject'
-import type { RootState } from '@/store/index.ts'
-import { useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
 import delProject from '@/api/delProject'
 import getCurrentRole from '@/api/getCurrentRole'
 import { createAllMonitor } from '../../../../sdk'
 
-type FieldType = {
-  username?: string
-  password?: string
-  remember?: string
-}
-
-interface childProps {
-  isModalOpen: boolean
-  closeModal: Function
-  getUserInfo: Function
-  user_id: string
-}
 interface ProjectInfoType {
   description: string
   projectname: string
@@ -29,7 +15,6 @@ interface ProjectInfoType {
 const ProjectSet: React.FC = () => {
   createAllMonitor().start()
   const navigate = useNavigate()
-  // const project_id = useSelector((state: RootState) => state.project.project_id)
   const { project_id } = useLocation().state
   const [projectInfo, setProjectInfo] = useState<ProjectInfoType>({
     description: '',
@@ -49,6 +34,7 @@ const ProjectSet: React.FC = () => {
 
   const onFinishFailed = (errorInfo: any) => {
     // closeModal()
+    console.log(errorInfo)
   }
 
   const deleteProject = () => {
@@ -61,11 +47,11 @@ const ProjectSet: React.FC = () => {
         : message.error('删除失败')
     })
   }
-  const confirm = (e: React.MouseEvent<HTMLElement>) => {
+  const confirm = (_e: React.MouseEvent<HTMLElement>) => {
     deleteProject()
   }
 
-  const cancel = (e: React.MouseEvent<HTMLElement>) => {}
+  const cancel = (_e: React.MouseEvent<HTMLElement>) => {}
 
   useEffect(() => {
     //获取用户身份
@@ -145,22 +131,6 @@ const ProjectSet: React.FC = () => {
             ) : (
               ''
             )}
-
-            {/* {role === 1 ? (
-              <div className='delete'>
-                <Popconfirm
-                  title='谨慎操作！'
-                  description='确定删除本项目吗?'
-                  onConfirm={confirm}
-                  onCancel={cancel}
-                  okText='确定'
-                  cancelText='取消'>
-                  <Button danger>删除项目</Button>
-                </Popconfirm>
-              </div>
-            ) : (
-              ''
-            )} */}
           </Form>
         </div>
       </div>

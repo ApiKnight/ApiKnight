@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
-import { Button, Checkbox, Form, Input, Modal } from 'antd'
+import React from 'react'
+import { Button, Form, Input, Modal } from 'antd'
 import './index.less'
 import request from '@/api/request'
 import randomNum from '@/utils/randomNum'
 import type { childProps } from './type'
-import { RESOURCE_BASE } from '@/config/config'
 
 const UpdateProject: React.FC<childProps> = (props) => {
   const { isModalOpen, closeModal, updateUserInfo, user_id } = props
@@ -20,7 +19,7 @@ const UpdateProject: React.FC<childProps> = (props) => {
     })
   }
 
-  const onFinishFailed = (errorInfo: any) => {}
+  const onFinishFailed = (_errorInfo: any) => {}
   return (
     <Modal
       title='创建新项目'

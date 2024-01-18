@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import './index.less'
 import MockReqParams from './c-pages/mock-req-params'
 import MockResponse from './c-pages/mock-response'
@@ -12,7 +12,7 @@ import { IMockProps } from './type'
 import ModeContext from './mode-context'
 
 const Mock: React.FunctionComponent<IMockProps> = (props) => {
-  const { mode, data, project_id } = props //run为运行,mock为mock
+  const { mode, project_id } = props //run为运行,mock为mock
 
   const { apiId } = useAppSelector((state) => ({
     apiId: state.rightSlice.value,

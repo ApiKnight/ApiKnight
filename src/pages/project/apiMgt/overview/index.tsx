@@ -4,8 +4,6 @@ import { useLocation } from 'react-router-dom'
 import { Badge, Descriptions, Button, Modal, Input, App } from 'antd'
 import type { DescriptionsProps } from 'antd'
 import getProjectBase from '@/api/getProjectBase'
-
-import './index.less'
 import { requestByServerProxy } from '@/api/service'
 import { parseSwaggerDoc } from '@/utils/api/api'
 import { getUserId } from '@/utils/storage/storage'
@@ -26,8 +24,8 @@ const Overview: React.FunctionComponent = () => {
   // 分享（导出相关）
   const [shareUrl, setShareUrl] = useState<string>('')
   const [onShareVisible, setOnShareVisible] = useState<boolean>(false)
-  const [onShareing, setOnShareing] = useState<boolean>(false)
-
+  // const [onShareing, setOnShareing] = useState<boolean>(false)
+  const onShareing = false
   const state = useLocation().state
   const [projectBase, setProjectBase] = useState<any>({})
   const items: DescriptionsProps['items'] = [
@@ -77,7 +75,6 @@ const Overview: React.FunctionComponent = () => {
     apiList: state.project.projectInfo.api_list,
   }))
   useEffect(() => {
-    // testApi()
     getProjectBase(state.project_id).then((res: any) => {
       res.data.code === 200 ? setProjectBase(res.data.data) : ''
     })
@@ -175,9 +172,8 @@ const Overview: React.FunctionComponent = () => {
 
     // return
     // 第二步 获取最新项目信息
-    const { folder_list: newestFolderList } = await getProjectInfoById(
-      projectId,
-    )
+    const { folder_list: newestFolderList } =
+      await getProjectInfoById(projectId)
 
     console.log({ newestFolderList })
 
@@ -231,9 +227,8 @@ const Overview: React.FunctionComponent = () => {
       }
     }
     // 第二步 获取最新项目信息
-    const { folder_list: newestFolderList } = await getProjectInfoById(
-      projectId,
-    )
+    const { folder_list: newestFolderList } =
+      await getProjectInfoById(projectId)
 
     // 第三步遍历所有的api，所有api创建
     for (const [folderName, apiList] of apiInfoMap) {
@@ -306,7 +301,7 @@ const Overview: React.FunctionComponent = () => {
               自动将OpenAPI（Swagger）格式的在线URL接口或者ApkKnight分享的URL接口输入，并导入ApiKnight项目
             </div>
             <div className='opts'>
-              <Button type='dashed' onClick={(e) => setOnImportVisible(true)}>
+              <Button type='dashed' onClick={(_e) => setOnImportVisible(true)}>
                 开始导入
               </Button>
             </div>

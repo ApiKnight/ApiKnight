@@ -4,11 +4,11 @@ function createUnirestTemplate(
   url: string,
   method: ArrayItemType,
   headers: any,
-  redirect?: string,
+  _redirect?: string,
 ): string {
   return `
         Unirest.setTimeouts(0, 0);
-        HttpResponse<String> response = Unirest.post("${url}")
+        HttpResponse<String> response = Unirest.${method.toLowerCase()}("${url}")
         .header(${headers})
         .body("<body data here>")
         .asString();

@@ -3,9 +3,6 @@ import classNames from 'classnames'
 import { Input, Table, Button } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-
-const { TextArea } = Input
-
 import { NavType } from '@/types/enum'
 import type { NormalParamsType, RequestParamsType } from '@/types/api'
 
@@ -65,7 +62,7 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
     {
       title: '类型',
       width: 150,
-      render: (text: string, _: any, index: number) => (
+      render: (_text: string, _: any, _index: number) => (
         <Input
           placeholder='类型'
           value={'string'}
@@ -92,7 +89,7 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
       width: 50,
       align: 'center',
       className: 'action',
-      render: (_, record, index) => (
+      render: (_, _record, index) => (
         <Button
           type='text'
           size='small'

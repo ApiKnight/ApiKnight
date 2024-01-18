@@ -4,6 +4,7 @@
  * lcp --> largest-contentful-paint
  * fip --> first-input
  */
+
 import { reportError } from './reportError'
 // 3. 封装成一个 monitor
 export function createPerfMonitor(url?: string) {

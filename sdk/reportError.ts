@@ -1,5 +1,3 @@
-import request from '../src/api/request'
-
 /* eslint-disable */
 export function reportError(error: any, url: string, type: string) {
   if (url === '' || url === undefined) {

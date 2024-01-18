@@ -1,5 +1,4 @@
 import React, { memo, useEffect } from 'react'
-import { Button } from 'antd'
 import './index.less'
 import DocOperator from './c-pages/doc-operator'
 import DocInfo from './c-pages/doc-info'
@@ -13,6 +12,7 @@ type DocumentPropsType = {
 }
 
 const Document: React.FunctionComponent<DocumentPropsType> = memo((props) => {
+  console.log(props)
   const dispatch = useAppDispatch()
   const { apiId } = useAppSelector((state) => ({
     apiId: state.rightSlice.value,

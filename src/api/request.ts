@@ -99,6 +99,7 @@ export class Request {
             message = `连接出错(${err.response.status})!`
         }
         // 错误信息提示，待加
+        console.log(message)
         // 这里是AxiosError类型，所以一般我们只reject我们需要的响应
         return Promise.reject(err.response)
       },

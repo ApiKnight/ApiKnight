@@ -28,7 +28,7 @@ const NormalParamTable: React.FunctionComponent<ParamsProps> = memo((props) => {
     {
       title: '类型',
       width: 150,
-      render: (text: string, _: any, index: number) => (
+      render: (_text: string, _: any, _index: number) => (
         <Input
           placeholder='类型'
           value={'string'}

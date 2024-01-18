@@ -11,7 +11,6 @@ import {
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import getSelfInfo from '@/api/getSelfInfo'
-import EmptyShow from '@/components/EmptyShow'
 import { createAllMonitor } from '../../../sdk'
 
 const Index: React.FunctionComponent = () => {
@@ -24,13 +23,18 @@ const Index: React.FunctionComponent = () => {
 
   const [user_info, setUserInfo] = useState({})
 
-  user_id
-    ? useEffect(() => {
-        getSelfInfo().then((res) => {
-          res.data.code === 200 ? setUserInfo((res.data as any).data) : ''
-        })
-      }, [])
-    : ''
+  useEffect(() => {
+    // 仅当 user_id 存在时，执行里面的逻辑
+    if (user_id) {
+      getSelfInfo().then((res) => {
+        if (res.data.code === 200) {
+          setUserInfo(res.data.data)
+        }
+      })
+    }
+    // 如果 user_id 是 React 状态或 prop，其更改应该触发此效果
+    // 所以 user_id 应该包含在依赖数组中
+  }, [user_id])
 
   const text1 = (
     <div>

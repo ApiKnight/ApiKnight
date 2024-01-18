@@ -1,16 +1,11 @@
-import React, { memo, useState } from 'react'
-import { Input } from 'antd'
-const { TextArea } = Input
+import React, { memo } from 'react'
 
 import './index.less'
-import { shallowEqualApp, useAppDispatch, useAppSelector } from '@/store'
+import { useAppDispatch, useAppSelector } from '@/store'
 import { ResponseType } from '@/types/api'
 import withMode from '../../with-mode'
 import CodeEditor from '@/components/CodeEditor'
-import {
-  changeRequestBodyAction,
-  changeResponseBodyAction,
-} from '@/store/modules/mock'
+import { changeResponseBodyAction } from '@/store/modules/mock'
 
 const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
   props,

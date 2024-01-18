@@ -4,7 +4,7 @@ function createRequestTemplate(
   url: string,
   method: ArrayItemType,
   headers: any,
-  redirect?: string,
+  _redirect?: string,
 ): string {
   return `
         var request = require('request');

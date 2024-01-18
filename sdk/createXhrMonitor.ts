@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { reportError } from './reportError'
 
 // 4, 封装成一个 monitor

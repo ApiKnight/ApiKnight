@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import Tabs from '@/components/Tabs'
 import RightComponent from '@/components/RightComponent'
 import { RootState } from '../../store'
 import { useSelector } from 'react-redux'
-import { Button } from 'antd'
 import './index.less'
 
 const RightPage: React.FC<{ project_id: string }> = (props) => {

@@ -4,7 +4,7 @@ function createOkHttpTemplate(
   url: string,
   method: ArrayItemType,
   headers: any,
-  redirect?: string,
+  _redirect?: string,
 ): string {
   return `
         OkHttpClient client = new OkHttpClient().newBuilder()

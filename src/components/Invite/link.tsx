@@ -2,16 +2,13 @@ import React from 'react'
 import { Button, Input, notification } from 'antd'
 import './link.less'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
-import { useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
-import { RootState } from '../../store'
 
 const Link: React.FunctionComponent<any> = (props) => {
   console.log(props)
 
   const [api, contextHolder] = notification.useNotification()
   // 示例链接
-  const link = `https://lyyfsq.club/receive?projectid=${Number(
+  const link = `https://lyyfsq.club/ApiKnight/receive?projectid=${Number(
     props.project_id,
   )}`
   const openNotification = (placement: NotificationPlacement) => {
@@ -21,7 +18,7 @@ const Link: React.FunctionComponent<any> = (props) => {
       placement,
     })
   }
-  function copy(e) {
+  function copy(_e: any) {
     navigator.clipboard
       .writeText(link)
       .then(() => {

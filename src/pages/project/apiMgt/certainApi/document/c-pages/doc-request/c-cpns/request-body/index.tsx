@@ -1,7 +1,4 @@
 import React, { memo } from 'react'
-import { Input } from 'antd'
-const { TextArea } = Input
-
 import { useAppDispatch, useAppSelector } from '@/store'
 import { changeRequestBodyAction } from '@/store/modules/document/document'
 import CodeEditor from '@/components/CodeEditor'

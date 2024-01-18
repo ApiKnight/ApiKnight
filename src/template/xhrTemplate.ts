@@ -4,7 +4,7 @@ function createXHRTemplate(
   url: string,
   method: ArrayItemType,
   headers: any,
-  redirect?: string,
+  _redirect?: string,
 ): string {
   return `
         var xhr = new XMLHttpRequest();

@@ -3,7 +3,7 @@ import { Button, App, Modal, Input } from 'antd'
 import type { ApiOptReqOptType } from '@/types/components'
 import './index.less'
 import ApiOperator from '@/components/ApiOperator'
-import { shallowEqualApp, useAppDispatch, useAppSelector } from '@/store'
+import { useAppDispatch, useAppSelector } from '@/store'
 import {
   changeMethodAction,
   changePrefixAction,
@@ -16,10 +16,7 @@ import { increment } from '@/store/modules/watchDir'
 import { removeData, upData } from '@/store/modules/tabSlice'
 import { setValue } from '@/store/modules/rightSlice'
 import { usePrevious } from '@/hooks/usePrevious'
-import {
-  fetchApiDataAction,
-  forceFetchApiDataAction,
-} from '@/store/modules/mock'
+import { forceFetchApiDataAction } from '@/store/modules/mock'
 
 const DocOperator: React.FunctionComponent = () => {
   const { message, modal } = App.useApp()
@@ -155,7 +152,7 @@ const DocOperator: React.FunctionComponent = () => {
         open={onUpdating}
         confirmLoading={onUploading}
         onOk={handleConfimSave}
-        onCancel={(e) =>
+        onCancel={(_e) =>
           dispatch(changeUpdateStatusAction({ onUpdating: false }))
         }
       >

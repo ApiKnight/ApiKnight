@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom'
-import { useAuth } from '@/utils/useAuth'
+import { isAuth } from '@/utils/isAuth'
 import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
 import { ReactNode, useState, useEffect } from 'react'
@@ -21,7 +21,7 @@ const AuthRoute = ({ children }: AuthRouteProps) => {
     </div>,
   )
   useEffect(() => {
-    useAuth().then((result) => {
+    isAuth().then((result) => {
       return setIsLogin(result ? children : <Navigate to='/user/login' />)
     })
   }, [])

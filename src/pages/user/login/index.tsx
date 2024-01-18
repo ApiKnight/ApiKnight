@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Layout, App } from 'antd'
 import HeaderNav from '@/components/HeaderNav'
 import { message } from 'antd'
-import type { MenuProps } from 'antd'
 import request from '@/api/request'
 import { useNavigate } from 'react-router-dom'
 import login from '@/api/login'
 import randomNum from '@/utils/randomNum'
-const { Header, Content } = Layout
+const { Content } = Layout
 import './index.less'
 import { createAllMonitor } from '../../../../sdk/index'
 import type { LoginType } from '@/api/loginType'
@@ -20,18 +19,6 @@ interface RegisterType {
   avatar_url: string
 }
 type LoginState = 'Login' | 'Regist'
-const items: MenuProps['items'] = [
-  {
-    label: '注册',
-    key: 'register',
-    // icon: <MailOutlined />,
-  },
-  {
-    label: '登录',
-    key: 'login',
-    // icon: <AppstoreOutlined />,
-  },
-]
 
 const Login: React.FC = () => {
   const navigate = useNavigate()
@@ -111,15 +98,7 @@ const Login: React.FC = () => {
         }))
   }
 
-  const [isSignIn, setIsSignIn] = useState(true)
-
-  const handleSignInClick = () => {
-    setIsSignIn(true)
-    onFinish()
-  }
-
   const handleSignUpClick = () => {
-    setIsSignIn(false)
     onFinish()
   }
 

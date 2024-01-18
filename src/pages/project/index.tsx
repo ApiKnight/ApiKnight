@@ -1,12 +1,13 @@
+/* eslint-disable */
+
 import React, { useEffect } from 'react'
 import './index.less'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import ProjectNav from '@/components/ProjectNav'
 import { Navigate, useNavigate } from 'react-router-dom'
 import getCurrentRole from '@/api/getCurrentRole'
 import ApiTab from '@/components/ApiTab'
-import './index.less'
 import getSelfInfo from '@/api/getSelfInfo'
 import { useAppDispatch } from '@/store'
 import { fetchProjectInfoAction } from '@/store/modules/project'
@@ -29,7 +30,7 @@ const Project: React.FunctionComponent = () => {
     project_id = state.project_id ? state.project_id : ''
   }
   useEffect(() => {
-    async function useAuth() {
+    async function isAuth() {
       console.log(
         'token',
         localStorage.getItem('token'),
@@ -47,18 +48,14 @@ const Project: React.FunctionComponent = () => {
       return data.code === 200
     }
 
-    useAuth().then((res) => {
+    isAuth().then((res) => {
       res === false
         ? navigate('/user/login')
         : getCurrentRole(project_id).then((res: any) => {
+            console.log(res)
             navigate('/project/apiMgt', { state: { project_id: project_id } })
           })
     })
-
-    // console.log('当前project_id', project_id)
-    // getCurrentRole(project_id).then((res: any) => {
-    //   navigate('/project/apiMgt', { state: { project_id: project_id } })
-    // })
   }, [])
 
   return (

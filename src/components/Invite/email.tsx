@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useMemo } from 'react'
-import { Button, Input, message, notification } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Button, Input, notification } from 'antd'
 import request from '@/api/request'
 import './email.less'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
 
-const Context = React.createContext({ name: 'Default' })
 const Email: React.FunctionComponent<any> = (props) => {
   const [userEmail, setUserEmail] = useState('')
   const [listData, setListData] = useState([])
   async function handleChange(e: any) {
-    await setUserEmail(e.target.value)
+    setUserEmail(e.target.value)
   }
   const [info, setInfo] = useState('')
+  console.log(info)
   const [api, contextHolder] = notification.useNotification()
   function sendInfo(): void {
     request
@@ -52,12 +52,10 @@ const Email: React.FunctionComponent<any> = (props) => {
       })
   }, [userEmail])
 
-  const contextValue = useMemo(() => ({ name: 'Ant Design' }), [])
   return (
     <div className='email'>
       {contextHolder}
       <div className='email-input'>
-        {/*<TextArea rows={4} placeholder="请输入被邀请者的邮箱" value={userEmail} onChange={handleChange} list="opts"/>*/}
         <Input
           placeholder='请输入被邀请者的邮箱'
           value={userEmail}

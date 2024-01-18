@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Card, Image } from 'antd'
 const { Meta } = Card
 import { useNavigate } from 'react-router-dom'

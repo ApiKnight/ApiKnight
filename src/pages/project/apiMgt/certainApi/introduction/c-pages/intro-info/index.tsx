@@ -1,7 +1,6 @@
 import React, { memo, useState } from 'react'
 import { App, Button, Modal } from 'antd'
 import classNames from 'classnames'
-import type { RootState } from '@/store/index.ts'
 import { useAppDispatch, useAppSelector } from '@/store'
 import './index.less'
 import { formatTime } from '@/utils/math'
@@ -9,8 +8,6 @@ import { deleteApi } from '@/api'
 import { increment } from '@/store/modules/watchDir'
 import { removeData } from '@/store/modules/tabSlice'
 import { setValue } from '@/store/modules/rightSlice'
-import { useSelector } from 'react-redux'
-import { setTemplateValue } from '@/store/modules/templateSlice'
 import CodeTemplate from '@/components/CodeTemplate'
 import VersionBack from '@/components/versionBack'
 
@@ -52,9 +49,6 @@ const IntroInfo: React.FunctionComponent = memo(() => {
       onCancel: () => {},
     })
   }
-  const templateSlice = useSelector(
-    (state: RootState) => state.templateSlice.value,
-  )
 
   // create code
 

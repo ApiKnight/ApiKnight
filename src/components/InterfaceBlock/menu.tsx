@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { UnorderedListOutlined } from '@ant-design/icons'
-import { Button, Modal, Popover, App } from 'antd'
+import { Button, Popover, App } from 'antd'
 import { AddData } from '@/types/treeComponents'
 import { useDispatch } from 'react-redux'
 import { setTrue } from '@/store/modules/createFileState'

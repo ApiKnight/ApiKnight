@@ -25,7 +25,7 @@ export const fetchDocumentApiAction = createAsyncThunk(
       // 获取文档信息
       const res = await getFullApiData(apiId)
       const apiData: IAPIInfo = JSON.parse(res.request_data)
-      const { id, name, folder_id, create_user, description } = res
+      const { id, name, folder_id, create_user } = res
       apiData.meta_info.api_id = id
       apiData.meta_info.name = name
       apiData.meta_info.folder_id = folder_id

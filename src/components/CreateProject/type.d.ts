@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 interface childProps {
   isModalOpen: boolean
   closeModal: Function

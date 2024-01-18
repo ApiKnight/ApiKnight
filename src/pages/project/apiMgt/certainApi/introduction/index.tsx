@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/store'
 import { fetchDocumentApiAction } from '@/store/modules/document/document'
 
 const Introduction: React.FunctionComponent<IntroductionProps> = (props) => {
-  // const { data } = props
+  console.log(props)
   const dispatch = useAppDispatch()
   const { apiId } = useAppSelector((state) => ({
     apiId: state.rightSlice.value,

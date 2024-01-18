@@ -7,6 +7,8 @@ import { createXHRTemplate } from '@/template/xhrTemplate'
 import { Menu } from 'antd'
 import CodeEditor from '../CodeEditor'
 import { itemsJsCode } from './constant'
+import { useAppSelector } from '@/store'
+import { ArrayItemType } from '@/types/arrayToTree'
 
 const JSCodeContent: React.FC = () => {
   const [current, setCurrent] = useState('1')
@@ -15,6 +17,10 @@ const JSCodeContent: React.FC = () => {
     setCurrent(e.key)
   }
 
+  const { baseInfo } = useAppSelector((state) => ({
+    baseInfo: state.document.apiData.apiInfo.base,
+  }))
+  console.log(baseInfo)
   return (
     <div className='codeTemplate-content'>
       <Menu
@@ -27,9 +33,9 @@ const JSCodeContent: React.FC = () => {
         {current === '1' ? (
           <CodeEditor
             defaultValue={createFetchTemplate(
-              'http://127.0.0.1/xxx',
-              'GET',
-              "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+              `http://127.0.0.1/${baseInfo.path}`,
+              baseInfo.method as ArrayItemType,
+              "'User-Agent', 'Apifox/1.0.0 (https://lyyfsq.club/ApiKnight)'",
               'follow',
             )}
             lang='javascript'
@@ -39,9 +45,10 @@ const JSCodeContent: React.FC = () => {
         ) : current === '2' ? (
           <CodeEditor
             defaultValue={createAxiosTemplate(
-              'http://127.0.0.1/xxx',
-              'GET',
-              "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+              `http://127.0.0.1/${baseInfo.path}`,
+              baseInfo.method as ArrayItemType,
+              "'User-Agent': 'Apifox/1.0.0 (https://lyyfsq.club/ApiKnight)'",
+              'follow',
             )}
             lang='javascript'
             height='360px'
@@ -50,9 +57,10 @@ const JSCodeContent: React.FC = () => {
         ) : current === '3' ? (
           <CodeEditor
             defaultValue={createJQueryTemplate(
-              'http://127.0.0.1/xxx',
-              'GET',
-              "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+              `http://127.0.0.1/${baseInfo.path}`,
+              baseInfo.method as ArrayItemType,
+              "'User-Agent': 'Apifox/1.0.0 (https://lyyfsq.club/ApiKnight)'",
+              'follow',
             )}
             lang='javascript'
             height='360px'
@@ -61,9 +69,9 @@ const JSCodeContent: React.FC = () => {
         ) : current === '4' ? (
           <CodeEditor
             defaultValue={createFetchTemplate(
-              'http://127.0.0.1/xxx',
-              'GET',
-              "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+              `http://127.0.0.1/${baseInfo.path}`,
+              baseInfo.method as ArrayItemType,
+              "'User-Agent', 'Apifox/1.0.0 (https://lyyfsq.club/ApiKnight)'",
               'follow',
             )}
             lang='javascript'
@@ -73,9 +81,10 @@ const JSCodeContent: React.FC = () => {
         ) : (
           <CodeEditor
             defaultValue={createXHRTemplate(
-              'http://127.0.0.1/xxx',
-              'GET',
-              "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+              `http://127.0.0.1/${baseInfo.path}`,
+              baseInfo.method as ArrayItemType,
+              "'User-Agent': 'Apifox/1.0.0 (https://lyyfsq.club/ApiKnight)'",
+              'follow',
             )}
           />
         )}

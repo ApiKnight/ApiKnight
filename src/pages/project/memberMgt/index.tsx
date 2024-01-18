@@ -23,8 +23,6 @@ import chgProjAdmin from '@/api/chgProjAdmin'
 import ShowMember from '@/components/ShowMember'
 import { createAllMonitor } from '../../../../sdk'
 
-const count = 3
-
 const MemberMgt: React.FC = () => {
   createAllMonitor().start()
   const state = useLocation().state
@@ -34,7 +32,7 @@ const MemberMgt: React.FC = () => {
 
   const [initLoading, setInitLoading] = useState(true)
 
-  const [moreLoading, setMoreLoading] = useState(false)
+  const [moreLoading] = useState(false)
 
   const [member_list, setMemberList] = useState<Array<any>>()
 
@@ -98,18 +96,6 @@ const MemberMgt: React.FC = () => {
     getCurRole(project_id)
   }, [])
 
-  const onLoadMore = () => {
-    setMoreLoading(true)
-    setMemberList(
-      member_list.concat([...new Array(count)].map(() => ({ loading: true }))),
-    )
-    setMoreLoading(false)
-    // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-    // In real scene, you can using public method of react-virtualized:
-    // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
-    // window.dispatchEvent(new Event('resize'));
-  }
-
   const closeModal = () => {
     setIsModalOpen(false)
   }
@@ -123,9 +109,7 @@ const MemberMgt: React.FC = () => {
           height: 32,
           lineHeight: '32px',
         }}
-      >
-        {/* <Button onClick={onLoadMore}>loading more</Button> */}
-      </div>
+      ></div>
     ) : null
 
   const approval = (id) => {
@@ -179,10 +163,10 @@ const MemberMgt: React.FC = () => {
             authority === 'member'
               ? 3
               : authority === 'operator'
-              ? 2
-              : authority === 'admin'
-              ? 1
-              : 4,
+                ? 2
+                : authority === 'admin'
+                  ? 1
+                  : 4,
         }).then((res) => {
           res.data.code === 200
             ? (message.success('修改成功'), updateMemberList())
@@ -396,10 +380,10 @@ const MemberMgt: React.FC = () => {
                       item.role === 1
                         ? '管理者'
                         : item.role === 2
-                        ? '管理员'
-                        : item.role === 3
-                        ? '成员'
-                        : '游客'
+                          ? '管理员'
+                          : item.role === 3
+                            ? '成员'
+                            : '游客'
                     }`}
                   />
                 </Skeleton>

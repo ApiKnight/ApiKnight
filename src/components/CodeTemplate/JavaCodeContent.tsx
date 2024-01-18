@@ -5,12 +5,17 @@ import { createUnirestTemplate } from '@/template/unirestTemplate'
 import { createOkHttpTemplate } from '@/template/pkHttpTemplate'
 import CodeEditor from '../CodeEditor'
 import { itemsJavaCode } from './constant'
+import { useAppSelector } from '@/store'
+import { ArrayItemType } from '@/types/arrayToTree'
 
 const JavaCodeContent: React.FC = () => {
   const [current, setCurrent] = useState('1')
   const onClick: MenuProps['onClick'] = (e: any) => {
     setCurrent(e.key)
   }
+  const { baseInfo } = useAppSelector((state) => ({
+    baseInfo: state.document.apiData.apiInfo.base,
+  }))
   return (
     <div className='codeTemplate-content'>
       <Menu
@@ -25,9 +30,9 @@ const JavaCodeContent: React.FC = () => {
           current === '1' ? (
             <CodeEditor
               defaultValue={createUnirestTemplate(
-                'http://127.0.0.1/xxx',
-                'GET',
-                "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+                `http://127.0.0.1/${baseInfo.path}`,
+                baseInfo.method as ArrayItemType,
+                "'User-Agent': 'Apifox/1.0.0 (https://lyyfsq.club/ApiKnight)'",
                 'follow',
               )}
               lang='java'
@@ -37,9 +42,10 @@ const JavaCodeContent: React.FC = () => {
           ) : (
             <CodeEditor
               defaultValue={createOkHttpTemplate(
-                'http://127.0.0.1/xxx',
-                'GET',
-                "'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'",
+                `http://127.0.0.1/${baseInfo.path}`,
+                baseInfo.method as ArrayItemType,
+                "'User-Agent': 'Apifox/1.0.0 (https://lyyfsq.club/ApiKnight)'",
+                'follow',
               )}
               lang='java'
               height='360px'

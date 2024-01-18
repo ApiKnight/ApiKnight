@@ -1,5 +1,3 @@
-import { Method } from '@/types/components'
-
 // 传输类型：发送mock请求
 export interface IMockTransfer {
   project_id: number

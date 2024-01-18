@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom'
 import EmptyShow from '@/components/EmptyShow'
 import { createAllMonitor } from '../../../sdk/index'
 
-const { Header, Content, Footer } = Layout
+const { Content, Footer } = Layout
 
 const User: React.FunctionComponent = () => {
   const [projectList, setProjectList] = useState<any[]>([])
@@ -42,7 +42,6 @@ const User: React.FunctionComponent = () => {
   }
   useEffect(() => {
     //有token，先登录再拉取项目列表
-    // updateProjectList()
     updateUserInfo()
   }, [])
 
@@ -59,20 +58,12 @@ const User: React.FunctionComponent = () => {
         className='layout'
         style={{ minHeight: '100%', overflow: 'scroll' }}
       >
-        {/* <Header
-          style={{
-            // backgroundColor: '#ffffff',
-            padding: 0
-          }}> */}
         <HeaderNav user_info={user_info} />
-        {/* </Header> */}
         <div className='content-wrap' style={{ height: '100%', flex: '1' }}>
           <Content
             className='content'
             style={{
               padding: '50px 50px',
-              // justifyContent: 'center',
-              // alignItems: 'center',
               position: 'relative',
             }}
           >
@@ -86,13 +77,10 @@ const User: React.FunctionComponent = () => {
               >
                 新建项目
               </Button>
-              {/* <div className='create-project'>
-             
-            </div> */}
             </div>
             <div className='list'>
               {projectList.length ? (
-                projectList.map((value, index) => {
+                projectList.map((value, _index) => {
                   return (
                     <div className='item' key={value.id}>
                       <ProjectItem

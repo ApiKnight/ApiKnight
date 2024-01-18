@@ -7,7 +7,7 @@ import type { NotificationPlacement } from 'antd/es/notification/interface'
 
 const Receive: React.FunctionComponent = () => {
   const navigate = useNavigate()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const [api, contextHolder] = notification.useNotification()
   function sendJoin() {
     request

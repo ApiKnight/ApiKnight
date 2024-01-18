@@ -172,8 +172,9 @@ const Overview: React.FunctionComponent = () => {
 
     // return
     // 第二步 获取最新项目信息
-    const { folder_list: newestFolderList } =
-      await getProjectInfoById(projectId)
+    const { folder_list: newestFolderList } = await getProjectInfoById(
+      projectId,
+    )
 
     console.log({ newestFolderList })
 
@@ -227,8 +228,9 @@ const Overview: React.FunctionComponent = () => {
       }
     }
     // 第二步 获取最新项目信息
-    const { folder_list: newestFolderList } =
-      await getProjectInfoById(projectId)
+    const { folder_list: newestFolderList } = await getProjectInfoById(
+      projectId,
+    )
 
     // 第三步遍历所有的api，所有api创建
     for (const [folderName, apiList] of apiInfoMap) {

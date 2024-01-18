@@ -16,6 +16,9 @@ jobs:
         with:
           node-version: 18
 
+      - name: Get Branch Name
+        run: echo "Deploying to production server on branch $GITHUB_REF"
+
       - name: Install Dependencies
         run: |
           npm install

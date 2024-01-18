@@ -163,10 +163,10 @@ const MemberMgt: React.FC = () => {
             authority === 'member'
               ? 3
               : authority === 'operator'
-                ? 2
-                : authority === 'admin'
-                  ? 1
-                  : 4,
+              ? 2
+              : authority === 'admin'
+              ? 1
+              : 4,
         }).then((res) => {
           res.data.code === 200
             ? (message.success('修改成功'), updateMemberList())
@@ -380,10 +380,10 @@ const MemberMgt: React.FC = () => {
                       item.role === 1
                         ? '管理者'
                         : item.role === 2
-                          ? '管理员'
-                          : item.role === 3
-                            ? '成员'
-                            : '游客'
+                        ? '管理员'
+                        : item.role === 3
+                        ? '成员'
+                        : '游客'
                     }`}
                   />
                 </Skeleton>

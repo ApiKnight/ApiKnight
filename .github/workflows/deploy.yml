@@ -54,6 +54,7 @@ jobs:
         if: always()
         run: |
           kill $(lsof -t -i:4173)
+          echo ${{ steps.extract_branch.outputs.branch }}
         shell: bash
 
       - name: Deploy to GitHub Pages

@@ -1,4 +1,4 @@
-import{r as i,j as e,aa as a,U as s}from"./index-606c256f.js";import{b as d}from"./index-f8f293a1.js";function l(t,r,n,o){return`
+import{r as i,q as s,j as e,aa as d,U as l}from"./index-cd4eea13.js";import{b as c}from"./index-1ba6040f.js";function p(t,r,n,o){return`
         package main
         import (
         "fmt"
@@ -32,4 +32,4 @@ import{r as i,j as e,aa as a,U as s}from"./index-606c256f.js";import{b as d}from
         }
         fmt.Println(string(body))
         }
-    `}const m=()=>{const[t,r]=i.useState("1"),n=o=>{r(o.key)};return e.jsxs("div",{className:"codeTemplate-content",children:[e.jsx(a,{onClick:n,selectedKeys:[t],mode:"horizontal",items:d}),e.jsx("div",{className:"codeTemplate-content__codeBlock",children:e.jsx(s,{defaultValue:l("http://127.0.0.1/xxx","GET","'User-Agent': 'Apifox/1.0.0 (https://apiknight.nice)'"),lang:"go",height:"360px",width:"435px"})})]})};export{m as default};
+    `}const f=()=>{const[t,r]=i.useState("1"),n=a=>{r(a.key)},{baseInfo:o}=s(a=>({baseInfo:a.document.apiData.apiInfo.base}));return e.jsxs("div",{className:"codeTemplate-content",children:[e.jsx(d,{onClick:n,selectedKeys:[t],mode:"horizontal",items:c}),e.jsx("div",{className:"codeTemplate-content__codeBlock",children:e.jsx(l,{defaultValue:p(`http://127.0.0.1/${o.path}`,o.method,"'User-Agent', 'Apifox/1.0.0 (https://lyyfsq.club/ApiKnight)'"),lang:"go",height:"360px",width:"435px"})})]})};export{f as default};

@@ -62,7 +62,8 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          BRANCH: gh-pages-${{ steps.extract_branch.outputs.branch }}
+          BRANCH: gh-pages
           FOLDER: dist
         env:
           PERMISSIONS_POLICY: ${{ env.PERMISSIONS_POLICY }}
+        if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'refs/heads/main'  # 仅在 main 分支上推送时触发

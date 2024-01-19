@@ -66,4 +66,4 @@ jobs:
           FOLDER: dist
         env:
           PERMISSIONS_POLICY: ${{ env.PERMISSIONS_POLICY }}
-        if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'refs/heads/main'  # 仅在 main 分支上推送时触发
+        if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'main'  # 仅在 main 分支上推送时触发

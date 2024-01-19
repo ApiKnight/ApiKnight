@@ -4,6 +4,10 @@ import './index.less'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import request from '@/api/request'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
+import { AxiosResponse } from 'axios'
+import { Result } from '@/api/request.type'
+import { MemberList, QueryResp } from '@/types/response.type'
+import getProjectMember from '@/api/getProjectMember'
 
 const Receive: React.FunctionComponent = () => {
   const navigate = useNavigate()
@@ -41,16 +45,11 @@ const Receive: React.FunctionComponent = () => {
         { projectid: Number(searchParams.get('projectid')) },
         {},
       )
-      .then((resp: any) => {
+      .then((resp: AxiosResponse<Result<QueryResp>>) => {
         setProjectName(resp.data.data.projectname as string)
       })
-    request
-      .post(
-        `/v1/members/list`,
-        { projectid: Number(searchParams.get('projectid')) },
-        {},
-      )
-      .then((resp: any) => {
+    getProjectMember(Number(searchParams.get('projectid'))).then(
+      (resp: AxiosResponse<Result<MemberList[]>>) => {
         const user_id = localStorage.getItem('user_id')
         const dataList = resp.data.data
         dataList.map((item) => {
@@ -60,7 +59,8 @@ const Receive: React.FunctionComponent = () => {
             setIsJoin(true)
           }
         })
-      })
+      },
+    )
   }, [])
   return (
     <div className='receive'>

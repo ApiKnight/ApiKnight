@@ -1,9 +1,9 @@
-import { ArrayNode } from '@/types/arrayToTree'
+import { ArrayNode, TreeNode } from '@/types/arrayToTree'
 /*
     包含了数组类型转树形结构的函数方法及数据结构
 */
 
-function arrayToTree(data: ArrayNode[]): any {
+function arrayToTree(data: ArrayNode[]): TreeNode[] {
   const root = {}
 
   // 创建一个空对象用于存储每个节点的引用

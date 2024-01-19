@@ -17,15 +17,15 @@ const tabSlice = createSlice({
   name: 'tabSlice',
   initialState,
   reducers: {
-    assign(state: any, action: PayloadAction<Array<TabSlice>>) {
+    assign(state, action: PayloadAction<TabSlice['data']>) {
       state.data = action.payload
     },
-    removeData(state: any, action: PayloadAction<string>) {
+    removeData(state, action: PayloadAction<string>) {
       state.data = state.data.filter((item) => {
         return item.key !== action.payload
       })
     },
-    addData(state: any, action: PayloadAction<TabSlice>) {
+    addData(state, action: PayloadAction<TabSlice['data'][0]>) {
       // 限制标签栏的数量最多为7个
       if (state.data.length >= 7) {
         // 删除第一个不是项目概览的标签
@@ -46,7 +46,14 @@ const tabSlice = createSlice({
         )
       })
     },
-    upData(state: any, action: PayloadAction<any>) {
+    upData(
+      state,
+      action: PayloadAction<{
+        key: string
+        type: { value: string }
+        title: string
+      }>,
+    ) {
       console.log('update')
       console.log(action.payload)
       state.data.map((item) => {
@@ -56,7 +63,7 @@ const tabSlice = createSlice({
         }
       })
     },
-    changeCurrentKeyAction(state: any, { payload }) {
+    changeCurrentKeyAction(state, { payload }) {
       state.currentKey = payload
     },
     // 关闭标签栏的action
@@ -65,10 +72,10 @@ const tabSlice = createSlice({
     },
     addDataItemAction(
       state,
-      { payload }: { payload: { item: any; index?: number } },
+      action: PayloadAction<{ item: TabSlice['data'][0]; index?: number }>,
     ) {
       // 如果有index，就在index的位置插入，否则就在最后插入
-      const { item, index } = payload
+      const { item, index } = action.payload
       // 如果已经存在当前的key，就不再添加
       const isExist = state.data.some((i) => i.key === item.key)
       if (isExist) return

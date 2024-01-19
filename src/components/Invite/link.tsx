@@ -3,7 +3,9 @@ import { Button, Input, notification } from 'antd'
 import './link.less'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
 
-const Link: React.FunctionComponent<any> = (props) => {
+const Link: React.FunctionComponent<{ project_id: number | string }> = (
+  props,
+) => {
   console.log(props)
 
   const [api, contextHolder] = notification.useNotification()
@@ -18,7 +20,7 @@ const Link: React.FunctionComponent<any> = (props) => {
       placement,
     })
   }
-  function copy(_e: any) {
+  function copy() {
     navigator.clipboard
       .writeText(link)
       .then(() => {

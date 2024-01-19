@@ -4,12 +4,11 @@ import { Avatar } from 'antd'
 import { Link } from 'react-router-dom'
 import './index.less'
 import type { ChildrenProps } from './type.d.ts'
-const HeaderNav: React.FC<ChildrenProps> = (props) => {
-  let { ifHideUser, user_info } = props
+import { CreateUser } from '@/types/response.type.js'
 
-  // 默认值
-  ifHideUser ? '' : (ifHideUser = false)
-  user_info ? '' : (user_info = {})
+const HeaderNav: React.FC<ChildrenProps> = (props) => {
+  const { ifHideUser = false, user_info = {} as CreateUser } = props
+
   return (
     // left
     <div className='header-nav'>
@@ -33,9 +32,7 @@ const HeaderNav: React.FC<ChildrenProps> = (props) => {
             </a>
           </div>
         </div>
-        {ifHideUser ? (
-          ''
-        ) : (
+        {!ifHideUser && (
           <div className='user-icon'>
             <div className='avatar'>
               <Link
@@ -44,20 +41,19 @@ const HeaderNav: React.FC<ChildrenProps> = (props) => {
                 <Avatar
                   size={40}
                   style={{ backgroundColor: 'black', marginLeft: '10px' }}
-                  icon={user_info.avatar_url ? '' : <UserOutlined />}
-                  src={user_info.avatar_url ? user_info.avatar_url : null}
+                  icon={!user_info.avatar_url && <UserOutlined />}
+                  src={user_info.avatar_url}
                   alt='用户头像'
                 />
               </Link>
             </div>
 
-            <div className='name'>
-              {user_info.username ? user_info.username : null}
-            </div>
+            <div className='name'>{user_info.username || null}</div>
           </div>
         )}
       </div>
     </div>
   )
 }
+
 export default HeaderNav

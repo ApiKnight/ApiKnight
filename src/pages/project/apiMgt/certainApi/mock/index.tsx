@@ -13,7 +13,7 @@ import ModeContext from './mode-context'
 
 const Mock: React.FunctionComponent<IMockProps> = (props) => {
   const { mode, project_id } = props //run为运行,mock为mock
-
+  console.log(project_id)
   const { apiId } = useAppSelector((state) => ({
     apiId: state.rightSlice.value,
   }))
@@ -30,9 +30,9 @@ const Mock: React.FunctionComponent<IMockProps> = (props) => {
     <div>
       <div className='mock-page'>
         <ModeContext.Provider value={{ ...props }}>
-          <MockUrl project_id={project_id} mode={{ mode }} />
-          <MockReqParams />
-          <MockResponse mode={{ mode }} />
+          <MockUrl mode={mode} />
+          <MockReqParams mode='run' />
+          <MockResponse mode={mode} />
         </ModeContext.Provider>
       </div>
     </div>

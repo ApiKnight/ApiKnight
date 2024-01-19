@@ -4,7 +4,7 @@ import {
   NormalParamsType,
   RequestParamsType,
 } from '@/types/api'
-import { IAPIInfoPlus } from './type'
+import { IAPIInfoPlus, SwaggerDoc, SwaggerParameter } from './type'
 import { StatusValue } from '@/types/enum'
 import { Method } from '@/types/components'
 import { getRangeRandom } from '../math'
@@ -35,8 +35,8 @@ export function parseAPIInfo(dataJsonStr: string): IAPIInfoPlus {
  * @returns Map<目录名 string, 目录下的所有接口列表 IAPIInfo[]>
  */
 export function parseSwaggerDoc(
-  swaggerDoc: any,
-  ownerId,
+  swaggerDoc: SwaggerDoc,
+  ownerId: string,
 ): Map<string, IAPIInfo[]> {
   const rst = new Map<string, IAPIInfo[]>()
   const basePath = swaggerDoc.Path
@@ -77,7 +77,9 @@ export function parseSwaggerDoc(
   return rst
 }
 
-function parseSwaggerParameters(swaggerParams): RequestParamsType {
+function parseSwaggerParameters(
+  swaggerParams: SwaggerParameter[],
+): RequestParamsType {
   const paramsInfo: NormalParamsType[] = []
   const headersInfo: NormalParamsType[] = []
   const cookieInfo: NormalParamsType[] = []
@@ -113,64 +115,3 @@ function parseSwaggerParameters(swaggerParams): RequestParamsType {
   }
   return rst
 }
-
-// const api_crete = function ({ project_id, folder_id, request_data, response_data, description, name }) {
-//     return {
-//         project_id,
-//         folder_id,
-//         request_data,
-//         response_data,
-//         description,
-//         name,
-//     }
-// }
-// const request_data_mo = function ({ path, prefix, owner_id, desc, method, header_list, params_list, bodyresult, respnseresult }) {
-//     return {
-//         meta_info: {
-//             // 创建时间：13位的时间戳
-//             created: Date.now(),
-//             status: 0,
-//             // 所有者id
-//             owner_id,
-//             // 标签，字符串形式的数组
-//             tags: ['默认标签'],
-//             // 接口描述
-//             desc,
-//         },
-//         apiInfo: {
-//             base: {
-//                 // 请求方法
-//                 method,
-//                 // 完整url地址为：prefix + '/' + path
-//                 path,
-//                 prefix,
-//             },
-//             request: {
-//                 // 请求的url参数
-//                 /*
-//                 http://xxx.com?id=1&name=LuoKing
-//                 中描述 id=1&name=LuoKing 这部分的信息
-//                 */
-//                 params: params_list,
-//                 // 请求的header部分
-//                 headers: header_list,
-//                 cookie: [
-//                 ],
-//                 // 纯文本的请求体内容
-//                 body: bodyresult,
-//             },
-//             response: {
-//                 // 响应状态码
-//                 status: 200,
-//                 // 响应体内容
-//                 body: respnseresult
-//             },
-//         },
-//     }
-// }
-// function jiexi(target) {
-//     if (target.type !== 'object') {
-//         return target.type
-//     } else {
-//         let mdidle = {}
-//         for (let i in target.properties) {

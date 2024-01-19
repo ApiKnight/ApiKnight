@@ -5,7 +5,9 @@ interface ProjectNavChildType {
   avatar: ReactNode
   content: string
   project_id?: string
-  props?: any
+  props?: {
+    project_id: number | string
+  }
 }
 
 export type { ProjectNavChildType }

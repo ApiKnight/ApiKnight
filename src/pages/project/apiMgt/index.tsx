@@ -26,7 +26,7 @@ const ApiMgt: React.FunctionComponent = () => {
   const state = useLocation().state
   const project_id = state.project_id
   function handleOverviewClick() {
-    const overviewData: any = {
+    const overviewData = {
       key: 'project-summary',
       title: '项目概览',
       type: 'gl',

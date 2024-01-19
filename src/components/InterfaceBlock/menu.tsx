@@ -18,13 +18,13 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
   const { prijectInfo } = useAppSelector((state) => ({
     prijectInfo: state.project.projectInfo,
   }))
-  function addChildDir(e: any): void {
+  function addChildDir(e: React.MouseEvent): void {
     dispatch(setTrue())
     setShow(true)
     e.stopPropagation()
     setTitleInfo('添加子目录')
   }
-  function updateChildDir(e: any): void {
+  function updateChildDir(e: React.MouseEvent): void {
     dispatch(setTrue())
     setShow(true)
     e.stopPropagation()

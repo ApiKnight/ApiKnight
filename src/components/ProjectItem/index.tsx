@@ -2,7 +2,14 @@ import React from 'react'
 import { Card, Image } from 'antd'
 const { Meta } = Card
 import { useNavigate } from 'react-router-dom'
-const ProjectItem: React.FC<any> = (params) => {
+
+interface ParamsType {
+  project_id: string
+  project_img: string
+  dec: string
+  name: string
+}
+const ProjectItem: React.FC<ParamsType> = (params) => {
   const navigate = useNavigate()
   const toProject = () => {
     console.log('toProject')
@@ -11,7 +18,6 @@ const ProjectItem: React.FC<any> = (params) => {
   return (
     <div className='project-item' onClick={toProject}>
       <Card
-        // title={params.name}
         className='project-item-card'
         style={{ width: 300 }}
         bodyStyle={{
@@ -28,7 +34,6 @@ const ProjectItem: React.FC<any> = (params) => {
           />
         }>
         <Meta title={params.name} description={params.dec} />
-        {/* <div>{params.dec}</div> */}
       </Card>
     </div>
   )

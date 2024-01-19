@@ -14,7 +14,7 @@ interface mockReqType {
   api_id: string
   method: string
   url: string
-  response: any
+  response: string
 }
 const mockReq = (mockReqObj: mockReqType) => {
   console.log(mockReqObj)

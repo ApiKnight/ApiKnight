@@ -6,8 +6,13 @@ import { setFalse } from '@/store/modules/stateFlag'
 import Overlay from '@/components/overlay'
 import { RootState } from '../../store'
 import request from '../../api/request'
+import { AxiosResponse } from 'axios'
+import { Result } from '@/api/request.type'
+import { QuerySummary } from '@/types/response.type'
 
-const Title: React.FunctionComponent<{ projectid: string }> = (props) => {
+const Title: React.FunctionComponent<{ projectid: string | number }> = (
+  props,
+) => {
   const dispatch = useDispatch()
   const flag = useSelector((state: RootState) => state.stateFlag.value)
   function closeInvite(): void {
@@ -17,9 +22,9 @@ const Title: React.FunctionComponent<{ projectid: string }> = (props) => {
   useEffect(() => {
     request
       .post('/v1/project/querysummary', { projectid: props.projectid }, {})
-      .then((resp) => {
-        if ((resp.data as any).code == 200) {
-          setName((resp.data as any).data.projectname)
+      .then((resp: AxiosResponse<Result<QuerySummary>>) => {
+        if (resp.data.code == 200) {
+          setName(resp.data.data.projectname)
         }
       })
   }, [])

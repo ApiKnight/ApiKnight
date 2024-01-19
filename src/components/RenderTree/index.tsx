@@ -13,6 +13,9 @@ import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
 import request from '@/api/request'
 import { increment } from '@/store/modules/watchDir'
 import { MakeValue } from './type'
+import { AxiosResponse } from 'axios'
+import { Result } from '@/api/request.type'
+import { QueryResp } from '@/types/response.type'
 
 const RenderTree: React.FC = () => {
   const [showLoading, setShowLoading] = useState<boolean>(false)
@@ -32,20 +35,20 @@ const RenderTree: React.FC = () => {
     setShowLoading(true)
     request
       .post('/v1/project/query', { projectid: projectId }, {})
-      .then((resp) => {
+      .then((resp: AxiosResponse<Result<QueryResp>>) => {
         // 在这里处理返回的数据
         if (resp.data.code == 200) {
           setData(
             mergeFlatArrays(
-              (resp.data as any).data.folder_list,
-              (resp.data as any).data.api_list,
+              resp.data.data.folder_list,
+              resp.data.data.api_list,
               projectId,
             ),
           )
           setMakeValue({
             value: mergeFlatArrays(
-              (resp.data as any).data.folder_list,
-              (resp.data as any).data.api_list,
+              resp.data.data.folder_list,
+              resp.data.data.api_list,
               projectId,
             ),
           })
@@ -76,7 +79,6 @@ const RenderTree: React.FC = () => {
         type: item.type,
         pid: item.pid,
       }
-
       restoredData.push(restoredItem)
     }
 
@@ -104,9 +106,6 @@ const RenderTree: React.FC = () => {
   // 数组转树形结构
   const tree: TreeNode[] = arrayToTree(renderData)
   console.log('tree', tree)
-  // eslint-disable-next-line
-  const { DirectoryTree } = Tree
-  //startMonitor()
   return (
     <div className='tree-part'>
       {(() => {

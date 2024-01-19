@@ -35,9 +35,8 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-var-requires': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
     // 暂时取消未使用变量的检测
     '@typescript-eslint/no-unused-vars': [
       'error',

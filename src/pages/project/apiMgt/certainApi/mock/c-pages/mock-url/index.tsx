@@ -113,6 +113,8 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
       headers,
       data: reqParams.body,
     })
+    console.log('------------------------------------')
+    console.log(typeof data)
     try {
       const jsonResBody = JSON.stringify(data)
       dispatch(changeResponseBodyAction(jsonResBody))

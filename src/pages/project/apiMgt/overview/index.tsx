@@ -27,7 +27,14 @@ const Overview: React.FunctionComponent = () => {
   // const [onShareing, setOnShareing] = useState<boolean>(false)
   const onShareing = false
   const state = useLocation().state
-  const [projectBase, setProjectBase] = useState<any>({})
+  interface ProjectBaseInfo {
+    projectname?: string
+    description?: string
+    create_time?: string
+    apis_count?: number
+    members_count?: number
+  }
+  const [projectBase, setProjectBase] = useState<ProjectBaseInfo>({})
   const items: DescriptionsProps['items'] = [
     {
       key: '1',
@@ -75,7 +82,7 @@ const Overview: React.FunctionComponent = () => {
     apiList: state.project.projectInfo.api_list,
   }))
   useEffect(() => {
-    getProjectBase(state.project_id).then((res: any) => {
+    getProjectBase(state.project_id).then((res) => {
       res.data.code === 200 ? setProjectBase(res.data.data) : ''
     })
   }, [])
@@ -92,6 +99,8 @@ const Overview: React.FunctionComponent = () => {
       const { data } = await requestByServerProxy({
         url: importUrl,
         method: 'GET',
+        headers: '',
+        data: '',
       })
       if (data?.type === 'apiknight') {
         // apiknight文档
@@ -172,9 +181,8 @@ const Overview: React.FunctionComponent = () => {
 
     // return
     // 第二步 获取最新项目信息
-    const { folder_list: newestFolderList } = await getProjectInfoById(
-      projectId,
-    )
+    const { folder_list: newestFolderList } =
+      await getProjectInfoById(projectId)
 
     console.log({ newestFolderList })
 
@@ -228,9 +236,8 @@ const Overview: React.FunctionComponent = () => {
       }
     }
     // 第二步 获取最新项目信息
-    const { folder_list: newestFolderList } = await getProjectInfoById(
-      projectId,
-    )
+    const { folder_list: newestFolderList } =
+      await getProjectInfoById(projectId)
 
     // 第三步遍历所有的api，所有api创建
     for (const [folderName, apiList] of apiInfoMap) {

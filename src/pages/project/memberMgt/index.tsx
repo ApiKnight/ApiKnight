@@ -22,10 +22,12 @@ import reqDelMember from '@/api/reqDelMember'
 import chgProjAdmin from '@/api/chgProjAdmin'
 import ShowMember from '@/components/ShowMember'
 import { createAllMonitor } from '../../../../sdk'
+import { MemberList } from '@/types/response.type'
 
 const MemberMgt: React.FC = () => {
   createAllMonitor().start()
   const state = useLocation().state
+  type ValueMemberList = MemberList & { key: string }
   const { project_id } = state
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -34,7 +36,7 @@ const MemberMgt: React.FC = () => {
 
   const [moreLoading] = useState(false)
 
-  const [member_list, setMemberList] = useState<Array<any>>()
+  const [member_list, setMemberList] = useState<Array<ValueMemberList>>()
 
   const [apply_list, setApplyList] = useState([])
 
@@ -43,7 +45,7 @@ const MemberMgt: React.FC = () => {
   const [number, setNumber] = useState(1)
 
   useEffect(() => {
-    getApplyList(project_id).then((res: any) => {
+    getApplyList(project_id).then((res) => {
       if (res.data.code === 200) {
         setDNumber(res.data.data.length)
       } else {
@@ -60,7 +62,7 @@ const MemberMgt: React.FC = () => {
   }
 
   const updateApplyList = () => {
-    getApplyList(project_id).then((res: any) => {
+    getApplyList(project_id).then((res) => {
       if (res.data.code === 200) {
         setApplyList(res.data.data.reverse())
       } else {
@@ -70,18 +72,18 @@ const MemberMgt: React.FC = () => {
   }
 
   async function getCurRole(project_id) {
-    const res: any = await getCurrentRole(project_id)
+    const res = await getCurrentRole(project_id)
     res.data.code === 200 ? setRoleState(res.data.data.role) : ''
     updateMemberList()
   }
 
   const updateMemberList = () =>
-    getProjectMember(project_id).then((res: any) => {
+    getProjectMember(project_id).then((res) => {
       if (res.data.code === 200) {
         const data = res.data.data
         setNumber(data.length)
         setMemberList(
-          data.map((value) => {
+          data.map((value: ValueMemberList) => {
             setInitLoading(false)
             value.key = value.user_id
             return value
@@ -162,10 +164,10 @@ const MemberMgt: React.FC = () => {
             authority === 'member'
               ? 3
               : authority === 'operator'
-              ? 2
-              : authority === 'admin'
-              ? 1
-              : 4,
+                ? 2
+                : authority === 'admin'
+                  ? 1
+                  : 4,
         }).then((res) => {
           res.data.code === 200
             ? (message.success('修改成功'), updateMemberList())
@@ -371,10 +373,10 @@ const MemberMgt: React.FC = () => {
                       item.role === 1
                         ? '管理者'
                         : item.role === 2
-                        ? '管理员'
-                        : item.role === 3
-                        ? '成员'
-                        : '游客'
+                          ? '管理员'
+                          : item.role === 3
+                            ? '成员'
+                            : '游客'
                     }`}
                   />
                 </Skeleton>

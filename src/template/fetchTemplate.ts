@@ -3,7 +3,7 @@ import { ArrayItemType } from '@/types/arrayToTree'
 function createFetchTemplate(
   url: string,
   method: ArrayItemType,
-  headers: any,
+  headers: string,
   redirect: string,
 ): string {
   return `

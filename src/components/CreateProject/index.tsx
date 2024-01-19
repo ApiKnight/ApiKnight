@@ -7,8 +7,14 @@ import type { childProps } from './type'
 
 const UpdateProject: React.FC<childProps> = (props) => {
   const { isModalOpen, closeModal, updateUserInfo, user_id } = props
-
-  const onFinish = (values: any) => {
+  // 定义表单值的类型
+  interface FormValues {
+    projectname: string
+    description: string
+    project_img: null | string
+    // 添加其他表单字段...
+  }
+  const onFinish = (values: FormValues) => {
     values.project_img = `${window.location.origin}/images/project${randomNum(
       1,
       10,
@@ -19,7 +25,7 @@ const UpdateProject: React.FC<childProps> = (props) => {
     })
   }
 
-  const onFinishFailed = (_errorInfo: any) => {}
+  const onFinishFailed = () => {}
   return (
     <Modal
       title='创建新项目'
@@ -37,7 +43,7 @@ const UpdateProject: React.FC<childProps> = (props) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete='off'>
-        <Form.Item<any>
+        <Form.Item
           label='项目名称'
           name='projectname'
           style={{ width: '100%' }}
@@ -45,7 +51,7 @@ const UpdateProject: React.FC<childProps> = (props) => {
           <Input />
         </Form.Item>
 
-        <Form.Item<any>
+        <Form.Item
           label='项目描述'
           name='description'
           style={{ width: '100%' }}

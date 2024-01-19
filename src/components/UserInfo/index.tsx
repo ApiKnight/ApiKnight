@@ -13,6 +13,9 @@ import { setIValue } from '@/store/modules/updateUserInfoSlice'
 import { RootState } from '@/store'
 import request from '@/api/request'
 import { useNavigate } from 'react-router-dom'
+import { AxiosResponse } from 'axios'
+import { Result } from '@/api/request.type'
+import { CreateUser } from '@/types/response.type'
 
 const UserInfo: React.FunctionComponent = () => {
   const dispatch = useDispatch()
@@ -92,43 +95,45 @@ const UserInfo: React.FunctionComponent = () => {
     (state: RootState) => state.isUpdateSlice.value,
   )
   useEffect(() => {
-    request.post('/v1/user/queryself', {}, {}).then((resp: any) => {
-      setTableData([
-        {
-          id: 'username',
-          key: '1',
-          type: '名称',
-          value: resp.data.data.username,
-          use: (
-            <Button onClick={showUpdate('username')} danger>
-              修改
-            </Button>
-          ),
-        },
-        {
-          id: 'email',
-          key: '2',
-          type: '邮箱',
-          value: resp.data.data.email,
-          use: (
-            <Button onClick={showUpdate('email')} danger>
-              修改
-            </Button>
-          ),
-        },
-        {
-          id: 'phone',
-          key: '3',
-          type: '电话',
-          value: resp.data.data.phone,
-          use: (
-            <Button onClick={showUpdate('phone')} danger>
-              修改
-            </Button>
-          ),
-        },
-      ])
-    })
+    request
+      .post('/v1/user/queryself', {}, {})
+      .then((resp: AxiosResponse<Result<CreateUser>>) => {
+        setTableData([
+          {
+            id: 'username',
+            key: '1',
+            type: '名称',
+            value: resp.data.data.username,
+            use: (
+              <Button onClick={showUpdate('username')} danger>
+                修改
+              </Button>
+            ),
+          },
+          {
+            id: 'email',
+            key: '2',
+            type: '邮箱',
+            value: resp.data.data.email,
+            use: (
+              <Button onClick={showUpdate('email')} danger>
+                修改
+              </Button>
+            ),
+          },
+          {
+            id: 'phone',
+            key: '3',
+            type: '电话',
+            value: resp.data.data.phone,
+            use: (
+              <Button onClick={showUpdate('phone')} danger>
+                修改
+              </Button>
+            ),
+          },
+        ])
+      })
   }, [isUpdateSlice])
   const navigate = useNavigate()
   function quit(): void {

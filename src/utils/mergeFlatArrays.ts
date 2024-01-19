@@ -1,7 +1,13 @@
-import { ArrayItem } from '@/types/arrayToTree'
+import { ArrayItem, ArrayItemType } from '@/types/arrayToTree'
 import { FlatItem } from '@/types/mergeFlatArrays'
 import { parseAPIInfo } from './api/api'
 
+interface NewItemType {
+  key: string
+  title: string | NewItemType
+  pid: string | null
+  type: ArrayItemType
+}
 // arr_1 -> 文件目录数组 arr_2 -> 接口文件数组
 export function mergeFlatArrays(
   arr_1: FlatItem[],
@@ -20,7 +26,7 @@ export function mergeFlatArrays(
   realArray_2.map((item: FlatItem) => {
     try {
       const tempData = parseAPIInfo(item.request_data)
-      item.type = tempData.getMethod() as any
+      item.type = tempData.getMethod()
     } catch (error) {
       console.log(error)
     }
@@ -29,9 +35,9 @@ export function mergeFlatArrays(
     item.parent_id = item.folder_id
   })
   const newArray = [...realArray_2, ...realArray_1]
-  const mergeArray: any = []
+  const mergeArray: Array<NewItemType> = []
   newArray.map((item: FlatItem) => {
-    const newItem = {
+    const newItem: NewItemType = {
       key: item.id,
       title: item.name,
       pid: item.parent_id,
@@ -39,10 +45,10 @@ export function mergeFlatArrays(
     }
     mergeArray.push(newItem)
   })
-  const arr: any = mergeArray
-  arr.map((e) => {
+  const arr: Array<NewItemType> = mergeArray
+  arr.map((e: NewItemType) => {
     e.title = { key: e.key, title: e.title, pid: e.pid, type: e.type }
   })
-  const result: ArrayItem[] = arr
+  const result: Array<ArrayItem> = arr
   return result
 }

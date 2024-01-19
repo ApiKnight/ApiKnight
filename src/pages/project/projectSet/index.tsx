@@ -12,6 +12,12 @@ interface ProjectInfoType {
   description: string
   projectname: string
 }
+interface FormValuesType {
+  projectname: string
+  description: string
+  projectid?: string
+}
+
 const ProjectSet: React.FC = () => {
   createAllMonitor().start()
   const navigate = useNavigate()
@@ -22,7 +28,7 @@ const ProjectSet: React.FC = () => {
   })
   const [role, setRoleState] = useState<number>(0)
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: FormValuesType) => {
     values.projectid = project_id
     console.log(values)
     updateProject(values).then((res) => {
@@ -32,9 +38,8 @@ const ProjectSet: React.FC = () => {
     })
   }
 
-  const onFinishFailed = (errorInfo: any) => {
-    // closeModal()
-    console.log(errorInfo)
+  const onFinishFailed = () => {
+    console.log('err')
   }
 
   const deleteProject = () => {
@@ -56,13 +61,13 @@ const ProjectSet: React.FC = () => {
   useEffect(() => {
     //获取用户身份
     async function getCurRole(project_id) {
-      const res: any = await getCurrentRole(project_id)
+      const res = await getCurrentRole(project_id)
       res.data.code === 200 ? setRoleState(res.data.data.role) : ''
     }
 
     getCurRole(project_id)
 
-    getProjectBase(project_id).then((res: any) => {
+    getProjectBase(project_id).then((res) => {
       res.data.code === 200 ? setProjectInfo(res.data.data) : ''
     })
   }, [])

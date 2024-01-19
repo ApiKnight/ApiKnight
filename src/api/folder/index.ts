@@ -17,7 +17,7 @@ export async function createFolder(
   projectId: number,
   parentId: string,
   name: string,
-): Promise<IApiResult<any>> {
+): Promise<IApiResult<unknown>> {
   const { data } = await request.post('/v1/folder/create', {
     project_id: projectId,
     parent_id: parentId,

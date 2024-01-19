@@ -58,7 +58,7 @@ const getItemByVal: <T>(arr: T[], value: T) => T = (list, value) => {
   return list[index]
 }
 
-type Owner = { label: string; value: any }
+type Owner = { label: string; value: string }
 
 const DocInfo: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
@@ -91,18 +91,18 @@ const DocInfo: React.FunctionComponent = () => {
   const owner = useMemo(() => {
     return directors[0]
   }, [ownerUser])
-
+  type Value = StatusValue | IUserInfo | TagType[] | DevStatus | Owner
   // 下拉框选择事件
-  const handleSelectChange = (value: any, type: SelectType) => {
+  const handleSelectChange = (value: Value, type: SelectType) => {
     switch (type) {
       case 'status':
-        dispatch(changeDevStatusAction(value))
+        dispatch(changeDevStatusAction(value as StatusValue))
         break
       case 'owner':
-        handleChangeOwnerInfo(value)
+        handleChangeOwnerInfo(value as IUserInfo)
         break
       case 'tag':
-        handleTagChange(value)
+        handleTagChange(value as TagType[])
         break
     }
   }

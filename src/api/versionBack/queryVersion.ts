@@ -1,8 +1,14 @@
 import { VersionInfo } from '@/types/versionInfo'
 import request from '@/api/request'
+import { AxiosResponse } from 'axios'
+import { Result } from '../request.type'
+import { ApiType } from '@/types/response.type'
 
+interface ApiTypeVersion extends ApiType {
+  notes: string
+}
 async function getVersionInfo(apis_id: string): Promise<VersionInfo[]> {
-  const resp = await request.post(
+  const resp: AxiosResponse<Result<ApiTypeVersion[]>> = await request.post(
     '/v1/apis/queryversion',
     {
       apis_id: apis_id,

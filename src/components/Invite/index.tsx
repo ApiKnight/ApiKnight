@@ -8,7 +8,9 @@ import Link from '@/components/Invite/link'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 
-const Invite: React.FunctionComponent<any> = (props) => {
+const Invite: React.FunctionComponent<{ project_id: number | string }> = (
+  props,
+) => {
   const flag = useSelector((state: RootState) => state.stateFlag.value)
   if (flag == true) {
     return ReactDOM.createPortal(

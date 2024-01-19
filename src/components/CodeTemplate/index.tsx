@@ -6,7 +6,7 @@ import { itemsIndex } from './constant'
 
 const CodeTemplate: React.FC = () => {
   const [current, setCurrent] = useState('1')
-  const onClick: MenuProps['onClick'] = (e: any) => {
+  const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key)
   }
   let CodeContent = null
@@ -14,8 +14,8 @@ const CodeTemplate: React.FC = () => {
     current === '1'
       ? React.lazy(() => import('./JSCodeContent'))
       : current === '2'
-      ? React.lazy(() => import('./JavaCodeContent'))
-      : React.lazy(() => import('./GoCodeContent'))
+        ? React.lazy(() => import('./JavaCodeContent'))
+        : React.lazy(() => import('./GoCodeContent'))
   console.log(CodeContent)
   return (
     <React.Suspense fallback={<div>Loading...</div>}>

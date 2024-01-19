@@ -10,12 +10,15 @@ import { SendProps } from '@/types/userInfo'
 import request from '@/api/request'
 import { increment } from '@/store/modules/isUpdateSlice'
 import { SendData } from './type'
+import { E } from '@/types/base'
+import { AxiosResponse } from 'axios'
+import { Result } from '@/api/request.type'
 
 const UpdateUserInfo: React.FunctionComponent<{ data: SendProps }> = (
   props,
 ) => {
   const [inputValue, setInputValue] = useState('')
-  function ChangeValue(e: any): void {
+  function ChangeValue(e: E): void {
     setInputValue(e.target.value)
   }
   const dispatch = useDispatch()
@@ -42,12 +45,14 @@ const UpdateUserInfo: React.FunctionComponent<{ data: SendProps }> = (
         }
         break
     }
-    request.post(url, sendData, {}).then((resp: any) => {
-      if (resp.data.code == 200) {
-        dispatch(increment())
-      }
-      closeThisPage()
-    })
+    request
+      .post(url, sendData, {})
+      .then((resp: AxiosResponse<Result<never>>) => {
+        if (resp.data.code == 200) {
+          dispatch(increment())
+        }
+        closeThisPage()
+      })
   }
   return ReactDOM.createPortal(
     <div className='updateUserInfo'>

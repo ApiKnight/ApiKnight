@@ -2,13 +2,8 @@ import { baseURL } from '@/config/config'
 import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import NProgress from 'nprogress'
+import { Result } from './request.type'
 
-interface Result<T> {
-  code: number
-  message: string
-  result?: T
-  data?: T
-}
 // 导出Request，传入配置以创建实例
 export class Request {
   // axios 实例
@@ -28,7 +23,7 @@ export class Request {
     //请求拦截，设置请求头，处理统一的请求数据
     this.instance.interceptors.request.use(
       // config:AxiosRequestConfig
-      (config: any) => {
+      (config) => {
         // 顶部进度条
         NProgress.start()
         // CORS
@@ -42,7 +37,7 @@ export class Request {
         // console.log('请求拦截成功', config)
         return config
       },
-      (err: any) => {
+      (err: string) => {
         // 错误提示，待加
         return Promise.reject(err)
       },
@@ -57,7 +52,7 @@ export class Request {
         // 系统如果有自定义code也可以在这里处理
         return res
       },
-      (err: any) => {
+      (err) => {
         // 这里用来处理http常见错误，进行全局提示
         let message = ''
         switch (err.response.status) {
@@ -111,30 +106,32 @@ export class Request {
     return this.instance.request(config)
   }
 
-  get<T = any>(
+  get<T>(
     url: string,
     config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<Result<T>>> {
     return this.instance.get(url, config)
   }
 
-  post<T = any>(
+  post<T>(
     url: string,
+    // eslint-disable-next-line
     data?: any,
     config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<Result<T>>> {
     return this.instance.post(url, data, config)
   }
 
-  put<T = any>(
+  put<T>(
     url: string,
+    // eslint-disable-next-line
     data?: any,
     config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<Result<T>>> {
     return this.instance.put(url, data, config)
   }
 
-  delete<T = any>(
+  delete<T>(
     url: string,
     config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<Result<T>>> {

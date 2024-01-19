@@ -10,16 +10,17 @@ import { increment } from '@/store/modules/watchDir'
 import request from '../../api/request'
 import { notification } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
+import { E } from '@/types/base'
 
 const CreateFile: React.FunctionComponent<{
-  handleClick: any
+  handleClick: (data: boolean) => void
   data: AddDir
   title: string
 }> = (props) => {
   const [api, contextHolder] = notification.useNotification()
   const dispatch = useDispatch()
   const [dirName, setDirName] = useState('')
-  function change(e: any): void {
+  function change(e: E): void {
     e.stopPropagation()
     setDirName(e.target.value)
   }
@@ -37,7 +38,7 @@ const CreateFile: React.FunctionComponent<{
     }
     openNotification('topRight')
   }
-  function addChildDir(e: any): void {
+  function addChildDir(e: React.MouseEvent): void {
     e.stopPropagation()
     if (props.title === '添加子目录') {
       request
@@ -84,7 +85,7 @@ const CreateFile: React.FunctionComponent<{
   return ReactDOM.createPortal(
     <div
       className='createFile'
-      onClick={(e: any): void => {
+      onClick={(e: React.MouseEvent): void => {
         e.stopPropagation()
       }}>
       {contextHolder}

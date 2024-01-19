@@ -1,7 +1,9 @@
+import { ArrayItem } from './arrayToTree'
+
 interface TabSlice {
   data: {
     key: string
-    title: string
+    title: string | ArrayItem
     type: ArrayItemType
   }[]
   currentKey: string

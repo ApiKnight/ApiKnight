@@ -11,7 +11,7 @@ import Invite from '@/components/Invite'
 import { ProjectNavChildType } from '@/types/projectNavChild'
 import ProjectNavChild from '../ProjectNavChild'
 
-const ProjectNav: React.FC<any> = (props) => {
+const ProjectNav: React.FC<{ project_id: number | string }> = (props) => {
   const items: Array<ProjectNavChildType> = [
     {
       key: '1',
@@ -42,7 +42,7 @@ const ProjectNav: React.FC<any> = (props) => {
   return (
     <div className='menu-wrap'>
       <div>
-        <Invite project_id={(props as any).project_id}></Invite>
+        <Invite project_id={props.project_id}></Invite>
       </div>
       <div className={classNames('project-nav-menu')}>
         {items.map((item) => {

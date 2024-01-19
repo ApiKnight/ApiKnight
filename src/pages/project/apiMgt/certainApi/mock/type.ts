@@ -1,6 +1,6 @@
 export interface IMockProps {
   mode: 'run' | 'mock'
-  data?: any
+  data?: never
   mockPrefix?: string
   project_id: string
 }

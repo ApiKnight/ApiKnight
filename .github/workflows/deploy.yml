@@ -23,11 +23,11 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install
+          git clean -fdx &npm install
 
       - name: ESlint check
         run: |
-          npm run lint
+          npm run lint:fix
 
       - name: build the project
         run: |

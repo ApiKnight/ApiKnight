@@ -18,7 +18,6 @@ import mockReducer from './modules/mock/index.ts'
 import introductionReducer from './modules/introduction.ts'
 
 import tabSliceReducer from '@/store/modules/tabSlice'
-import tabsSliceReducer from '@/store/modules/tabsSlice'
 import rightSliceReducer from '@/store/modules/rightSlice'
 import showRightMenuReducer from '@/store/modules/showRightMenu'
 import userInfoSliceReducer from '@/store/modules/userInfoSlice.ts'
@@ -38,7 +37,6 @@ export const store = configureStore({
     mock: mockReducer,
     introduction: introductionReducer,
     tabSlice: tabSliceReducer,
-    tabsSlice: tabsSliceReducer,
     rightSlice: rightSliceReducer,
     showRightMenu: showRightMenuReducer,
     userInfoSlice: userInfoSliceReducer,

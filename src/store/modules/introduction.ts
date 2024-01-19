@@ -7,7 +7,7 @@ const initialData: IAPIInfo = getInitialApiInfoObj('unknown')
 // 获取接口数据
 export const fetchApiDataAction = createAsyncThunk(
   'document/fetchApiData',
-  async (payload: any, { dispatch }) => {
+  async (payload, { dispatch }) => {
     console.log('fetchApiDataAction', payload)
 
     dispatch(changeApiDataAction(initialData))

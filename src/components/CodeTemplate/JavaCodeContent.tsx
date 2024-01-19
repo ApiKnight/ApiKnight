@@ -10,7 +10,7 @@ import { ArrayItemType } from '@/types/arrayToTree'
 
 const JavaCodeContent: React.FC = () => {
   const [current, setCurrent] = useState('1')
-  const onClick: MenuProps['onClick'] = (e: any) => {
+  const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key)
   }
   const { baseInfo } = useAppSelector((state) => ({

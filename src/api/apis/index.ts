@@ -6,6 +6,8 @@ import { IRawApiInfo } from '../project/type'
 import { getRangeRandom } from '@/utils/math'
 import { createMock } from '..'
 import { baseURL } from '@/config/config'
+import { AxiosResponse } from 'axios'
+import { Result } from '../request.type'
 
 /**
  * 获取纯前端定义的接口信息
@@ -14,7 +16,8 @@ import { baseURL } from '@/config/config'
  */
 export async function getApiData(apiId: string): Promise<IAPIInfo> {
   const { data } = await request.post('/v1/apis/query', { apis_id: apiId })
-  const apiDataStr = (data as IApiResult<IFetchApiTransfer>).data.request_data
+  const apiDataStr = (data as unknown as IApiResult<IFetchApiTransfer>).data
+    .request_data
   return JSON.parse(apiDataStr)
 }
 
@@ -48,9 +51,9 @@ export async function createApi(
   userId: string,
   name = '新建的接口',
   desc = '新建的接口描述',
-): Promise<any> {
+): Promise<void> {
   const apiData = getInitialApiInfoObj(userId)
-  const { data } = await request.post('/v1/apis/create', {
+  await request.post('/v1/apis/create', {
     project_id: projectId,
     folder_id: folderId,
     name: name,
@@ -58,7 +61,6 @@ export async function createApi(
     request_data: JSON.stringify(apiData),
     response_data: '{}',
   })
-  return data
 }
 
 /**
@@ -71,7 +73,7 @@ export async function createFullApi(options: {
   responseDataStr: string
   description: string
   name: string
-}): Promise<any> {
+}): Promise<void> {
   const {
     projectId,
     folderId,
@@ -80,7 +82,7 @@ export async function createFullApi(options: {
     description,
     name,
   } = options
-  const { data } = await request.post('/v1/apis/create', {
+  await request.post('/v1/apis/create', {
     project_id: projectId,
     folder_id: folderId,
     name: name,
@@ -88,7 +90,6 @@ export async function createFullApi(options: {
     request_data: JSON.stringify(requestData).replace(/\\s/g, ''),
     response_data: responseDataStr,
   })
-  return data
 }
 
 /**
@@ -101,18 +102,23 @@ export async function createFullApi(options: {
  * @param apiData api信息
  * @param responseData Mock响应信息
  */
-export async function updateApi(options: IUpdateApiTransfer): Promise<any> {
+export async function updateApi(
+  options: IUpdateApiTransfer,
+): Promise<Result<never>> {
   const { apiId, folderId, name, desc, notes, apiData, responseData } = options
-  const { data } = await request.post('/v1/apis/update', {
-    folder_id: folderId,
-    request_data: JSON.stringify(apiData).replace(/\\s/g, ''),
-    response_data: responseData.replace(/\\s/g, ''),
-    description: desc,
-    name: name,
-    notes: notes,
-    apis_id: apiId,
-  })
-  return data
+  const resp: AxiosResponse<Result<never>> = await request.post(
+    '/v1/apis/update',
+    {
+      folder_id: folderId,
+      request_data: JSON.stringify(apiData).replace(/\\s/g, ''),
+      response_data: responseData.replace(/\\s/g, ''),
+      description: desc,
+      name: name,
+      notes: notes,
+      apis_id: apiId,
+    },
+  )
+  return resp.data
 }
 
 /**
@@ -132,7 +138,7 @@ export async function deleteApi(apiId: string) {
  * @returns 用于导入的url
  */
 export async function shareApi(apiList: IRawApiInfo[], projectId: number) {
-  let list: any = apiList.map((item) => {
+  const list = apiList.map((item) => {
     // 删除重要信息
     const apiInfo: IAPIInfo = JSON.parse(item.request_data)
     apiInfo.meta_info.created = Date.now()
@@ -140,7 +146,7 @@ export async function shareApi(apiList: IRawApiInfo[], projectId: number) {
     apiInfo.meta_info.folder_id = item.folder_id
     return apiInfo
   })
-  list = JSON.stringify(list)
+  const str = JSON.stringify(list)
   const identity = getRangeRandom(10000, 99999)
   const sharePath = '/share&identity=' + identity
   await createMock({
@@ -151,7 +157,7 @@ export async function shareApi(apiList: IRawApiInfo[], projectId: number) {
     name: 'share-api-' + identity,
     headers: '{}',
     params: '{}',
-    response: JSON.stringify({ example: { data: list, type: 'apiknight' } }),
+    response: JSON.stringify({ example: { data: str, type: 'apiknight' } }),
     data: '{}',
   })
   return `${baseURL}v1/mock/${projectId}${sharePath}`

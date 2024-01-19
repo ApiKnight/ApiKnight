@@ -49,7 +49,7 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
       title: '参数名',
       dataIndex: 'paramName',
       width: 150,
-      render: (text: string, _: any, index: number) => (
+      render: (text: string, _, index: number) => (
         <Input
           placeholder='参数名'
           value={text}
@@ -62,7 +62,7 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
     {
       title: '类型',
       width: 150,
-      render: (_text: string, _: any, _index: number) => (
+      render: (_text: string, _, _index: number) => (
         <Input
           placeholder='类型'
           value={'string'}
@@ -73,7 +73,7 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
     {
       title: '参数值',
       dataIndex: 'value',
-      render: (text: string, _: any, index: number) => (
+      render: (text: string, _, index: number) => (
         <Input
           placeholder='参数值'
           value={text}

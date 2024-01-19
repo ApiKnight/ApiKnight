@@ -1,26 +1,22 @@
+import { ArrayItemType } from './arrayToTree'
+import { ApiType, CreateUser, FolderType } from './response.type'
+
 interface FlatItem {
   id: string
   parent_id?: string | null
   project_id: number
   name: string
   folder_id?: string
-  create_user?: any
-  create_time?: any
-  operate_time?: any
-  operate_user?: any
-  request_data?: any
-  response_data?: any
-  description?: any
-  type?:
-    | null
-    | 'GET'
-    | 'POST'
-    | 'PUT'
-    | 'DELETE'
-    | 'OPTIONS'
-    | 'HEAD'
-    | 'PATCH'
-    | 'FILE'
+  create_user?: CreateUser | string
+  create_time?: string
+  operate_time?: string
+  operate_user?: string
+  request_data?: string
+  response_data?: string
+  description?: string
+  type?: ArrayItemType | null
+  api_list?: Array<ApiType>
+  folder_list?: Array<FolderType>
 }
 interface FlatItemValue {
   value_1: FlatItem[]

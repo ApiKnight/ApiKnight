@@ -3,11 +3,17 @@ import { Button, Input, notification } from 'antd'
 import request from '@/api/request'
 import './email.less'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
+import { AxiosResponse } from 'axios'
+import { Result } from '@/api/request.type'
+import { E } from '@/types/base'
+import { CreateUser } from '@/types/response.type'
 
-const Email: React.FunctionComponent<any> = (props) => {
+const Email: React.FunctionComponent<{ project_id: string | number }> = (
+  props,
+) => {
   const [userEmail, setUserEmail] = useState('')
   const [listData, setListData] = useState([])
-  async function handleChange(e: any) {
+  async function handleChange(e: E) {
     setUserEmail(e.target.value)
   }
   const [info, setInfo] = useState('')
@@ -20,15 +26,12 @@ const Email: React.FunctionComponent<any> = (props) => {
         { email: userEmail, projectid: Number(props.project_id) },
         {},
       )
-      .then((resp) => {
-        if (
-          (resp as any).data.code !== 403 ||
-          (resp as any).data.data.code !== 500
-        ) {
-          setInfo((resp as any).data.message)
+      .then((resp: AxiosResponse<Result<never>>) => {
+        if (resp.data.code !== 403 && resp.data.code !== 500) {
+          setInfo(resp.data.message)
           const openNotification = (placement: NotificationPlacement) => {
             api.info({
-              message: <p>{(resp as any).data.message}</p>,
+              message: <p>{resp.data.message}</p>,
               description: <p></p>,
               placement,
             })
@@ -41,8 +44,8 @@ const Email: React.FunctionComponent<any> = (props) => {
   useEffect(() => {
     request
       .post('/v1/user/searchUsersByEmail', { email: userEmail }, {})
-      .then((res) => {
-        ;(res as any).data.data.map((item) => {
+      .then((res: AxiosResponse<Result<Omit<CreateUser, 'phone'>[]>>) => {
+        res.data.data.map((item) => {
           newArray.push({
             key: item.id,
             email: item.email,

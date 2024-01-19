@@ -10,6 +10,7 @@ const { Content } = Layout
 import './index.less'
 import { createAllMonitor } from '../../../../sdk/index'
 import type { LoginType } from '@/api/loginType'
+import { E } from '@/types/base'
 
 interface RegisterType {
   username: string
@@ -36,22 +37,22 @@ const Login: React.FC = () => {
   const [registPassword, setRegistPassword] = useState('')
   const [registEmail, setRegistEmail] = useState('')
   const [registPhone, setRegistPhone] = useState('')
-  function changeSetLoginUsername(e: any): void {
+  function changeSetLoginUsername(e: E): void {
     setLoginUsername(e.target.value)
   }
-  function changeSetLoginPassword(e: any): void {
+  function changeSetLoginPassword(e: E): void {
     setLoginPassword(e.target.value)
   }
-  function changeSetRegistUserNamed(e: any): void {
+  function changeSetRegistUserNamed(e: E): void {
     setRegistUserNamed(e.target.value)
   }
-  function changeSetRegistPassword(e: any): void {
+  function changeSetRegistPassword(e: E): void {
     setRegistPassword(e.target.value)
   }
-  function changeSetRegistEmail(e: any): void {
+  function changeSetRegistEmail(e: E): void {
     setRegistEmail(e.target.value)
   }
-  function changeSetRegistPhone(e: any): void {
+  function changeSetRegistPhone(e: E): void {
     setRegistPhone(e.target.value)
   }
   const onFinish = () => {
@@ -63,7 +64,7 @@ const Login: React.FC = () => {
           password: loginPassword,
         }),
         login(loginData).then(
-          (res: any) => {
+          (res) => {
             res.data.code === 200
               ? (message.success('登录成功'),
                 localStorage.setItem('token', res.data.data.token),

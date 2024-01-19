@@ -11,7 +11,7 @@ const Tab: React.FunctionComponent<Props> = (props) => {
   function changeShowState(): void {
     setShow(!show)
   }
-  function handleClose(e) {
+  function handleClose(e: React.MouseEvent) {
     e.stopPropagation()
     onRemoveTab?.(index)
   }

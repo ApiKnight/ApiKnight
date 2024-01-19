@@ -9,11 +9,12 @@ import getUserInfo from '@/api/getUserInfo'
 import { useLocation } from 'react-router-dom'
 import EmptyShow from '@/components/EmptyShow'
 import { createAllMonitor } from '../../../sdk/index'
+import { ProjectListItem } from '@/types/response.type'
 
 const { Content, Footer } = Layout
 
 const User: React.FunctionComponent = () => {
-  const [projectList, setProjectList] = useState<any[]>([])
+  const [projectList, setProjectList] = useState<ProjectListItem[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [user_info, setUserInfo] = useState({})
   const state = useLocation().state
@@ -27,12 +28,12 @@ const User: React.FunctionComponent = () => {
     setIsModalOpen(false)
   }
   const updateUserInfo = () => {
-    getUserInfo(user_id).then((res: any) => {
+    getUserInfo(user_id).then((res) => {
       const data = res.data.data
       setUserInfo(data)
       // 项目按照创建时间，后创建的在前面
       const sortedProjectList = data.project_list
-      sortedProjectList.sort((a: any, b: any) => {
+      sortedProjectList.sort((a: ProjectListItem, b: ProjectListItem) => {
         const aTime = new Date(a.create_time).getTime()
         const bTime = new Date(b.create_time).getTime()
         return bTime - aTime
@@ -84,7 +85,6 @@ const User: React.FunctionComponent = () => {
                         name={value.projectname}
                         dec={value.description}
                         project_id={value.id}
-                        iconPath={value.iconPath}
                         project_img={value.project_img}></ProjectItem>
                     </div>
                   )

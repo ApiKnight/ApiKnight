@@ -38,7 +38,7 @@ export interface RequestParamsType {
   params: NormalParamsType[]
   headers: NormalParamsType[]
   cookie: NormalParamsType[]
-  body: any
+  body: string
 }
 
 // 响应信息类型

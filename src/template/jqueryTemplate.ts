@@ -3,7 +3,7 @@ import { ArrayItemType } from '@/types/arrayToTree'
 function createJQueryTemplate(
   url: string,
   method: ArrayItemType,
-  headers: any,
+  headers: string,
   _redirect?: string,
 ): string {
   return `

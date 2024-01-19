@@ -5,8 +5,3 @@ declare interface ProjectItemType {
   dec: string
   project_img: string
 }
-// interface ProjectItemType {
-//     id: string,
-//     name: string,
-//     iconPath: string
-// }

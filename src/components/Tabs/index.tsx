@@ -8,6 +8,7 @@ import {
   removeTabAction,
 } from '@/store/modules/tabSlice'
 import { setValue } from '@/store/modules/rightSlice'
+import { TabsSetItem } from '@/types/tabs'
 
 const Tabs: React.FunctionComponent = () => {
   const dispatch = useDispatch()
@@ -48,7 +49,7 @@ const Tabs: React.FunctionComponent = () => {
       {tabs.map((item, index) => {
         return (
           <Tab
-            data={item}
+            data={item as TabsSetItem}
             key={item.key}
             active={item.key === currentKey}
             onRemoveTab={handleTabClose}

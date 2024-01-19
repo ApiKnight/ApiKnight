@@ -3,7 +3,7 @@ import { ArrayItemType } from '@/types/arrayToTree'
 function createUnirestTemplate(
   url: string,
   method: ArrayItemType,
-  headers: any,
+  headers: string,
   _redirect?: string,
 ): string {
   return `

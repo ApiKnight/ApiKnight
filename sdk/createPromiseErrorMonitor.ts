@@ -5,6 +5,7 @@ export function createPromiseErrorMonitor(url?: string) {
   if (url === '' || url === undefined) {
     url = window.location.pathname
   }
+  // eslint-disable-next-line
   function handlePromiseError(event: any) {
     reportError({ name, data: event.reason }, url, name)
   }

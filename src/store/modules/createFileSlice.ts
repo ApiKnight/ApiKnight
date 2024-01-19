@@ -1,25 +1,21 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 interface CreateFileValue {
-  value: {
-    project_id: number
-    parent_id: string
-  }
+  project_id: number
+  parent_id: string
 }
 
 const initialState: CreateFileValue = {
-  value: {
-    project_id: 0,
-    parent_id: '',
-  },
+  project_id: 0,
+  parent_id: '',
 }
 
 export const createFileSlice = createSlice({
   name: 'createFileSlice',
   initialState,
   reducers: {
-    setValue(state, action: PayloadAction<CreateFileValue>) {
-      ;(state.value as any) = action.payload
+    setValue(_state, action: PayloadAction<CreateFileValue>) {
+      return action.payload // 直接返回有效载荷
     },
   },
 })

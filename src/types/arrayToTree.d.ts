@@ -34,16 +34,16 @@ type ArrayItemType =
 
 interface ArrayItem {
   key: string
-  title: ArrayItemTitle
+  title: string | ArrayItem
   pid: string | null
-  type: ArrayItemTitle
+  type: ArrayItemType
 }
 
 interface ArrayNode {
   key: string
   title: ReactNode | Element
   pid: string | null
-  type: ArrayItemTitle
+  type: ArrayItemType
   isLeaf?: boolean | undefined
 }
 

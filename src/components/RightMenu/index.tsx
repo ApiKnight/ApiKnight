@@ -32,10 +32,10 @@ const RightMenu: React.FC<Props> = (props) => {
             // <div>修改文档组件,同时父组件传入的id为{data}</div>
             <Document data={data} />
           ) : current === '3' ? (
-            <Mock data={data} mode='run' project_id={project_id} />
+            <Mock mode='run' project_id={project_id} />
           ) : (
             // <div>Mock组件,同时父组件传入的id为{data}</div>
-            <Mock data={data} mode='mock' project_id={project_id} />
+            <Mock mode='mock' project_id={project_id} />
           )
         }
       </div>

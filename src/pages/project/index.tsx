@@ -15,7 +15,7 @@ import { createAllMonitor } from '../../../sdk'
 
 const Project: React.FunctionComponent = () => {
   const navigate = useNavigate()
-  let project_id
+  let project_id: number | string
   const state = useLocation().state
   createAllMonitor().start()
   // 获取project_id后更新projectReducer，统一存储
@@ -51,13 +51,12 @@ const Project: React.FunctionComponent = () => {
     isAuth().then((res) => {
       res === false
         ? navigate('/user/login')
-        : getCurrentRole(project_id).then((res: any) => {
+        : getCurrentRole(project_id).then((res) => {
             console.log(res)
             navigate('/project/apiMgt', { state: { project_id: project_id } })
           })
     })
   }, [])
-
   return (
     <div className='project-wrap'>
       <ApiTab />

@@ -5,6 +5,7 @@
   "type": "module",
   "homepage": "https://apiknight.github.io",
   "scripts": {
+    "prepare": "husky install",
     "dev": "vite",
     "build": "tsc && vite build",
     "lint:strict": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

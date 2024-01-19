@@ -8,8 +8,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint:strict": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --fix",
-    "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
+    "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --fix",
+    "lint-strict:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "preview": "vite preview",
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
     "deploy": "gh-pages -d build",
@@ -23,6 +24,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "5.8.4",
     "axios": "^1.4.0",
+    "husky": "^8.0.3",
     "less": "^4.1.3",
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
@@ -55,5 +57,13 @@
   "volta": {
     "node": "18.17.0",
     "pnpm": "8.6.11"
+  },
+  "husky": {
+    "hooks": {
+      "applypatch-msg": "echo \"[Husky] applypatch-msg\"",
+      "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
+      "post-applypatch": "echo \"[Husky] post-applypatch\"",
+      "pre-commit": "npm run prettier && npm run lint:fix && git add -A"
+    }
   }
 }

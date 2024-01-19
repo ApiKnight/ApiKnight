@@ -13,8 +13,7 @@ const RightPage: React.FC<{ project_id: string }> = (props) => {
       <div
         className={classNames('tabs-wrap', {
           hidden: tabContent === 'blank',
-        })}
-      >
+        })}>
         <Tabs />
       </div>
       <div className={classNames('other-wrap')}>

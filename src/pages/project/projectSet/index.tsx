@@ -79,15 +79,13 @@ const ProjectSet: React.FC = () => {
             initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
-            autoComplete='off'
-          >
+            autoComplete='off'>
             {projectInfo.description ? (
               <Form.Item
                 label='项目名称'
                 name='projectname'
                 rules={[{ required: true, message: '请输入项目名称!' }]}
-                initialValue={projectInfo.projectname}
-              >
+                initialValue={projectInfo.projectname}>
                 <Input disabled={role !== 1} />
               </Form.Item>
             ) : (
@@ -99,8 +97,7 @@ const ProjectSet: React.FC = () => {
                 label='项目描述'
                 name='description'
                 rules={[{ required: true, message: '请输入项目描述!' }]}
-                initialValue={projectInfo.description}
-              >
+                initialValue={projectInfo.description}>
                 <Input disabled={role !== 1} />
               </Form.Item>
             ) : (
@@ -112,8 +109,7 @@ const ProjectSet: React.FC = () => {
                 <Button
                   type='primary'
                   htmlType='submit'
-                  style={{ marginRight: '10px' }}
-                >
+                  style={{ marginRight: '10px' }}>
                   确定
                 </Button>
                 <Popconfirm
@@ -123,8 +119,7 @@ const ProjectSet: React.FC = () => {
                   onConfirm={confirm}
                   onCancel={cancel}
                   okText='确定'
-                  cancelText='取消'
-                >
+                  cancelText='取消'>
                   <Button danger>删除项目</Button>
                 </Popconfirm>
               </Form.Item>

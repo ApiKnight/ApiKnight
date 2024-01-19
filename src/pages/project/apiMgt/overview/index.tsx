@@ -172,9 +172,8 @@ const Overview: React.FunctionComponent = () => {
 
     // return
     // 第二步 获取最新项目信息
-    const { folder_list: newestFolderList } = await getProjectInfoById(
-      projectId,
-    )
+    const { folder_list: newestFolderList } =
+      await getProjectInfoById(projectId)
 
     console.log({ newestFolderList })
 
@@ -228,9 +227,8 @@ const Overview: React.FunctionComponent = () => {
       }
     }
     // 第二步 获取最新项目信息
-    const { folder_list: newestFolderList } = await getProjectInfoById(
-      projectId,
-    )
+    const { folder_list: newestFolderList } =
+      await getProjectInfoById(projectId)
 
     // 第三步遍历所有的api，所有api创建
     for (const [folderName, apiList] of apiInfoMap) {
@@ -316,8 +314,7 @@ const Overview: React.FunctionComponent = () => {
         open={onImportVisible}
         confirmLoading={onImporting}
         onOk={handleConfirmImport}
-        onCancel={() => setOnImportVisible(false)}
-      >
+        onCancel={() => setOnImportVisible(false)}>
         <Input
           style={{ marginTop: '15px' }}
           placeholder='OpenAPI（Swagger2.0）在线URL获取ApiKnight的分享链接'
@@ -332,8 +329,7 @@ const Overview: React.FunctionComponent = () => {
         confirmLoading={onShareing}
         onOk={handleConfirmShare}
         onCancel={() => setOnShareVisible(false)}
-        okText='复制接口链接'
-      >
+        okText='复制接口链接'>
         <Input
           style={{ marginTop: '15px' }}
           placeholder='分享链接'

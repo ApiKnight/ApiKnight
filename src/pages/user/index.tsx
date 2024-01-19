@@ -56,8 +56,7 @@ const User: React.FunctionComponent = () => {
 
       <Layout
         className='layout'
-        style={{ minHeight: '100%', overflow: 'scroll' }}
-      >
+        style={{ minHeight: '100%', overflow: 'scroll' }}>
         <HeaderNav user_info={user_info} />
         <div className='content-wrap' style={{ height: '100%', flex: '1' }}>
           <Content
@@ -65,16 +64,14 @@ const User: React.FunctionComponent = () => {
             style={{
               padding: '50px 50px',
               position: 'relative',
-            }}
-          >
+            }}>
             <div className='title'>
               <h1 className='my-project'>我的项目</h1>
               <Button
                 icon={<PlusOutlined />}
                 type='primary'
                 className='button'
-                onClick={() => openModal()}
-              >
+                onClick={() => openModal()}>
                 新建项目
               </Button>
             </div>
@@ -88,8 +85,7 @@ const User: React.FunctionComponent = () => {
                         dec={value.description}
                         project_id={value.id}
                         iconPath={value.iconPath}
-                        project_img={value.project_img}
-                      ></ProjectItem>
+                        project_img={value.project_img}></ProjectItem>
                     </div>
                   )
                 })

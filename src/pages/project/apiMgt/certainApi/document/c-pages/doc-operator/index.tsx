@@ -130,15 +130,13 @@ const DocOperator: React.FunctionComponent = () => {
         onPrefixInputChange={(e) => handleInputChange(e, 'prefix')}
         onInputChange={(e) => handleInputChange(e, 'path')}
         urlPrefixValue={baseInfo.prefix}
-        inputValue={baseInfo.path}
-      >
+        inputValue={baseInfo.path}>
         <Button
           className='btn'
           type='primary'
           onClick={() =>
             dispatch(changeUpdateStatusAction({ onUpdating: true }))
-          }
-        >
+          }>
           保存
         </Button>
         <Button className='btn' onClick={handleDelInfo}>
@@ -154,8 +152,7 @@ const DocOperator: React.FunctionComponent = () => {
         onOk={handleConfimSave}
         onCancel={(_e) =>
           dispatch(changeUpdateStatusAction({ onUpdating: false }))
-        }
-      >
+        }>
         <Input
           style={{ marginTop: '15px' }}
           status={isEmpty}

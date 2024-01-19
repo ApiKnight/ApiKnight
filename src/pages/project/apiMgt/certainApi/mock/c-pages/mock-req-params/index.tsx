@@ -94,8 +94,7 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
           type='text'
           size='small'
           onClick={() => handleNormalParamsAction(false, index)}
-          block
-        >
+          block>
           <MinusCircleOutlined />
         </Button>
       ),
@@ -186,8 +185,7 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
           type='link'
           size='small'
           onClick={() => handleNormalParamsAction(true, -1)}
-          block
-        >
+          block>
           <PlusOutlined />
         </Button>
       </div>
@@ -204,8 +202,7 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
               active: currentNav === item.value,
             })}
             key={item.value}
-            onClick={() => setCurrentNav(item.value)}
-          >
+            onClick={() => setCurrentNav(item.value)}>
             {item.label}
           </div>
         ))}

@@ -23,8 +23,7 @@ const AddBtn: React.FunctionComponent<{ data: AddData }> = (props) => {
         createApi(projectId, data.key, getUserId()).then((_res) => {
           dispatch(increment())
         })
-      }}
-    >
+      }}>
       <PlusOutlined />
       {contextHolder}
     </span>

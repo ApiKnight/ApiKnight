@@ -58,8 +58,7 @@ const NormalParamTable: React.FunctionComponent<ParamsProps> = memo((props) => {
           type='text'
           size='small'
           onClick={() => onParamDelClick(index, record)}
-          block
-        >
+          block>
           <MinusCircleOutlined />
         </Button>
       ),
@@ -74,8 +73,7 @@ const NormalParamTable: React.FunctionComponent<ParamsProps> = memo((props) => {
           type='link'
           size='small'
           onClick={() => onParamAddClick()}
-          block
-        >
+          block>
           <PlusOutlined />
         </Button>
       </div>

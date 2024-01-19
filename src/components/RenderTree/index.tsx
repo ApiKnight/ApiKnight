@@ -125,8 +125,7 @@ const RenderTree: React.FC = () => {
               blockNode
               onDrop={onDrop}
               style={{ width: '250px' }}
-              className='renderTree'
-            ></Tree>
+              className='renderTree'></Tree>
           )
         }
       })()}

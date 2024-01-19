@@ -80,7 +80,7 @@ devDependencies:
     specifier: ^8.45.0
     version: 8.56.0
   eslint-config-prettier:
-    specifier: ^8.9.0
+    specifier: ^8.10.0
     version: 8.10.0(eslint@8.56.0)
   eslint-plugin-prettier:
     specifier: ^5.1.3

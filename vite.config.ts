@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 import viteCompression from 'vite-plugin-compression'
+import cvIndex from './vite-plugins/vite-plugin-cvindex'
 
 const resolve = (dir: string) => path.join(__dirname, dir)
 
@@ -16,12 +17,14 @@ export default defineConfig({
     terserOptions: {
       mangle: true,
     },
+    outDir: './dist',
   },
   plugins: [
     react(),
     viteCompression({
       threshold: 102400, // 对大于 0.1mb 的文件进行压缩
     }),
+    cvIndex(),
   ],
   resolve: {
     alias: {

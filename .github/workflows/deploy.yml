@@ -23,7 +23,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          git clean -fdx &npm install
+          git clean -fdx & npm install
 
       - name: ESlint check
         run: |

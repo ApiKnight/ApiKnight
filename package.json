@@ -16,7 +16,8 @@
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
     "deploy": "gh-pages -d build",
     "test": "npx playwright test",
-    "test:debug": "npx playwright test --ui"
+    "test:debug": "npx playwright test --ui",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.5",

@@ -21,9 +21,15 @@ jobs:
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
 
+      - name: git-checkout
+        uses: actions/checkout@v3
+
+      - name: pnpm-setup
+        uses: pnpm/action-setup@v2
+
       - name: Install Dependencies
         run: |
-          git clean -fdx & npm i -g pnpm & pnpm install
+          git clean -fdx & pnpm install
 
       - name: ESlint check
         run: |

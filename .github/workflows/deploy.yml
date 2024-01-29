@@ -23,26 +23,26 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          git clean -fdx & npm install
+          git clean -fdx & npm i -g pnpm & pnpm install
 
       - name: ESlint check
         run: |
-          npm run lint:fix
+          pnpm run lint:fix
 
       - name: build the project
         run: |
-          npm run build
+          pnpm run build
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: start server for testing the built app
-        run: nohup npm run preview &
+        run: nohup pnpm run preview &
              echo "Preview app started"
              sleep 12
 
       - name: Run Playwright tests
-        run: npm run test
+        run: pnpm run test
       - uses: actions/upload-artifact@v3
         if: always()
         with:

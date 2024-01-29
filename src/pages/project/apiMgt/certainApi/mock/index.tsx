@@ -6,7 +6,7 @@ import MockUrl from './c-pages/mock-url'
 import { useAppDispatch, useAppSelector } from '@/store'
 import {
   changeMockModeAction,
-  forceFetchApiDataAction,
+  initFetchApiDataAction,
 } from '@/store/modules/mock'
 import { IMockProps } from './type'
 import ModeContext from './mode-context'
@@ -22,7 +22,7 @@ const Mock: React.FunctionComponent<IMockProps> = (props) => {
     if (apiId !== 'gl') {
       dispatch(changeMockModeAction(mode))
       // 根据接口id获取接口信息
-      dispatch(forceFetchApiDataAction(apiId))
+      dispatch(initFetchApiDataAction(apiId))
     }
   }, [dispatch, apiId])
 

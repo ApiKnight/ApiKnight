@@ -25,6 +25,20 @@ export const fetchApiDataAction = createAsyncThunk(
   },
 )
 
+export const initFetchApiDataAction = createAsyncThunk(
+  'mock/forceFetchApiDataAction',
+  async (apiId: string, { dispatch }) => {
+    const apiData = await getApiData(apiId)
+    apiData.apiInfo.response = {
+      status: 200,
+      body: '',
+    }
+    console.log(apiData.apiInfo.response)
+    dispatch(changeRunData(apiData))
+    dispatch(changeMockData(cloneDeep(apiData)))
+  },
+)
+
 // 强行重新获取接口数据
 export const forceFetchApiDataAction = createAsyncThunk(
   'mock/forceFetchApiDataAction',
@@ -77,6 +91,7 @@ const mockSlice = createSlice({
       }
     },
     changeResponseBodyAction(state, { payload }) {
+      console.log('payload')
       console.log(payload)
 
       if (state.mockMode === 'run') {

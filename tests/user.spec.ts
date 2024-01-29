@@ -52,7 +52,7 @@ test.describe('User page', async () => {
     await projectDescInput.fill('Test Project Desc')
     await page.getByRole('button', { name: '确 定' }).click()
     await expect(page.getByText('Test Project Desc').nth(0)).toBeVisible()
-    await page.getByText('Test Project Desc').hover()
+    await page.getByText('Test Project Desc').nth(0).hover()
     await expect(page.getByTestId('Test Project').nth(0)).toBeVisible()
     await page.getByTestId('Test Project').nth(0).click()
   })

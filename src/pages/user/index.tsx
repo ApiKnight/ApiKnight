@@ -85,7 +85,8 @@ const User: React.FunctionComponent = () => {
                         name={value.projectname}
                         dec={value.description}
                         project_id={value.id}
-                        project_img={value.project_img}></ProjectItem>
+                        project_img={value.project_img}
+                        updateUserInfo={updateUserInfo}></ProjectItem>
                     </div>
                   )
                 })

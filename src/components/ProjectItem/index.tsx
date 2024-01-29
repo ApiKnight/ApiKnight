@@ -1,15 +1,24 @@
 import React from 'react'
-import { Card, Image } from 'antd'
+import { Button, Card, Image } from 'antd'
 const { Meta } = Card
 import { useNavigate } from 'react-router-dom'
+import { DeleteOutlined } from '@ant-design/icons'
+import './index.less'
+import delProject from '@/api/delProject'
 
 interface ParamsType {
   project_id: string
   project_img: string
   dec: string
   name: string
+  updateUserInfo: () => void
 }
 const ProjectItem: React.FC<ParamsType> = (params) => {
+  async function deleteProject(e: React.MouseEvent<HTMLButtonElement>) {
+    e.stopPropagation()
+    await delProject(params.project_id)
+    params.updateUserInfo()
+  }
   const navigate = useNavigate()
   const toProject = () => {
     console.log('toProject')
@@ -33,7 +42,15 @@ const ProjectItem: React.FC<ParamsType> = (params) => {
             alt='项目图片'
           />
         }>
-        <Meta title={params.name} description={params.dec} />
+        <div className='project-item__title'>
+          <Meta title={params.name} description={params.dec} />
+          <Button
+            data-testid={params.name}
+            icon={<DeleteOutlined style={{ fontSize: '20px', color: 'red' }} />}
+            className='menu'
+            onClick={deleteProject}
+          />
+        </div>
       </Card>
     </div>
   )

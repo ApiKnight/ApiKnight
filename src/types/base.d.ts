@@ -1,3 +1,3 @@
 type E = React.ChangeEvent<HTMLInputElement>
-
-export type { E }
+type Obj<T extends object> = T
+export type { E, Obj }

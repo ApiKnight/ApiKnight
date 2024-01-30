@@ -25,7 +25,7 @@ export const fetchDocumentApiAction = createAsyncThunk(
       // 获取文档信息
       const res = await getFullApiData(apiId)
       const apiData: IAPIInfo = JSON.parse(res.request_data)
-      const { id, name, folder_id, create_user } = res
+      const { id, name, folder_id, create_user, response_data } = res
       apiData.meta_info.api_id = id
       apiData.meta_info.name = name
       apiData.meta_info.folder_id = folder_id
@@ -39,6 +39,7 @@ export const fetchDocumentApiAction = createAsyncThunk(
       dispatch(changeApiDataAction(apiData))
       dispatch(changeApiIdAction(res.id))
       dispatch(changeFolderNameAction(folderName))
+      dispatch(changeRequestBodyAction(response_data))
     } catch (err) {
       console.log('出错了')
 
@@ -97,8 +98,16 @@ const documentSlice = createSlice({
     onUpdating: false,
     // 正在向服务器发送请求
     onUploading: false,
+    request_data: '',
+    response_data: '',
   },
   reducers: {
+    changeRequestDataAction(state, { payload }) {
+      state.request_data = payload
+    },
+    changeResponseDataAction(state, { payload }) {
+      state.response_data = payload
+    },
     changeUserInfoAction(state, { payload }) {
       state.ownerUser = payload
     },
@@ -207,5 +216,7 @@ export const {
   changeResponseBodyAction,
   changeUpdateStatusAction,
   changeFolderNameAction,
+  changeRequestDataAction,
+  changeResponseDataAction,
 } = documentSlice.actions
 export default documentSlice.reducer

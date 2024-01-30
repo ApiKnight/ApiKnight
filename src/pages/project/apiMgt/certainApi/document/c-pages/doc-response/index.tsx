@@ -10,6 +10,7 @@ const DocResponse: React.FunctionComponent = memo(() => {
   const { apiData } = useAppSelector((state) => ({
     apiData: state.document.apiData,
   }))
+  console.log(apiData.apiInfo.response.body)
   return (
     <div className='doc-response'>
       <div className='section-title'>返回响应</div>

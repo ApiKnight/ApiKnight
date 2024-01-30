@@ -39,7 +39,7 @@ const IntroRequest: React.FunctionComponent = memo(() => {
           title={paramType.slice(0, 1).toUpperCase() + paramType.slice(1)}
           // extra={<a href='#'>生成代码</a>}
           style={{ width: '100%' }}>
-          {requestInfo[paramType].map((paramItem) => {
+          {requestInfo[paramType].map((paramItem: NormalParamsType) => {
             return getNormalParamItem(paramItem)
           })}
         </Card>
@@ -49,7 +49,7 @@ const IntroRequest: React.FunctionComponent = memo(() => {
 
   function getNormalParamItem(paramItem: NormalParamsType): ReactNode {
     return (
-      <div className='param-kv'>
+      <div className='param-kv' key={paramItem.id}>
         <div className='type'>
           <div className='param-name label'>
             <Tag color='cyan'>{paramItem.paramName}</Tag>

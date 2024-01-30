@@ -22,6 +22,7 @@ const Document: React.FunctionComponent<DocumentPropsType> = memo((props) => {
       dispatch(fetchDocumentApiAction(apiId))
     }
   }, [dispatch, apiId])
+  console.log('document')
   return (
     <div className='document-page'>
       <DocOperator />

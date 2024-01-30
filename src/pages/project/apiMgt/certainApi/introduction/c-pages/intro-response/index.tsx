@@ -11,7 +11,8 @@ const IntroResponse: React.FunctionComponent = memo(() => {
     }),
     shallowEqualApp,
   )
-
+  console.log('文档')
+  console.log(apiData.apiInfo.response.body)
   return (
     <div className='intro-response'>
       <div className='setction-title'>返回响应</div>

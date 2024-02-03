@@ -42,30 +42,21 @@ const Index: React.FunctionComponent = () => {
         可视化 API 文档设计功能，无需手写 Markdown 或
         YAML，零学习成本，高效便捷。
       </h3>
-      <img
-        src='https://cdn.apifox.cn/www/assets/image/index/design.0.png'
-        alt='展示图片'
-      />
+      <img src='/indexPage/2.jpg' alt='展示图片' />
     </div>
   )
   const text2 = (
     <div>
-      <h3>
-        可将常用数据结构定义为“数据模型”，在多个接口中引用，一次修改全局生效。
-      </h3>
-      <img
-        src='https://cdn.apifox.cn/www/assets/image/index/design.1.png'
-        alt='展示图片'
-      />
+      <h3>支持多种数据类型，UI友好，上手简单。</h3>
+      <img src='/indexPage/3.jpg' alt='展示图片' />
     </div>
   )
   const text3 = (
     <div>
-      <h3>接口文档完全遵循 OpenAPI(Swagger) 规范，支持 JSON Schema</h3>
-      <img
-        src='https://cdn.apifox.cn/www/assets/image/index/design.2.png'
-        alt='展示图片'
-      />
+      <h3>
+        接口文档完全遵循 OpenAPI(Swagger) 规范，支持 JSON Schema，快捷导出分享
+      </h3>
+      <img src='/indexPage/4.jpg' alt='展示图片' />
     </div>
   )
   const text4 = (
@@ -74,10 +65,7 @@ const Index: React.FunctionComponent = () => {
         支持导入 Swagger(OpenAPI), Postman, Jmeter, apiDoc, RAP2, YApi, Eolink,
         Apipost 等数据格式
       </h3>
-      <img
-        src='https://cdn.apifox.cn/www/assets/image/index/design.3.png'
-        alt='展示图片'
-      />
+      <img src='/indexPage/5.jpg' alt='展示图片' />
     </div>
   )
   const text5 = (
@@ -118,28 +106,19 @@ const Index: React.FunctionComponent = () => {
         设计完（或导入） 的API
         文档，一键分享给合作伙伴，接口变更实时同步，支持公开或加密发布。
       </h3>
-      <img
-        src='https://cdn.apifox.cn/www/assets/image/index/publish.0.png'
-        alt='展示图片'
-      />
+      <img src='/indexPage/4.jpg' alt='展示图片' />
     </div>
   )
   const text9 = (
     <div>
       <h3>API 文档页面支持“调试”功能，可以在线请求真实接口并返回数据</h3>
-      <img
-        src='https://cdn.apifox.cn/www/assets/image/index/publish.1.png'
-        alt='展示图片'
-      />
+      <img src='/indexPage/7.jpg' alt='展示图片' />
     </div>
   )
   const text10 = (
     <div>
       <h3>在线文档支持生成 20 多种语言的接口请求代码和数据模型代码</h3>
-      <img
-        src='https://cdn.apifox.cn/www/assets/image/index/publish.4.png'
-        alt='展示图片'
-      />
+      <img src='/indexPage/8.jpg' alt='展示图片' />
     </div>
   )
   const text11 = (
@@ -312,10 +291,7 @@ const Index: React.FunctionComponent = () => {
           </div>
         </div>
         <div className='block_2'>
-          <img
-            src='https://cdn.apifox.cn/www/assets/image/index/background-with-theme/dark-purple.png'
-            alt='展示图片'
-          />
+          <img src='/indexPage/1.jpg' alt='展示图片' />
         </div>
         <div className='block_3'>
           <h1>HOW IT WORKS</h1>
@@ -383,7 +359,6 @@ const Index: React.FunctionComponent = () => {
                 accordion
                 style={{ marginTop: '1%' }}
               />
-              ;
             </div>
             <div className='block_5--content-right'>
               <img
@@ -415,7 +390,6 @@ const Index: React.FunctionComponent = () => {
                 accordion
                 style={{ marginTop: '1%' }}
               />
-              ;
             </div>
           </div>
         </div>
@@ -439,7 +413,6 @@ const Index: React.FunctionComponent = () => {
                   accordion
                   style={{ marginTop: '1%' }}
                 />
-                ;
               </div>
               <div className='block_5--content-right'>
                 <img

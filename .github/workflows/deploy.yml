@@ -38,6 +38,10 @@ jobs:
         run: |
           pnpm run lint:fix
 
+      - name: Vitest
+        run: |
+          pnpm test:vitest
+
       - name: build the project
         run: |
           pnpm run build

@@ -1,0 +1,559 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for ApiKnight/src/api/request.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">ApiKnight/src/api</a> request.ts</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>0/158</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>0/158</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input oninput="onInput()" type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line low'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { baseURL } from '@/config/config'</span></span></span>
+<span class="cstat-no" title="statement not covered" >import axios from 'axios'</span>
+<span class="cstat-no" title="statement not covered" >import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'</span>
+<span class="cstat-no" title="statement not covered" >import NProgress from 'nprogress'</span>
+<span class="cstat-no" title="statement not covered" >import { Result } from './request.type'</span>
+<span class="cstat-no" title="statement not covered" >import { reportError } from '../../sdk/reportError'</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >// 导出Request，传入配置以创建实例</span>
+<span class="cstat-no" title="statement not covered" >export class Request {</span>
+<span class="cstat-no" title="statement not covered" >  // axios 实例</span>
+<span class="cstat-no" title="statement not covered" >  instance: AxiosInstance</span>
+<span class="cstat-no" title="statement not covered" >  startTime: number</span>
+<span class="cstat-no" title="statement not covered" >  endTime: number</span>
+<span class="cstat-no" title="statement not covered" >  targetURL: string</span>
+<span class="cstat-no" title="statement not covered" >  // 基础配置，url和超时时间</span>
+<span class="cstat-no" title="statement not covered" >  // 测试接口，id:bolpgeq7pltiflnj,  secret:d0JZQ2N1bUQ2djJBSXFFSm92ZVpWdz09</span>
+<span class="cstat-no" title="statement not covered" >  // https://www.mxnzp.com/api/holiday/single/20181121?ignoreHoliday=false&amp;app_id=bolpgeq7pltiflnj&amp;app_secret=d0JZQ2N1bUQ2djJBSXFFSm92ZVpWdz09</span>
+<span class="cstat-no" title="statement not covered" >  baseConfig: AxiosRequestConfig = {</span>
+<span class="cstat-no" title="statement not covered" >    baseURL: baseURL,</span>
+<span class="cstat-no" title="statement not covered" >    timeout: 60000,</span>
+<span class="cstat-no" title="statement not covered" >    // withCredentials: true,</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  constructor(config: AxiosRequestConfig) {</span>
+<span class="cstat-no" title="statement not covered" >    this.startTime = +new Date()</span>
+<span class="cstat-no" title="statement not covered" >    this.instance = axios.create(Object.assign(this.baseConfig, config))</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    //请求拦截，设置请求头，处理统一的请求数据</span>
+<span class="cstat-no" title="statement not covered" >    this.instance.interceptors.request.use(</span>
+<span class="cstat-no" title="statement not covered" >      // config:AxiosRequestConfig</span>
+<span class="cstat-no" title="statement not covered" >      (config) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        // 顶部进度条</span>
+<span class="cstat-no" title="statement not covered" >        NProgress.start()</span>
+<span class="cstat-no" title="statement not covered" >        // CORS</span>
+<span class="cstat-no" title="statement not covered" >        config.headers['Access-Control-Allow-Origin'] = '*'</span>
+<span class="cstat-no" title="statement not covered" >        config.headers['Content-Type'] = 'application/json'</span>
+<span class="cstat-no" title="statement not covered" >        // 判断token</span>
+<span class="cstat-no" title="statement not covered" >        const token = localStorage.getItem('token') as string</span>
+<span class="cstat-no" title="statement not covered" >        if (token) {</span>
+<span class="cstat-no" title="statement not covered" >          config.headers!.Authorization = 'Bearer ' + token</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >        // console.log('请求拦截成功', config)</span>
+<span class="cstat-no" title="statement not covered" >        return config</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >      (err: string) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        // 错误提示，待加</span>
+<span class="cstat-no" title="statement not covered" >        return Promise.reject(err)</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >    )</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    //响应拦截,根据响应状态码做统一的提示信息，整理响应数据</span>
+<span class="cstat-no" title="statement not covered" >    this?.instance.interceptors.response.use(</span>
+<span class="cstat-no" title="statement not covered" >      (res: AxiosResponse) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        // 顶部进度条</span>
+<span class="cstat-no" title="statement not covered" >        NProgress.done()</span>
+<span class="cstat-no" title="statement not covered" >        this.endTime = +new Date()</span>
+<span class="cstat-no" title="statement not covered" >        reportError(</span>
+<span class="cstat-no" title="statement not covered" >          this.endTime - this.startTime,</span>
+<span class="cstat-no" title="statement not covered" >          this.targetURL,</span>
+<span class="cstat-no" title="statement not covered" >          'NetWork request time',</span>
+<span class="cstat-no" title="statement not covered" >        )</span>
+<span class="cstat-no" title="statement not covered" >        // 统一处理响应数据</span>
+<span class="cstat-no" title="statement not covered" >        // 系统如果有自定义code也可以在这里处理</span>
+<span class="cstat-no" title="statement not covered" >        return res</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >      (err) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        // 这里用来处理http常见错误，进行全局提示</span>
+<span class="cstat-no" title="statement not covered" >        let message = ''</span>
+<span class="cstat-no" title="statement not covered" >        switch (err.response.status) {</span>
+<span class="cstat-no" title="statement not covered" >          case 400:</span>
+<span class="cstat-no" title="statement not covered" >            message = '请求错误(400)'</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+<span class="cstat-no" title="statement not covered" >          case 401:</span>
+<span class="cstat-no" title="statement not covered" >            message = '未授权，请重新登录(401)'</span>
+<span class="cstat-no" title="statement not covered" >            // 这里可以做清空storage并跳转到登录页的操作</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+<span class="cstat-no" title="statement not covered" >          case 403:</span>
+<span class="cstat-no" title="statement not covered" >            message = '拒绝访问(403)'</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+<span class="cstat-no" title="statement not covered" >          case 404:</span>
+<span class="cstat-no" title="statement not covered" >            message = '请求出错(404)'</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+<span class="cstat-no" title="statement not covered" >          case 408:</span>
+<span class="cstat-no" title="statement not covered" >            message = '请求超时(408)'</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+<span class="cstat-no" title="statement not covered" >          case 500:</span>
+<span class="cstat-no" title="statement not covered" >            message = '服务器错误(500)'</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+<span class="cstat-no" title="statement not covered" >          case 501:</span>
+<span class="cstat-no" title="statement not covered" >            message = '服务未实现(501)'</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+<span class="cstat-no" title="statement not covered" >          case 502:</span>
+<span class="cstat-no" title="statement not covered" >            message = '网络错误(502)'</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+<span class="cstat-no" title="statement not covered" >          case 503:</span>
+<span class="cstat-no" title="statement not covered" >            message = '服务不可用(503)'</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+<span class="cstat-no" title="statement not covered" >          case 504:</span>
+<span class="cstat-no" title="statement not covered" >            message = '网络超时(504)'</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+<span class="cstat-no" title="statement not covered" >          case 505:</span>
+<span class="cstat-no" title="statement not covered" >            message = 'HTTP版本不受支持(505)'</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+<span class="cstat-no" title="statement not covered" >          default:</span>
+<span class="cstat-no" title="statement not covered" >            message = `连接出错(${err.response.status})!`</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >        // 错误信息提示，待加</span>
+<span class="cstat-no" title="statement not covered" >        console.log(message)</span>
+<span class="cstat-no" title="statement not covered" >        // 这里是AxiosError类型，所以一般我们只reject我们需要的响应</span>
+<span class="cstat-no" title="statement not covered" >        return Promise.reject(err.response)</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >    )</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  // 定义请求方法</span>
+<span class="cstat-no" title="statement not covered" >  request(config: AxiosRequestConfig): Promise&lt;AxiosResponse&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.instance.request(config)</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  get&lt;T&gt;(</span>
+<span class="cstat-no" title="statement not covered" >    url: string,</span>
+<span class="cstat-no" title="statement not covered" >    config?: AxiosRequestConfig,</span>
+<span class="cstat-no" title="statement not covered" >  ): Promise&lt;AxiosResponse&lt;Result&lt;T&gt;&gt;&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    this.targetURL = url</span>
+<span class="cstat-no" title="statement not covered" >    return this.instance.get(url, config)</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  post&lt;T&gt;(</span>
+<span class="cstat-no" title="statement not covered" >    url: string,</span>
+<span class="cstat-no" title="statement not covered" >    // eslint-disable-next-line</span>
+<span class="cstat-no" title="statement not covered" >    data?: any,</span>
+<span class="cstat-no" title="statement not covered" >    config?: AxiosRequestConfig,</span>
+<span class="cstat-no" title="statement not covered" >  ): Promise&lt;AxiosResponse&lt;Result&lt;T&gt;&gt;&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    this.targetURL = url</span>
+<span class="cstat-no" title="statement not covered" >    return this.instance.post(url, data, config)</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  put&lt;T&gt;(</span>
+<span class="cstat-no" title="statement not covered" >    url: string,</span>
+<span class="cstat-no" title="statement not covered" >    // eslint-disable-next-line</span>
+<span class="cstat-no" title="statement not covered" >    data?: any,</span>
+<span class="cstat-no" title="statement not covered" >    config?: AxiosRequestConfig,</span>
+<span class="cstat-no" title="statement not covered" >  ): Promise&lt;AxiosResponse&lt;Result&lt;T&gt;&gt;&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    this.targetURL = url</span>
+<span class="cstat-no" title="statement not covered" >    return this.instance.put(url, data, config)</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  delete&lt;T&gt;(</span>
+<span class="cstat-no" title="statement not covered" >    url: string,</span>
+<span class="cstat-no" title="statement not covered" >    config?: AxiosRequestConfig,</span>
+<span class="cstat-no" title="statement not covered" >  ): Promise&lt;AxiosResponse&lt;Result&lt;T&gt;&gt;&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    this.targetURL = url</span>
+<span class="cstat-no" title="statement not covered" >    return this.instance.delete(url, config)</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >// 默认导出Request实例</span>
+<span class="cstat-no" title="statement not covered" >export default new Request({})</span>
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2024-02-04T07:01:25.024Z
+            </div>
+        <script src="../../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
+    </body>
+</html>
+    

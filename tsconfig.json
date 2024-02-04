@@ -25,6 +25,6 @@
     },
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src", "sdk","vite-plugins","vite.config.ts"],
+  "include": ["src", "sdk"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

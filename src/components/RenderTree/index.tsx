@@ -52,6 +52,16 @@ const RenderTree: React.FC = () => {
               projectId,
             ),
           })
+          console.log('------------------====-----------------------')
+          console.log(resp.data.data.folder_list)
+          console.log(resp.data.data.api_list)
+          console.log(
+            mergeFlatArrays(
+              resp.data.data.folder_list,
+              resp.data.data.api_list,
+              projectId,
+            ),
+          )
           setShowLoading(false)
         }
       })
@@ -105,7 +115,9 @@ const RenderTree: React.FC = () => {
   const renderData = restoreData(makeValue.value)
   // 数组转树形结构
   const tree: TreeNode[] = arrayToTree(renderData)
-  console.log('tree', tree)
+  console.log('tree and renderData:')
+  console.log(renderData)
+  console.log(tree)
   return (
     <div className='tree-part'>
       {(() => {

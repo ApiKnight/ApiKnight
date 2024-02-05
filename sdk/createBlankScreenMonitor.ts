@@ -19,7 +19,7 @@ export function createBlankScreenMonitor(url?: string) {
       if (firstPaintEntry && firstContentfulPaintEntry) {
         const blankScreenTime =
           firstContentfulPaintEntry.startTime - firstPaintEntry.startTime
-        reportError({ name, data: { blankScreenTime } }, url, name)
+        reportError({ name, blankScreenTime }, url, name)
       }
     })
 

@@ -1,10 +1,15 @@
+import { UnhandledRejectionData, JsErrorData } from './type'
+
 /* eslint-disable */
-export function reportError(error: any, url: string, type: string) {
+type ReportType = Record<string,string | number | JsErrorData | UnhandledRejectionData | PerformanceEntry | Record<string,string>>
+export function reportError(error: ReportType, url: string, type: string) {
   if (url === '' || url === undefined) {
     url = window.location.pathname
   }
+  console.log(error instanceof Object)
+  console.log(error)
   error.userId = localStorage.getItem('user_id') ? localStorage.getItem('user_id') : "New User"
-  error.curTime = +new Date();
+  error.curTime = String(+new Date());
   const sendData = {
     url: url,
     type: type,

@@ -55,7 +55,7 @@ export class Request {
         NProgress.done()
         this.endTime = +new Date()
         reportError(
-          this.endTime - this.startTime,
+          { time: this.endTime - this.startTime },
           this.targetURL,
           'NetWork request time',
         )

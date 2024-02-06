@@ -16,7 +16,7 @@ export function createResourceErrorMonitor(url?: string) {
           return
         }
         if (target instanceof HTMLElement) {
-          let url
+          let url: string
           // 区分 link 标签，获取静态资源地址
           if (target.tagName.toLowerCase() === 'link') {
             url = target.getAttribute('href')

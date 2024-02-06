@@ -1,21 +1,9 @@
 import { reportError } from './reportError'
+import { UnhandledRejectionData, JsErrorData } from './type'
 
 /* 
   采集JS错误的 monitor
 */
-interface JsErrorData {
-  type: string
-  message?: string
-  filename?: string
-  lineno?: number
-  colno?: number
-}
-
-// Adjust the type of 'reason' based on your application's needs
-interface UnhandledRejectionData {
-  type: string
-  reason: Error // Provide a more specific type for 'reason'
-}
 
 export function createJsErrorMonitor(url?: string) {
   const name = 'js-error'

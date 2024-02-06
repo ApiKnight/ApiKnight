@@ -26,7 +26,6 @@ dist-ssr
 *.test.json
 *.test.js
 
-package-lock.json
 yarn.lock
 
 coverage

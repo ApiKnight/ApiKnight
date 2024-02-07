@@ -80,3 +80,15 @@ jobs:
         env:
           PERMISSIONS_POLICY: ${{ env.PERMISSIONS_POLICY }}
         if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'main'  # 仅在 main 分支上推送时触发
+
+      - name: SSH to server and run deployment script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          password: ${{ secrets.REMOTE_PASS }}
+          script: |
+            cd /home/ubuntu/ApiKnight/ApiKnight
+            git pull origin gh-pages
+            chmod -R 777 ./
+        if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'main'  # 仅在 main 分支上推送时触发

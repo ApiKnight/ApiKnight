@@ -14,7 +14,7 @@ const HeaderNav: React.FC<ChildrenProps> = (props) => {
     <div className='header-nav'>
       <div className='left'>
         <div className='title'>
-          <a href='/ApiKnight/user'>ApiKnight</a>
+          <a href='/user'>ApiKnight</a>
         </div>
       </div>
 
@@ -22,7 +22,7 @@ const HeaderNav: React.FC<ChildrenProps> = (props) => {
       <div className='right'>
         <div className='github'>
           <div className='url'>
-            <a href='https://github.com/ApiKnight' target='_blank'>
+            <a href='/' target='_blank'>
               <Avatar
                 size={40}
                 style={{ backgroundColor: 'black' }}

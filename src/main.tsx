@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <ConfigProvider theme={theme}>
     <AntdApp style={{ height: '100%' }}>
       <Provider store={store}>
-        <BrowserRouter basename='/ApiKnight'>
+        <BrowserRouter>
           <App />
         </BrowserRouter>
       </Provider>

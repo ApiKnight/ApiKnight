@@ -9,7 +9,6 @@ const resolve = (dir: string) => path.join(__dirname, dir)
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
   esbuild: {
     pure: ['console.log'], // 删除 console.log
     drop: ['debugger'], // 删除 debugger

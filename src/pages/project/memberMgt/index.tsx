@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import getProjectMember from '@/api/getProjectMember'
 import { useLocation } from 'react-router-dom'
 import {
@@ -52,7 +52,7 @@ const MemberMgt: React.FC = () => {
         console.log('审批列表拉取失败')
       }
     })
-  }, [])
+  }, [project_id])
 
   const [currentUid, setCurrentUid] = useState<string>('')
   const [role, setRoleState] = useState<number>(0)
@@ -71,32 +71,38 @@ const MemberMgt: React.FC = () => {
     })
   }
 
-  async function getCurRole(project_id) {
-    const res = await getCurrentRole(project_id)
-    res.data.code === 200 ? setRoleState(res.data.data.role) : ''
-    updateMemberList()
-  }
+  const updateMemberList = useCallback(
+    () =>
+      getProjectMember(project_id).then((res) => {
+        if (res.data.code === 200) {
+          const data = res.data.data
+          setNumber(data.length)
+          setMemberList(
+            data.map((value: ValueMemberList) => {
+              setInitLoading(false)
+              value.key = value.user_id
+              return value
+            }),
+          )
+        } else {
+          console.log('拉取成员列表失败')
+        }
+      }),
+    [project_id],
+  )
 
-  const updateMemberList = () =>
-    getProjectMember(project_id).then((res) => {
-      if (res.data.code === 200) {
-        const data = res.data.data
-        setNumber(data.length)
-        setMemberList(
-          data.map((value: ValueMemberList) => {
-            setInitLoading(false)
-            value.key = value.user_id
-            return value
-          }),
-        )
-      } else {
-        console.log('拉取成员列表失败')
-      }
-    })
+  const getCurRole = useCallback(
+    async (project_id) => {
+      const res = await getCurrentRole(project_id)
+      res.data.code === 200 ? setRoleState(res.data.data.role) : ''
+      updateMemberList()
+    },
+    [updateMemberList],
+  )
 
   useEffect(() => {
     getCurRole(project_id)
-  }, [])
+  }, [getCurRole, project_id])
 
   const closeModal = () => {
     setIsModalOpen(false)

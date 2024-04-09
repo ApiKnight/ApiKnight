@@ -25,6 +25,7 @@ type MockUrlProps = {
   mode: 'run' | 'mock'
   mockPrefix?: string
 }
+// eslint-disable-next-line react-refresh/only-export-components
 const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
   const { mode } = props
   const [mockPrefix, setMockPrefix] = useState(
@@ -202,4 +203,5 @@ const MockUrl: React.FunctionComponent<MockUrlProps> = (props) => {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default memo(withMode(MockUrl))

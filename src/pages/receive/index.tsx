@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Button, notification } from 'antd'
 import './index.less'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -13,7 +13,9 @@ const Receive: React.FunctionComponent = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [api, contextHolder] = notification.useNotification()
-  function sendJoin() {
+  const [isJoin, setIsJoin] = useState(false)
+
+  const sendJoin = useCallback(() => {
     request
       .post(
         '/v1/invite/receive',
@@ -35,9 +37,10 @@ const Receive: React.FunctionComponent = () => {
           navigate('/')
         }, 3000)
       })
-  }
+  }, [searchParams, isJoin, api, navigate])
+
   const [projectName, setProjectName] = useState('')
-  const [isJoin, setIsJoin] = useState(false)
+
   useEffect(() => {
     request
       .post(
@@ -48,6 +51,7 @@ const Receive: React.FunctionComponent = () => {
       .then((resp: AxiosResponse<Result<QueryResp>>) => {
         setProjectName(resp.data.data.projectname as string)
       })
+
     getProjectMember(Number(searchParams.get('projectid'))).then(
       (resp: AxiosResponse<Result<MemberList[]>>) => {
         const user_id = localStorage.getItem('user_id')
@@ -61,7 +65,8 @@ const Receive: React.FunctionComponent = () => {
         })
       },
     )
-  }, [])
+  }, [searchParams])
+
   return (
     <div className='receive'>
       {contextHolder}

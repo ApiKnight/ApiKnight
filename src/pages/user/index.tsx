@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import './index.less'
 import ProjectItem from '@/components/ProjectItem'
 import { Layout, Button } from 'antd'
@@ -21,13 +21,13 @@ const User: React.FunctionComponent = () => {
   const user_id = localStorage.getItem('user_id')
   console.log('userid', user_id, state)
   createAllMonitor('/user').start()
-  const openModal = () => {
+  const openModal = useCallback(() => {
     setIsModalOpen(true)
-  }
-  const closeModal = () => {
+  }, [])
+  const closeModal = useCallback(() => {
     setIsModalOpen(false)
-  }
-  const updateUserInfo = () => {
+  }, [])
+  const updateUserInfo = useCallback(() => {
     getUserInfo(user_id).then((res) => {
       const data = res.data.data
       setUserInfo(data)
@@ -40,11 +40,11 @@ const User: React.FunctionComponent = () => {
       })
       setProjectList(sortedProjectList)
     })
-  }
+  }, [user_id])
   useEffect(() => {
     //有token，先登录再拉取项目列表
     updateUserInfo()
-  }, [])
+  }, [updateUserInfo])
 
   return (
     <div className='user'>

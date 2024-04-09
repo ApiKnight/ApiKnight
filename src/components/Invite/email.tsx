@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Button, Input, notification } from 'antd'
 import request from '@/api/request'
 import './email.less'
@@ -19,7 +19,7 @@ const Email: React.FunctionComponent<{ project_id: string | number }> = (
   const [info, setInfo] = useState('')
   console.log(info)
   const [api, contextHolder] = notification.useNotification()
-  function sendInfo(): void {
+  const sendInfo = useCallback((): void => {
     request
       .post(
         '/v1/invite/sending',
@@ -39,8 +39,10 @@ const Email: React.FunctionComponent<{ project_id: string | number }> = (
           openNotification('topLeft')
         }
       })
-  }
-  const newArray = []
+  }, [api, props.project_id, userEmail])
+  const newArray = useMemo(() => {
+    return []
+  }, [])
   useEffect(() => {
     request
       .post('/v1/user/searchUsersByEmail', { email: userEmail }, {})
@@ -53,7 +55,7 @@ const Email: React.FunctionComponent<{ project_id: string | number }> = (
           setListData(newArray)
         })
       })
-  }, [userEmail])
+  }, [newArray, userEmail])
 
   return (
     <div className='email'>

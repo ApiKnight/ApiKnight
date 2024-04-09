@@ -7,6 +7,7 @@ import withMode from '../../with-mode'
 import CodeEditor from '@/components/CodeEditor'
 import { changeResponseBodyAction } from '@/store/modules/mock'
 
+// eslint-disable-next-line react-refresh/only-export-components
 const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
   props,
 ) => {
@@ -40,4 +41,5 @@ const MockResponse: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default memo(withMode(MockResponse))

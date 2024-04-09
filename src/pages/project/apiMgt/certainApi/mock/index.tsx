@@ -24,7 +24,7 @@ const Mock: React.FunctionComponent<IMockProps> = (props) => {
       // 根据接口id获取接口信息
       dispatch(initFetchApiDataAction(apiId))
     }
-  }, [dispatch, apiId])
+  }, [dispatch, apiId, mode])
 
   return (
     <div>

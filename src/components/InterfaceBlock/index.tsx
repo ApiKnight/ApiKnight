@@ -11,6 +11,7 @@ import { setValue } from '@/store/modules/rightSlice'
 import { ArrayItem, delProps } from '@/types/arrayToTree'
 import { changeCurrentKeyAction } from '@/store/modules/tabSlice'
 
+// eslint-disable-next-line react-refresh/only-export-components
 const InterfaceBlock: React.FunctionComponent<{ data: ArrayItem }> = (
   props,
 ) => {
@@ -63,4 +64,5 @@ const InterfaceBlock: React.FunctionComponent<{ data: ArrayItem }> = (
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default React.memo(InterfaceBlock)

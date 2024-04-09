@@ -4,6 +4,7 @@ import { changeRequestBodyAction } from '@/store/modules/document/document'
 import CodeEditor from '@/components/CodeEditor'
 import './index.less'
 
+// eslint-disable-next-line react-refresh/only-export-components
 const RequestBody: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
   const { requestBody } = useAppSelector((state) => ({
@@ -26,4 +27,5 @@ const RequestBody: React.FunctionComponent = () => {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default memo(RequestBody)

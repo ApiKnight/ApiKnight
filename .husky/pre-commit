@@ -1,1 +1,1 @@
-pnpm run prettier && pnpm run lint:fix && git add -A .
+pnpm run prettier && pnpm run lint-strict:fix && git add -A .

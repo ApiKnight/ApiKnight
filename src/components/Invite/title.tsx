@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import './title.less'
 import { PoweroffOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,9 +15,9 @@ const Title: React.FunctionComponent<{ projectid: string | number }> = (
 ) => {
   const dispatch = useDispatch()
   const flag = useSelector((state: RootState) => state.stateFlag.value)
-  function closeInvite(): void {
+  const closeInvite = useCallback((): void => {
     dispatch(setFalse())
-  }
+  }, [dispatch])
   const [name, setName] = useState('示例')
   useEffect(() => {
     request
@@ -27,7 +27,7 @@ const Title: React.FunctionComponent<{ projectid: string | number }> = (
           setName(resp.data.data.projectname)
         }
       })
-  }, [])
+  }, [props.projectid])
   return (
     <div className='invite-title'>
       <h2>邀请加入{name}项目</h2>

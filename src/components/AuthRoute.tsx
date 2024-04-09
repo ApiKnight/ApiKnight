@@ -23,7 +23,7 @@ const AuthRoute = ({ children }: AuthRouteProps) => {
     isAuth().then((result) => {
       return setLoginResult(result ? children : <Navigate to='/user/login' />)
     })
-  }, [])
+  }, [children])
   return <div className='Router-Cpn'>{loginResult}</div>
 }
 

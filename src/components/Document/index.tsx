@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Button, notification, Spin, Tag } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
 import './index.less'
@@ -13,14 +13,23 @@ const Document: React.FunctionComponent<{ data: string }> = (props) => {
   const { data } = props
   const [api, contextHolder] = notification.useNotification()
   const [showLoading, setShowLoading] = useState(false)
-  const openNotification = (placement: NotificationPlacement) => {
-    api.info({
-      message: <p>复制成功</p>,
-      description: <p></p>,
-      placement,
-    })
-  }
-  function copy() {
+  // url这里正常应该包含在rquest_data中，这里未定结构，暂时写死
+  const [url] = useState('/example')
+  const [createUser, SetCreateUser] = useState('')
+  const [changeUser, SetChangeUser] = useState('')
+  const [apiName, setApiName] = useState('ApiName')
+  const [floderName, setFolderName] = useState('根目录')
+  const openNotification = useCallback(
+    (placement: NotificationPlacement) => {
+      api.info({
+        message: <p>复制成功</p>,
+        description: <p></p>,
+        placement,
+      })
+    },
+    [api],
+  )
+  const copy = useCallback(() => {
     navigator.clipboard
       .writeText(url)
       .then(() => {
@@ -29,7 +38,52 @@ const Document: React.FunctionComponent<{ data: string }> = (props) => {
       .catch((error) => {
         console.log(error)
       })
-  }
+  }, [openNotification, url])
+  const getFolderName = useCallback((folderId: string): void => {
+    request
+      .post(
+        '/v1/folder/queryname',
+        {
+          folder_id: folderId,
+        },
+        {},
+      )
+      .then((resp: AxiosResponse<Result<string>>) => {
+        if (resp.data.code == 200) {
+          setFolderName(resp.data.data)
+        }
+      })
+  }, [])
+  const getCreateUser = useCallback((userId: string): void => {
+    request
+      .post(
+        '/v1/user/query',
+        {
+          user_id: userId,
+        },
+        {},
+      )
+      .then((resp: AxiosResponse<Result<CreateUser>>) => {
+        SetCreateUser(resp.data.data.username)
+      })
+  }, [])
+  const getChangeUser = useCallback((userId: string): void => {
+    setShowLoading(true)
+    request
+      .post(
+        '/v1/user/query',
+        {
+          user_id: userId,
+        },
+        {},
+      )
+      .then((resp: AxiosResponse<Result<CreateUser>>) => {
+        if (resp.data.code == 200) {
+          SetChangeUser(resp.data.data.username)
+          setShowLoading(false)
+        }
+      })
+  }, [])
   const [allValue, setAllValue] = useState<DocumentTypes>({
     id: '',
     folder_id: '',
@@ -62,58 +116,8 @@ const Document: React.FunctionComponent<{ data: string }> = (props) => {
         setApiName(resp.data.data.name)
         getFolderName(resp.data.data.folder_id)
       })
-  }, [props])
-  const [createUser, SetCreateUser] = useState('')
-  const [changeUser, SetChangeUser] = useState('')
-  const [apiName, setApiName] = useState('ApiName')
-  const [floderName, setFolderName] = useState('根目录')
-  // url这里正常应该包含在rquest_data中，这里未定结构，暂时写死
-  const [url] = useState('/example')
-  function getFolderName(folderId: string): void {
-    request
-      .post(
-        '/v1/folder/queryname',
-        {
-          folder_id: folderId,
-        },
-        {},
-      )
-      .then((resp: AxiosResponse<Result<string>>) => {
-        if (resp.data.code == 200) {
-          setFolderName(resp.data.data)
-        }
-      })
-  }
-  function getCreateUser(userId: string): void {
-    request
-      .post(
-        '/v1/user/query',
-        {
-          user_id: userId,
-        },
-        {},
-      )
-      .then((resp: AxiosResponse<Result<CreateUser>>) => {
-        SetCreateUser(resp.data.data.username)
-      })
-  }
-  function getChangeUser(userId: string): void {
-    setShowLoading(true)
-    request
-      .post(
-        '/v1/user/query',
-        {
-          user_id: userId,
-        },
-        {},
-      )
-      .then((resp: AxiosResponse<Result<CreateUser>>) => {
-        if (resp.data.code == 200) {
-          SetChangeUser(resp.data.data.username)
-          setShowLoading(false)
-        }
-      })
-  }
+  }, [data, getChangeUser, getCreateUser, getFolderName, props])
+
   return (
     <div className='document'>
       {showLoading && (

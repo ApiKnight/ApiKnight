@@ -7,6 +7,7 @@ import './index.less'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { fetchDocumentApiAction } from '@/store/modules/document/document'
 
+// eslint-disable-next-line react-refresh/only-export-components
 const Introduction: React.FunctionComponent<IntroductionProps> = (props) => {
   console.log(props)
   const dispatch = useAppDispatch()
@@ -29,4 +30,5 @@ const Introduction: React.FunctionComponent<IntroductionProps> = (props) => {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default memo(Introduction)

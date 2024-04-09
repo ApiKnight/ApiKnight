@@ -8,6 +8,7 @@ import Link from '@/components/Invite/link'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 
+// eslint-disable-next-line react-refresh/only-export-components
 const Invite: React.FunctionComponent<{ project_id: number | string }> = (
   props,
 ) => {
@@ -44,4 +45,5 @@ const Invite: React.FunctionComponent<{ project_id: number | string }> = (
   }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default React.memo(Invite)

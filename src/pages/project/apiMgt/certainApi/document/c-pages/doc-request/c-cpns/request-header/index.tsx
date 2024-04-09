@@ -15,6 +15,7 @@ import NormalParamTable from '@/components/NormalParamTable'
 // 自己模块的内容
 import './index.less'
 
+// eslint-disable-next-line react-refresh/only-export-components
 const RequestHeader: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
   const { params } = useAppSelector((state) => ({
@@ -70,4 +71,5 @@ const RequestHeader: React.FunctionComponent = () => {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default memo(RequestHeader)

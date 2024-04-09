@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Button, Form, Input, message, Popconfirm, App } from 'antd'
 import './index.less'
 import getProjectBase from '@/api/getProjectBase'
@@ -28,21 +28,24 @@ const ProjectSet: React.FC = () => {
   })
   const [role, setRoleState] = useState<number>(0)
 
-  const onFinish = (values: FormValuesType) => {
-    values.projectid = project_id
-    console.log(values)
-    updateProject(values).then((res) => {
-      res.data.code === 200
-        ? message.success('修改成功')
-        : message.error('修改失败')
-    })
-  }
+  const onFinish = useCallback(
+    (values: FormValuesType) => {
+      values.projectid = project_id
+      console.log(values)
+      updateProject(values).then((res) => {
+        res.data.code === 200
+          ? message.success('修改成功')
+          : message.error('修改失败')
+      })
+    },
+    [project_id],
+  )
 
-  const onFinishFailed = () => {
+  const onFinishFailed = useCallback(() => {
     console.log('err')
-  }
+  }, [])
 
-  const deleteProject = () => {
+  const deleteProject = useCallback(() => {
     delProject(project_id).then((res) => {
       res.data.code === 200
         ? (message.success('删除成功'),
@@ -51,10 +54,13 @@ const ProjectSet: React.FC = () => {
           }))
         : message.error('删除失败')
     })
-  }
-  const confirm = (_e: React.MouseEvent<HTMLElement>) => {
-    deleteProject()
-  }
+  }, [navigate, project_id])
+  const confirm = useCallback(
+    (_e: React.MouseEvent<HTMLElement>) => {
+      deleteProject()
+    },
+    [deleteProject],
+  )
 
   const cancel = (_e: React.MouseEvent<HTMLElement>) => {}
 
@@ -70,7 +76,7 @@ const ProjectSet: React.FC = () => {
     getProjectBase(project_id).then((res) => {
       res.data.code === 200 ? setProjectInfo(res.data.data) : ''
     })
-  }, [])
+  }, [project_id])
 
   return (
     <App>

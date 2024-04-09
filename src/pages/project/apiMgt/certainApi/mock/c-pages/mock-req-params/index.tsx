@@ -17,6 +17,7 @@ import { NavItem } from './type'
 import withMode from '../../with-mode'
 import CodeEditor from '@/components/CodeEditor'
 
+// eslint-disable-next-line react-refresh/only-export-components
 const NavItems: NavItem[] = [
   { label: 'Params', value: NavType.Params },
   { label: 'Body', value: NavType.Body },
@@ -24,6 +25,7 @@ const NavItems: NavItem[] = [
   { label: 'Header', value: NavType.Header },
 ]
 
+// eslint-disable-next-line react-refresh/only-export-components
 const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
   props,
 ) => {
@@ -213,4 +215,5 @@ const MockReqParams: React.FunctionComponent<{ mode: 'run' | 'mock' }> = (
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default memo(withMode(MockReqParams))

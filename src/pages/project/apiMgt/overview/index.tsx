@@ -85,7 +85,7 @@ const Overview: React.FunctionComponent = () => {
     getProjectBase(state.project_id).then((res) => {
       res.data.code === 200 ? setProjectBase(res.data.data) : ''
     })
-  }, [])
+  }, [state.project_id])
 
   const { folderList, projectId } = useAppSelector((state) => ({
     folderList: state.project.projectInfo.folder_list,

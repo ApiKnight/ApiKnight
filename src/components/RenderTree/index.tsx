@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useState, useEffect } from 'react'
-import { Skeleton, Tree } from 'antd'
+import { Skeleton, Tree, TreeProps } from 'antd'
 import { arrayToTree } from '@/utils/arrayToTree'
-import type { TreeNode, ArrayItem, ArrayNode } from '@/types/arrayToTree'
+import type {
+  TreeNode,
+  ArrayItem,
+  ArrayNode,
+  ArrayItemType,
+} from '@/types/arrayToTree'
 import './index.less'
 import { useLocation } from 'react-router-dom'
 import { RootState } from '@/store/index.ts'
@@ -31,7 +36,7 @@ const RenderTree: React.FC = () => {
   const [makeValue, setMakeValue] = useState<MakeValue>({ value: data })
   const state = useLocation().state
   const projectId = state.project_id
-  function reqFun() {
+  const reqFun = useCallback(() => {
     setShowLoading(true)
     request
       .post('/v1/project/query', { projectid: projectId }, {})
@@ -65,11 +70,11 @@ const RenderTree: React.FC = () => {
           setShowLoading(false)
         }
       })
-  }
+  }, [projectId])
   const watchDir = useSelector((state: RootState) => state.watchDir.value)
   useEffect(() => {
     reqFun()
-  }, [watchDir])
+  }, [reqFun, watchDir])
   function restoreData(d: ArrayItem[]): ArrayNode[] {
     const restoredData: ArrayNode[] = []
 
@@ -95,23 +100,29 @@ const RenderTree: React.FC = () => {
     return restoredData
   }
   const dispatch = useDispatch()
-  const onDrop = (info) => {
-    if (info.node.type === 'FILE') {
-      const url =
-        info.dragNode.type === 'FILE' ? '/v1/folder/update' : '/v1/apis/update'
-      const urlData =
-        info.dragNode.type === 'FILE'
-          ? { folder_id: info.dragNodesKeys[0], parent_id: info.node.key }
-          : { apis_id: info.dragNodesKeys[0], folder_id: info.node.key }
-      setShowLoading(true)
-      request.post(url, urlData, {}).then((res) => {
-        console.log(res)
-        // 在这里处理返回的数据
-        dispatch(increment())
+  const onDrop: TreeProps['onDrop'] = useCallback(
+    (info) => {
+      if ((info.node as unknown as { type: ArrayItemType }).type === 'FILE') {
+        console.log(info)
+        const url =
+          (info.dragNode as unknown as { type: ArrayItemType }).type === 'FILE'
+            ? '/v1/folder/update'
+            : '/v1/apis/update'
+        const urlData =
+          (info.dragNode as unknown as { type: ArrayItemType }).type === 'FILE'
+            ? { folder_id: info.dragNodesKeys[0], parent_id: info.node.key }
+            : { apis_id: info.dragNodesKeys[0], folder_id: info.node.key }
         setShowLoading(true)
-      })
-    }
-  }
+        request.post(url, urlData, {}).then((res) => {
+          console.log(res)
+          // 在这里处理返回的数据
+          dispatch(increment())
+          setShowLoading(true)
+        })
+      }
+    },
+    [dispatch],
+  )
   const renderData = restoreData(makeValue.value)
   // 数组转树形结构
   const tree: TreeNode[] = arrayToTree(renderData)

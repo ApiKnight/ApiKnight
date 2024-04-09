@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { Button, App, Modal, Input } from 'antd'
 import type { ApiOptReqOptType } from '@/types/components'
 import './index.less'
@@ -18,6 +18,7 @@ import { setValue } from '@/store/modules/rightSlice'
 import { usePrevious } from '@/hooks/usePrevious'
 import { forceFetchApiDataAction } from '@/store/modules/mock'
 
+// eslint-disable-next-line react-refresh/only-export-components
 const DocOperator: React.FunctionComponent = () => {
   const { message, modal } = App.useApp()
   const dispatch = useAppDispatch()
@@ -30,6 +31,16 @@ const DocOperator: React.FunctionComponent = () => {
       apiName: state.document.apiName,
     }),
   )
+
+  // 通知其他redux等更新数据
+  const updateOthers = useCallback(() => {
+    // 通知接口目录
+    dispatch(increment())
+    // 通知运行和mock
+    dispatch(forceFetchApiDataAction(apiId))
+    console.log(apiName)
+  }, [apiId, apiName, dispatch])
+
   // 保存上一次的更新状态
   const previousOnloading = usePrevious(onUploading)
   useEffect(() => {
@@ -37,16 +48,7 @@ const DocOperator: React.FunctionComponent = () => {
     if (previousOnloading && !onUploading) {
       updateOthers()
     }
-  }, [onUploading])
-
-  // 通知其他redux等更新数据
-  const updateOthers = () => {
-    // 通知接口目录
-    dispatch(increment())
-    // 通知运行和mock
-    dispatch(forceFetchApiDataAction(apiId))
-    console.log(apiName)
-  }
+  }, [onUploading, previousOnloading, updateOthers])
 
   // 保存接口备注
   const [saveRemark, setSaveRemark] = useState<string>('')
@@ -62,10 +64,13 @@ const DocOperator: React.FunctionComponent = () => {
   }, [baseInfo])
 
   // 请求方式改变事件
-  const handleMethodChange = (methodOpt: ApiOptReqOptType): void => {
-    setMethod(methodOpt)
-    dispatch(changeMethodAction(methodOpt.value))
-  }
+  const handleMethodChange = useCallback(
+    (methodOpt: ApiOptReqOptType): void => {
+      setMethod(methodOpt)
+      dispatch(changeMethodAction(methodOpt.value))
+    },
+    [dispatch],
+  )
 
   // 输入框改变事件
   const handleInputChange = (
@@ -98,7 +103,7 @@ const DocOperator: React.FunctionComponent = () => {
   }
 
   // 删除信息
-  const handleDelInfo = () => {
+  const handleDelInfo = useCallback(() => {
     // 删除接口成功事件
     const okEvent = async () => {
       // 删除接口信息
@@ -120,7 +125,7 @@ const DocOperator: React.FunctionComponent = () => {
       onOk: okEvent,
       onCancel: () => {},
     })
-  }
+  }, [apiId, dispatch, message, modal])
 
   return (
     <div className='doc-operator'>
@@ -168,4 +173,5 @@ const DocOperator: React.FunctionComponent = () => {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default memo(DocOperator)

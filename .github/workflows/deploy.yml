@@ -36,7 +36,7 @@ jobs:
 
       - name: ESlint check
         run: |
-          pnpm run lint:fix
+          pnpm run lint-strict:fix
 
       - name: Vitest
         run: |

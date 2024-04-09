@@ -1,4 +1,9 @@
-import React, { MouseEventHandler, useState, useEffect } from 'react'
+import React, {
+  MouseEventHandler,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react'
 import './index.less'
 import { CloseOutlined } from '@ant-design/icons'
 import { SendProps, UserShowType } from '@/types/userInfo'
@@ -22,16 +27,17 @@ const UserInfo: React.FunctionComponent = () => {
   const [data, setData] = useState<SendProps>({
     sendType: 'email',
   })
-  function showUpdate(
-    type: 'email' | 'phone' | 'username',
-  ): MouseEventHandler<HTMLElement> {
-    return () => {
-      dispatch(setIValue(true))
-      setData({
-        sendType: type,
-      })
-    }
-  }
+  const showUpdate = useCallback(
+    (type: 'email' | 'phone' | 'username'): MouseEventHandler<HTMLElement> => {
+      return () => {
+        dispatch(setIValue(true))
+        setData({
+          sendType: type,
+        })
+      }
+    },
+    [dispatch],
+  )
   const columns: ColumnsType<UserShowType> = [
     {
       title: 'type',
@@ -85,9 +91,9 @@ const UserInfo: React.FunctionComponent = () => {
       ),
     },
   ])
-  function closeThisPage() {
+  const closeThisPage = useCallback(() => {
     dispatch(setValue(false))
-  }
+  }, [dispatch])
   const updateUserInfoSlice = useSelector(
     (state: RootState) => state.updateUserInfoSlice.value,
   )
@@ -134,14 +140,14 @@ const UserInfo: React.FunctionComponent = () => {
           },
         ])
       })
-  }, [isUpdateSlice])
+  }, [isUpdateSlice, showUpdate])
   const navigate = useNavigate()
-  function quit(): void {
+  const quit = useCallback((): void => {
     localStorage.removeItem('user_id')
     localStorage.removeItem('token')
     closeThisPage()
     navigate('/user/login')
-  }
+  }, [closeThisPage, navigate])
   return ReactDOM.createPortal(
     <div className='userInfo'>
       {updateUserInfoSlice && <UpdateUserInfo data={data} />}

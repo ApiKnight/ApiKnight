@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Popover, App } from 'antd'
 import { AddData } from '@/types/treeComponents'
@@ -15,33 +15,49 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
   const { data } = props
   const { modal } = App.useApp()
   const dispatch = useDispatch()
+  const state = useLocation().state
+  const proId = state.project_id
+  const [show, setShow] = useState(false)
+  const [pData, setPData] = useState({
+    project_id: proId,
+    parent_id: data.key,
+    pid: data.pid,
+  })
+
   const { prijectInfo } = useAppSelector((state) => ({
     prijectInfo: state.project.projectInfo,
   }))
-  function addChildDir(e: React.MouseEvent): void {
-    dispatch(setTrue())
-    setShow(true)
-    e.stopPropagation()
-    setTitleInfo('添加子目录')
-  }
-  function updateChildDir(e: React.MouseEvent): void {
-    dispatch(setTrue())
-    setShow(true)
-    e.stopPropagation()
-    setTitleInfo('修改文件夹名称')
-  }
+
+  const addChildDir = useCallback(
+    (e: React.MouseEvent): void => {
+      dispatch(setTrue())
+      setShow(true)
+      e.stopPropagation()
+      setTitleInfo('添加子目录')
+    },
+    [dispatch],
+  )
+  const updateChildDir = useCallback(
+    (e: React.MouseEvent): void => {
+      dispatch(setTrue())
+      setShow(true)
+      e.stopPropagation()
+      setTitleInfo('修改文件夹名称')
+    },
+    [dispatch],
+  )
   useEffect(() => {
     setPData({
       project_id: proId,
       parent_id: data.key,
       pid: data.pid,
     })
-  }, [])
+  }, [data.key, data.pid, proId])
 
   /**
    * 导出api
    */
-  async function handleShare() {
+  const handleShare = useCallback(async () => {
     setShow(false)
     const shareURL = await shareApi(prijectInfo.api_list, prijectInfo.id)
     // 复制链接到剪切板
@@ -55,7 +71,7 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
         </div>
       ),
     })
-  }
+  }, [modal, prijectInfo.api_list, prijectInfo.id])
   const content = (
     <div>
       <div>
@@ -79,18 +95,13 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
       </div>
     </div>
   )
-  const state = useLocation().state
-  const proId = state.project_id
-  const [show, setShow] = useState(false)
-  const [pData, setPData] = useState({
-    project_id: proId,
-    parent_id: data.key,
-    pid: data.pid,
-  })
-  const handleDataFromChild = (data: boolean): void => {
+
+  const handleDataFromChild = useCallback((data: boolean): void => {
     setShow(data)
-  }
+  }, [])
+
   const [titleInfo, setTitleInfo] = useState('添加子目录')
+
   return (
     <span>
       <Popover content={content} title='' trigger='click'>

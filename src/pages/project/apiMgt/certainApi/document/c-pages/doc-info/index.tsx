@@ -60,6 +60,7 @@ const getItemByVal: <T>(arr: T[], value: T) => T = (list, value) => {
 
 type Owner = { label: string; value: string }
 
+// eslint-disable-next-line react-refresh/only-export-components
 const DocInfo: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
   const { metaInfo, ownerUser } = useAppSelector((state) => ({
@@ -81,16 +82,18 @@ const DocInfo: React.FunctionComponent = () => {
     return values
   }, [metaInfo.tags])
   // 候选负责人列表
-  const directors: Owner[] = [
-    {
-      label: '@' + ownerUser.username,
-      value: ownerUser.id,
-    },
-  ]
+  const directors: Owner[] = useMemo(() => {
+    return [
+      {
+        label: '@' + ownerUser.username,
+        value: ownerUser.id,
+      },
+    ]
+  }, [ownerUser.id, ownerUser.username])
   // 责任人信息
   const owner = useMemo(() => {
     return directors[0]
-  }, [ownerUser])
+  }, [directors])
   type Value = StatusValue | IUserInfo | TagType[] | DevStatus | Owner
   // 下拉框选择事件
   const handleSelectChange = (value: Value, type: SelectType) => {
@@ -192,4 +195,5 @@ const DocInfo: React.FunctionComponent = () => {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default memo(DocInfo)

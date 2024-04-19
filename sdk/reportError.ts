@@ -1,3 +1,4 @@
+import { baseURL } from '@/config/config'
 import { UnhandledRejectionData, JsErrorData } from './type'
 
 /* eslint-disable */
@@ -15,5 +16,5 @@ export function reportError(error: ReportType, url: string, type: string) {
     type: type,
     message: JSON.stringify(error),
   }
-  navigator.sendBeacon('https://lyyfsq.club:7000/api/v1/monitor/upload',JSON.stringify(sendData))
+  navigator.sendBeacon(`${baseURL}v1/monitor/upload`,JSON.stringify(sendData))
 }

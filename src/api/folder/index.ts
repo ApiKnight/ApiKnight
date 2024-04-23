@@ -25,3 +25,20 @@ export async function createFolder(
   })
   return data
 }
+
+export async function updataFolder(
+  folder_id: string,
+  parent_id: string,
+  name: string,
+) {
+  const { data } = await request.post(
+    '/v1/folder/update',
+    {
+      folder_id,
+      parent_id,
+      name,
+    },
+    {},
+  )
+  return data
+}

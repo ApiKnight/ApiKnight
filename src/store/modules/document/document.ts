@@ -31,10 +31,10 @@ export const fetchDocumentApiAction = createAsyncThunk(
       apiData.meta_info.folder_id = folder_id
       // 获取文件夹名字
       const folderName = await getFolderName(folder_id)
-      // console.log({ folderName })
 
       // 获取用户信息
-      const ownerInfo = await getUserInfoById(create_user)
+      const response = await getUserInfoById(create_user)
+      const ownerInfo: IUserInfo = response.data
       dispatch(changeUserInfoAction(ownerInfo))
       dispatch(changeApiDataAction(apiData))
       dispatch(changeApiIdAction(res.id))

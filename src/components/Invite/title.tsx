@@ -5,10 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setFalse } from '@/store/modules/stateFlag'
 import Overlay from '@/components/overlay'
 import { RootState } from '../../store'
-import request from '../../api/request'
-import { AxiosResponse } from 'axios'
-import { Result } from '@/api/request.type'
-import { QuerySummary } from '@/types/response.type'
+import { querySummaryProject } from '@/api/project'
 
 const Title: React.FunctionComponent<{ projectid: string | number }> = (
   props,
@@ -20,13 +17,13 @@ const Title: React.FunctionComponent<{ projectid: string | number }> = (
   }, [dispatch])
   const [name, setName] = useState('示例')
   useEffect(() => {
-    request
-      .post('/v1/project/querysummary', { projectid: props.projectid }, {})
-      .then((resp: AxiosResponse<Result<QuerySummary>>) => {
-        if (resp.data.code == 200) {
-          setName(resp.data.data.projectname)
-        }
-      })
+    const func = async () => {
+      const resp = await querySummaryProject(props.projectid)
+      if (resp.code == 200) {
+        setName(resp.data.projectname)
+      }
+    }
+    func()
   }, [props.projectid])
   return (
     <div className='invite-title'>

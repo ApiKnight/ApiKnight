@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "sideEffects": false,
+  "private": false,
   "scripts": {
     "test": "npx jest",
     "build": "npx rollup -c",

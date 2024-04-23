@@ -1,4 +1,4 @@
-import{r as p,w as h,j as o,ad as l,X as a}from"./index-78ee94a0.js";import{i as c}from"./index-66f3d0ef.js";function i(t,s,r,e){return`
+import{r as p,w as h,j as o,ad as l,X as a}from"./index-671c4982.js";import{i as c}from"./index-3eb80b27.js";function i(t,s,r,e){return`
         var myHeaders = new Headers();
         myHeaders.append(${r});
         

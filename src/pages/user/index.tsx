@@ -8,7 +8,7 @@ import CreateProject from '@/components/CreateProject'
 import getUserInfo from '@/api/getUserInfo'
 import { useLocation } from 'react-router-dom'
 import EmptyShow from '@/components/EmptyShow'
-import { createAllMonitor } from '../../../sdk/index'
+import { createAllMonitor } from '../../../sdk/src/index'
 import { ProjectListItem } from '@/types/response.type'
 
 const { Content, Footer } = Layout

@@ -8,7 +8,7 @@ import login from '@/api/login'
 import randomNum from '@/utils/randomNum'
 const { Content } = Layout
 import './index.less'
-import { createAllMonitor } from '../../../../sdk/index'
+import { createAllMonitor } from '../../../../sdk/src/index'
 import type { LoginType } from '@/api/loginType'
 import { E } from '@/types/base'
 

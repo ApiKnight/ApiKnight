@@ -11,7 +11,7 @@ import ApiTab from '@/components/ApiTab'
 import getSelfInfo from '@/api/getSelfInfo'
 import { useAppDispatch } from '@/store'
 import { fetchProjectInfoAction } from '@/store/modules/project'
-import { createAllMonitor } from '../../../sdk'
+import { createAllMonitor } from '../../../sdk/src'
 
 const Project: React.FunctionComponent = () => {
   const navigate = useNavigate()

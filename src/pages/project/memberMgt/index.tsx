@@ -21,7 +21,7 @@ import getCurrentRole from '@/api/getCurrentRole'
 import reqDelMember from '@/api/reqDelMember'
 import chgProjAdmin from '@/api/chgProjAdmin'
 import ShowMember from '@/components/ShowMember'
-import { createAllMonitor } from '../../../../sdk'
+import { createAllMonitor } from '../../../../sdk/src'
 import { MemberList } from '@/types/response.type'
 
 const MemberMgt: React.FC = () => {

@@ -1,8 +1,5 @@
-import { baseURL } from '@/config/config'
-import { UnhandledRejectionData, JsErrorData } from './type'
-
 /* eslint-disable */
-type ReportType = Record<string,string | number | JsErrorData | UnhandledRejectionData | PerformanceEntry | Record<string,string>>
+type ReportType = Record<string,any>
 export function reportError(error: ReportType, url: string, type: string) {
   if (url === '' || url === undefined) {
     url = window.location.pathname
@@ -16,5 +13,5 @@ export function reportError(error: ReportType, url: string, type: string) {
     type: type,
     message: JSON.stringify(error),
   }
-  navigator.sendBeacon(`${baseURL}v1/monitor/upload`,JSON.stringify(sendData))
+  navigator.sendBeacon(`https://lyyfsq.club:7000/api/v1/monitor/upload`,JSON.stringify(sendData))
 }

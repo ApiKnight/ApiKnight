@@ -7,7 +7,7 @@ export function createPromiseErrorMonitor(url?: string) {
   }
   // eslint-disable-next-line
   function handlePromiseError(event: any) {
-    reportError({ name, data: event.reason }, url, name)
+    reportError({ name, data: event.reason }, url as string, name)
   }
 
   function start() {

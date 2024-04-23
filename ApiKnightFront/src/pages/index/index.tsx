@@ -11,12 +11,11 @@ import {
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import getSelfInfo from '@/api/getSelfInfo'
-import { createAllMonitor } from '../../../sdk/src'
 
 const Index: React.FunctionComponent = () => {
   //清空缓存
   // 过期token
-  createAllMonitor('/index').start()
+  // createAllMonitor('/index').start()
   const navigate = useNavigate()
 
   const user_id = localStorage.getItem('user_id')

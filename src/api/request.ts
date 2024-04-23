@@ -3,7 +3,7 @@ import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import NProgress from 'nprogress'
 import { Result } from './request.type'
-import { reportError } from '../../sdk/reportError'
+import { reportError } from '../../sdk/src/reportError'
 
 // 导出Request，传入配置以创建实例
 export class Request {

@@ -31,7 +31,7 @@ export function createJsErrorMonitor(url?: string) {
         colno: colno || 0,
       }
 
-      reportError({ name, data: jsErrorData }, url, name)
+      reportError({ name, data: jsErrorData }, url as string, name)
     }
   }
 
@@ -40,7 +40,7 @@ export function createJsErrorMonitor(url?: string) {
 
     const rejectionData: UnhandledRejectionData = { type, reason }
 
-    reportError({ name, data: rejectionData }, url, name)
+    reportError({ name, data: rejectionData }, url as string, name)
   }
 
   return { name, start }

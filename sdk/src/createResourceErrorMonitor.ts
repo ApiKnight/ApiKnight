@@ -16,14 +16,14 @@ export function createResourceErrorMonitor(url?: string) {
           return
         }
         if (target instanceof HTMLElement) {
-          let url: string
+          let url: string | null
           // 区分 link 标签，获取静态资源地址
           if (target.tagName.toLowerCase() === 'link') {
             url = target.getAttribute('href')
           } else {
             url = target.getAttribute('src')
           }
-          reportError({ name, data: { url } }, url, name)
+          reportError({ name, data: { url } }, url as string, name)
         }
       },
       true,

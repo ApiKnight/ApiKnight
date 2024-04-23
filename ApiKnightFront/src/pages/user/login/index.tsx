@@ -8,7 +8,6 @@ import login from '@/api/login'
 import randomNum from '@/utils/randomNum'
 const { Content } = Layout
 import './index.less'
-import { createAllMonitor } from '../../../../sdk/src/index'
 import type { LoginType } from '@/api/loginType'
 import { E } from '@/types/base'
 
@@ -29,7 +28,6 @@ const Login: React.FC = () => {
    * @param max 最大值
    * @returns
    */
-  createAllMonitor().start()
   const [loginState, setLoginState] = useState<LoginState>('Login')
   const [loginUserName, setLoginUsername] = useState('')
   const [loginPassword, setLoginPassword] = useState('')

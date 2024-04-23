@@ -8,7 +8,6 @@ import CreateProject from '@/components/CreateProject'
 import getUserInfo from '@/api/getUserInfo'
 import { useLocation } from 'react-router-dom'
 import EmptyShow from '@/components/EmptyShow'
-import { createAllMonitor } from '../../../sdk/src/index'
 import { ProjectListItem } from '@/types/response.type'
 
 const { Content, Footer } = Layout
@@ -20,7 +19,6 @@ const User: React.FunctionComponent = () => {
   const state = useLocation().state
   const user_id = localStorage.getItem('user_id')
   console.log('userid', user_id, state)
-  createAllMonitor('/user').start()
   const openModal = useCallback(() => {
     setIsModalOpen(true)
   }, [])

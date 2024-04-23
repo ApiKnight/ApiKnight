@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import getSelfInfo from '@/api/getSelfInfo'
-import { createAllMonitor } from '../../../sdk/src'
+import { createAllMonitor } from '@/utils/monitor'
 
 const Index: React.FunctionComponent = () => {
   //清空缓存

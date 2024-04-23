@@ -9,9 +9,11 @@ import { MemberList } from '@/types/response.type'
 import getProjectMember from '@/api/getProjectMember'
 import { getProjectInfoById } from '@/api/project'
 import { apiReceive } from '@/api/invite'
+import { createAllMonitor } from '@/utils/monitor'
 
 const Receive: React.FunctionComponent = () => {
   const navigate = useNavigate()
+  createAllMonitor().start()
   const [searchParams] = useSearchParams()
   const [api, contextHolder] = notification.useNotification()
   const [isJoin, setIsJoin] = useState(false)

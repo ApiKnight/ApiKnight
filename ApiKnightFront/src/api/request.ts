@@ -3,7 +3,7 @@ import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import NProgress from 'nprogress'
 import { Result } from './request.type'
-import { reportError } from '../../sdk/src/reportError'
+import { report } from '@/utils/monitor'
 
 // 导出Request，传入配置以创建实例
 export class Request {
@@ -54,7 +54,7 @@ export class Request {
         // 顶部进度条
         NProgress.done()
         this.endTime = +new Date()
-        reportError(
+        report(
           { time: this.endTime - this.startTime },
           this.targetURL,
           'NetWork request time',

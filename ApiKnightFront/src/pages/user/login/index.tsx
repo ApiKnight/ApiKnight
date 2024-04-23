@@ -8,9 +8,9 @@ import login from '@/api/login'
 import randomNum from '@/utils/randomNum'
 const { Content } = Layout
 import './index.less'
-import { createAllMonitor } from '../../../../sdk/src/index'
 import type { LoginType } from '@/api/loginType'
 import { E } from '@/types/base'
+import { createAllMonitor } from '@/utils/monitor'
 
 interface RegisterType {
   username: string
@@ -23,13 +23,13 @@ type LoginState = 'Login' | 'Regist'
 
 const Login: React.FC = () => {
   const navigate = useNavigate()
+  createAllMonitor().start()
   /**
    * 生成[min,max)区间的随机整数
    * @param min 最小值
    * @param max 最大值
    * @returns
    */
-  createAllMonitor().start()
   const [loginState, setLoginState] = useState<LoginState>('Login')
   const [loginUserName, setLoginUsername] = useState('')
   const [loginPassword, setLoginPassword] = useState('')

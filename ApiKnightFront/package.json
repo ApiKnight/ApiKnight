@@ -1,0 +1,27 @@
+{
+  "name": "@apiknight/front",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "homepage": "https://apiknight.github.io",
+  "scripts": {
+    "prepare": "husky",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint:strict": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
+    "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --fix",
+    "lint-strict:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
+    "preview": "vite preview",
+    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
+    "deploy": "gh-pages -d build",
+    "test": "npx playwright test",
+    "test:vitest": "vitest",
+    "test:vitest-prod": "vitest --coverage",
+    "test:debug": "npx playwright test --ui",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "dependencies": {
+    "@apiknight/monitor-sdk": "workspace:*"
+  }
+}

@@ -21,9 +21,9 @@
     // "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*","sdk/src/*"]
+      "@/*": ["src/*", "sdk/src/*"]
     },
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src", "sdk"],
   "references": [{ "path": "./tsconfig.node.json" }]

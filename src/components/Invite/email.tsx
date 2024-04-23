@@ -1,12 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Button, Input, notification } from 'antd'
-import request from '@/api/request'
 import './email.less'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
-import { AxiosResponse } from 'axios'
-import { Result } from '@/api/request.type'
 import { E } from '@/types/base'
-import { CreateUser } from '@/types/response.type'
+import { searchUsersByEmail, sendEamil } from '@/api/invite'
 
 const Email: React.FunctionComponent<{ project_id: string | number }> = (
   props,
@@ -19,42 +16,33 @@ const Email: React.FunctionComponent<{ project_id: string | number }> = (
   const [info, setInfo] = useState('')
   console.log(info)
   const [api, contextHolder] = notification.useNotification()
-  const sendInfo = useCallback((): void => {
-    request
-      .post(
-        '/v1/invite/sending',
-        { email: userEmail, projectid: Number(props.project_id) },
-        {},
-      )
-      .then((resp: AxiosResponse<Result<never>>) => {
-        if (resp.data.code !== 403 && resp.data.code !== 500) {
-          setInfo(resp.data.message)
-          const openNotification = (placement: NotificationPlacement) => {
-            api.info({
-              message: <p>{resp.data.message}</p>,
-              description: <p></p>,
-              placement,
-            })
-          }
-          openNotification('topLeft')
-        }
+  const sendInfo = useCallback(async (): Promise<void> => {
+    const resp = await sendEamil(userEmail, Number(props.project_id))
+    setInfo(resp.message)
+    const openNotification = (placement: NotificationPlacement) => {
+      api.info({
+        message: <p>{resp.message}</p>,
+        description: <p></p>,
+        placement,
       })
+    }
+    openNotification('topLeft')
   }, [api, props.project_id, userEmail])
   const newArray = useMemo(() => {
     return []
   }, [])
   useEffect(() => {
-    request
-      .post('/v1/user/searchUsersByEmail', { email: userEmail }, {})
-      .then((res: AxiosResponse<Result<Omit<CreateUser, 'phone'>[]>>) => {
-        res.data.data.map((item) => {
-          newArray.push({
-            key: item.id,
-            email: item.email,
-          })
-          setListData(newArray)
+    const func = async () => {
+      const res = await searchUsersByEmail(userEmail)
+      res.data.map((item) => {
+        newArray.push({
+          key: item.id,
+          email: item.email,
         })
+        setListData(newArray)
       })
+    }
+    func()
   }, [newArray, userEmail])
 
   return (

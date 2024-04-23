@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Button, Input } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
 import './index.less'
@@ -7,10 +7,10 @@ import { useDispatch } from 'react-redux'
 import { AddDir } from '@/types/arrayToTree'
 import { setFalse } from '@/store/modules/createFileState'
 import { increment } from '@/store/modules/watchDir'
-import request from '../../api/request'
 import { notification } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
 import { E } from '@/types/base'
+import { createFolder, updataFolder } from '@/api/folder'
 
 const CreateFile: React.FunctionComponent<{
   handleClick: (data: boolean) => void
@@ -20,68 +20,58 @@ const CreateFile: React.FunctionComponent<{
   const [api, contextHolder] = notification.useNotification()
   const dispatch = useDispatch()
   const [dirName, setDirName] = useState('')
-  function change(e: E): void {
+  const change = useCallback((e: E): void => {
     e.stopPropagation()
     setDirName(e.target.value)
-  }
-  function closeThis(): void {
+  }, [])
+  const closeThis = useCallback((): void => {
     props.handleClick(false)
     dispatch(setFalse())
-  }
-  function alertTip(alertData: string): void {
-    const openNotification = (placement: NotificationPlacement) => {
-      api.info({
-        message: `错误提示`,
-        description: alertData,
-        placement,
-      })
-    }
-    openNotification('topRight')
-  }
-  function addChildDir(e: React.MouseEvent): void {
-    e.stopPropagation()
-    if (props.title === '添加子目录') {
-      request
-        .post(
-          '/v1/folder/create',
-          {
-            project_id: props.data.project_id,
-            parent_id: props.data.parent_id,
-            name: dirName,
-          },
-          {},
-        )
-        .then((res) => {
-          // 在这里处理返回的数据
-          if (res.data.code == 200) {
-            dispatch(increment())
-          } else {
-            alertTip(res.data.message)
-          }
+  }, [dispatch, props])
+  const alertTip = useCallback(
+    (alertData: string): void => {
+      const openNotification = (placement: NotificationPlacement) => {
+        api.info({
+          message: `错误提示`,
+          description: alertData,
+          placement,
         })
-    } else {
-      request
-        .post(
-          '/v1/folder/update',
-          {
-            folder_id: props.data.parent_id,
-            parent_id: props.data.pid,
-            name: dirName,
-          },
-          {},
+      }
+      openNotification('topRight')
+    },
+    [api],
+  )
+  const addChildDir = useCallback(
+    async (e: React.MouseEvent): Promise<void> => {
+      e.stopPropagation()
+      if (props.title === '添加子目录') {
+        const res = await createFolder(
+          props.data.project_id,
+          props.data.parent_id,
+          dirName,
         )
-        .then((res) => {
-          // 在这里处理返回的数据
-          if (res.data.code == 200) {
-            dispatch(increment())
-          } else {
-            alert(res.data.message)
-          }
-        })
-    }
-    dispatch(setFalse())
-    props.handleClick(false)
-  }
+        if (res.code == 200) {
+          dispatch(increment())
+        } else {
+          alertTip(res.message)
+        }
+      } else {
+        const res = await updataFolder(
+          props.data.parent_id,
+          props.data.pid,
+          dirName,
+        )
+        if (res.code == 200) {
+          dispatch(increment())
+        } else {
+          alert(res.message)
+        }
+      }
+      dispatch(setFalse())
+      props.handleClick(false)
+    },
+    [alertTip, dirName, dispatch, props],
+  )
   return ReactDOM.createPortal(
     <div
       className='createFile'

@@ -2,12 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Button, notification } from 'antd'
 import './index.less'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import request from '@/api/request'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
 import { AxiosResponse } from 'axios'
 import { Result } from '@/api/request.type'
-import { MemberList, QueryResp } from '@/types/response.type'
+import { MemberList } from '@/types/response.type'
 import getProjectMember from '@/api/getProjectMember'
+import { getProjectInfoById } from '@/api/project'
+import { apiReceive } from '@/api/invite'
 
 const Receive: React.FunctionComponent = () => {
   const navigate = useNavigate()
@@ -15,56 +16,46 @@ const Receive: React.FunctionComponent = () => {
   const [api, contextHolder] = notification.useNotification()
   const [isJoin, setIsJoin] = useState(false)
 
-  const sendJoin = useCallback(() => {
-    request
-      .post(
-        '/v1/invite/receive',
-        { projectid: Number(searchParams.get('projectid')) },
-        {},
-      )
-      .then((resp) => {
-        const logInfo =
-          isJoin === false ? resp.data.message : '您已加入该项目组'
-        const openNotification = (placement: NotificationPlacement) => {
-          api.info({
-            message: <p>{logInfo}</p>,
-            description: <p>3s后返回主界面</p>,
-            placement,
-          })
-        }
-        openNotification('topLeft')
-        setTimeout(() => {
-          navigate('/')
-        }, 3000)
+  const sendJoin = useCallback(async () => {
+    const resp = await apiReceive(Number(searchParams.get('projectid')))
+    const logInfo = isJoin === false ? resp.message : '您已加入该项目组'
+    const openNotification = (placement: NotificationPlacement) => {
+      api.info({
+        message: <p>{logInfo}</p>,
+        description: <p>3s后返回主界面</p>,
+        placement,
       })
+    }
+    openNotification('topLeft')
+    setTimeout(() => {
+      navigate('/')
+    }, 3000)
   }, [searchParams, isJoin, api, navigate])
 
   const [projectName, setProjectName] = useState('')
 
   useEffect(() => {
-    request
-      .post(
-        `/v1/project/query`,
-        { projectid: Number(searchParams.get('projectid')) },
-        {},
+    const func = async () => {
+      const resp = await getProjectInfoById(
+        Number(searchParams.get('projectid')),
       )
-      .then((resp: AxiosResponse<Result<QueryResp>>) => {
-        setProjectName(resp.data.data.projectname as string)
-      })
+      setProjectName(resp.data.projectname as string)
 
-    getProjectMember(Number(searchParams.get('projectid'))).then(
-      (resp: AxiosResponse<Result<MemberList[]>>) => {
-        const user_id = localStorage.getItem('user_id')
-        const dataList = resp.data.data
-        dataList.map((item) => {
-          console.log(item.user_id)
-          console.log(user_id)
-          if (item.user_id === user_id) {
-            setIsJoin(true)
-          }
-        })
-      },
-    )
+      getProjectMember(Number(searchParams.get('projectid'))).then(
+        (resp: AxiosResponse<Result<MemberList[]>>) => {
+          const user_id = localStorage.getItem('user_id')
+          const dataList = resp.data.data
+          dataList.map((item) => {
+            console.log(item.user_id)
+            console.log(user_id)
+            if (item.user_id === user_id) {
+              setIsJoin(true)
+            }
+          })
+        },
+      )
+    }
+    func()
   }, [searchParams])
 
   return (

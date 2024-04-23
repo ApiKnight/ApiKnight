@@ -3,11 +3,9 @@ import { Button, notification, Spin, Tag } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
 import './index.less'
 import MethodList from '@/components/MethodList'
-import request from '@/api/request'
 import type { DocumentTypes } from '@/types/document'
-import { AxiosResponse } from 'axios'
-import { Result } from '@/api/request.type'
-import { ApiType, CreateUser } from '@/types/response.type'
+import { getFolders } from '@/api/document'
+import { getFullApiData, getUserInfoById } from '@/api'
 
 const Document: React.FunctionComponent<{ data: string }> = (props) => {
   const { data } = props
@@ -19,6 +17,7 @@ const Document: React.FunctionComponent<{ data: string }> = (props) => {
   const [changeUser, SetChangeUser] = useState('')
   const [apiName, setApiName] = useState('ApiName')
   const [floderName, setFolderName] = useState('根目录')
+
   const openNotification = useCallback(
     (placement: NotificationPlacement) => {
       api.info({
@@ -39,51 +38,28 @@ const Document: React.FunctionComponent<{ data: string }> = (props) => {
         console.log(error)
       })
   }, [openNotification, url])
-  const getFolderName = useCallback((folderId: string): void => {
-    request
-      .post(
-        '/v1/folder/queryname',
-        {
-          folder_id: folderId,
-        },
-        {},
-      )
-      .then((resp: AxiosResponse<Result<string>>) => {
-        if (resp.data.code == 200) {
-          setFolderName(resp.data.data)
-        }
-      })
+
+  const getFolderName = useCallback(async (folderId: string): Promise<void> => {
+    const resp = await getFolders(folderId)
+    if (resp.code == 200) {
+      setFolderName(resp.data)
+    }
   }, [])
-  const getCreateUser = useCallback((userId: string): void => {
-    request
-      .post(
-        '/v1/user/query',
-        {
-          user_id: userId,
-        },
-        {},
-      )
-      .then((resp: AxiosResponse<Result<CreateUser>>) => {
-        SetCreateUser(resp.data.data.username)
-      })
+
+  const getCreateUser = useCallback(async (userId: string): Promise<void> => {
+    const { data } = await getUserInfoById(userId)
+    SetCreateUser(data.username)
   }, [])
-  const getChangeUser = useCallback((userId: string): void => {
+
+  const getChangeUser = useCallback(async (userId: string): Promise<void> => {
     setShowLoading(true)
-    request
-      .post(
-        '/v1/user/query',
-        {
-          user_id: userId,
-        },
-        {},
-      )
-      .then((resp: AxiosResponse<Result<CreateUser>>) => {
-        if (resp.data.code == 200) {
-          SetChangeUser(resp.data.data.username)
-          setShowLoading(false)
-        }
-      })
+    const resp = await getUserInfoById(userId)
+    if (resp.code == 200) {
+      SetChangeUser(resp.data.username)
+      setShowLoading(false)
+    }
   }, [])
+
   const [allValue, setAllValue] = useState<DocumentTypes>({
     id: '',
     folder_id: '',
@@ -97,25 +73,21 @@ const Document: React.FunctionComponent<{ data: string }> = (props) => {
     description: '',
     name: '',
   })
-  type ApiTypeDoc = Required<
-    Omit<ApiType, 'creat_user'> & { create_user: string }
-  >
+
+  // type ApiTypeDoc = Required<
+  //   Omit<ApiType, 'creat_user'> & { create_user: string }
+  // >
+
   useEffect(() => {
-    request
-      .post(
-        '/v1/apis/query',
-        {
-          apis_id: data,
-        },
-        {},
-      )
-      .then((resp: AxiosResponse<Result<ApiTypeDoc>>) => {
-        setAllValue(resp.data.data)
-        getCreateUser(resp.data.data.create_user as string)
-        getChangeUser(resp.data.data.operate_user)
-        setApiName(resp.data.data.name)
-        getFolderName(resp.data.data.folder_id)
-      })
+    const func = async () => {
+      const resp = await getFullApiData(data)
+      setAllValue(resp)
+      getCreateUser(resp.create_user as string)
+      getChangeUser(resp.operate_user)
+      setApiName(resp.name)
+      getFolderName(resp.folder_id)
+    }
+    func()
   }, [data, getChangeUser, getCreateUser, getFolderName, props])
 
   return (

@@ -18,9 +18,7 @@ import { mergeFlatArrays } from '@/utils/mergeFlatArrays'
 import request from '@/api/request'
 import { increment } from '@/store/modules/watchDir'
 import { MakeValue } from './type'
-import { AxiosResponse } from 'axios'
-import { Result } from '@/api/request.type'
-import { QueryResp } from '@/types/response.type'
+import { getProjectInfoById } from '@/api/project'
 
 const RenderTree: React.FC = () => {
   const [showLoading, setShowLoading] = useState<boolean>(false)
@@ -36,40 +34,28 @@ const RenderTree: React.FC = () => {
   const [makeValue, setMakeValue] = useState<MakeValue>({ value: data })
   const state = useLocation().state
   const projectId = state.project_id
-  const reqFun = useCallback(() => {
+  const reqFun = useCallback(async () => {
     setShowLoading(true)
-    request
-      .post('/v1/project/query', { projectid: projectId }, {})
-      .then((resp: AxiosResponse<Result<QueryResp>>) => {
-        // 在这里处理返回的数据
-        if (resp.data.code == 200) {
-          setData(
-            mergeFlatArrays(
-              resp.data.data.folder_list,
-              resp.data.data.api_list,
-              projectId,
-            ),
-          )
-          setMakeValue({
-            value: mergeFlatArrays(
-              resp.data.data.folder_list,
-              resp.data.data.api_list,
-              projectId,
-            ),
-          })
-          console.log('------------------====-----------------------')
-          console.log(resp.data.data.folder_list)
-          console.log(resp.data.data.api_list)
-          console.log(
-            mergeFlatArrays(
-              resp.data.data.folder_list,
-              resp.data.data.api_list,
-              projectId,
-            ),
-          )
-          setShowLoading(false)
-        }
+    const resp = await getProjectInfoById(projectId)
+    if (resp.code == 200) {
+      setData(
+        mergeFlatArrays(resp.data.folder_list, resp.data.api_list, projectId),
+      )
+      setMakeValue({
+        value: mergeFlatArrays(
+          resp.data.folder_list,
+          resp.data.api_list,
+          projectId,
+        ),
       })
+      console.log('------------------====-----------------------')
+      console.log(resp.data.folder_list)
+      console.log(resp.data.api_list)
+      console.log(
+        mergeFlatArrays(resp.data.folder_list, resp.data.api_list, projectId),
+      )
+      setShowLoading(false)
+    }
   }, [projectId])
   const watchDir = useSelector((state: RootState) => state.watchDir.value)
   useEffect(() => {

@@ -8,7 +8,7 @@ export const fetchProjectInfoAction = createAsyncThunk(
   async (projectId: number, { dispatch }) => {
     if (projectId) {
       const projectInfo = await getProjectInfoById(projectId)
-      dispatch(changeProjectInfo(projectInfo))
+      dispatch(changeProjectInfo(projectInfo.data))
     }
   },
 )

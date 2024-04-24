@@ -14,7 +14,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 20
+          node-version: 18
 
       - name: Get Branch Name
         shell: bash
@@ -47,7 +47,6 @@ jobs:
           pnpm run build
 
       - name: Install Playwright Browsers
-        working-directory: ./ApiKnightFront
         run: npx playwright install --with-deps
 
       - name: start server for testing the built app
@@ -77,6 +76,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./ApiKnightFront/dist
           BRANCH: gh-pages
+          FOLDER: dist
         env:
           PERMISSIONS_POLICY: ${{ env.PERMISSIONS_POLICY }}
         if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'main'  # 仅在 main 分支上推送时触发

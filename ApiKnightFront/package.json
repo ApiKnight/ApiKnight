@@ -22,6 +22,7 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
-    "@apiknight/monitor-sdk": "workspace:*"
+    "@apiknight/monitor-sdk": "workspace:*",
+    "@playwright/test": "^1.43.1"
   }
 }

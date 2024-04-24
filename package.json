@@ -31,7 +31,6 @@
     "@commitlint/cli": "^18.6.0",
     "@commitlint/config-conventional": "^18.6.0",
     "@monaco-editor/react": "^4.5.2",
-    "@playwright/test": "^1.43.1",
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "5.8.4",
     "axios": "^1.4.0",

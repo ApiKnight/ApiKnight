@@ -47,7 +47,7 @@ jobs:
           pnpm run build
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run:cd ApiKnightFront & npx playwright install --with-deps
 
       - name: start server for testing the built app
         run: nohup pnpm run preview &
@@ -74,7 +74,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./Apiknight/dist
+          publish_dir: ./ApiKnightFront/dist
           BRANCH: gh-pages
           FOLDER: dist
         env:

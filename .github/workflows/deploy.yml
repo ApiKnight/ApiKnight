@@ -47,7 +47,7 @@ jobs:
           pnpm run build
 
       - name: Install Playwright Browsers
-        workdir: ./ApiKnightFront
+        working-directory: ./ApiKnightFront
         run: npx playwright install --with-deps
 
       - name: start server for testing the built app

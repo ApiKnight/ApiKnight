@@ -9,73 +9,82 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3 # 使用最新的checkout版本
+        uses: actions/checkout@v2
 
       - name: Use Node.js
-        uses: actions/setup-node@v3 # 使用最新的setup-node版本
+        uses: actions/setup-node@v1
         with:
-          node-version: '20' # 统一使用Node.js 20版本
-          cache: 'pnpm'
-
-      - name: Install pnpm
-        run: npm install -g pnpm
+          node-version: 20
 
       - name: Get Branch Name
         shell: bash
-        run: echo "${GITHUB_REF#refs/heads/}" > branch-name.txt
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
+        with:
+          version: 6.10.0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'
 
       - name: Install Dependencies
         run: |
-          git clean -fdx
-          pnpm install
+          git clean -fdx & pnpm install
 
       - name: ESlint check
-        run: pnpm run lint-strict:fix
+        run: |
+          pnpm run lint-strict:fix
 
       - name: Vitest
-        run: pnpm test:vitest
+        run: |
+          pnpm test:vitest
 
-      - name: Build the project
-        run: pnpm run build
+      - name: build the project
+        run: |
+          pnpm run build
 
       - name: Install Playwright Browsers
-        working-directory: ApiKnightFront # 设置工作目录，避免多次cd
-        run: npx playwright install --with-deps
+        run: cd ApiKnightFront && 
+             npx playwright install &&
+             cd ..
 
-      - name: Start server for testing the built app
-        run: |
-          pnpm run preview & # 在后台运行预览服务器
-          echo "Preview app started"
-          sleep 12 # 等待服务器启动
+      - name: start server for testing the built app
+        run: nohup pnpm run preview &
+             echo "Preview app started"
+             sleep 12
 
       - name: Run Playwright tests
         run: pnpm run test
-
-      - name: Kill Server Process
-        if: always() # 无论前面的步骤是否成功都执行
-        run: |
-          pkill -f "pnpm run preview" # 使用pkill根据进程名结束进程，更可靠
-          echo "Server process killed"
-
-      - name: Upload Playwright report artifact
-        uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+          
+      - name: Kill Server Process
+        if: always()
+        run: |
+          kill $(lsof -t -i:4173)
+          echo ${{ steps.extract_branch.outputs.branch }}
+        shell: bash
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
-        if: success() && github.event_name == 'push' && $(cat branch-name.txt) == 'main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./ApiKnightFront/dist
-          target_branch: gh-pages
+          BRANCH: gh-pages
+          FOLDER: dist
+        env:
+          PERMISSIONS_POLICY: ${{ env.PERMISSIONS_POLICY }}
+        if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'main'  # 仅在 main 分支上推送时触发
 
       - name: SSH to server and run deployment script
         uses: appleboy/ssh-action@master
-        if: success() && github.event_name == 'push' && $(cat branch-name.txt) == 'main'
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
@@ -84,3 +93,4 @@ jobs:
             cd /home/ubuntu/ApiKnight/dist
             git pull origin gh-pages
             chmod -R 777 ./
+        if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'main'  # 仅在 main 分支上推送时触发

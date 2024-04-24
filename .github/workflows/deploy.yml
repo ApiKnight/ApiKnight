@@ -47,7 +47,8 @@ jobs:
           pnpm run build
 
       - name: Install Playwright Browsers
-        run:cd ApiKnightFront & npx playwright install --with-deps
+        run: cd ApiKnightFront 
+             npx playwright install --with-deps
 
       - name: start server for testing the built app
         run: nohup pnpm run preview &

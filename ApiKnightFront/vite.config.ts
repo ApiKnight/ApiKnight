@@ -4,6 +4,7 @@ import path from 'path'
 import viteCompression from 'vite-plugin-compression'
 import cvIndex from './vite-plugins/vite-plugin-cvindex'
 import cvRobots from './vite-plugins/vite-plugin-cvrobots'
+import wasm from 'vite-plugin-wasm'
 
 const resolve = (dir: string) => path.join(__dirname, dir)
 
@@ -26,6 +27,7 @@ export default defineConfig({
     }),
     cvIndex(),
     cvRobots(),
+    wasm(),
   ],
   resolve: {
     alias: {

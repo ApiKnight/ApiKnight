@@ -5,14 +5,13 @@ import './index.less'
 import Title from '@/components/Invite/title'
 import { Tabs } from 'antd'
 import Link from '@/components/Invite/link'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store'
+import { useStateFlag } from '@/region/stateFlag'
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Invite: React.FunctionComponent<{ project_id: number | string }> = (
   props,
 ) => {
-  const flag = useSelector((state: RootState) => state.stateFlag.value)
+  const flag = useStateFlag()
   if (flag == true) {
     return ReactDOM.createPortal(
       <div className='invite-modal'>

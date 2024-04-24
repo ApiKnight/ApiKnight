@@ -5,12 +5,12 @@ import './index.less'
 import ReactDOM from 'react-dom'
 import { useDispatch } from 'react-redux'
 import { AddDir } from '@/types/arrayToTree'
-import { setFalse } from '@/store/modules/createFileState'
 import { increment } from '@/store/modules/watchDir'
 import { notification } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
 import { E } from '@/types/base'
 import { createFolder, updataFolder } from '@/api/folder'
+import { setCreateFileState } from '@/region/createFileState'
 
 const CreateFile: React.FunctionComponent<{
   handleClick: (data: boolean) => void
@@ -26,8 +26,8 @@ const CreateFile: React.FunctionComponent<{
   }, [])
   const closeThis = useCallback((): void => {
     props.handleClick(false)
-    dispatch(setFalse())
-  }, [dispatch, props])
+    setCreateFileState(false)
+  }, [props])
   const alertTip = useCallback(
     (alertData: string): void => {
       const openNotification = (placement: NotificationPlacement) => {
@@ -67,7 +67,7 @@ const CreateFile: React.FunctionComponent<{
           alert(res.message)
         }
       }
-      dispatch(setFalse())
+      setCreateFileState(false)
       props.handleClick(false)
     },
     [alertTip, dirName, dispatch, props],

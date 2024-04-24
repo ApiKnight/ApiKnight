@@ -9,7 +9,6 @@ export const fetchApiDataAction = createAsyncThunk(
   'document/fetchApiData',
   async (payload, { dispatch }) => {
     console.log('fetchApiDataAction', payload)
-
     dispatch(changeApiDataAction(initialData))
   },
 )

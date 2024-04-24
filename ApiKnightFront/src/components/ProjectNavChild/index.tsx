@@ -2,35 +2,33 @@ import { Avatar } from 'antd'
 import React from 'react'
 import classNames from 'classnames'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import './index.less'
 import { ProjectNavChildType } from '@/types/projectNavChild'
-import { reversal, setFalse } from '@/store/modules/stateFlag'
 import { pathList } from './constant'
+import { setStateFlag } from '@/region/stateFlag'
 
 const ProjectNavChild: React.FunctionComponent<{
   data: ProjectNavChildType
 }> = (props) => {
   const location = useLocation()
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   function show(): void {
-    dispatch(reversal())
+    setStateFlag(true)
   }
   const onClick = () => {
     // 输出url
     switch (props.data.key) {
       case '1':
         navigate('/project/apiMgt', { state: props.data.props })
-        dispatch(setFalse())
+        setStateFlag(false)
         break
       case '2':
         navigate('/project/memberMgt', { state: props.data.props })
-        dispatch(setFalse())
+        setStateFlag(false)
         break
       case '3':
         navigate('/project/projectSet', { state: props.data.props })
-        dispatch(setFalse())
+        setStateFlag(false)
         break
       case '4':
         show()

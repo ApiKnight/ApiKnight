@@ -8,6 +8,7 @@ import { IAPIInfoPlus, SwaggerDoc, SwaggerParameter } from './type'
 import { StatusValue } from '@/types/enum'
 import { Method } from '@/types/components'
 import { getRangeRandom } from '../math'
+// import { parse_swagger_parameters } from '@apiknight/compute-module'
 
 /**
  *  解析前端定义的请求信息类型对象
@@ -46,6 +47,8 @@ export function parseSwaggerDoc(
     const fullInfo = swaggerPaths[pathKey]
     const method = Object.keys(fullInfo)[0]
     const needInfo = fullInfo[method]
+    console.log(needInfo.parameters)
+    console.log(parseSwaggerParameters(needInfo.parameters))
     // 接口本身的描述信息
     const meta_info: MetaInfo = {
       created: new Date().getTime(),
@@ -77,6 +80,12 @@ export function parseSwaggerDoc(
   return rst
 }
 
+/**
+ * 解析 Swagger 参数
+ *
+ * @param swaggerParams Swagger 参数数组
+ * @returns 返回解析后的请求参数类型对象
+ */
 function parseSwaggerParameters(
   swaggerParams: SwaggerParameter[],
 ): RequestParamsType {

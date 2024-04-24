@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@apiknight/monitor-sdk": "workspace:*",
-    "@playwright/test": "^1.43.1"
+    "@apiknight/compute-module": "workspace:*",
+    "@playwright/test": "^1.45.0"
   }
 }

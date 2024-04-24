@@ -22,6 +22,7 @@ describe('Utilities', () => {
       // 预期UTC格式化时间
       const expected = '2023-4-1 12:30'
       expect(formatted).toBe(expected)
+      expect(true).toBe(true)
     })
   })
 })

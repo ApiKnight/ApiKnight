@@ -1,20 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import './title.less'
 import { PoweroffOutlined } from '@ant-design/icons'
-import { useDispatch, useSelector } from 'react-redux'
-import { setFalse } from '@/store/modules/stateFlag'
 import Overlay from '@/components/overlay'
-import { RootState } from '../../store'
 import { querySummaryProject } from '@/api/project'
+import { setStateFlag, useStateFlag } from '@/region/stateFlag'
 
 const Title: React.FunctionComponent<{ projectid: string | number }> = (
   props,
 ) => {
-  const dispatch = useDispatch()
-  const flag = useSelector((state: RootState) => state.stateFlag.value)
+  const flag = useStateFlag()
   const closeInvite = useCallback((): void => {
-    dispatch(setFalse())
-  }, [dispatch])
+    setStateFlag(false)
+  }, [])
   const [name, setName] = useState('示例')
   useEffect(() => {
     const func = async () => {

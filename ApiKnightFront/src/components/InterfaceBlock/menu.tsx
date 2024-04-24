@@ -2,19 +2,17 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Popover, App } from 'antd'
 import { AddData } from '@/types/treeComponents'
-import { useDispatch } from 'react-redux'
-import { setTrue } from '@/store/modules/createFileState'
 import CreateFile from '@/components/createFile'
 import Overlay from '@/components/overlay'
 import { useLocation } from 'react-router-dom'
 import './menu.less'
 import { shareApi } from '@/api'
 import { useAppSelector } from '@/store'
+import { setCreateFileState } from '@/region/createFileState'
 
 const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
   const { data } = props
   const { modal } = App.useApp()
-  const dispatch = useDispatch()
   const state = useLocation().state
   const proId = state.project_id
   const [show, setShow] = useState(false)
@@ -28,24 +26,18 @@ const Menu: React.FunctionComponent<{ data: AddData }> = (props) => {
     prijectInfo: state.project.projectInfo,
   }))
 
-  const addChildDir = useCallback(
-    (e: React.MouseEvent): void => {
-      dispatch(setTrue())
-      setShow(true)
-      e.stopPropagation()
-      setTitleInfo('添加子目录')
-    },
-    [dispatch],
-  )
-  const updateChildDir = useCallback(
-    (e: React.MouseEvent): void => {
-      dispatch(setTrue())
-      setShow(true)
-      e.stopPropagation()
-      setTitleInfo('修改文件夹名称')
-    },
-    [dispatch],
-  )
+  const addChildDir = useCallback((e: React.MouseEvent): void => {
+    setCreateFileState(true)
+    setShow(true)
+    e.stopPropagation()
+    setTitleInfo('添加子目录')
+  }, [])
+  const updateChildDir = useCallback((e: React.MouseEvent): void => {
+    setCreateFileState(true)
+    setShow(true)
+    e.stopPropagation()
+    setTitleInfo('修改文件夹名称')
+  }, [])
   useEffect(() => {
     setPData({
       project_id: proId,

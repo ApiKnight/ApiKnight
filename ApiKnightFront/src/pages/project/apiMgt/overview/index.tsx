@@ -13,6 +13,7 @@ import { createFolder, getFolderName } from '@/api/folder'
 import { createFullApi, shareApi } from '@/api'
 import { getProjectInfoById } from '@/api/project'
 import { fetchProjectInfoAction } from '@/store/modules/project'
+import Fibonacci from '@/pages/index/Demo'
 
 const Overview: React.FunctionComponent = () => {
   const { message } = App.useApp()
@@ -108,7 +109,10 @@ const Overview: React.FunctionComponent = () => {
       } else {
         // swagger2.0文档
         const apiInfoMap = parseSwaggerDoc(data, getUserId())
+        const oldDate = +new Date()
         await startImport(apiInfoMap)
+        const newDate = +new Date()
+        localStorage.setItem('test1', newDate - oldDate + 'ms')
       }
 
       message.success('导入成功')
@@ -284,6 +288,7 @@ const Overview: React.FunctionComponent = () => {
 
   return (
     <>
+      <Fibonacci />
       <div className='project-overview'>
         <div className='content-item'>
           <div className='title'>基本信息</div>

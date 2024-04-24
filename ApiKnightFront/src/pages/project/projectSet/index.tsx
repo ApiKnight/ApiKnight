@@ -6,6 +6,7 @@ import updateProject from '@/api/updateProject'
 import { useNavigate, useLocation } from 'react-router-dom'
 import delProject from '@/api/delProject'
 import getCurrentRole from '@/api/getCurrentRole'
+import { createAllMonitor } from '@/utils/monitor'
 
 interface ProjectInfoType {
   description: string
@@ -75,6 +76,7 @@ const ProjectSet: React.FC = () => {
       res.data.code === 200 ? setProjectInfo(res.data.data) : ''
     })
   }, [project_id])
+  createAllMonitor().start()
 
   return (
     <App>

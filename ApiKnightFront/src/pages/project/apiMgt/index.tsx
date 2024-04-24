@@ -15,9 +15,11 @@ import { useDispatch } from 'react-redux'
 import { setValue } from '@/store/modules/rightSlice'
 import './index.less'
 import { useAppSelector } from '@/store'
+import { createAllMonitor } from '@/utils/monitor'
 
 const ApiMgt: React.FunctionComponent = () => {
   const dispatch = useDispatch()
+  createAllMonitor().start()
   const { currentKey } = useAppSelector((state) => ({
     currentKey: state.tabSlice.currentKey,
   }))

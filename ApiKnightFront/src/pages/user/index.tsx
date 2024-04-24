@@ -9,11 +9,13 @@ import getUserInfo from '@/api/getUserInfo'
 import { useLocation } from 'react-router-dom'
 import EmptyShow from '@/components/EmptyShow'
 import { ProjectListItem } from '@/types/response.type'
+import { createAllMonitor } from '@/utils/monitor'
 
 const { Content, Footer } = Layout
 
 const User: React.FunctionComponent = () => {
   const [projectList, setProjectList] = useState<ProjectListItem[]>([])
+  createAllMonitor().start()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [user_info, setUserInfo] = useState({})
   const state = useLocation().state

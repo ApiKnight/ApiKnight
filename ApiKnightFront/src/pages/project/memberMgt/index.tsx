@@ -22,9 +22,11 @@ import reqDelMember from '@/api/reqDelMember'
 import chgProjAdmin from '@/api/chgProjAdmin'
 import ShowMember from '@/components/ShowMember'
 import { MemberList } from '@/types/response.type'
+import { createAllMonitor } from '@/utils/monitor'
 
 const MemberMgt: React.FC = () => {
   const state = useLocation().state
+  createAllMonitor().start()
   type ValueMemberList = MemberList & { key: string }
   const { project_id } = state
 

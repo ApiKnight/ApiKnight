@@ -20,5 +20,8 @@
     "test:vitest-prod": "vitest --coverage",
     "test:debug": "npx playwright test --ui",
     "preinstall": "npx only-allow pnpm"
+  },
+  "dependencies": {
+    "@apiknight/monitor-sdk": "workspace:*"
   }
 }

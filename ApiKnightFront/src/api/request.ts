@@ -3,6 +3,7 @@ import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import NProgress from 'nprogress'
 import { Result } from './request.type'
+import { report } from '@/utils/monitor'
 
 // 导出Request，传入配置以创建实例
 export class Request {
@@ -53,6 +54,11 @@ export class Request {
         // 顶部进度条
         NProgress.done()
         this.endTime = +new Date()
+        report(
+          { time: this.endTime - this.startTime },
+          this.targetURL,
+          'NetWork request time',
+        )
         // 统一处理响应数据
         // 系统如果有自定义code也可以在这里处理
         return res

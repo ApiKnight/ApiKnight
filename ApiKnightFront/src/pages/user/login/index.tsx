@@ -10,6 +10,7 @@ const { Content } = Layout
 import './index.less'
 import type { LoginType } from '@/api/loginType'
 import { E } from '@/types/base'
+import { createAllMonitor } from '@/utils/monitor'
 
 interface RegisterType {
   username: string
@@ -22,6 +23,7 @@ type LoginState = 'Login' | 'Regist'
 
 const Login: React.FC = () => {
   const navigate = useNavigate()
+  createAllMonitor().start()
   /**
    * 生成[min,max)区间的随机整数
    * @param min 最小值

@@ -11,9 +11,11 @@ import ApiTab from '@/components/ApiTab'
 import getSelfInfo from '@/api/getSelfInfo'
 import { useAppDispatch } from '@/store'
 import { fetchProjectInfoAction } from '@/store/modules/project'
+import { createAllMonitor } from '@/utils/monitor'
 
 const Project: React.FunctionComponent = () => {
   const navigate = useNavigate()
+  createAllMonitor().start()
   let project_id: number | string
   const state = useLocation().state
   // 获取project_id后更新projectReducer，统一存储

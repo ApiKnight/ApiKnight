@@ -75,7 +75,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./ApiKnightFront/dist
+          publish_dir: ./dist
           BRANCH: gh-pages
           FOLDER: dist
         env:

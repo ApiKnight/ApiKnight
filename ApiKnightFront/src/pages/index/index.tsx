@@ -455,6 +455,9 @@ const Index: React.FunctionComponent = () => {
           })}
         </div>
       </div>
+      <a href='https://beian.miit.gov.cn/' target='_blank'>
+        辽ICP备2022009515号-1
+      </a>
     </div>
   )
 }

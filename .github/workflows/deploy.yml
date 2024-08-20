@@ -93,6 +93,6 @@ jobs:
           password: ${{ secrets.REMOTE_PASS }}
           script: |
             cd /home/ubuntu/ApiKnight/dist
-            git pull origin gh-pages
             chmod -R 777 ./
+            git pull origin gh-pages
         if: github.event_name == 'push' && steps.extract_branch.outputs.branch == 'main'  # 仅在 main 分支上推送时触发
